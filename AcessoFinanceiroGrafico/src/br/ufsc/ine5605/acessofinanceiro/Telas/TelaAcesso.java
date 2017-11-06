@@ -128,7 +128,7 @@ public class TelaAcesso extends JFrame {
      * @return int opcao escolhida pelo usuario
      */
     public int exibeNovaTentativa() {
-        
+        return 0;
     }
 
 	private class GerenciadorBotoes implements ActionListener {
@@ -138,11 +138,8 @@ public class TelaAcesso extends JFrame {
 			// usar equals?
 			if(e.getSource() == btAcesso) {
 				owner.validaAcessoFinanceiro((int) tfMatricula.getValue());
-//				Nos slides: ctrl.realizaAcao?
-//				Assim a tela estaria mandando no ctrl.
-//				Verificar com prof em aula.
 			} else if(e.getSource() == btVoltar) {
-				
+				//faz algo pra voltar
 			}
 		}
 		

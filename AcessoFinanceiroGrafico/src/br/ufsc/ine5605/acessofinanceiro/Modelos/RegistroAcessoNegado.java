@@ -5,13 +5,14 @@
  */
 package br.ufsc.ine5605.acessofinanceiro.Modelos;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author thiagobrezinski
  */
-public class RegistroAcessoNegado {
+public class RegistroAcessoNegado implements Serializable {
 	
 	private Date data;
 	private int matricula;

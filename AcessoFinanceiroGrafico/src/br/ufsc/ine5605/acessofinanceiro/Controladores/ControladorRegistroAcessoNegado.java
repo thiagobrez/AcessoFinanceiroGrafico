@@ -19,11 +19,11 @@ import java.util.Date;
 public class ControladorRegistroAcessoNegado {
     
     private TelaRegistroAcessoNegado telaRegistroAcessoNegado;
-	private ArrayList<RegistroAcessoNegado> registros;
+	private RegistroAcessoNegadoDAO registroDAO;
     
     public ControladorRegistroAcessoNegado() {
         this.telaRegistroAcessoNegado = new TelaRegistroAcessoNegado(this);
-		this.registros = new ArrayList<>();
+		this.registroDAO = new RegistroAcessoNegadoDAO();
     }
     
 	/**
@@ -135,7 +135,7 @@ public class ControladorRegistroAcessoNegado {
 	 */
 	public ArrayList<RegistroAcessoNegado> encontraRegistrosPorMotivo(Motivo motivo) {
 		ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
-		for(RegistroAcessoNegado registro : this.registros) {
+		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
 			if(registro.getMotivo() == motivo) {
 				registrosEncontrados.add(registro);
 			}
@@ -152,7 +152,7 @@ public class ControladorRegistroAcessoNegado {
 	 */
 	public ArrayList<RegistroAcessoNegado> encontraRegistrosPorMatricula(int matricula) {
 		ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
-		for(RegistroAcessoNegado registro : this.registros) {
+		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
 			if(registro.getMatricula() == matricula) {
 				registrosEncontrados.add(registro);
 			}
@@ -167,9 +167,12 @@ public class ControladorRegistroAcessoNegado {
 	 * @param matricula desejada para encontrar os registros
 	 * @return ArrayList de registros encontrados
 	 */
+	
+	//================================== ARRUMAR AQUI USANDO GET DO HASHMAP ===================================
+	
 	public ArrayList<RegistroAcessoNegado> encontraRegistrosHorarioNaoPermitidoPelaMatricula(int matricula) {
 		ArrayList<RegistroAcessoNegado> registrosHorarioNaoPermitido = new ArrayList<>();
-		for(RegistroAcessoNegado registro : this.registros) {
+		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
 			if(registro.getMatricula() == matricula && registro.getMotivo() == Motivo.HORARIO_NAO_PERMITIDO)
 				registrosHorarioNaoPermitido.add(registro);
 		}
@@ -185,7 +188,7 @@ public class ControladorRegistroAcessoNegado {
 	 */
 	public void novoRegistroAcessoNegado(Date data, int matricula, Motivo motivo) {
 		RegistroAcessoNegado registro = new RegistroAcessoNegado(data, matricula, motivo);
-		this.registros.add(registro);
+		this.registroDAO.put(registro);
 	}
 	
 	/**
