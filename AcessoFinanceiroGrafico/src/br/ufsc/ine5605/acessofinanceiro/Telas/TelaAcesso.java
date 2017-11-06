@@ -11,10 +11,12 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -24,17 +26,19 @@ public class TelaAcesso extends JFrame {
 
     private ControladorAcesso owner;
 	private JLabel lbPrincipal;
-	private JTextField tfMatricula;
+	private JFormattedTextField tfMatricula;
 	private JButton btAcesso;
 	private JButton btVoltar;
 
     public TelaAcesso(ControladorAcesso owner) {
 		super(Constantes.ACESSO_FINANCEIRO);
         this.owner = owner;
-		configuraTela();
+		try {
+			configuraTela();
+		} catch (ParseException e) {}
     }
 
-	private void configuraTela() {
+	private void configuraTela() throws ParseException {
 		Container container = getContentPane();
 		container.setLayout(new FlowLayout());
 		
@@ -43,7 +47,9 @@ public class TelaAcesso extends JFrame {
 		container.add(lbPrincipal);
 		
 		//Configuracao tfMatricula
-		tfMatricula = new JTextField(5);
+		//Trocar ########## por Constantes.COMUM_FORMATADOR_MATRICULA
+		MaskFormatter mascaraMatricula = new MaskFormatter("#########");
+		tfMatricula = new JFormattedTextField(mascaraMatricula);
 		container.add(tfMatricula);
 		
 		//Configuracao GerenciadorBotoes
@@ -63,7 +69,7 @@ public class TelaAcesso extends JFrame {
 		setLocationRelativeTo(null);
 		
 //		Para testes
-//		setVisible(true);
+		setVisible(true);
 	}
 	
     /**
@@ -131,6 +137,7 @@ public class TelaAcesso extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// usar equals?
 			if(e.getSource() == btAcesso) {
+				owner.validaAcessoFinanceiro((int) tfMatricula.getValue());
 //				Nos slides: ctrl.realizaAcao?
 //				Assim a tela estaria mandando no ctrl.
 //				Verificar com prof em aula.
