@@ -13,10 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.text.MaskFormatter;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -26,7 +26,7 @@ public class TelaAcesso extends JFrame {
 
     private ControladorAcesso owner;
 	private JLabel lbPrincipal;
-	private JFormattedTextField tfMatricula;
+	private JTextField tfMatricula;
 	private JButton btAcesso;
 	private JButton btVoltar;
 
@@ -47,9 +47,7 @@ public class TelaAcesso extends JFrame {
 		container.add(lbPrincipal);
 		
 		//Configuracao tfMatricula
-		//Trocar ########## por Constantes.COMUM_FORMATADOR_MATRICULA
-		MaskFormatter mascaraMatricula = new MaskFormatter("#########");
-		tfMatricula = new JFormattedTextField(mascaraMatricula);
+		tfMatricula = new JTextField(5);
 		container.add(tfMatricula);
 		
 		//Configuracao GerenciadorBotoes
@@ -67,26 +65,18 @@ public class TelaAcesso extends JFrame {
 	
 		setSize(360, 150);
 		setLocationRelativeTo(null);
-		
-//		Para testes
-		setVisible(true);
 	}
-	
-    /**
-     * Exibe o menu para insercao da matricula para tentativa de acesso ao
-     * financeiro e trata se a matricula inserida eh realmente um inteiro.
-     *
-     * @return int matricula usada para a tentativa de acesso
-     */
-    public void exibeAcessoFinanceiro() {
-        setVisible(true);
-    }
 
     /**
      * Imprime na tela que o acesso ao financeiro foi permitido.
      */
     public void exibeAcessoPermitido() {
-        
+		JOptionPane.showMessageDialog(
+				null,
+				Constantes.ACESSO_PERMITIDO,
+				Constantes.ACESSO_PERMITIDO_TITULO,
+				JOptionPane.PLAIN_MESSAGE
+		);
     }
 
     /**
@@ -94,7 +84,12 @@ public class TelaAcesso extends JFrame {
      * nao existe.
      */
     public void exibeAcessoNegadoMatriculaInexistente() {
-
+		JOptionPane.showMessageDialog(
+				null,
+				Constantes.ACESSO_NEGADO_MATRICULA_INEXISTENTE,
+				Constantes.ACESSO_NEGADO_TITULO,
+				JOptionPane.PLAIN_MESSAGE
+		);
     }
 
     /**
@@ -102,7 +97,12 @@ public class TelaAcesso extends JFrame {
      * tem acesso.
      */
     public void exibeAcessoNegadoCargoSemAcesso() {
-
+		JOptionPane.showMessageDialog(
+				null,
+				Constantes.ACESSO_NEGADO_CARGO_SEM_ACESSO,
+				Constantes.ACESSO_NEGADO_TITULO,
+				JOptionPane.PLAIN_MESSAGE
+		);
     }
 
     /**
@@ -110,7 +110,12 @@ public class TelaAcesso extends JFrame {
      * eh permitido para o cargo do funcionario tentando o acesso.
      */
     public void exibeAcessoNegadoHorarioNaoPermitido() {
-
+		JOptionPane.showMessageDialog(
+				null,
+				Constantes.ACESSO_NEGADO_HORARIO_NAO_PERMITIDO,
+				Constantes.ACESSO_NEGADO_TITULO,
+				JOptionPane.PLAIN_MESSAGE
+		);
     }
 
     /**
@@ -118,17 +123,12 @@ public class TelaAcesso extends JFrame {
      * funcionario foi bloqueado.
      */
     public void exibeAcessoNegadoAcessoBloqueado() {
-        
-    }
-
-    /**
-     * Exibe um menu para o usuario escolher a opcao desejada, para tentar
-     * inserir a matricula novamente ou voltar ao menu principal.
-     *
-     * @return int opcao escolhida pelo usuario
-     */
-    public int exibeNovaTentativa() {
-        return 0;
+		JOptionPane.showMessageDialog(
+				null,
+				Constantes.ACESSO_NEGADO_ACESSO_BLOQUEADO,
+				Constantes.ACESSO_NEGADO_TITULO,
+				JOptionPane.PLAIN_MESSAGE
+		);
     }
 
 	private class GerenciadorBotoes implements ActionListener {
@@ -137,9 +137,9 @@ public class TelaAcesso extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// usar equals?
 			if(e.getSource() == btAcesso) {
-				owner.validaAcessoFinanceiro((int) tfMatricula.getValue());
+				owner.acessaFinanceiro(Integer.parseInt(tfMatricula.getText()));
 			} else if(e.getSource() == btVoltar) {
-				//faz algo pra voltar
+				setVisible(false);
 			}
 		}
 		

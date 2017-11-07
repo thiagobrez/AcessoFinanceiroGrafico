@@ -13,6 +13,8 @@ package br.ufsc.ine5605.acessofinanceiro.Modelos;
  */
 public class Constantes {
 
+	// ======================================= FAVOR MANTER OS PADRÕES ======================================= //
+	
 	//COMUM
 	public static final String COMUM_BOTAO_VOLTAR = "Voltar";
 	
@@ -20,6 +22,13 @@ public class Constantes {
 	public static final String ACESSO_FINANCEIRO = "Acesso ao financeiro";
 	public static final String ACESSO_INSIRA_MATRICULA = "Insira a matricula de acesso: ";
 	public static final String ACESSO_BOTAO_ACESSAR = "Acessar";
+	public static final String ACESSO_NEGADO_TITULO = "Acesso negado";
+	public static final String ACESSO_NEGADO_MATRICULA_INEXISTENTE = "Matrícula inexistente";
+	public static final String ACESSO_NEGADO_ACESSO_BLOQUEADO = "Acesso bloqueado";
+	public static final String ACESSO_NEGADO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
+	public static final String ACESSO_NEGADO_CARGO_SEM_ACESSO = "Cargo sem acesso";
+	public static final String ACESSO_PERMITIDO = "Financeiro acessado com sucesso!";
+	public static final String ACESSO_PERMITIDO_TITULO = "Acesso permitido";
 	
 	// ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
 	
@@ -60,13 +69,7 @@ public class Constantes {
     public static final String FORMATADOR_MEIA_NOITE = "00:00";
 
     // ACESSO AO FINANCEIRO
-//    public static final String ACESSO_FINANCEIRO = "+-+-+-+-+-+-+-+ Acesso ao financeiro +-+-+-+-+-+-+-+";
     public static final String ACESSO_MATRICULA_INEXISTENTE = "------------ MATRÍCULA INSERIDA NÃO EXISTE, não foi possivel acessar o financeio. ------------";
-    public static final String ACESSO_PERMITIDO = "------------ ACESSO AO FINANCEIRO REALIZADO COM SUCESSO! ------------";
-    public static final String ACESSO_NEGADO_MATRICULA_INEXISTENTE = "------------ ACESSO NEGADO: matricula inexistente. ------------";
-    public static final String ACESSO_NEGADO_HORARIO_NAO_PERMITIDO = "------------ ACESSO NEGADO: horario nao permitido. ------------";
-    public static final String ACESSO_NEGADO_CARGO_SEM_ACESSO = "------------ ACESSO NEGADO: cargo sem acesso. ------------";
-    public static final String ACESSO_NEGADO_ACESSO_BLOQUEADO = "------------ ACESSO NEGADO: acesso bloqueado. ------------";
 
     // RELATORIO
     public static final String RELATORIO_ACESSO = "+-+-+-+-+-+-+-+ Emitir relatórios de acesso negado +-+-+-+-+-+-+-+";

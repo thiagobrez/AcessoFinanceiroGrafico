@@ -29,10 +29,17 @@ public class ControladorAcesso {
 	/**
 	 * Exibe a tela para acesso do financeiro e trata o recebimento da matricula.
 	 */
-    public void acessaFinanceiro() {
-		telaAcesso.exibeAcessoFinanceiro();
+    public void exibePainelAcesso() {
+		this.telaAcesso.setVisible(true);
     }
     
+	public void acessaFinanceiro(int matricula) {
+		if(validaAcessoFinanceiro(matricula)) {
+			telaAcesso.exibeAcessoPermitido();
+			telaAcesso.setVisible(false);
+		}
+	}
+	
 	/**
 	 * Verifica se a matricula recebida existe e, se verdadeiro, verifica se o
 	 * acesso do funcionario esta bloqueado. Se sim, solicita a criacao de um
@@ -42,26 +49,25 @@ public class ControladorAcesso {
 	 * @return true se o acesso do funcionario for permitido
 	 */
     public boolean validaAcessoFinanceiro(int matricula) {
-		System.out.println("KKKKKKKKKKKKK");
-//		Date dataAtual = ControladorPrincipal.getInstance().getDataSistema();
-//		Funcionario funcionario = null;
-//		ArrayList<RegistroAcessoNegado> registrosHorarioNaoPermitido = new ArrayList<>();
-//        try {
-//            funcionario = ControladorPrincipal.getInstance().encontraFuncionarioPelaMatricula(matricula);
-//			registrosHorarioNaoPermitido = ControladorPrincipal.getInstance().encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
-//			if(registrosHorarioNaoPermitido.size() >= 3) {
-//				ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.ACESSO_BLOQUEADO);
-//				telaAcesso.exibeAcessoNegadoAcessoBloqueado();
-//				return false;
-//			}
-//			Acesso acesso = new Acesso(dataAtual, matricula);
-//			return acesso.validaAcesso(acesso, funcionario, dataAtual);
-//        } catch (NullPointerException e) {
-//			if(funcionario == null) {
-//				ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.MATRICULA_INEXISTENTE);
-//				telaAcesso.exibeAcessoNegadoMatriculaInexistente();
-//			}
-//        } catch (ParseException e) {}
+		Date dataAtual = ControladorPrincipal.getInstance().getDataSistema();
+		Funcionario funcionario = null;
+		ArrayList<RegistroAcessoNegado> registrosHorarioNaoPermitido = new ArrayList<>();
+        try {
+            funcionario = ControladorPrincipal.getInstance().encontraFuncionarioPelaMatricula(matricula);
+			registrosHorarioNaoPermitido = ControladorPrincipal.getInstance().encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
+			if(registrosHorarioNaoPermitido.size() >= 3) {
+				ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.ACESSO_BLOQUEADO);
+				telaAcesso.exibeAcessoNegadoAcessoBloqueado();
+				return false;
+			}
+			Acesso acesso = new Acesso(dataAtual, matricula);
+			return acesso.validaAcesso(acesso, funcionario, dataAtual);
+        } catch (NullPointerException e) {
+			if(funcionario == null) {
+				ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.MATRICULA_INEXISTENTE);
+				telaAcesso.exibeAcessoNegadoMatriculaInexistente();
+			}
+        } catch (ParseException e) {}
         return false;
     }
 
@@ -74,20 +80,6 @@ public class ControladorAcesso {
 	 */
 	public void novoRegistroAcessoNegado(Date data, int matricula, Motivo motivo) {
 		ControladorPrincipal.getInstance().novoRegistroAcessoNegado(data, matricula, motivo);
-	}
-	
-	/**
-	 * Oferece a opcao de tentar inserir a matricula novamente para acessar o
-	 * financeiro ou voltar ao menu principal.
-	 */
-	public void trataNovaTentativa() {
-		int opcao = 0;
-		opcao = telaAcesso.exibeNovaTentativa();
-		if(opcao == 1) {
-			acessaFinanceiro();
-		} else {
-			ControladorPrincipal.getInstance().exibeMenuPrincipal();
-		}
 	}
 
 	/**

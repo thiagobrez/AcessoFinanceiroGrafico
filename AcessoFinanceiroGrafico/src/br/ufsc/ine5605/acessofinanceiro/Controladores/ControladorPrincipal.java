@@ -89,7 +89,7 @@ public class ControladorPrincipal {
      * Chama classe que controla o acesso ao financeiro
      */
     public void acessarFinanceiro(){
-        this.controladorAcesso.acessaFinanceiro();
+        this.controladorAcesso.exibePainelAcesso();
     }
     
     /**
@@ -121,7 +121,7 @@ public class ControladorPrincipal {
     }
 	
     public Date getDataSistema(){
-	return controladorData.getDataSistema();
+		return controladorData.getDataSistema();
     }
 
     /**
@@ -131,7 +131,7 @@ public class ControladorPrincipal {
      * @return funcionario
      */
     public Funcionario encontraFuncionarioPelaMatricula(int matricula) {
-	return controladorFuncionario.encontraFuncionarioPelaMatricula(matricula);
+		return controladorFuncionario.encontraFuncionarioPelaMatricula(matricula);
     }
 
     /**
@@ -142,7 +142,7 @@ public class ControladorPrincipal {
      * @return registro de acesso negado
      */
     public ArrayList<RegistroAcessoNegado> encontraRegistrosHorarioNaoPermitidoPelaMatricula(int matricula) {
-	return controladorRegistroAcessoNegado.encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
+		return controladorRegistroAcessoNegado.encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
     }
 
     /**
@@ -153,7 +153,7 @@ public class ControladorPrincipal {
      * @param motivo da negação de acesso
      */
     public void novoRegistroAcessoNegado(Date data, int matricula, Motivo motivo) {
-	controladorRegistroAcessoNegado.novoRegistroAcessoNegado(data, matricula, motivo);
+		controladorRegistroAcessoNegado.novoRegistroAcessoNegado(data, matricula, motivo);
     }
     
     /**
