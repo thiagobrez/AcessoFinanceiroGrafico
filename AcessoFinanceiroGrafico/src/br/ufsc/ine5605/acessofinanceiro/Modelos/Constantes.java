@@ -17,6 +17,8 @@ public class Constantes {
 	
 	//COMUM
 	public static final String COMUM_BOTAO_VOLTAR = "Voltar";
+	public static final String COMUM_DATA = "Data";
+	public static final String COMUM_MATRICULA = "Matrícula";
 	
     //ACESSO AO FINANCEIRO
 	public static final String ACESSO_FINANCEIRO = "Acesso ao financeiro";
@@ -29,6 +31,10 @@ public class Constantes {
 	public static final String ACESSO_NEGADO_CARGO_SEM_ACESSO = "Cargo sem acesso";
 	public static final String ACESSO_PERMITIDO = "Financeiro acessado com sucesso!";
 	public static final String ACESSO_PERMITIDO_TITULO = "Acesso permitido";
+	
+	//REGISTRO
+	public static final String REGISTRO_NUMERO = "Número";
+	public static final String REGISTRO_MOTIVO = "Motivo";
 	
 	// ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
 	

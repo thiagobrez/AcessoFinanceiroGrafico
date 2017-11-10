@@ -11,6 +11,7 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Motivo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.RegistroAcessoNegado;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaPrincipal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -186,5 +187,9 @@ public class ControladorPrincipal {
     public void deletaCargosFuncionarios(Cargo cargoDeletado, Cargo cargoIndefinido) {
         controladorFuncionario.deixaFuncionariosSemCargo(cargoDeletado, cargoIndefinido);
     }
+
+	public Collection<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
+		return controladorRegistroAcessoNegado.getListaRegistrosAcessosNegados();
+	}
     
 }

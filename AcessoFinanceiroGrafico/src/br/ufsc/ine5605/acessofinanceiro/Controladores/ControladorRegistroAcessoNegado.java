@@ -10,6 +10,7 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Motivo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.RegistroAcessoNegado;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaRegistroAcessoNegado;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -22,8 +23,8 @@ public class ControladorRegistroAcessoNegado {
 	private RegistroAcessoNegadoDAO registroDAO;
     
     public ControladorRegistroAcessoNegado() {
-        this.telaRegistroAcessoNegado = new TelaRegistroAcessoNegado(this);
 		this.registroDAO = new RegistroAcessoNegadoDAO();
+        this.telaRegistroAcessoNegado = new TelaRegistroAcessoNegado(this);
     }
     
 	/**
@@ -31,22 +32,22 @@ public class ControladorRegistroAcessoNegado {
 	 * relatorio e trata a opcao recebida.
 	 */
     public void exibeRelatorio() {
-        int filtro = 0;
-        filtro = telaRegistroAcessoNegado.exibeMenuRelatorio();
-        switch(filtro) {
-            case 1:
-                exibeFiltroPorMotivo();
-                break;
-            case 2:
-                exibeFiltroPorMatricula();
-                break;
-            case 3:
-                ControladorPrincipal.getInstance().exibeMenuPrincipal();
-                break;
-            default:
-                telaRegistroAcessoNegado.exibeOpcaoInexistente();
-                exibeRelatorio();
-        }
+		telaRegistroAcessoNegado.setVisible(true);
+//        telaRegistroAcessoNegado.exibeMenuRelatorio(registroDAO.getList());
+//        switch(filtro) {
+//            case 1:
+//                exibeFiltroPorMotivo();
+//                break;
+//            case 2:
+//                exibeFiltroPorMatricula();
+//                break;
+//            case 3:
+//                ControladorPrincipal.getInstance().exibeMenuPrincipal();
+//                break;
+//            default:
+//                telaRegistroAcessoNegado.exibeOpcaoInexistente();
+//                exibeRelatorio();
+//        }
     }
 
 	/**
@@ -230,6 +231,10 @@ public class ControladorRegistroAcessoNegado {
 		} else {
 			ControladorPrincipal.getInstance().exibeMenuPrincipal();
 		}
+	}
+
+	public Collection<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
+		return this.registroDAO.getList();
 	}
 	
 }
