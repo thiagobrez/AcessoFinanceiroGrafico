@@ -14,9 +14,13 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -29,18 +33,20 @@ import javax.swing.table.DefaultTableModel;
 public class TelaRegistroAcessoNegado extends JFrame {
 
     private ControladorRegistroAcessoNegado owner;
-	private JTable tbItens;
 	private GridBagConstraints constraints;
 	private JScrollPane spBaseTabela;
+	private JTable tbItens;
+	private JButton btVoltar;
+	private JComboBox comboFiltro;
+	
 
     public TelaRegistroAcessoNegado(ControladorRegistroAcessoNegado owner) {
+//		super(Constantes.)
         this.owner = owner;
-		try {
-			configuraTela();
-		} catch (ParseException ex) {}
+		configuraTela();
     }
 
-	private void configuraTela() throws ParseException {
+	private void configuraTela() {
 		
 		//Configuracao container
 		Container container = getContentPane();
@@ -49,26 +55,36 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		//Configuracao constraints
 		this.constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.CENTER;
-		constraints.gridwidth = 2;
-		constraints.gridheight = 4;
+//		constraints.gridwidth = 2;
+//		constraints.gridheight = 4;
 		constraints.gridx = 0;
 		constraints.gridy = 4;
 		
 		//Configuracao tbItens
 		this.tbItens = new JTable();
-		tbItens.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		tbItens.setPreferredScrollableViewportSize(new Dimension(500, 300));
 		tbItens.setFillsViewportHeight(true);
-//		updateData();
 		spBaseTabela = new JScrollPane(tbItens);
 		container.add(spBaseTabela, constraints);
+		
+		//Configuracao btManager e comboManager
+		GerenciadorBotoes btManager = new GerenciadorBotoes();
+		GerenciadorCombos comboManager = new GerenciadorCombos();
+		
+		//Configuracao btVoltar
+		btVoltar = new JButton(Constantes.COMUM_BOTAO_VOLTAR);
+		btVoltar.addActionListener(btManager);
+		container.add(btVoltar);
+		
+		//Configuracao comboFiltro
+		
 		
 		setSize(600, 400);
 		setLocationRelativeTo(null);
 		
 	}
 	
-	private void updateData() {
-		
+	public void updateData() {
 		DefaultTableModel modelTbItens = new DefaultTableModel();
 		modelTbItens.addColumn(Constantes.REGISTRO_NUMERO);
 		modelTbItens.addColumn(Constantes.COMUM_DATA);
@@ -84,10 +100,8 @@ public class TelaRegistroAcessoNegado extends JFrame {
 				registro.getMotivo()
 			});
 		}
-		
 		tbItens.setModel(modelTbItens);
 		this.repaint();
-		
 	}
 	
     /**
@@ -96,31 +110,9 @@ public class TelaRegistroAcessoNegado extends JFrame {
      *
      * @return int opcao escolhida pelo usuario
      */
-    public void exibeMenuRelatorio(Collection<RegistroAcessoNegado> lista) {
-		
-//        int opcao = 0;
-//        boolean opcaoInvalida = true;
-//        System.out.println("");
-//        System.out.println(Constantes.RELATORIO_ACESSO);
-//        while (opcaoInvalida) {
-//            try {
-//                System.out.println("");
-//                System.out.println(Constantes.RELATORIO_ESCOLHA_FILTRO);
-//                System.out.println(Constantes.RELATORIO_FILTRO_MOTIVO);
-//                System.out.println(Constantes.RELATORIO_FILTRO_MATRICULA);
-//                System.out.println(Constantes.VOLTAR_MENU_PRINCIPAL_3);
-//                System.out.println();
-//                System.out.println(Constantes.O_QUE_DESEJA_FAZER);
-//                opcao = teclado.nextInt();
-//                opcaoInvalida = false;
-//            } catch (InputMismatchException e) {
-//                teclado.next();
-//                System.out.println();
-//                System.out.println(Constantes.OPCAO_INVALIDA);
-//                System.out.println();
-//            }
-//        }
-//        return opcao;
+    public void exibeMenuRelatorio() {
+		updateData();
+		setVisible(true);
     }
 
     /**
@@ -337,4 +329,26 @@ public class TelaRegistroAcessoNegado extends JFrame {
 //        return opcao;
     }
 
+	private class GerenciadorBotoes implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource().equals(btVoltar)) {
+				setVisible(false);
+			}
+		}
+		
+	}
+
+	private class GerenciadorCombos implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource().equals(comboFiltro)) {
+				
+			}
+		}
+		
+	}
+	
 }

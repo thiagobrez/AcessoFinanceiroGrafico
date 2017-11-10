@@ -136,9 +136,9 @@ public class TelaAcesso extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// usar equals?
-			if(e.getSource() == btAcesso) {
+			if(e.getSource().equals(btAcesso)) {
 				owner.acessaFinanceiro(Integer.parseInt(tfMatricula.getText()));
-			} else if(e.getSource() == btVoltar) {
+			} else if(e.getSource().equals(btVoltar)) {
 				setVisible(false);
 			}
 		}

@@ -32,22 +32,7 @@ public class ControladorRegistroAcessoNegado {
 	 * relatorio e trata a opcao recebida.
 	 */
     public void exibeRelatorio() {
-		telaRegistroAcessoNegado.setVisible(true);
-//        telaRegistroAcessoNegado.exibeMenuRelatorio(registroDAO.getList());
-//        switch(filtro) {
-//            case 1:
-//                exibeFiltroPorMotivo();
-//                break;
-//            case 2:
-//                exibeFiltroPorMatricula();
-//                break;
-//            case 3:
-//                ControladorPrincipal.getInstance().exibeMenuPrincipal();
-//                break;
-//            default:
-//                telaRegistroAcessoNegado.exibeOpcaoInexistente();
-//                exibeRelatorio();
-//        }
+		telaRegistroAcessoNegado.exibeMenuRelatorio();
     }
 
 	/**
