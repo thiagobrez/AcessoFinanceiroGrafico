@@ -8,6 +8,9 @@ package br.ufsc.ine5605.acessofinanceiro.Telas;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorFuncionario;
+import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
+import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
+import br.ufsc.ine5605.acessofinanceiro.Modelos.RegistroAcessoNegado;
 import java.util.Scanner;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -20,6 +23,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -29,6 +33,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -67,14 +72,14 @@ public class TelaFuncionario extends JFrame {
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.CENTER;
-        constraints.gridwidth = 2;
-        constraints.gridheight = 4;
+        constraints.gridwidth = 10;
+        constraints.gridheight = 10;
         constraints.gridx = 0;
-        constraints.gridy = 4;
+        constraints.gridy = 6;
 
         //Configuracao tbItens
         this.tbItens = new JTable();
-        tbItens.setPreferredScrollableViewportSize(new Dimension(500, 300));
+        tbItens.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbItens.setFillsViewportHeight(true);
         spBaseTabela = new JScrollPane(tbItens);
         container.add(spBaseTabela, constraints);
@@ -103,18 +108,53 @@ public class TelaFuncionario extends JFrame {
         btVoltarMenuPrincipal.addActionListener(btManager);
         container.add(btVoltarMenuPrincipal);
 
-        setSize(600, 400);
+        setSize(700, 700);
         setLocationRelativeTo(null);
 
     }
 
+    public void updateData() {
+
+        //Configuracao modelTbItens
+        DefaultTableModel modelTbItens = new DefaultTableModel();
+        modelTbItens.addColumn(Constantes.COMUM_NOME);
+        modelTbItens.addColumn(Constantes.COMUM_MATRICULA);
+        modelTbItens.addColumn(Constantes.COMUM_DATA_NASCIMENTO);
+        modelTbItens.addColumn(Constantes.COMUM_TELEFONE);
+        modelTbItens.addColumn(Constantes.COMUM_SALARIO);
+        modelTbItens.addColumn(Constantes.COMUM_CARGO);
+
+        Collection<Funcionario> listaFuncionarios = ControladorPrincipal.getInstance().getListaFuncionarios();
+
+        for (Funcionario funcionario : listaFuncionarios) {
+            modelTbItens.addRow(new Object[]{
+                funcionario.getNome(),
+                funcionario.getMatricula(),
+                funcionario.getDataNascimento(),
+                funcionario.getTelefone(),
+                funcionario.getSalario(),
+                funcionario.getCargo().getNome()
+            });
+        }
+        tbItens.setModel(modelTbItens);
+
+        this.repaint();
+    }
+
+// -----------------------GERENCIADOR DE BOTÕES---------------------------------
+//
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            if (e.getSource().equals(btCadastraFuncionario)) {
+                controlador.exibeCadastraFuncionario();
+            }
+            if (e.getSource().equals(btEditaFuncionario)) {
+                controlador.exibeEditaFuncionario();
+            }
             if (e.getSource().equals(btVoltarMenuPrincipal)) {
-
+                setVisible(false);
                 controlador.voltarMenuPrincipal();
             }
 

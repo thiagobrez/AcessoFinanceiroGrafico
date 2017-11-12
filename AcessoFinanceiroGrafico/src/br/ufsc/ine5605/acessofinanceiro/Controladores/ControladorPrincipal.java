@@ -202,4 +202,12 @@ public class ControladorPrincipal {
         return controladorRegistroAcessoNegado.getListaRegistrosAcessosNegados();
     }
 
+    public Collection<Funcionario> getListaFuncionarios() {
+        return controladorFuncionario.getListaFuncionarios();
+    }
+
+    //Bruno: só retorna o list de cargos
+    public Collection<Cargo> getListaCargos() {
+        return controladorCargo.getListaCargos();
+    }
 }

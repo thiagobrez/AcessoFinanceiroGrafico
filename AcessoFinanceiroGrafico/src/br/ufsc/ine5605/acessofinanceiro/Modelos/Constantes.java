@@ -18,12 +18,16 @@ public class Constantes {
     public static final String COMUM_BOTAO_VOLTAR = "Voltar";
     public static final String COMUM_BOTAO_VOLTAR_MENU_PRINCIPAL = "Voltar ao Menu Principal";
     public static final String COMUM_DATA = "Data";
-    public static final String COMUM_COLUNA_NOME = "Nome";
-    public static final String COMUM_COLUNA_MATRICULA = "Matrícula";
-    public static final String COMUM_COLUNA_DATA_NASCIMENTO = "Data de Nascimento";
-    public static final String COMUM_COLUNA_TELEFONE = "Telefone";
-    public static final String COMUM_COLUNA_SALARIO = "Cargo";
+    public static final String COMUM_NOME = "Nome";
+    public static final String COMUM_MATRICULA = "Matrícula";
+    public static final String COMUM_DATA_NASCIMENTO = "Data de Nascimento";
+    public static final String COMUM_TELEFONE = "Telefone";
+    public static final String COMUM_SALARIO = "Salario";
+    public static final String COMUM_CARGO = "Cargo";
+    public static final String COMUM_CODIGO = "Codigo";
     public static final String COMUM_OQUE_DESEJA_FAZER = "O que você deseja fazer?";
+    public static final String COMUM_BOTAO_CANCELAR = "Cancelar";
+    public static final String COMUM_BOTAO_CADASTRAR = "Cadastrar";
 
     //ACESSO AO FINANCEIRO
     public static final String ACESSO_FINANCEIRO = "Acesso ao financeiro";
@@ -48,6 +52,12 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_EDITAR = "Editar Funcinário";
     public static final String GERENCIAR_FUNCIONARIO_LISTAR = "Listar Funcionário";
     public static final String GERENCIAR_FUNCIONARIO_DELETAR = "Deletar Funcionário";
+    public static final String GERENCIAR_FUNCIONARIO_NOME = "Nome: ";
+    public static final String GERENCIAR_FUNCIONARIO_MATRICULA = "Matrícula: ";
+    public static final String GERENCIAR_FUNCIONARIO_DATA_NASCIMENTO = "Data de Nascimento: ";
+    public static final String GERENCIAR_FUNCIONARIO_TELEFONE = "Telefone: ";
+    public static final String GERENCIAR_FUNCIONARIO_SALARIO = "Salario: ";
+    public static final String GERENCIAR_FUNCIONARIO_CARGO = "Cargo: ";
 
     //DATA SISTEMA
     public static final String DATA_HORA_SISTEMA = "Data e Hora do sistema";

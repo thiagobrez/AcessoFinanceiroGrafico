@@ -17,6 +17,7 @@ import java.lang.Character;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -44,13 +45,73 @@ public class ControladorFuncionario implements IControladorFuncionario {
         this.telaFuncionario.setVisible(true);
     }
 
+    public void exibeCadastraFuncionario() {
+        this.telaCadastroFuncionario.setVisible(true);
+    }
+
+    public void exibeEditaFuncionario() {
+        this.telaEditarFuncionario.setVisible(true);
+    }
+
     public void voltarMenuPrincipal() {
         ControladorPrincipal.getInstance().exibeMenuPrincipal();
     }
 
-//
-//+-+-+-+-+-+-+-+-+-+- CADASTRAR FUNCIONARIO +-+-+-+-+-+-+-+-+-+-
-//
+    public Collection<Funcionario> getListaFuncionarios() {
+        return this.funcionarioDAO.getList();
+    }
+
+    public void cadastraFuncionario(int matricula, String nome, String dataNascimento, int telefone, int salario, Cargo cargo) {
+        boolean nomeValido = verificaNomeInserido(nome);
+        boolean matriculaValida = verificaMatricula(matricula);
+
+        if (nomeValido && matriculaValida) {
+            Funcionario funcionario = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
+            funcionarioDAO.put(funcionario);
+        }
+
+    }
+
+    public boolean verificaMatricula(int matricula) {
+        for (Funcionario funcionarioCadastrado : this.funcionarioDAO.getList()) {
+            if (funcionarioCadastrado.getMatricula() == matricula) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean verificaNomeInserido(String nome) {
+        if (nome.length() > 2) {
+            for (int i = 0; i < nome.length(); i++) {
+                char letraAnalisada = nome.charAt(i);
+                if (!Character.isLetter(letraAnalisada)) {
+                    if (!Character.isSpace(letraAnalisada)) {
+                        return false;
+                    }
+                }
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public ArrayList getMatriculas() {
+        ArrayList<Integer> matriculas = new ArrayList<>();
+        Set matriculasSet = funcionarioDAO.getMatriculas();
+        for (Object matricula : matriculasSet) {
+            matriculas.add((Integer) matricula);
+        }
+        return matriculas;
+    }
+
+    //
+    //
+    //+-+-+-+-+-+-+--+-+-+-+--+-+-+-+--+-+-+-+-+-+-+- ANTIGO +-+-+-+-+-+-+-+-+-+--+-+-+-+--+-+-+-+--+-+-+-+--+-+-+-+-
+    //
+    //+-+-+-+-+-+-+-+-+-+- CADASTRAR FUNCIONARIO +-+-+-+-+-+-+-+-+-+-
+    //
     /**
      * Pede ao usuario todos os atributos para cadastrar um funcionario e caso o
      * funcionario não esteja cadastrado (matricula não foi cadastrada ainda),
@@ -473,12 +534,4 @@ public class ControladorFuncionario implements IControladorFuncionario {
         return cargo;
     }
 
-    public ArrayList getMatriculas() {
-        ArrayList<Integer> matriculas = new ArrayList<>();
-        Set matriculasSet = funcionarioDAO.getMatriculas();
-		for(Object matricula : matriculasSet) {
-			matriculas.add((Integer) matricula);
-		}
-        return matriculas;
-    }
 }
