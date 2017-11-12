@@ -6,6 +6,7 @@
 package br.ufsc.ine5605.acessofinanceiro.Controladores;
 
 import br.ufsc.ine5605.acessofinanceiro.Interfaces.IControladorDataSistema;
+import br.ufsc.ine5605.acessofinanceiro.Modelos.DataSistemaDAO;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaDataHoraSistema;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,11 +19,11 @@ import java.util.Date;
 public class ControladorDataSistema implements IControladorDataSistema {
 
     private TelaDataHoraSistema telaDataHora;
-    private Date dataHoraSistema;
+    private DataSistemaDAO dataSistema;
 
     public ControladorDataSistema() {
         this.telaDataHora = new TelaDataHoraSistema(this);
-        this.dataHoraSistema = new Date();
+        this.dataSistema = new DataSistemaDAO();
     }
 
     /**
@@ -40,7 +41,7 @@ public class ControladorDataSistema implements IControladorDataSistema {
      * exibe a data e hora atuais do sistema
      */
     public void exibeDataHoraSistema() {
-        this.telaDataHora.exibeDataHoraSistema(dataHoraSistema);
+        this.telaDataHora.exibeDataHoraSistema(dataSistema.get());
     }
 
     /**
@@ -79,7 +80,7 @@ public class ControladorDataSistema implements IControladorDataSistema {
      * chama o metodo de confirmacao de alteracao de data e hora.
      */
     public void executaOpcao1Menu() {
-        this.dataHoraSistema = alteraDataHoraSistema();
+        this.dataSistema.set(alteraDataHoraSistema());
         exibeDataHoraSistema();
         this.telaDataHora.exibeConfirmacaoDataHoraSistema();
         controlaConfirmacaoDataHoraSistema();
@@ -107,7 +108,7 @@ public class ControladorDataSistema implements IControladorDataSistema {
 
     @Override
     public Date getDataSistema() {
-        return this.dataHoraSistema;
+        return this.dataSistema.get();
     }
 
     /**

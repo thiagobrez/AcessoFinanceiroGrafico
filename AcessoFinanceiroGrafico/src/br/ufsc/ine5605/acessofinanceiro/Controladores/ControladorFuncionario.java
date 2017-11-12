@@ -28,52 +28,16 @@ public class ControladorFuncionario implements IControladorFuncionario {
         this.telaFuncionario = new TelaFuncionario(this);
         this.funcionarioDAO = new FuncionarioDAO();
     }
-//
-// +-+-+-+-+-+-+-+-+-+- MENU PRINCIPAL FUNCIONARIO +-+-+-+-+-+-+-+-+-+-
-//
 
     /**
      * Exibe o menu principal do CRUD do funcionário.
      */
     public void exibeMenuFuncionario() {
-        telaFuncionario.exibeMenuFuncionario();
-        controlaMenuFuncionario();
+        this.telaFuncionario.setVisible(true);
     }
 
-    /**
-     * Controla o que o sistema faz com base na opcao que o usuario selecionar
-     * no menu principal do funcionario. Caso aperte 1: cadastra um funcionario.
-     * Caso aperte 2: edita um funcionario. Caso aperte 3: lista todos os
-     * funcionarios. Caso aperte 4: deleta um funcionario. Caso aperte 5: volta
-     * ao menu principal do sistema. Caso aperte outra tecla: apresenta uma
-     * mensagem de opcao inexistente e pede que o usuario digite outra vez a
-     * opcao que deseja selecionar.
-     */
-    public void controlaMenuFuncionario() {
-        int opcao = this.telaFuncionario.pedeOpcao();
-
-        switch (opcao) {
-            case 1:
-                incluiFuncionario();
-                break;
-            case 2:
-                editaFuncionario();
-                break;
-            case 3:
-                listaFuncionarios();
-                break;
-            case 4:
-                menuDeletaFuncionario();
-                break;
-            case 5:
-                ControladorPrincipal.getInstance().exibeMenuPrincipal();
-                break;
-            default:
-                this.telaFuncionario.opcaoInexistente();
-                exibeMenuFuncionario();
-                break;
-        }
-
+    public void voltarMenuPrincipal() {
+        ControladorPrincipal.getInstance().exibeMenuPrincipal();
     }
 
 //
@@ -85,8 +49,6 @@ public class ControladorFuncionario implements IControladorFuncionario {
      * cadastra o funcionario.
      */
     public void incluiFuncionario() {
-
-        this.telaFuncionario.mensagemNovoFuncionario();
 
         String nome = pedeNome();
         int matricula = verificaMatriculaInserida();

@@ -13,31 +13,45 @@ package br.ufsc.ine5605.acessofinanceiro.Modelos;
  */
 public class Constantes {
 
-	// ======================================= FAVOR MANTER OS PADRÕES ======================================= //
-	
-	//COMUM
-	public static final String COMUM_BOTAO_VOLTAR = "Voltar";
-	public static final String COMUM_DATA = "Data";
-	public static final String COMUM_MATRICULA = "Matrícula";
-	
+    // ======================================= FAVOR MANTER OS PADRÕES ======================================= //
+    //COMUM
+    public static final String COMUM_BOTAO_VOLTAR = "Voltar";
+    public static final String COMUM_BOTAO_VOLTAR_MENU_PRINCIPAL = "Voltar ao Menu Principal";
+    public static final String COMUM_DATA = "Data";
+    public static final String COMUM_NOME = "Nome: ";
+    public static final String COMUM_MATRICULA = "Matrícula: ";
+    public static final String COMUM_DATA_NASCIMENTO = "Data de Nascimento: ";
+    public static final String COMUM_TELEFONE = "Telefone: ";
+    public static final String COMUM_SALARIO = "Cargo: ";
+    public static final String COMUM_OQUE_DESEJA_FAZER = "O que você deseja fazer?";
+
     //ACESSO AO FINANCEIRO
-	public static final String ACESSO_FINANCEIRO = "Acesso ao financeiro";
-	public static final String ACESSO_INSIRA_MATRICULA = "Insira a matricula de acesso: ";
-	public static final String ACESSO_BOTAO_ACESSAR = "Acessar";
-	public static final String ACESSO_NEGADO_TITULO = "Acesso negado";
-	public static final String ACESSO_NEGADO_MATRICULA_INEXISTENTE = "Matrícula inexistente";
-	public static final String ACESSO_NEGADO_ACESSO_BLOQUEADO = "Acesso bloqueado";
-	public static final String ACESSO_NEGADO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
-	public static final String ACESSO_NEGADO_CARGO_SEM_ACESSO = "Cargo sem acesso";
-	public static final String ACESSO_PERMITIDO = "Financeiro acessado com sucesso!";
-	public static final String ACESSO_PERMITIDO_TITULO = "Acesso permitido";
-	
-	//REGISTRO
-	public static final String REGISTRO_NUMERO = "Número";
-	public static final String REGISTRO_MOTIVO = "Motivo";
-	
-	// ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
-	
+    public static final String ACESSO_FINANCEIRO = "Acesso ao financeiro";
+    public static final String ACESSO_INSIRA_MATRICULA = "Insira a matricula de acesso: ";
+    public static final String ACESSO_BOTAO_ACESSAR = "Acessar";
+    public static final String ACESSO_NEGADO_TITULO = "Acesso negado";
+    public static final String ACESSO_NEGADO_MATRICULA_INEXISTENTE = "Matrícula inexistente";
+    public static final String ACESSO_NEGADO_ACESSO_BLOQUEADO = "Acesso bloqueado";
+    public static final String ACESSO_NEGADO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
+    public static final String ACESSO_NEGADO_CARGO_SEM_ACESSO = "Cargo sem acesso";
+    public static final String ACESSO_PERMITIDO = "Financeiro acessado com sucesso!";
+    public static final String ACESSO_PERMITIDO_TITULO = "Acesso permitido";
+
+    //REGISTRO
+    public static final String REGISTRO_NUMERO = "Número";
+    public static final String REGISTRO_MOTIVO = "Motivo";
+
+    //FUNCIONARIO
+    public static final String GERENCIAR_FUNCIONARIO = "Gerenciar Funcionários";
+    public static final String GERENCIAR_FUNCIONARIO_CADASTRAR = "Cadastrar Funcionário";
+    public static final String GERENCIAR_FUNCIONARIO_EDITAR = "Editar Funcinário";
+    public static final String GERENCIAR_FUNCIONARIO_LISTAR = "Listar Funcionário";
+    public static final String GERENCIAR_FUNCIONARIO_DELETAR = "Deletar Funcionário";
+
+    //DATA SISTEMA
+    public static final String DATA_HORA_SISTEMA = "Data e Hora do sistema";
+
+    // ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
     // COMUM
     public static final String INSIRA_MATRICULA = "Digite a matrícula: ";
     public static final String MATRICULA_INVALIDA = "------------ MATRÍCULA INVÁLIDA: a matrícula deve conter somente e ate 9 numeros ------------";
@@ -99,7 +113,7 @@ public class Constantes {
     public static final String RELATORIO_REGISTRO_NENHUM_ENCONTRADO = " ------------ Nenhum registro encontrado. -----------";
 
     //MENU GERENCIAR FUNCIONARIO
-    public static final String GERENCIAR_FUNCIONARIO = " +-+-+-+-+-+-+-+ Gerenciar Funcionários +-+-+-+-+-+-+-+";
+    public static final String GERENCIAR_FUNCIONARIOs = " +-+-+-+-+-+-+-+ Gerenciar Funcionários +-+-+-+-+-+-+-+";
     public static final String CADASTRAR_FUNCIONARIO = " 1. Cadastrar Funcionário ";
     public static final String EDITAR_FUNCIONARIO = " 2. Editar Funcionário ";
     public static final String LISTAR_FUNCIONARIOS = " 3. Listar Funcionários ";
