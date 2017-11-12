@@ -13,7 +13,10 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import javax.swing.JFrame;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -23,6 +26,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -33,94 +38,68 @@ public class TelaFuncionario extends JFrame {
 
     private ControladorFuncionario controlador;
     private GerenciadorBotoes btManager;
-    private TelaCadastrarFuncionario tlCadastrarFuncionario;
-    private JLabel lbPrincipal;
-    private JLabel lbNome;
-    private JLabel lbMatricula;
-    private JLabel lbDataNascimento;
-    private JLabel lbTelefone;
-    private JLabel lbSalario;
-    private JLabel lbCargo;
-    private JTextField tfNome;
-    private JTextField tfMatricula;
-    private JTextField tfDataNascimento;
-    private JTextField tfTelefone;
-    private JTextField tfSalario;
+    private GridBagConstraints constraints;
+    private JTable tbItens;
+    private JScrollPane spBaseTabela;
     private JButton btCadastraFuncionario;
     private JButton btEditaFuncionario;
-    private JButton btListaFuncionarios;
     private JButton btDeletaFuncionario;
     private JButton btVoltarMenuPrincipal;
-    private JButton btVoltar;
 
     public TelaFuncionario(ControladorFuncionario owner) {
         super(Constantes.GERENCIAR_FUNCIONARIOS);
         this.controlador = owner;
         this.btManager = new GerenciadorBotoes();
-        this.tlCadastrarFuncionario = new TelaCadastrarFuncionario();
 
         try {
-            configuraTela(true);
+            configuraTela();
         } catch (ParseException e) {
         }
     }
 
-    private void configuraTela(boolean visivel) throws ParseException {
+    private void configuraTela() throws ParseException {
 
         Container container = getContentPane();
-        container.setLayout(new FlowLayout());
+        container.setLayout(new GridBagLayout());
 
-        //Configuracao lbPrincipal
-        lbPrincipal = new JLabel(Constantes.COMUM_OQUE_DESEJA_FAZER);
-        container.add(lbPrincipal);
-        lbPrincipal.setVisible(visivel);
+        //Configuracao constraints
+        this.constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.CENTER;
+        constraints.gridwidth = 2;
+        constraints.gridheight = 4;
+        constraints.gridx = 0;
+        constraints.gridy = 4;
+
+        //Configuracao tbItens
+        this.tbItens = new JTable();
+        tbItens.setPreferredScrollableViewportSize(new Dimension(500, 300));
+        tbItens.setFillsViewportHeight(true);
+        spBaseTabela = new JScrollPane(tbItens);
+        container.add(spBaseTabela, constraints);
 
         //Configura btCadastraFuncionario
         btCadastraFuncionario = new JButton();
         btCadastraFuncionario.setText(Constantes.GERENCIAR_FUNCIONARIO_CADASTRAR);
         btCadastraFuncionario.addActionListener(btManager);
         container.add(btCadastraFuncionario);
-        btCadastraFuncionario.setVisible(visivel);
 
         //Configura btEditaFuncionario
         btEditaFuncionario = new JButton();
         btEditaFuncionario.setText(Constantes.GERENCIAR_FUNCIONARIO_EDITAR);
         btEditaFuncionario.addActionListener(btManager);
         container.add(btEditaFuncionario);
-        btEditaFuncionario.setVisible(visivel);
-
-        //Configura btListaFuncionario
-        btListaFuncionarios = new JButton();
-        btListaFuncionarios.setText(Constantes.GERENCIAR_FUNCIONARIO_LISTAR);
-        btListaFuncionarios.addActionListener(btManager);
-        container.add(btListaFuncionarios);
-        btListaFuncionarios.setVisible(visivel);
 
         //Configura btDeletaFuncionario
         btDeletaFuncionario = new JButton();
         btDeletaFuncionario.setText(Constantes.GERENCIAR_FUNCIONARIO_DELETAR);
         btDeletaFuncionario.addActionListener(btManager);
         container.add(btDeletaFuncionario);
-        btDeletaFuncionario.setVisible(visivel);
 
         //Configura btVoltarMenuPrincipal
         btVoltarMenuPrincipal = new JButton();
         btVoltarMenuPrincipal.setText(Constantes.COMUM_BOTAO_VOLTAR_MENU_PRINCIPAL);
         btVoltarMenuPrincipal.addActionListener(btManager);
         container.add(btVoltarMenuPrincipal);
-        btVoltarMenuPrincipal.setVisible(visivel);
-
-    }
-
-    private void telaEditaFuncionario() {
-
-    }
-
-    private void telaListaFuncionarios() {
-
-    }
-
-    private void telaDeletaFuncionario() {
 
     }
 
@@ -128,91 +107,11 @@ public class TelaFuncionario extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource().equals(btCadastraFuncionario)) {
-                try {
-                    configuraTela(false);
-                } catch (ParseException ex) {
-                    Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                tlCadastrarFuncionario.telaCadastraFuncionario(true);
 
-            }
-            if (e.getSource().equals(btEditaFuncionario)) {
-                setVisible(false);
-                telaEditaFuncionario();
-            }
-            if (e.getSource().equals(btListaFuncionarios)) {
-                setVisible(false);
-                telaListaFuncionarios();
-            }
-            if (e.getSource().equals(btDeletaFuncionario)) {
-                setVisible(false);
-                telaDeletaFuncionario();
-            }
             if (e.getSource().equals(btVoltarMenuPrincipal)) {
-                setVisible(false);
+
                 controlador.voltarMenuPrincipal();
             }
-            if (e.getSource().equals(btVoltar)) {
-                try {
-                    configuraTela(false);
-                } catch (ParseException ex) {
-                    Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-        }
-
-    }
-
-    private class TelaCadastrarFuncionario {
-
-        private void telaCadastraFuncionario(boolean visivel) {
-
-            Container container = getContentPane();
-            container.setLayout(new FlowLayout());
-
-            //Configuracao lbNome
-            lbNome = new JLabel(Constantes.COMUM_NOME);
-            container.add(lbNome);
-
-            //Configuracao tfNome
-            tfNome = new JTextField(5);
-            container.add(tfNome);
-
-            //Configuracao lbMatricula
-            lbMatricula = new JLabel(Constantes.COMUM_MATRICULA);
-            container.add(lbMatricula);
-
-            //Configuracao tfMatricula
-            tfMatricula = new JTextField(5);
-            container.add(tfMatricula);
-
-            //Configuracao lbDataNascimento
-            lbDataNascimento = new JLabel(Constantes.COMUM_DATA_NASCIMENTO);
-            container.add(lbDataNascimento);
-
-            //Configuracao tfNascimento
-            tfDataNascimento = new JTextField(5);
-            container.add(tfDataNascimento);
-
-            //Configuracao lbTelefone
-            lbTelefone = new JLabel(Constantes.COMUM_TELEFONE);
-            container.add(lbTelefone);
-
-            //Configuracao tfTelefone
-            tfTelefone = new JTextField(5);
-            container.add(tfTelefone);
-
-            //Configuracao lbSalario
-            lbSalario = new JLabel(Constantes.COMUM_SALARIO);
-            container.add(lbSalario);
-
-            //Configuracao tfSalario
-            tfSalario = new JTextField(5);
-            container.add(tfSalario);
-
-            setVisible(visivel);
 
         }
 

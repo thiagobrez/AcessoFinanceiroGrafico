@@ -5,13 +5,14 @@
  */
 package br.ufsc.ine5605.acessofinanceiro.Modelos;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author vladimir
  */
-public class Funcionario {
+public class Funcionario implements Serializable {
 
     private int matricula;
     private String nome;

@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +29,10 @@ public class FuncionarioDAO {
 
     public FuncionarioDAO() {
         load();
+    }
+
+    public Set<Integer> getMatriculas() {
+        return this.cacheFuncionarios.keySet();
     }
 
     public void put(Funcionario funcionario) {

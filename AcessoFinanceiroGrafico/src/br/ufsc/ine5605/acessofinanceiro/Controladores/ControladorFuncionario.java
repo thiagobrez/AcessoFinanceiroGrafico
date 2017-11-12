@@ -9,11 +9,14 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
 import br.ufsc.ine5605.acessofinanceiro.Interfaces.IControladorFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.FuncionarioDAO;
+import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCadastroFuncionario;
+import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaFuncionario;
 import java.util.Date;
 import java.lang.Character;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,10 +25,14 @@ import java.text.SimpleDateFormat;
 public class ControladorFuncionario implements IControladorFuncionario {
 
     private TelaFuncionario telaFuncionario;
+    private TelaCadastroFuncionario telaCadastroFuncionario;
+    private TelaEditarFuncionario telaEditarFuncionario;
     private FuncionarioDAO funcionarioDAO;
 
     public ControladorFuncionario() {
         this.telaFuncionario = new TelaFuncionario(this);
+        this.telaCadastroFuncionario = new TelaCadastroFuncionario(this);
+        this.telaEditarFuncionario = new TelaEditarFuncionario(this);
         this.funcionarioDAO = new FuncionarioDAO();
     }
 
@@ -463,5 +470,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
             }
         }
         return cargo;
+    }
+
+    public ArrayList getMatriculas() {
+        ArrayList<Integer> matriculas = new ArrayList<>();
+        matriculas = (ArrayList<Integer>) funcionarioDAO.getMatriculas();
+        return matriculas;
     }
 }

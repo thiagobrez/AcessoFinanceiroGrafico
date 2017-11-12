@@ -19,9 +19,9 @@ import java.util.Date;
  * @author bruno
  */
 public class ControladorPrincipal {
-	
+
     private static ControladorPrincipal controladorPrincipal;
-	
+
     public TelaPrincipal telaPrincipal;
     public ControladorCargo controladorCargo;
     public ControladorDataSistema controladorData;
@@ -29,7 +29,6 @@ public class ControladorPrincipal {
     public ControladorAcesso controladorAcesso;
     public ControladorRegistroAcessoNegado controladorRegistroAcessoNegado;
 
-    
     public ControladorPrincipal() {
         this.telaPrincipal = new TelaPrincipal(this);
         this.controladorCargo = new ControladorCargo();
@@ -38,40 +37,42 @@ public class ControladorPrincipal {
         this.controladorAcesso = new ControladorAcesso();
         this.controladorRegistroAcessoNegado = new ControladorRegistroAcessoNegado();
     }
-    
+
     public static ControladorPrincipal getInstance() {
-        if(controladorPrincipal == null) controladorPrincipal = new ControladorPrincipal();
+        if (controladorPrincipal == null) {
+            controladorPrincipal = new ControladorPrincipal();
+        }
         return controladorPrincipal;
     }
-    
+
     /**
      * Exibe o menu principal do sistema.
      */
     public void exibeMenuPrincipal() {
         telaPrincipal.exibeMenuPrincipal();
         controlaMenuPrincipal();
-    }   
-    
+    }
+
     /**
      * Controla o que o sistema faz com base na opcao que o usuario selecionar
      * no menu principal. Caso aperte 1: avança ao menu de acesso ao financeiro.
      * Caso aperte 2: gerencia um funcionario. Caso aperte 3: gerencia um cargo.
      * Caso aperte 4: gerencia a data do sistema. Caso aperte 5: emite relatorio
-     * de acessos. Caso aperte outra tecla: apresenta uma mensagem de opcao 
-     * inexistente e pede que o usuario digite outra vez a opcao que deseja 
+     * de acessos. Caso aperte outra tecla: apresenta uma mensagem de opcao
+     * inexistente e pede que o usuario digite outra vez a opcao que deseja
      * selecionar.
      */
     public void controlaMenuPrincipal() {
         int opcao = telaPrincipal.pedeOpcao();
-        
-        switch(opcao) {
+
+        switch (opcao) {
             case 1:
                 acessarFinanceiro();
                 break;
-            case 2: 
+            case 2:
                 gerenciarFuncionarios();
                 break;
-            case 3: 
+            case 3:
                 gerenciarCargos();
                 break;
             case 4:
@@ -85,111 +86,120 @@ public class ControladorPrincipal {
                 exibeMenuPrincipal();
         }
     }
-    
+
     /**
      * Chama classe que controla o acesso ao financeiro
      */
-    public void acessarFinanceiro(){
+    public void acessarFinanceiro() {
         this.controladorAcesso.exibePainelAcesso();
-    }
-    
-    /**
-     * Chama classe que controla o gerenciamento de funcionarios
-     */
-    public void gerenciarFuncionarios(){
-        this.controladorFuncionario.exibeMenuFuncionario();
-    }
-    
-    /**
-     * Chama classe que controla o gerenciamento de cargos
-     */
-    public void gerenciarCargos(){
-        this.controladorCargo.exibeMenuCargo();
-    }
-    
-    /**
-     * Chama classe que controla o gerenciamento da data do sistema
-     */
-    public void gerenciarData(){
-        this.controladorData.menuDataHoraSistema();
-    }
-    
-    /**
-     * Chama classe que controla o registro de acesso negado
-     */
-    public void emitirRelatorio(){
-        controladorRegistroAcessoNegado.exibeRelatorio();
-    }
-	
-    public Date getDataSistema(){
-		return controladorData.getDataSistema();
     }
 
     /**
-     * Chama função no controlador funcionario que encontra funcionario, recebe como parametro uma 
-     * matricula e retorna um funcionario
+     * Chama classe que controla o gerenciamento de funcionarios
+     */
+    public void gerenciarFuncionarios() {
+        this.controladorFuncionario.exibeMenuFuncionario();
+    }
+
+    /**
+     * Chama classe que controla o gerenciamento de cargos
+     */
+    public void gerenciarCargos() {
+        this.controladorCargo.exibeMenuCargo();
+    }
+
+    /**
+     * Chama classe que controla o gerenciamento da data do sistema
+     */
+    public void gerenciarData() {
+        this.controladorData.menuDataHoraSistema();
+    }
+
+    /**
+     * Chama classe que controla o registro de acesso negado
+     */
+    public void emitirRelatorio() {
+        controladorRegistroAcessoNegado.exibeRelatorio();
+    }
+
+    public Date getDataSistema() {
+        return controladorData.getDataSistema();
+    }
+
+    /**
+     * Chama função no controlador funcionario que encontra funcionario, recebe
+     * como parametro uma matricula e retorna um funcionario
+     *
      * @param matricula do funcionario
      * @return funcionario
      */
     public Funcionario encontraFuncionarioPelaMatricula(int matricula) {
-		return controladorFuncionario.encontraFuncionarioPelaMatricula(matricula);
+        return controladorFuncionario.encontraFuncionarioPelaMatricula(matricula);
     }
 
     /**
-     * Chama função no controlador registro de acesso negado que encontra 
-     * resgistros de tentativas de acesso negadas, recebe como parametro uma 
+     * Chama função no controlador registro de acesso negado que encontra
+     * resgistros de tentativas de acesso negadas, recebe como parametro uma
      * matricula e retorna um registro
+     *
      * @param matricula do funcionario
      * @return registro de acesso negado
      */
     public ArrayList<RegistroAcessoNegado> encontraRegistrosHorarioNaoPermitidoPelaMatricula(int matricula) {
-		return controladorRegistroAcessoNegado.encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
+        return controladorRegistroAcessoNegado.encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
     }
 
     /**
-     * Chama função no controlador registro de acesso negado que registra nova 
+     * Chama função no controlador registro de acesso negado que registra nova
      * tentativa de acesso negada.
+     *
      * @param data da tentativa de acesso
      * @param matricula do funcionario
      * @param motivo da negação de acesso
      */
     public void novoRegistroAcessoNegado(Date data, int matricula, Motivo motivo) {
-		controladorRegistroAcessoNegado.novoRegistroAcessoNegado(data, matricula, motivo);
+        controladorRegistroAcessoNegado.novoRegistroAcessoNegado(data, matricula, motivo);
     }
-    
+
     /**
-     * Chama função no controlador funcionario que percorre a lista de matriculas
-     * cadastrada e retorna um valor boleano se a matricula desejada está ou não na lista
-     * 
+     * Chama função no controlador funcionario que percorre a lista de
+     * matriculas cadastrada e retorna um valor boleano se a matricula desejada
+     * está ou não na lista
+     *
      * @param matricula do funcionario
      * @return true ou false em relação da matricula já estar cadastrada
      */
     public boolean matriculaExiste(int matricula) {
-    	return controladorFuncionario.matriculaExiste(matricula);
+        return controladorFuncionario.matriculaExiste(matricula);
     }
 
     /**
-     * Instancia cargo indefinido (codigo = 0, sem função gerencial e sem
-     * acesso ao financeiro)
+     * Instancia cargo indefinido (codigo = 0, sem função gerencial e sem acesso
+     * ao financeiro)
      */
     public void inicia() {
         controladorCargo.criaCargoPadrao();
         exibeMenuPrincipal();
     }
-    
+
+    public ArrayList getMatriculas() {
+        return this.controladorFuncionario.getMatriculas();
+    }
+
     /**
-     * Chama função no controlador funcionario que percorre a lista de funcionarios
-     * e sobrescreve o cargo do funcionario do paramentro para cargo indefinido
-     * 
+     * Chama função no controlador funcionario que percorre a lista de
+     * funcionarios e sobrescreve o cargo do funcionario do paramentro para
+     * cargo indefinido
+     *
      * @param cargoDeletado a ser subistituido por indefinido
-     * @param cargoIndefinido 
+     * @param cargoIndefinido
      */
     public void deletaCargosFuncionarios(Cargo cargoDeletado, Cargo cargoIndefinido) {
         controladorFuncionario.deixaFuncionariosSemCargo(cargoDeletado, cargoIndefinido);
     }
 
-	public Collection<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
-		return controladorRegistroAcessoNegado.getListaRegistrosAcessosNegados();
-	}
-    
+    public Collection<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
+        return controladorRegistroAcessoNegado.getListaRegistrosAcessosNegados();
+    }
+
 }
