@@ -38,6 +38,7 @@ public class TelaFuncionario extends JFrame {
 
     private ControladorFuncionario controlador;
     private GerenciadorBotoes btManager;
+    private GerenciadorCombos comboManager;
     private GridBagConstraints constraints;
     private JTable tbItens;
     private JScrollPane spBaseTabela;
@@ -47,9 +48,10 @@ public class TelaFuncionario extends JFrame {
     private JButton btVoltarMenuPrincipal;
 
     public TelaFuncionario(ControladorFuncionario owner) {
-        super(Constantes.GERENCIAR_FUNCIONARIOS);
+        super(Constantes.GERENCIAR_FUNCIONARIO);
         this.controlador = owner;
         this.btManager = new GerenciadorBotoes();
+        this.comboManager = new GerenciadorCombos();
 
         try {
             configuraTela();
@@ -101,6 +103,9 @@ public class TelaFuncionario extends JFrame {
         btVoltarMenuPrincipal.addActionListener(btManager);
         container.add(btVoltarMenuPrincipal);
 
+        setSize(600, 400);
+        setLocationRelativeTo(null);
+
     }
 
     private class GerenciadorBotoes implements ActionListener {
@@ -112,6 +117,15 @@ public class TelaFuncionario extends JFrame {
 
                 controlador.voltarMenuPrincipal();
             }
+
+        }
+
+    }
+
+    private class GerenciadorCombos implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
 
         }
 

@@ -18,11 +18,11 @@ public class Constantes {
     public static final String COMUM_BOTAO_VOLTAR = "Voltar";
     public static final String COMUM_BOTAO_VOLTAR_MENU_PRINCIPAL = "Voltar ao Menu Principal";
     public static final String COMUM_DATA = "Data";
-    public static final String COMUM_NOME = "Nome: ";
-    public static final String COMUM_MATRICULA = "Matrícula: ";
-    public static final String COMUM_DATA_NASCIMENTO = "Data de Nascimento: ";
-    public static final String COMUM_TELEFONE = "Telefone: ";
-    public static final String COMUM_SALARIO = "Cargo: ";
+    public static final String COMUM_COLUNA_NOME = "Nome";
+    public static final String COMUM_COLUNA_MATRICULA = "Matrícula";
+    public static final String COMUM_COLUNA_DATA_NASCIMENTO = "Data de Nascimento";
+    public static final String COMUM_COLUNA_TELEFONE = "Telefone";
+    public static final String COMUM_COLUNA_SALARIO = "Cargo";
     public static final String COMUM_OQUE_DESEJA_FAZER = "O que você deseja fazer?";
 
     //ACESSO AO FINANCEIRO
