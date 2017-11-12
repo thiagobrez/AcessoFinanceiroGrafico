@@ -122,7 +122,7 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		tbItens.setModel(modelTbItens);
 		
 		//Configuracao comboFiltroMatricula
-//		this.matriculas = ControladorPrincipal.getInstance().getListaMatriculas();
+		this.matriculas = ControladorPrincipal.getInstance().getMatriculas();
 		
 		this.repaint();
 	}

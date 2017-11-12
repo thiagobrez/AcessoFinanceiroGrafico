@@ -17,6 +17,7 @@ import java.lang.Character;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  *
@@ -474,7 +475,10 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
     public ArrayList getMatriculas() {
         ArrayList<Integer> matriculas = new ArrayList<>();
-        matriculas = (ArrayList<Integer>) funcionarioDAO.getMatriculas();
+        Set matriculasSet = funcionarioDAO.getMatriculas();
+		for(Object matricula : matriculasSet) {
+			matriculas.add((Integer) matricula);
+		}
         return matriculas;
     }
 }
