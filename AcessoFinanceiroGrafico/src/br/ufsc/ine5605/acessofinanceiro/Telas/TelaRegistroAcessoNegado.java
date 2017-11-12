@@ -16,9 +16,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -37,11 +38,13 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	private JScrollPane spBaseTabela;
 	private JTable tbItens;
 	private JButton btVoltar;
-	private JComboBox comboFiltro;
+	private JComboBox comboFiltroMotivo;
+	private JComboBox comboFiltroMatricula;
+	private List<Integer> matriculas;
 	
 
     public TelaRegistroAcessoNegado(ControladorRegistroAcessoNegado owner) {
-//		super(Constantes.)
+		super(Constantes.REGISTRO_TITULO);
         this.owner = owner;
 		configuraTela();
     }
@@ -55,13 +58,14 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		//Configuracao constraints
 		this.constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.CENTER;
-//		constraints.gridwidth = 2;
-//		constraints.gridheight = 4;
-		constraints.gridx = 0;
-		constraints.gridy = 4;
+		constraints.gridwidth = 4;
+		constraints.gridheight = 4;
+//		constraints.gridx = 2;
+		constraints.gridy = 1;
 		
 		//Configuracao tbItens
 		this.tbItens = new JTable();
+		tbItens.setAutoCreateRowSorter(true);
 		tbItens.setPreferredScrollableViewportSize(new Dimension(500, 300));
 		tbItens.setFillsViewportHeight(true);
 		spBaseTabela = new JScrollPane(tbItens);
@@ -76,8 +80,22 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		btVoltar.addActionListener(btManager);
 		container.add(btVoltar);
 		
-		//Configuracao comboFiltro
+		//Configuracao comboFiltroMotivo
+		Enum[] motivos = {
+			Motivo.MATRICULA_INEXISTENTE,
+			Motivo.HORARIO_NAO_PERMITIDO,
+			Motivo.CARGO_SEM_ACESSO,
+			Motivo.ACESSO_BLOQUEADO
+		};
+		comboFiltroMotivo = new JComboBox(motivos);
+		comboFiltroMotivo.addActionListener(comboManager);
+		container.add(comboFiltroMotivo);
 		
+		//Configuracao comboFiltroMatricula
+		this.matriculas = new ArrayList<>();
+		comboFiltroMatricula = new JComboBox(matriculas.toArray());
+		comboFiltroMatricula.addActionListener(comboManager);
+		container.add(comboFiltroMatricula);
 		
 		setSize(600, 400);
 		setLocationRelativeTo(null);
@@ -85,8 +103,9 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	}
 	
 	public void updateData() {
+		
+		//Configuracao modelTbItens
 		DefaultTableModel modelTbItens = new DefaultTableModel();
-		modelTbItens.addColumn(Constantes.REGISTRO_NUMERO);
 		modelTbItens.addColumn(Constantes.COMUM_DATA);
 		modelTbItens.addColumn(Constantes.COMUM_MATRICULA);
 		modelTbItens.addColumn(Constantes.REGISTRO_MOTIVO);
@@ -101,6 +120,10 @@ public class TelaRegistroAcessoNegado extends JFrame {
 			});
 		}
 		tbItens.setModel(modelTbItens);
+		
+		//Configuracao comboFiltroMatricula
+//		this.matriculas = ControladorPrincipal.getInstance().getListaMatriculas();
+		
 		this.repaint();
 	}
 	
@@ -344,7 +367,9 @@ public class TelaRegistroAcessoNegado extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource().equals(comboFiltro)) {
+			if(e.getSource().equals(comboFiltroMotivo)) {
+				
+			} else if (e.getSource().equals(comboFiltroMatricula)) {
 				
 			}
 		}

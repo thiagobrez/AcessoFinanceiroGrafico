@@ -38,6 +38,7 @@ public class Constantes {
     public static final String ACESSO_PERMITIDO_TITULO = "Acesso permitido";
 
     //REGISTRO
+    public static final String REGISTRO_TITULO = "Relatório de acessos negados";
     public static final String REGISTRO_NUMERO = "Número";
     public static final String REGISTRO_MOTIVO = "Motivo";
 
