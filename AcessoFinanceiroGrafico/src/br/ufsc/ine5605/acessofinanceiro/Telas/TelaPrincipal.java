@@ -32,7 +32,6 @@ public class TelaPrincipal extends JFrame {
     private JButton btMenuCargos;
     private JButton btMenuData;
     private JButton btMenuRelatorio;
-    
 
     public TelaPrincipal(ControladorPrincipal owner) {
         //refatorar depois essa constante
@@ -40,68 +39,69 @@ public class TelaPrincipal extends JFrame {
         this.owner = owner;
         configuraTela();
     }
-    
+
     private void configuraTela() {
         Container container = getContentPane();
         container.setLayout(new FlowLayout());
-        
+
         //Configuracao lbPrincipal
         lbPrincipal = new JLabel(Constantes.PRINCIPAL_TITULO);
         container.add(lbPrincipal);
-        
+
         //Configuracao GerenciadorBotoes
         GerenciadorBotoes btManager = new GerenciadorBotoes();
-        
+
         //Configuracao btMenuAcesso
         btMenuAcesso = new JButton(Constantes.PRINCIPAL_MENU_ACESSO);
         //btMenuAcesso.addActionListener(btManager);
         container.add(btMenuAcesso);
-        
+
         //Configuracao btMenuFuncionarios
         btMenuFuncionarios = new JButton(Constantes.PRINCIPAL_MENU_FUNCIONARIOS);
-        //btMenuFuncionarios.addActionListener(btManager);
+        btMenuFuncionarios.addActionListener(btManager);
         container.add(btMenuFuncionarios);
-        
+
         //Configuracao btMenuAcesso
         btMenuCargos = new JButton(Constantes.PRINCIPAL_MENU_CARGOS);
         //btMenuCargos.addActionListener(btManager);
         container.add(btMenuCargos);
-        
+
         //Configuracao btMenuAcesso
         btMenuData = new JButton(Constantes.PRINCIPAL_MENU_DATA);
         //btMenuData.addActionListener(btManager);
         container.add(btMenuData);
-        
+
         //Configuracao btMenuAcesso
         btMenuRelatorio = new JButton(Constantes.PRINCIPAL_MENU_RELATORIO);
         //btMenuRelatorio.addActionListener(btManager);
         container.add(btMenuRelatorio);
-        
+
         setSize(720, 480);
         setLocationRelativeTo(null);
-		
+
         setVisible(true);
-        
+
     }
-    
+
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             // usar equals?
-            if(e.getSource().equals(btMenuAcesso)) {
+            if (e.getSource().equals(btMenuAcesso)) {
                 owner.acessarFinanceiro();
-            } else if(e.getSource().equals(btMenuFuncionarios)) {
+            } else if (e.getSource().equals(btMenuFuncionarios)) {
+                setVisible(false);
                 owner.gerenciarFuncionarios();
-            } else if(e.getSource().equals(btMenuCargos)) {
+            } else if (e.getSource().equals(btMenuCargos)) {
                 owner.gerenciarCargos();
-            } else if(e.getSource().equals(btMenuData)) {
+            } else if (e.getSource().equals(btMenuData)) {
                 owner.gerenciarData();
-            } else if(e.getSource().equals(btMenuRelatorio)) {
+            } else if (e.getSource().equals(btMenuRelatorio)) {
                 owner.emitirRelatorio();
             }
         }
-		
+
     }
-    
+
 }

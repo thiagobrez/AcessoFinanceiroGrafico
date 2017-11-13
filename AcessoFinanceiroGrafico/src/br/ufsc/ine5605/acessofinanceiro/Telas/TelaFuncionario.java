@@ -53,7 +53,7 @@ public class TelaFuncionario extends JFrame {
     private JButton btVoltarMenuPrincipal;
 
     public TelaFuncionario(ControladorFuncionario owner) {
-        super(Constantes.GERENCIAR_FUNCIONARIO);
+        super(Constantes.GERENCIAR_FUNCIONARIO_TITULO);
         this.controlador = owner;
         this.btManager = new GerenciadorBotoes();
         this.comboManager = new GerenciadorCombos();
@@ -71,7 +71,7 @@ public class TelaFuncionario extends JFrame {
 
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.CENTER;
+        constraints.fill = GridBagConstraints.PAGE_START;
         constraints.gridwidth = 10;
         constraints.gridheight = 10;
         constraints.gridx = 0;
@@ -79,7 +79,7 @@ public class TelaFuncionario extends JFrame {
 
         //Configuracao tbItens
         this.tbItens = new JTable();
-        tbItens.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tbItens.setPreferredScrollableViewportSize(new Dimension(500, 300));
         tbItens.setFillsViewportHeight(true);
         spBaseTabela = new JScrollPane(tbItens);
         container.add(spBaseTabela, constraints);
@@ -106,9 +106,11 @@ public class TelaFuncionario extends JFrame {
         btVoltarMenuPrincipal = new JButton();
         btVoltarMenuPrincipal.setText(Constantes.COMUM_BOTAO_VOLTAR_MENU_PRINCIPAL);
         btVoltarMenuPrincipal.addActionListener(btManager);
-        container.add(btVoltarMenuPrincipal);
+        constraints.gridx = 12;
+        constraints.gridy = 12;
+        container.add(btVoltarMenuPrincipal, constraints);
 
-        setSize(700, 700);
+        setSize(700, 500);
         setLocationRelativeTo(null);
 
     }
@@ -141,6 +143,20 @@ public class TelaFuncionario extends JFrame {
         this.repaint();
     }
 
+    public void exibeMenuFuncionario() {
+        updateData();
+        setVisible(true);
+    }
+
+    public void exibeFuncionarioDeletadoComSucesso() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.GERENCIAR_FUNCIONARIO_DELETADO_SUCESSO,
+                Constantes.GERENCIAR_FUNCIONARIO_TITULO_DELETADO_SUCESSO,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
 // -----------------------GERENCIADOR DE BOTÕES---------------------------------
 //
     private class GerenciadorBotoes implements ActionListener {
@@ -152,6 +168,10 @@ public class TelaFuncionario extends JFrame {
             }
             if (e.getSource().equals(btEditaFuncionario)) {
                 controlador.exibeEditaFuncionario();
+            }
+            if (e.getSource().equals(btDeletaFuncionario)) {
+                //controlador.deletaFuncionarioPorIndex(tbItens.getSelectedRow());
+                //exibeFuncionarioDeletadoComSucesso();
             }
             if (e.getSource().equals(btVoltarMenuPrincipal)) {
                 setVisible(false);
@@ -187,20 +207,6 @@ public class TelaFuncionario extends JFrame {
      * Exibe na tela o menu com as opcoes do CRUD do funcionario (cadastrar,
      * editar, listar e deletar)
      */
-    public void exibeMenuFuncionario() {
-        System.out.println();
-        System.out.println(Constantes.GERENCIAR_FUNCIONARIO);
-        System.out.println();
-        System.out.println(Constantes.CADASTRAR_FUNCIONARIO);
-        System.out.println(Constantes.EDITAR_FUNCIONARIO);
-        System.out.println(Constantes.LISTAR_FUNCIONARIOS);
-        System.out.println(Constantes.DELETAR_FUNCIONARIO);
-        System.out.println(Constantes.VOLTAR_AO_MENU_PRINCIPAL);
-        System.out.println();
-        System.out.println(Constantes.O_QUE_DESEJA_FAZER);
-        System.out.println();
-    }
-
     /**
      * Exibe na tela o titulo do cadastro de funcionaio: Novo Usuario
      */

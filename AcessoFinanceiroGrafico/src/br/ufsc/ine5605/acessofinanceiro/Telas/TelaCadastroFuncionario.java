@@ -70,14 +70,14 @@ public class TelaCadastroFuncionario extends JFrame {
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.CENTER;
-        constraints.gridwidth = 20;
+        constraints.gridwidth = 10;
         constraints.gridheight = 8;
         constraints.gridx = 0;
         constraints.gridy = 8;
 
         //Configuracao tbItens
         this.tbItens = new JTable();
-        tbItens.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tbItens.setPreferredScrollableViewportSize(new Dimension(800, 200));
         tbItens.setFillsViewportHeight(true);
         spBaseTabela = new JScrollPane(tbItens);
         container.add(spBaseTabela, constraints);
@@ -134,7 +134,7 @@ public class TelaCadastroFuncionario extends JFrame {
         btCadastrar.addActionListener(btManager);
         container.add(btCadastrar);
 
-        setSize(1000, 1000);
+        setSize(1200, 500);
         setLocationRelativeTo(null);
     }
 
@@ -142,8 +142,8 @@ public class TelaCadastroFuncionario extends JFrame {
 
         //Configuracao modelTbItens
         DefaultTableModel modelTbItens = new DefaultTableModel();
-        modelTbItens.addColumn(Constantes.COMUM_CODIGO);
         modelTbItens.addColumn(Constantes.COMUM_NOME);
+        modelTbItens.addColumn(Constantes.COMUM_CODIGO);
 
         Collection<Cargo> listaCargos = ControladorPrincipal.getInstance().getListaCargos();
 
@@ -155,6 +155,11 @@ public class TelaCadastroFuncionario extends JFrame {
         tbItens.setModel(modelTbItens);
 
         this.repaint();
+    }
+
+    public void exibeMenuCadastroFuncionario() {
+        updateData();
+        setVisible(true);
     }
 
     private class GerenciadorBotoes implements ActionListener {

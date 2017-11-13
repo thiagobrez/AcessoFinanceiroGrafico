@@ -28,13 +28,13 @@ public class Constantes {
     public static final String COMUM_OQUE_DESEJA_FAZER = "O que você deseja fazer?";
     public static final String COMUM_BOTAO_CANCELAR = "Cancelar";
     public static final String COMUM_BOTAO_CADASTRAR = "Cadastrar";
-    
+
     //MENU PRINCIPAL
     public static final String PRINCIPAL_TITULO = "Menu Principal";
     public static final String PRINCIPAL_MENU_ACESSO = "Acesso ao Financeiro";
     public static final String PRINCIPAL_MENU_FUNCIONARIOS = "Gerenciar Funcionarios";
     public static final String PRINCIPAL_MENU_CARGOS = "Gerenciar Cargos";
-    public static final String PRINCIPAL_MENU_DATA = "Geremciar Data";
+    public static final String PRINCIPAL_MENU_DATA = "Gerenciar Data do Sistema";
     public static final String PRINCIPAL_MENU_RELATORIO = "Emitir Relatorio";
 
     //ACESSO AO FINANCEIRO
@@ -55,7 +55,7 @@ public class Constantes {
     public static final String REGISTRO_MOTIVO = "Motivo";
 
     //FUNCIONARIO
-    public static final String GERENCIAR_FUNCIONARIO = "Gerenciar Funcionários";
+    public static final String GERENCIAR_FUNCIONARIO_TITULO = "Gerenciar Funcionários";
     public static final String GERENCIAR_FUNCIONARIO_CADASTRAR = "Cadastrar Funcionário";
     public static final String GERENCIAR_FUNCIONARIO_EDITAR = "Editar Funcinário";
     public static final String GERENCIAR_FUNCIONARIO_LISTAR = "Listar Funcionário";
@@ -66,9 +66,13 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_TELEFONE = "Telefone: ";
     public static final String GERENCIAR_FUNCIONARIO_SALARIO = "Salario: ";
     public static final String GERENCIAR_FUNCIONARIO_CARGO = "Cargo: ";
+    public static final String GERENCIAR_FUNCIONARIO_TITULO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
+    public static final String GERENCIAR_FUNCIONARIO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
 
     //DATA SISTEMA
-    public static final String DATA_HORA_SISTEMA = "Data e Hora do sistema";
+    public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
+    public static final String DATA_SISTEMA_ATUAL = "Data e Hora do sistema: ";
+    public static final String DATA_SISTEMA_BOTAO_ALTERAR = "Data e Hora do sistema: ";
 
     // ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
     // COMUM

@@ -112,7 +112,7 @@ public class ControladorPrincipal {
      * Chama classe que controla o gerenciamento da data do sistema
      */
     public void gerenciarData() {
-        this.controladorData.menuDataHoraSistema();
+        this.controladorData.exibeMenuDataSistema();
     }
 
     /**
@@ -206,7 +206,6 @@ public class ControladorPrincipal {
         return controladorFuncionario.getListaFuncionarios();
     }
 
-    //Bruno: só retorna o list de cargos
     public Collection<Cargo> getListaCargos() {
         return controladorCargo.getListaCargos();
     }

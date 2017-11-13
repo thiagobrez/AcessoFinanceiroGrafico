@@ -7,24 +7,96 @@ package br.ufsc.ine5605.acessofinanceiro.Telas;
 
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorDataSistema;
+import java.awt.Container;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
  * @author vladimir
  */
-public class TelaDataHoraSistema {
+public class TelaDataHoraSistema extends JFrame {
 
     private Scanner teclado;
     private ControladorDataSistema controlador;
+    private GerenciadorBotoes btManager;
+    private JLabel lbDataSistemaTitulo;
+    private JLabel lbDataSistema;
+    private JButton btVoltarMenuPrincipal;
+    private JButton btAlterarDataSistema;
 
     public TelaDataHoraSistema(ControladorDataSistema owner) {
+        super(Constantes.DATA_SISTEMA_TITULO);
         this.teclado = new Scanner(System.in);
         this.controlador = owner;
+        try {
+            configuraTela();
+        } catch (ParseException e) {
+        }
     }
 
+    private void configuraTela() throws ParseException {
+
+        Container container = getContentPane();
+        container.setLayout(new GridBagLayout());
+
+        //Configuracao lbDataSistemaTitulo
+        lbDataSistemaTitulo = new JLabel(Constantes.DATA_SISTEMA_ATUAL);
+        container.add(lbDataSistemaTitulo);
+
+        //Configuracao lbDataSistema
+        lbDataSistema = new JLabel(controlador.getDataSistema().toString());
+        container.add(lbDataSistema);
+
+        //Configura btVoltarMenuPrincipal
+        btVoltarMenuPrincipal = new JButton();
+        btVoltarMenuPrincipal.setText(Constantes.COMUM_BOTAO_VOLTAR_MENU_PRINCIPAL);
+        btVoltarMenuPrincipal.addActionListener(btManager);
+        container.add(btVoltarMenuPrincipal);
+
+        //Configura btAlterarDataSistema
+        btAlterarDataSistema = new JButton();
+        btAlterarDataSistema.setText(Constantes.DATA_SISTEMA_BOTAO_ALTERAR);
+        btAlterarDataSistema.addActionListener(btManager);
+        container.add(btAlterarDataSistema);
+
+        setSize(500, 250);
+        setLocationRelativeTo(null);
+    }
+
+    public void exibeMenuDataSistema() {
+        setVisible(true);
+    }
+//
+
+    // -----------------------GERENCIADOR DE BOTÕES---------------------------------
+//
+    private class GerenciadorBotoes implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource().equals(btAlterarDataSistema)) {
+                controlador.alterarDataSistema();
+            }
+            if (e.getSource().equals(btVoltarMenuPrincipal)) {
+                setVisible(false);
+                controlador.voltarMenuPrincipal();
+            }
+
+        }
+
+    }
+
+    //
+    //----------------- ANTIGO -------------------
     /**
      * exibe na tela a data e a hora atuais do sistema
      *

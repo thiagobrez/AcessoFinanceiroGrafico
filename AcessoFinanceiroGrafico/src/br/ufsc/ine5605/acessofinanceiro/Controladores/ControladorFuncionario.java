@@ -42,11 +42,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
      * Exibe o menu principal do CRUD do funcionário.
      */
     public void exibeMenuFuncionario() {
-        this.telaFuncionario.setVisible(true);
+        this.telaFuncionario.exibeMenuFuncionario();
     }
 
     public void exibeCadastraFuncionario() {
-        this.telaCadastroFuncionario.setVisible(true);
+        this.telaCadastroFuncionario.exibeMenuCadastroFuncionario();
     }
 
     public void exibeEditaFuncionario() {
@@ -69,6 +69,14 @@ public class ControladorFuncionario implements IControladorFuncionario {
             Funcionario funcionario = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
             funcionarioDAO.put(funcionario);
         }
+
+    }
+
+    public void deletaFuncionarioPorIndice(int index) {
+
+        this.funcionarioDAO.remove(funcionario);
+        funcionario = null;
+        this.telaFuncionario.mensagemFuncionarioDeletadoSucesso();
 
     }
 
@@ -106,6 +114,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
         return matriculas;
     }
 
+//    public Cargo encontraCargoPorIndex(int index) {
+//        Collection<Cargo> listaCargos = ControladorPrincipal.getInstance().getListaCargos();
+//
+//        return cargos.get(index);
+//    }
     //
     //
     //+-+-+-+-+-+-+--+-+-+-+--+-+-+-+--+-+-+-+-+-+-+- ANTIGO +-+-+-+-+-+-+-+-+-+--+-+-+-+--+-+-+-+--+-+-+-+--+-+-+-+-

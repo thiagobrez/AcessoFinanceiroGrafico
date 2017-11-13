@@ -7,6 +7,7 @@ package br.ufsc.ine5605.acessofinanceiro.Controladores;
 
 import br.ufsc.ine5605.acessofinanceiro.Interfaces.IControladorDataSistema;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.DataSistemaDAO;
+import br.ufsc.ine5605.acessofinanceiro.Telas.TelaAlterarDataSistema;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaDataHoraSistema;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,13 +20,37 @@ import java.util.Date;
 public class ControladorDataSistema implements IControladorDataSistema {
 
     private TelaDataHoraSistema telaDataHora;
+    private TelaAlterarDataSistema telaAlterarDataSistema;
     private DataSistemaDAO dataSistema;
 
     public ControladorDataSistema() {
         this.telaDataHora = new TelaDataHoraSistema(this);
+        this.telaAlterarDataSistema = new TelaAlterarDataSistema(this);
         this.dataSistema = new DataSistemaDAO();
     }
 
+    public void voltarMenuPrincipal() {
+        ControladorPrincipal.getInstance().exibeMenuPrincipal();
+    }
+
+    @Override
+    public Date getDataSistema() {
+        return dataSistema.get();
+    }
+
+    public void exibeMenuDataSistema() {
+        this.telaDataHora.exibeMenuDataSistema();
+    }
+
+    public void alterarDataSistema() {
+        this.telaAlterarDataSistema.alterarDataSistema();
+    }
+
+    //
+    //
+    // --------------- ANTIGO -------------------------------
+    //
+    //
     /**
      * compreende o controle da totalidade do menu de data e hora do sistema,
      * chamando os metodos para exibir a data e hora e exibir as opcoes
