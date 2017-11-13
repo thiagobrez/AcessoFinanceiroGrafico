@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class DataSistemaDAO {
 
     private Date dataSistema;
-    private final String nomeArquivo = "dataSistema.dat";
+    private final String nomeArquivo = "dataSistema.batman";
 
     public DataSistemaDAO() {
         this.dataSistema = new Date();

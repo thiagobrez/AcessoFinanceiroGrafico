@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 public class CargoDAO {
     private HashMap<Integer, Cargo> cacheCargos = new HashMap<>();
     
-    private final String fileName = "cargos.mama";
+    private final String fileName = "cargos.batman";
     
     public CargoDAO() {
         load();
