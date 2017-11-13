@@ -49,10 +49,15 @@ public class TelaPrincipal extends JFrame {
         
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.NORTH;
+        constraints.gridwidth = 3;
+        constraints.gridheight = 10;
+        constraints.gridx = 8;
+        constraints.gridy = 1;
         
         //Configuracao lbPrincipal
         lbPrincipal = new JLabel(Constantes.PRINCIPAL_TITULO);
-        container.add(lbPrincipal);
+        container.add(lbPrincipal, constraints);
 
         //Configuracao GerenciadorBotoes
         GerenciadorBotoes btManager = new GerenciadorBotoes();
@@ -60,27 +65,32 @@ public class TelaPrincipal extends JFrame {
         //Configuracao btMenuAcesso
         btMenuAcesso = new JButton(Constantes.PRINCIPAL_MENU_ACESSO);
         btMenuAcesso.addActionListener(btManager);
-        container.add(btMenuAcesso);
+        constraints.gridy = 3;
+        container.add(btMenuAcesso, constraints);
 
         //Configuracao btMenuFuncionarios
         btMenuFuncionarios = new JButton(Constantes.PRINCIPAL_MENU_FUNCIONARIOS);
         btMenuFuncionarios.addActionListener(btManager);
-        container.add(btMenuFuncionarios);
+        constraints.gridy = 4;
+        container.add(btMenuFuncionarios, constraints);
 
         //Configuracao btMenuAcesso
         btMenuCargos = new JButton(Constantes.PRINCIPAL_MENU_CARGOS);
         btMenuCargos.addActionListener(btManager);
-        container.add(btMenuCargos);
+        constraints.gridy = 5;
+        container.add(btMenuCargos, constraints);
 
         //Configuracao btMenuAcesso
         btMenuData = new JButton(Constantes.PRINCIPAL_MENU_DATA);
         btMenuData.addActionListener(btManager);
-        container.add(btMenuData);
+        constraints.gridy = 6;
+        container.add(btMenuData, constraints);
 
         //Configuracao btMenuAcesso
         btMenuRelatorio = new JButton(Constantes.PRINCIPAL_MENU_RELATORIO);
         btMenuRelatorio.addActionListener(btManager);
-        container.add(btMenuRelatorio);
+        constraints.gridy = 7;
+        container.add(btMenuRelatorio, constraints);
 
         setSize(720, 480);
         setLocationRelativeTo(null);
