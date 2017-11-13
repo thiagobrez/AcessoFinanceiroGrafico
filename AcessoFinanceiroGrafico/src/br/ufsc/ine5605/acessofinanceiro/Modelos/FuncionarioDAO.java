@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
@@ -31,8 +32,8 @@ public class FuncionarioDAO {
         load();
     }
 
-    public Set<Integer> getMatriculas() {
-        return this.cacheFuncionarios.keySet();
+    public ArrayList<Integer> getMatriculas() {
+		return new ArrayList<>(this.cacheFuncionarios.keySet());	
     }
 
     public void put(Funcionario funcionario) {
