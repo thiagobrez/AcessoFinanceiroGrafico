@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -164,6 +165,24 @@ public class TelaCadastroFuncionario extends JFrame {
     public void exibeMenuCadastroFuncionario() {
         updateData();
         setVisible(true);
+    }
+
+    public void exibeFuncionarioCadastradoComSucesso() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.GERENCIAR_FUNCIONARIO_TITULO_DELETADO_SUCESSO,
+                Constantes.GERENCIAR_FUNCIONARIO_TITULO,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
+    public void exibeMatriculaJaExiste() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE,
+                Constantes.GERENCIAR_FUNCIONARIO_TITULO,
+                JOptionPane.PLAIN_MESSAGE
+        );
     }
 
     private class GerenciadorBotoes implements ActionListener {

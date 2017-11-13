@@ -62,22 +62,25 @@ public class ControladorFuncionario implements IControladorFuncionario {
     }
 
     public void cadastraFuncionario(int matricula, String nome, String dataNascimento, int telefone, int salario, Cargo cargo) {
+
         boolean nomeValido = verificaNomeInserido(nome);
         boolean matriculaValida = verificaMatricula(matricula);
 
         if (nomeValido && matriculaValida) {
             Funcionario funcionario = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
             funcionarioDAO.put(funcionario);
+            this.telaCadastroFuncionario.exibeFuncionarioCadastradoComSucesso();
+        } else {
+            this.telaCadastroFuncionario.exibeMatriculaJaExiste();
         }
 
     }
 
     public void deletaFuncionarioPorIndice(int index) {
 
-//        this.funcionarioDAO.remove(funcionario);
-//        funcionario = null;
-//        this.telaFuncionario.mensagemFuncionarioDeletadoSucesso();
-
+        //this.funcionarioDAO.remove(funcionario);
+        // funcionario = null;
+        //this.telaFuncionario.mensagemFuncionarioDeletadoSucesso();
     }
 
     public boolean verificaMatricula(int matricula) {

@@ -68,6 +68,7 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_CARGO = "Cargo: ";
     public static final String GERENCIAR_FUNCIONARIO_TITULO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
     public static final String GERENCIAR_FUNCIONARIO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
+    public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "Funcionário não cadastrado. Tente outra matrícula.";
 
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
