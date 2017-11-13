@@ -106,9 +106,6 @@ public class ControladorFuncionario implements IControladorFuncionario {
     }
 
     public ArrayList getMatriculas() {
-		for(int matricula : this.funcionarioDAO.getMatriculas()) {
-			System.out.println(matricula);
-		}
         return this.funcionarioDAO.getMatriculas();
     }
 
