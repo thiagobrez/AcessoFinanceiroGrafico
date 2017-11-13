@@ -79,10 +79,12 @@ public class TelaPrincipal extends JFrame {
         setSize(720, 480);
         setLocationRelativeTo(null);
 
-        setVisible(true);
-
     }
 
+	public void exibeMenuPrincipal() {
+		setVisible(true);
+	}
+	
     private class GerenciadorBotoes implements ActionListener {
 
         @Override

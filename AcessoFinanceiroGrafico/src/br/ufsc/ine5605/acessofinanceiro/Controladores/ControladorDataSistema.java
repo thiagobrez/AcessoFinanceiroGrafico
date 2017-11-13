@@ -35,7 +35,8 @@ public class ControladorDataSistema implements IControladorDataSistema {
 
     @Override
     public Date getDataSistema() {
-        return dataSistema.get();
+//        return dataSistema.get();
+		return new Date();
     }
 
     public void exibeMenuDataSistema() {

@@ -50,7 +50,7 @@ public class ControladorPrincipal {
      */
     public void exibeMenuPrincipal() {
         telaPrincipal.exibeMenuPrincipal();
-        controlaMenuPrincipal();
+//        controlaMenuPrincipal();
     }
 
     /**
