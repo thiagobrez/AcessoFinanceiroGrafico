@@ -131,10 +131,10 @@ public class ControladorDataSistema implements IControladorDataSistema {
         return null;
     }
 
-    @Override
-    public Date getDataSistema() {
-        return this.dataSistema.get();
-    }
+//    @Override
+//    public Date getDataSistema() {
+//        return this.dataSistema.get();
+//    }
 
     /**
      * Controla o menu de confirmacao da alteracao de data e hora do sistema,
