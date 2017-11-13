@@ -42,7 +42,7 @@ public class TelaPrincipal extends JFrame {
 
     private void configuraTela() {
         Container container = getContentPane();
-        container.setLayout(new FlowLayout());
+        container.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
 
         //Configuracao lbPrincipal
         lbPrincipal = new JLabel(Constantes.PRINCIPAL_TITULO);
@@ -53,7 +53,7 @@ public class TelaPrincipal extends JFrame {
 
         //Configuracao btMenuAcesso
         btMenuAcesso = new JButton(Constantes.PRINCIPAL_MENU_ACESSO);
-        //btMenuAcesso.addActionListener(btManager);
+        btMenuAcesso.addActionListener(btManager);
         container.add(btMenuAcesso);
 
         //Configuracao btMenuFuncionarios
@@ -63,17 +63,17 @@ public class TelaPrincipal extends JFrame {
 
         //Configuracao btMenuAcesso
         btMenuCargos = new JButton(Constantes.PRINCIPAL_MENU_CARGOS);
-        //btMenuCargos.addActionListener(btManager);
+        btMenuCargos.addActionListener(btManager);
         container.add(btMenuCargos);
 
         //Configuracao btMenuAcesso
         btMenuData = new JButton(Constantes.PRINCIPAL_MENU_DATA);
-        //btMenuData.addActionListener(btManager);
+        btMenuData.addActionListener(btManager);
         container.add(btMenuData);
 
         //Configuracao btMenuAcesso
         btMenuRelatorio = new JButton(Constantes.PRINCIPAL_MENU_RELATORIO);
-        //btMenuRelatorio.addActionListener(btManager);
+        btMenuRelatorio.addActionListener(btManager);
         container.add(btMenuRelatorio);
 
         setSize(720, 480);
