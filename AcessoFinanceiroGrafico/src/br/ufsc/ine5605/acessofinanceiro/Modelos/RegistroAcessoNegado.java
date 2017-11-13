@@ -14,6 +14,8 @@ import java.util.Date;
  */
 public class RegistroAcessoNegado implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private Date data;
 	private int matricula;
 	private Motivo motivo;
