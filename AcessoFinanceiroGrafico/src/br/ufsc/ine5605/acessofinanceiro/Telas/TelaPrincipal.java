@@ -9,6 +9,8 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -32,6 +34,7 @@ public class TelaPrincipal extends JFrame {
     private JButton btMenuCargos;
     private JButton btMenuData;
     private JButton btMenuRelatorio;
+    private GridBagConstraints constraints;
 
     public TelaPrincipal(ControladorPrincipal owner) {
         //refatorar depois essa constante
@@ -42,8 +45,11 @@ public class TelaPrincipal extends JFrame {
 
     private void configuraTela() {
         Container container = getContentPane();
-        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-
+        container.setLayout(new GridBagLayout());
+        
+        //Configuracao constraints
+        this.constraints = new GridBagConstraints();
+        
         //Configuracao lbPrincipal
         lbPrincipal = new JLabel(Constantes.PRINCIPAL_TITULO);
         container.add(lbPrincipal);
@@ -82,7 +88,7 @@ public class TelaPrincipal extends JFrame {
     }
 
 	public void exibeMenuPrincipal() {
-		setVisible(true);
+            setVisible(true);
 	}
 	
     private class GerenciadorBotoes implements ActionListener {
