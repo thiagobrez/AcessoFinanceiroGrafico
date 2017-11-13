@@ -104,7 +104,12 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	public void updateData() {
 		
 		//Configuracao modelTbItens
-		DefaultTableModel modelTbItens = new DefaultTableModel();
+		DefaultTableModel modelTbItens = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
 		modelTbItens.addColumn(Constantes.COMUM_DATA);
 		modelTbItens.addColumn(Constantes.COMUM_MATRICULA);
 		modelTbItens.addColumn(Constantes.REGISTRO_MOTIVO);
