@@ -74,7 +74,7 @@ public class ControladorCargo implements IControladorCargo {
         }
     }
 
-    public Collection<Cargo> getListaCargos() {
+    public ArrayList<Cargo> getListaCargos() {
         return this.cargoDAO.getList();
     }
 

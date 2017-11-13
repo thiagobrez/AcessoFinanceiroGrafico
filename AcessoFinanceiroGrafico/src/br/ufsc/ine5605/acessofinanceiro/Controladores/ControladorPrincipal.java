@@ -206,7 +206,7 @@ public class ControladorPrincipal {
         return controladorFuncionario.getListaFuncionarios();
     }
 
-    public Collection<Cargo> getListaCargos() {
+    public ArrayList<Cargo> getListaCargos() {
         return controladorCargo.getListaCargos();
     }
 }

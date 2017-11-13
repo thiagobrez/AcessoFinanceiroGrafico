@@ -18,9 +18,12 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,7 +42,8 @@ public class TelaCadastroFuncionario extends JFrame {
     private GerenciadorBotoes btManager;
     private ControladorFuncionario controlador;
     private GridBagConstraints constraints;
-    private JTable tbItens;
+    private JComboBox comboCargos;
+    private List<Cargo> cargos;
     private JScrollPane spBaseTabela;
     private JLabel lbNome;
     private JTextField tfNome;
@@ -67,6 +71,8 @@ public class TelaCadastroFuncionario extends JFrame {
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
 
+        GerenciadorCombos comboManager = new GerenciadorCombos();
+
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.CENTER;
@@ -75,12 +81,11 @@ public class TelaCadastroFuncionario extends JFrame {
         constraints.gridx = 0;
         constraints.gridy = 8;
 
-        //Configuracao tbItens
-        this.tbItens = new JTable();
-        tbItens.setPreferredScrollableViewportSize(new Dimension(800, 200));
-        tbItens.setFillsViewportHeight(true);
-        spBaseTabela = new JScrollPane(tbItens);
-        container.add(spBaseTabela, constraints);
+        //Configuracao comboCargos
+        this.cargos = new ArrayList<>();
+        comboCargos = new JComboBox(cargos.toArray());
+        comboCargos.addActionListener(comboManager);
+        container.add(comboCargos);
 
         //Configuracao lbNome
         lbNome = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_NOME);
@@ -140,19 +145,11 @@ public class TelaCadastroFuncionario extends JFrame {
 
     public void updateData() {
 
-        //Configuracao modelTbItens
-        DefaultTableModel modelTbItens = new DefaultTableModel();
-        modelTbItens.addColumn(Constantes.COMUM_NOME);
-        modelTbItens.addColumn(Constantes.COMUM_CODIGO);
-
-        Collection<Cargo> listaCargos = ControladorPrincipal.getInstance().getListaCargos();
-
-        for (Cargo cargo : listaCargos) {
-            modelTbItens.addRow(new Object[]{
-                cargo.getNome(),
-                cargo.getCodigo(),});
+        //Configuracao comboCargos
+        this.cargos = ControladorPrincipal.getInstance().getListaCargos();
+        for (Cargo cargo : cargos) {
+            System.out.println(cargo);
         }
-        tbItens.setModel(modelTbItens);
 
         this.repaint();
     }
@@ -176,6 +173,15 @@ public class TelaCadastroFuncionario extends JFrame {
             if (e.getSource().equals(btCancelar)) {
                 setVisible(false);
             }
+
+        }
+
+    }
+
+    private class GerenciadorCombos implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
 
         }
 
