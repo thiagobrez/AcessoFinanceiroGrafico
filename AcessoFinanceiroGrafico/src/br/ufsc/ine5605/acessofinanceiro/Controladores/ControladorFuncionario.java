@@ -74,9 +74,9 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
     public void deletaFuncionarioPorIndice(int index) {
 
-        this.funcionarioDAO.remove(funcionario);
-        funcionario = null;
-        this.telaFuncionario.mensagemFuncionarioDeletadoSucesso();
+//        this.funcionarioDAO.remove(funcionario);
+//        funcionario = null;
+//        this.telaFuncionario.mensagemFuncionarioDeletadoSucesso();
 
     }
 
@@ -106,12 +106,10 @@ public class ControladorFuncionario implements IControladorFuncionario {
     }
 
     public ArrayList getMatriculas() {
-        ArrayList<Integer> matriculas = new ArrayList<>();
-        Set matriculasSet = funcionarioDAO.getMatriculas();
-        for (Object matricula : matriculasSet) {
-            matriculas.add((Integer) matricula);
-        }
-        return matriculas;
+		for(int matricula : this.funcionarioDAO.getMatriculas()) {
+			System.out.println(matricula);
+		}
+        return this.funcionarioDAO.getMatriculas();
     }
 
 //    public Cargo encontraCargoPorIndex(int index) {
