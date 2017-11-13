@@ -13,7 +13,7 @@ import java.util.Date;
  * @author bruno e thiago
  */
 public class Cargo implements Serializable {
-	
+
     private int codigo;
     private String nome;
     private boolean ehGerencial;
@@ -24,7 +24,7 @@ public class Cargo implements Serializable {
     private Date horaFimTarde;
 
     public Cargo(int codigo, String nome, boolean ehGerencial, boolean temAcessoAoFinanceiro,
-                    Date horaInicioManha, Date horaFimManha, Date horaInicioTarde, Date horaFimTarde) {
+            Date horaInicioManha, Date horaFimManha, Date horaInicioTarde, Date horaFimTarde) {
         this.codigo = codigo;
         this.nome = nome;
         this.ehGerencial = ehGerencial;
@@ -32,25 +32,25 @@ public class Cargo implements Serializable {
         this.horaInicioManha = horaInicioManha;
         this.horaFimManha = horaFimManha;
         this.horaInicioTarde = horaInicioTarde;
-        this.horaFimTarde = horaFimTarde;	
+        this.horaFimTarde = horaFimTarde;
     }
-    
-    public boolean ehGerencial(){
+
+    public boolean ehGerencial() {
         return this.ehGerencial;
     }
-    
+
     public void setEhGerencial(boolean ehGerencial) {
         this.ehGerencial = ehGerencial;
     }
-    
+
     public boolean temAcessoAoFinanceiro() {
         return this.temAcessoAoFinanceiro;
     }
-    
+
     public void setTemAcessoAoFinanceiro(boolean temAcessoAoFinanceiro) {
         this.temAcessoAoFinanceiro = temAcessoAoFinanceiro;
     }
-    
+
     public int getCodigo() {
         return codigo;
     }
@@ -68,35 +68,39 @@ public class Cargo implements Serializable {
     }
 
     public Date getHoraInicioManha() {
-            return horaInicioManha;
+        return horaInicioManha;
     }
 
     public void setHoraInicioManha(Date horaInicioManha) {
-            this.horaInicioManha = horaInicioManha;
+        this.horaInicioManha = horaInicioManha;
     }
 
     public Date getHoraFimManha() {
-            return horaFimManha;
+        return horaFimManha;
     }
 
     public void setHoraFimManha(Date horaFimManha) {
-            this.horaFimManha = horaFimManha;
+        this.horaFimManha = horaFimManha;
     }
 
     public Date getHoraInicioTarde() {
-            return horaInicioTarde;
+        return horaInicioTarde;
     }
 
     public void setHoraInicioTarde(Date horaInicioTarde) {
-            this.horaInicioTarde = horaInicioTarde;
+        this.horaInicioTarde = horaInicioTarde;
     }
 
     public Date getHoraFimTarde() {
-            return horaFimTarde;
+        return horaFimTarde;
     }
 
     public void setHoraFimTarde(Date horaFimTarde) {
-            this.horaFimTarde = horaFimTarde;
+        this.horaFimTarde = horaFimTarde;
     }
 
+    @Override
+    public String toString() {
+        return this.nome;
+    }
 }

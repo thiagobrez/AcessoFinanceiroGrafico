@@ -44,6 +44,7 @@ public class TelaCadastroFuncionario extends JFrame {
     private GridBagConstraints constraints;
     private JComboBox comboCargos;
     private List<Cargo> cargos;
+    private List<String> cargosNomes;
     private JScrollPane spBaseTabela;
     private JLabel lbNome;
     private JTextField tfNome;
@@ -83,9 +84,10 @@ public class TelaCadastroFuncionario extends JFrame {
 
         //Configuracao comboCargos
         this.cargos = new ArrayList<>();
-        comboCargos = new JComboBox(cargos.toArray());
+        this.cargosNomes = new ArrayList<>();
+        comboCargos = new JComboBox(cargosNomes.toArray());
         comboCargos.addActionListener(comboManager);
-        container.add(comboCargos);
+        container.add(comboCargos, constraints);
 
         //Configuracao lbNome
         lbNome = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_NOME);
@@ -147,8 +149,13 @@ public class TelaCadastroFuncionario extends JFrame {
 
         //Configuracao comboCargos
         this.cargos = ControladorPrincipal.getInstance().getListaCargos();
+        comboCargos.removeAllItems();
         for (Cargo cargo : cargos) {
-            System.out.println(cargo);
+            //this.cargosNomes.add(cargo.getNome());
+
+            comboCargos.addItem(cargo);
+
+            System.out.println(cargo.getNome());
         }
 
         this.repaint();
@@ -166,7 +173,7 @@ public class TelaCadastroFuncionario extends JFrame {
             if (e.getSource().equals(btCadastrar)) {
                 controlador.cadastraFuncionario(Integer.parseInt(tfMatricula.getText()),
                         tfNome.getText(), tfDataNascimento.getText(), Integer.parseInt(tfTelefone.getText()),
-                        Integer.parseInt(tfSalario.getText()), cargo);
+                        Integer.parseInt(tfSalario.getText()), (Cargo) comboCargos.getSelectedItem());
                 setVisible(false);
             }
 

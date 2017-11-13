@@ -63,7 +63,7 @@ public class ControladorPrincipal {
      * selecionar.
      */
     public void controlaMenuPrincipal() {
-        int opcao = telaPrincipal.pedeOpcao();
+        int opcao = 0;//telaPrincipal.pedeOpcao();
 
         switch (opcao) {
             case 1:
@@ -82,7 +82,7 @@ public class ControladorPrincipal {
                 emitirRelatorio();
                 break;
             default:
-                this.telaPrincipal.exibeOpcaoInexistente();
+                // this.telaPrincipal.exibeOpcaoInexistente();
                 exibeMenuPrincipal();
         }
     }
