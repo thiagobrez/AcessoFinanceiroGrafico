@@ -42,7 +42,7 @@ public class TelaPrincipal extends JFrame {
 
     private void configuraTela() {
         Container container = getContentPane();
-        container.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
+        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
 
         //Configuracao lbPrincipal
         lbPrincipal = new JLabel(Constantes.PRINCIPAL_TITULO);
@@ -89,7 +89,7 @@ public class TelaPrincipal extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // usar equals?
+            
             if (e.getSource().equals(btMenuAcesso)) {
                 owner.acessarFinanceiro();
             } else if (e.getSource().equals(btMenuFuncionarios)) {
