@@ -25,7 +25,7 @@ public class FuncionarioDAO {
 
     private HashMap<Integer, Funcionario> cacheFuncionarios = new HashMap<>();
 
-    private final String nomeArquivo = "funcionarios.dat";
+    private final String nomeArquivo = "funcionarios.batman";
 
     public FuncionarioDAO() {
         load();
