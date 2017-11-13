@@ -5,6 +5,8 @@
  */
 package br.ufsc.ine5605.acessofinanceiro.Controladores;
 
+import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
+import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.CargoHorarioEspecial;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
@@ -20,11 +22,10 @@ import java.util.Date;
  */
 public class ControladorCargo implements IControladorCargo {
 
-    private ArrayList<Cargo> cargos;
+    private CargoDAO cargoDAO = new CargoDAO();
     private TelaCargo telaCargo;
 
     public ControladorCargo() {
-        this.cargos = new ArrayList<>();
         this.telaCargo = new TelaCargo(this);
     }
 
@@ -99,11 +100,11 @@ public class ControladorCargo implements IControladorCargo {
             switch(tipoCargo){
                 case 1:
                     cargo.setEhGerencial(true);
-                    this.cargos.add(cargo);
+                    this.cargoDAO.put(cargo);
                     this.telaCargo.mensagemCargoCadastrado();
                     break;
                 case 2:
-                    this.cargos.add(cargo);
+                    this.cargoDAO.put(cargo);
                     this.telaCargo.mensagemCargoCadastrado();
                     break;
                 case 3:
@@ -116,7 +117,7 @@ public class ControladorCargo implements IControladorCargo {
                     break;
                 case 5:
                     cargo.setTemAcessoAoFinanceiro(false);
-                    this.cargos.add(cargo);
+                    this.cargoDAO.put(cargo);
                     this.telaCargo.mensagemCargoCadastrado();
                     break;
                 default:
@@ -182,7 +183,7 @@ public class ControladorCargo implements IControladorCargo {
         Cargo cargoIndefinido = encontraCargoIndefinido();
         if (cargo != null) {
             ControladorPrincipal.getInstance().deletaCargosFuncionarios(cargo, cargoIndefinido);
-            cargos.remove(cargo);
+            cargoDAO.remove(cargo.getCodigo());
             this.telaCargo.mensagemCargoDeletadoSucesso();                
         }
     }
@@ -196,7 +197,7 @@ public class ControladorCargo implements IControladorCargo {
      */
     public int verificaCodigoInserido() {
         int codigo = this.telaCargo.pedeCodigo();
-        for (Cargo cargoCadastrado : this.cargos) {
+        for (Cargo cargoCadastrado : this.cargoDAO.getList()) {
             if (cargoCadastrado.getCodigo() == codigo) {
                 this.telaCargo.mensagemErroCodigoJaCadastrada();
                 verificaCodigoInserido();
@@ -337,7 +338,7 @@ public class ControladorCargo implements IControladorCargo {
     @Override
     public void listaCargos() {
         this.telaCargo.mensagemListaCargos();
-        for (Cargo cargoCadastrado : cargos) {
+        for (Cargo cargoCadastrado : cargoDAO.getList()) {
             int codigo = cargoCadastrado.getCodigo();
             String nome = cargoCadastrado.getNome();
             boolean ehGerencial = cargoCadastrado.ehGerencial();
@@ -348,7 +349,7 @@ public class ControladorCargo implements IControladorCargo {
 
     @Override
     public Cargo encontraCargoPorCodigo(int codigo) {
-        for(Cargo cargoLista : this.cargos) {
+        for(Cargo cargoLista : this.cargoDAO.getList()) {
             if(cargoLista.getCodigo() == codigo) return cargoLista;
         }
         return null;
@@ -384,15 +385,9 @@ public class ControladorCargo implements IControladorCargo {
             Date horaFimTarde = formatador.parse(telaCargo.pedeHoraFimTarde());
             Date horaInicioEspecial = formatador.parse(telaCargo.pedeHoraInicioEspecial());
             Date horaFimEspecial = formatador.parse(telaCargo.pedeHoraFimEspecial());
-//			Date horaInicioManha = pedeHora(Constantes.DIGITE_HORA_INICIO_MANHA, formatador);
-//			Date horaFimManha = pedeHora(Constantes.DIGITE_HORA_FIM_MANHA, formatador);
-//			Date horaInicioTarde = pedeHora(Constantes.DIGITE_HORA_INICIO_TARDE, formatador);
-//			Date horaFimTarde = pedeHora(Constantes.DIGITE_HORA_FIM_TARDE, formatador);
-//			Date horaInicioEspecial = pedeHora(Constantes.DIGITE_HORA_INICIO_ESPECIAL, formatador);
-//			Date horaFimEspecial = pedeHora(Constantes.DIGITE_HORA_FIM_ESPECIAL, formatador);
             CargoHorarioEspecial cargo = new CargoHorarioEspecial(codigo, nome, horaInicioManha, horaFimManha,
 			horaInicioTarde, horaFimTarde, horaInicioEspecial, horaFimEspecial);
-            this.cargos.add(cargo);
+            this.cargoDAO.put(cargo);
             return cargo;
         } catch (ParseException e) {
             this.telaCargo.exibeHoraInseridaFormatoIncorreto();
@@ -460,7 +455,7 @@ public class ControladorCargo implements IControladorCargo {
         Date dataIndefinida = new Date();
         Cargo cargo = new Cargo(0, Constantes.CARGO_INDEFINIDO, false, false,
 		dataIndefinida, dataIndefinida, dataIndefinida, dataIndefinida);
-        this.cargos.add(cargo);
+        this.cargoDAO.put(cargo);
     }
 
     /**
@@ -489,7 +484,7 @@ public class ControladorCargo implements IControladorCargo {
 //			Date horaFimTarde = pedeHora(Constantes.DIGITE_HORA_FIM_TARDE, formatador);
         Cargo cargo = new Cargo(codigo, nome, false, true, horaInicioManha, horaFimManha,
                             horaInicioTarde, horaFimTarde);
-        this.cargos.add(cargo);
+        this.cargoDAO.put(cargo);
         return cargo;
         } catch (ParseException e) {
             telaCargo.exibeHoraInseridaFormatoIncorreto();

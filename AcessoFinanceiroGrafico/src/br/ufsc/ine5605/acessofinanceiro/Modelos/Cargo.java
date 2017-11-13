@@ -5,13 +5,14 @@
  */
 package br.ufsc.ine5605.acessofinanceiro.Modelos;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * @author bruno e thiago
  */
-public class Cargo {
+public class Cargo implements Serializable {
 	
     private int codigo;
     private String nome;
