@@ -7,75 +7,101 @@ package br.ufsc.ine5605.acessofinanceiro.Telas;
 
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
  * @author bruno
  */
-public class TelaPrincipal {
+public class TelaPrincipal extends JFrame {
 
-    private Scanner teclado;
-    private ControladorPrincipal controlador;
+    private ControladorPrincipal owner;
+    private JLabel lbPrincipal;
+    private JButton btMenuAcesso;
+    private JButton btMenuFuncionarios;
+    private JButton btMenuCargos;
+    private JButton btMenuData;
+    private JButton btMenuRelatorio;
+    
 
     public TelaPrincipal(ControladorPrincipal owner) {
-        this.teclado = new Scanner(System.in);
-        this.controlador = owner;
+        //refatorar depois essa constante
+        super(Constantes.ACESSO_FINANCEIRO);
+        this.owner = owner;
+        configuraTela();
     }
     
-    /**
-     * Exibe na tela o menu com as opcoes do sistema (Acesso ao financeiro,
-     * Gerenciar Funcionarios, Gerenciar Cargos, Gerenciar Data e Emitir Relatorio)
-     */
-    public void exibeMenuPrincipal() {
-        System.out.println(Constantes.MENU_PRINCIPAL);
-        System.out.println();
-        System.out.println(Constantes.ACESSO_AO_FINANCEIRO);
-        System.out.println(Constantes.GERENCIAR_FUNCIONARIOS);
-        System.out.println(Constantes.GERENCIAR_CARGOS);
-        System.out.println(Constantes.GERENCIAR_DATA);
-        System.out.println(Constantes.EMITIR_RELATORIO);
-        System.out.println();
-        System.out.println(Constantes.O_QUE_DESEJA_FAZER);
-        System.out.println();
+    private void configuraTela() {
+        Container container = getContentPane();
+        container.setLayout(new FlowLayout());
+        
+        //Configuracao lbPrincipal
+        lbPrincipal = new JLabel(Constantes.PRINCIPAL_TITULO);
+        container.add(lbPrincipal);
+        
+        //Configuracao GerenciadorBotoes
+        GerenciadorBotoes btManager = new GerenciadorBotoes();
+        
+        //Configuracao btMenuAcesso
+        btMenuAcesso = new JButton(Constantes.PRINCIPAL_MENU_ACESSO);
+        //btMenuAcesso.addActionListener(btManager);
+        container.add(btMenuAcesso);
+        
+        //Configuracao btMenuFuncionarios
+        btMenuFuncionarios = new JButton(Constantes.PRINCIPAL_MENU_FUNCIONARIOS);
+        //btMenuFuncionarios.addActionListener(btManager);
+        container.add(btMenuFuncionarios);
+        
+        //Configuracao btMenuAcesso
+        btMenuCargos = new JButton(Constantes.PRINCIPAL_MENU_CARGOS);
+        //btMenuCargos.addActionListener(btManager);
+        container.add(btMenuCargos);
+        
+        //Configuracao btMenuAcesso
+        btMenuData = new JButton(Constantes.PRINCIPAL_MENU_DATA);
+        //btMenuData.addActionListener(btManager);
+        container.add(btMenuData);
+        
+        //Configuracao btMenuAcesso
+        btMenuRelatorio = new JButton(Constantes.PRINCIPAL_MENU_RELATORIO);
+        //btMenuRelatorio.addActionListener(btManager);
+        container.add(btMenuRelatorio);
+        
+        setSize(720, 480);
+        setLocationRelativeTo(null);
+		
+        setVisible(true);
+        
     }
+    
+    private class GerenciadorBotoes implements ActionListener {
 
-    /**
-     * Pede que o usuario insira um numero correspondente a opcao que ele deseja
-     * selecionar
-     *
-     * @return opcao inserida pelo usuario
-     */
-    public int pedeOpcao() {
-        int opcao = 0;
-        boolean opcaoValida = true;
-        while (opcaoValida) {
-            try {
-                System.out.println();
-                opcao = teclado.nextInt();
-                teclado.nextLine();
-                System.out.println();
-                opcaoValida = false;
-
-            } catch (InputMismatchException e) {
-                System.out.println();
-                System.out.println(Constantes.OPCAO_INVALIDA);
-                teclado.nextLine();
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // usar equals?
+            if(e.getSource().equals(btMenuAcesso)) {
+                owner.acessarFinanceiro();
+            } else if(e.getSource().equals(btMenuFuncionarios)) {
+                owner.gerenciarFuncionarios();
+            } else if(e.getSource().equals(btMenuCargos)) {
+                owner.gerenciarCargos();
+            } else if(e.getSource().equals(btMenuData)) {
+                owner.gerenciarData();
+            } else if(e.getSource().equals(btMenuRelatorio)) {
+                owner.emitirRelatorio();
             }
         }
-        return opcao;
+		
     }
     
-    /**
-     * Exibe a mensagem de erro de opcao inexistente
-     */
-    public void exibeOpcaoInexistente() {
-        System.out.println();
-        System.out.println(Constantes.OPCAO_INEXISTENTE);
-        System.out.println();
-        System.out.println(Constantes.O_QUE_DESEJA_FAZER);
-        System.out.println();
-    }
-
 }

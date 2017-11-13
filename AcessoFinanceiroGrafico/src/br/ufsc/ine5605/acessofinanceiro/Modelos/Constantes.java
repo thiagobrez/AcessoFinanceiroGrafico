@@ -28,6 +28,14 @@ public class Constantes {
     public static final String COMUM_OQUE_DESEJA_FAZER = "O que você deseja fazer?";
     public static final String COMUM_BOTAO_CANCELAR = "Cancelar";
     public static final String COMUM_BOTAO_CADASTRAR = "Cadastrar";
+    
+    //MENU PRINCIPAL
+    public static final String PRINCIPAL_TITULO = "Menu Principal";
+    public static final String PRINCIPAL_MENU_ACESSO = "Acesso ao Financeiro";
+    public static final String PRINCIPAL_MENU_FUNCIONARIOS = "Gerenciar Funcionarios";
+    public static final String PRINCIPAL_MENU_CARGOS = "Gerenciar Cargos";
+    public static final String PRINCIPAL_MENU_DATA = "Geremciar Data";
+    public static final String PRINCIPAL_MENU_RELATORIO = "Emitir Relatorio";
 
     //ACESSO AO FINANCEIRO
     public static final String ACESSO_FINANCEIRO = "Acesso ao financeiro";
