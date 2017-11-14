@@ -127,7 +127,7 @@ public class TelaFuncionario extends JFrame {
         modelTbItens.addColumn(Constantes.COMUM_CARGO);
 
         Collection<Funcionario> listaFuncionarios = ControladorPrincipal.getInstance().getListaFuncionarios();
-
+        tbItens.removeAll();
         for (Funcionario funcionario : listaFuncionarios) {
             modelTbItens.addRow(new Object[]{
                 funcionario.getNome(),
@@ -152,9 +152,19 @@ public class TelaFuncionario extends JFrame {
         JOptionPane.showMessageDialog(
                 null,
                 Constantes.GERENCIAR_FUNCIONARIO_DELETADO_SUCESSO,
-                Constantes.GERENCIAR_FUNCIONARIO_TITULO_DELETADO_SUCESSO,
+                Constantes.GERENCIAR_FUNCIONARIO_DELETAR,
                 JOptionPane.PLAIN_MESSAGE
         );
+    }
+
+    public void exibeFuncionarioNaoDeletado() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.GERENCIAR_FUNCIONARIO_NAO_DELETADO,
+                Constantes.GERENCIAR_FUNCIONARIO_DELETAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+
     }
 
 // -----------------------GERENCIADOR DE BOTÕES---------------------------------
@@ -165,13 +175,14 @@ public class TelaFuncionario extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource().equals(btCadastraFuncionario)) {
                 controlador.exibeCadastraFuncionario();
+                updateData();
             }
             if (e.getSource().equals(btEditaFuncionario)) {
                 controlador.exibeEditaFuncionario();
             }
             if (e.getSource().equals(btDeletaFuncionario)) {
-                //controlador.deletaFuncionarioPorIndex(tbItens.getSelectedRow());
-                //exibeFuncionarioDeletadoComSucesso();
+                controlador.deletaFuncionarioSelecionado(tbItens.getSelectedRow());
+                updateData();
             }
             if (e.getSource().equals(btVoltarMenuPrincipal)) {
                 setVisible(false);

@@ -76,11 +76,17 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
     }
 
-    public void deletaFuncionarioPorIndice(int index) {
+    public void deletaFuncionarioSelecionado(int indexSelecionado) {
+        if (indexSelecionado != -1) {
+            ArrayList<Integer> matriculas = this.funcionarioDAO.getMatriculas();
+            int matricula = matriculas.get(indexSelecionado);
+            Funcionario funcionario = this.funcionarioDAO.get(matricula);
+            this.funcionarioDAO.remove(funcionario);
+            this.telaFuncionario.exibeFuncionarioDeletadoComSucesso();
+        } else {
+            this.telaFuncionario.exibeFuncionarioNaoDeletado();
+        }
 
-        //this.funcionarioDAO.remove(funcionario);
-        // funcionario = null;
-        //this.telaFuncionario.mensagemFuncionarioDeletadoSucesso();
     }
 
     public boolean verificaMatricula(int matricula) {
@@ -112,11 +118,6 @@ public class ControladorFuncionario implements IControladorFuncionario {
         return this.funcionarioDAO.getMatriculas();
     }
 
-//    public Cargo encontraCargoPorIndex(int index) {
-//        Collection<Cargo> listaCargos = ControladorPrincipal.getInstance().getListaCargos();
-//
-//        return cargos.get(index);
-//    }
     //
     //
     //+-+-+-+-+-+-+--+-+-+-+--+-+-+-+--+-+-+-+-+-+-+- ANTIGO +-+-+-+-+-+-+-+-+-+--+-+-+-+--+-+-+-+--+-+-+-+--+-+-+-+-

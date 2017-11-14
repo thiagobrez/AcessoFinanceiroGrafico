@@ -28,6 +28,8 @@ public class Constantes {
     public static final String COMUM_OQUE_DESEJA_FAZER = "O que você deseja fazer?";
     public static final String COMUM_BOTAO_CANCELAR = "Cancelar";
     public static final String COMUM_BOTAO_CADASTRAR = "Cadastrar";
+    public static final String COMUM_SIM = "Sim";
+    public static final String COMUM_NAO = "Não";
 
     //MENU PRINCIPAL
     public static final String PRINCIPAL_TITULO = "Menu Principal";
@@ -67,8 +69,11 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_SALARIO = "Salario: ";
     public static final String GERENCIAR_FUNCIONARIO_CARGO = "Cargo: ";
     public static final String GERENCIAR_FUNCIONARIO_TITULO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
+    public static final String GERENCIAR_FUNCIONARIO_NAO_DELETADO = "Selecione um funcionário para o deletar.";
+    public static final String GERENCIAR_FUNCIONARIO_TITULO_CADASTRADO_SUCESSO = "O funcionário foi deletado com sucesso!";
     public static final String GERENCIAR_FUNCIONARIO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
-    public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "Funcionário não cadastrado. Tente outra matrícula.";
+    public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "O funcionário não foi cadastrado. Matrícula ja existente.";
+    public static final String GERENCIAR_FUNCIONARIO_CONFIRMACAO_DELETAR = "Você deseja mesmo excluir o funcionário?";
 
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
