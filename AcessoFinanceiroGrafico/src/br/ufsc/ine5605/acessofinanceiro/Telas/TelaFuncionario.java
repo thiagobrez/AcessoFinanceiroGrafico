@@ -175,7 +175,7 @@ public class TelaFuncionario extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource().equals(btCadastraFuncionario)) {
                 controlador.exibeCadastraFuncionario();
-                updateData();
+
             }
             if (e.getSource().equals(btEditaFuncionario)) {
                 controlador.exibeEditaFuncionario();

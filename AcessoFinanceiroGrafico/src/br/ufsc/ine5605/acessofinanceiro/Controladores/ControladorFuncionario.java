@@ -70,6 +70,7 @@ public class ControladorFuncionario implements IControladorFuncionario {
             Funcionario funcionario = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
             funcionarioDAO.put(funcionario);
             this.telaCadastroFuncionario.exibeFuncionarioCadastradoComSucesso();
+            this.telaFuncionario.updateData();
         } else {
             this.telaCadastroFuncionario.exibeMatriculaJaExiste();
         }
