@@ -75,10 +75,7 @@ public class TelaDataHoraSistema extends JFrame {
     public void exibeMenuDataSistema() {
         setVisible(true);
     }
-//
 
-    // -----------------------GERENCIADOR DE BOTÕES---------------------------------
-//
     private class GerenciadorBotoes implements ActionListener {
 
         @Override

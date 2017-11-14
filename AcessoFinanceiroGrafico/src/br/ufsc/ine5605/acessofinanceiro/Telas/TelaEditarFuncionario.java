@@ -129,7 +129,7 @@ public class TelaEditarFuncionario extends JFrame {
 
         //Configura btConfirmar
         btConfirmar = new JButton();
-        btConfirmar.setText(Constantes.COMUM_BOTAO_CADASTRAR);
+        btConfirmar.setText(Constantes.COMUM_BOTAO_EDITAR);
         btConfirmar.addActionListener(btManager);
         container.add(btConfirmar);
 

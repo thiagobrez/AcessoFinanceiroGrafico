@@ -35,8 +35,7 @@ public class ControladorDataSistema implements IControladorDataSistema {
 
     @Override
     public Date getDataSistema() {
-//        return dataSistema.get();
-		return new Date();
+        return new Date();
     }
 
     public void exibeMenuDataSistema() {
@@ -44,7 +43,7 @@ public class ControladorDataSistema implements IControladorDataSistema {
     }
 
     public void alterarDataSistema() {
-        this.telaAlterarDataSistema.alterarDataSistema();
+        this.telaAlterarDataSistema.exibeAlterarDataSistema();
     }
 
     //
@@ -136,7 +135,6 @@ public class ControladorDataSistema implements IControladorDataSistema {
 //    public Date getDataSistema() {
 //        return this.dataSistema.get();
 //    }
-
     /**
      * Controla o menu de confirmacao da alteracao de data e hora do sistema,
      * onde caso o usuario selecione 1: exibe a mensagem de que a data e a hora
