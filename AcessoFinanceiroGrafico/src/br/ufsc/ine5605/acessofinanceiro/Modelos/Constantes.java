@@ -69,9 +69,10 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_SALARIO = "Salario: ";
     public static final String GERENCIAR_FUNCIONARIO_CARGO = "Cargo: ";
     public static final String GERENCIAR_FUNCIONARIO_TITULO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
-    public static final String GERENCIAR_FUNCIONARIO_NAO_DELETADO = "Selecione um funcionário para o deletar.";
-    public static final String GERENCIAR_FUNCIONARIO_TITULO_CADASTRADO_SUCESSO = "O funcionário foi deletado com sucesso!";
+    public static final String GERENCIAR_FUNCIONARIO_NADA_SELECIONADO = "Selecione um funcionário.";
+    public static final String GERENCIAR_FUNCIONARIO_TITULO_CADASTRADO_SUCESSO = "O funcionário foi cadastrado com sucesso!";
     public static final String GERENCIAR_FUNCIONARIO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
+    public static final String GERENCIAR_FUNCIONARIO_EDITADO_SUCESSO = "O funcionário foi editado com sucesso!";
     public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "O funcionário não foi cadastrado. Matrícula ja existente.";
     public static final String GERENCIAR_FUNCIONARIO_CONFIRMACAO_DELETAR = "Você deseja mesmo excluir o funcionário?";
 

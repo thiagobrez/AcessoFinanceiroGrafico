@@ -157,10 +157,10 @@ public class TelaFuncionario extends JFrame {
         );
     }
 
-    public void exibeFuncionarioNaoDeletado() {
+    public void exibeFuncionarioNaoSelecionado() {
         JOptionPane.showMessageDialog(
                 null,
-                Constantes.GERENCIAR_FUNCIONARIO_NAO_DELETADO,
+                Constantes.GERENCIAR_FUNCIONARIO_NADA_SELECIONADO,
                 Constantes.GERENCIAR_FUNCIONARIO_DELETAR,
                 JOptionPane.PLAIN_MESSAGE
         );
@@ -175,10 +175,9 @@ public class TelaFuncionario extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource().equals(btCadastraFuncionario)) {
                 controlador.exibeCadastraFuncionario();
-
             }
             if (e.getSource().equals(btEditaFuncionario)) {
-                controlador.exibeEditaFuncionario();
+                controlador.exibeEditarFuncionarioSelecionado(tbItens.getSelectedRow());
             }
             if (e.getSource().equals(btDeletaFuncionario)) {
                 controlador.deletaFuncionarioSelecionado(tbItens.getSelectedRow());

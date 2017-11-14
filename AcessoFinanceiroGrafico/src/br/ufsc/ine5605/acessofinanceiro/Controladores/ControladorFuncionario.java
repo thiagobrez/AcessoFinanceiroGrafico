@@ -18,7 +18,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 /**
  *
@@ -49,16 +48,19 @@ public class ControladorFuncionario implements IControladorFuncionario {
         this.telaCadastroFuncionario.exibeMenuCadastroFuncionario();
     }
 
-    public void exibeEditaFuncionario() {
-        this.telaEditarFuncionario.setVisible(true);
+    public void exibeEditarFuncionarioSelecionado(int indexSelecionado) {
+        if (indexSelecionado != -1) {
+            ArrayList<Integer> matriculas = this.funcionarioDAO.getMatriculas();
+            int matricula = matriculas.get(indexSelecionado);
+            Funcionario funcionario = this.funcionarioDAO.get(matricula);
+            this.telaEditarFuncionario.exibeMenuEditaFuncionario(funcionario);
+        } else {
+            this.telaFuncionario.exibeFuncionarioNaoSelecionado();
+        }
     }
 
     public void voltarMenuPrincipal() {
         ControladorPrincipal.getInstance().exibeMenuPrincipal();
-    }
-
-    public Collection<Funcionario> getListaFuncionarios() {
-        return this.funcionarioDAO.getList();
     }
 
     public void cadastraFuncionario(int matricula, String nome, String dataNascimento, int telefone, int salario, Cargo cargo) {
@@ -85,9 +87,26 @@ public class ControladorFuncionario implements IControladorFuncionario {
             this.funcionarioDAO.remove(funcionario);
             this.telaFuncionario.exibeFuncionarioDeletadoComSucesso();
         } else {
-            this.telaFuncionario.exibeFuncionarioNaoDeletado();
+            this.telaFuncionario.exibeFuncionarioNaoSelecionado();
         }
 
+    }
+
+    public void editaFuncionario(int matriculaAntiga, int matricula, String nome, String dataNascimento, int telefone, int salario, Cargo cargo) {
+        boolean nomeValido = verificaNomeInserido(nome);
+        boolean matriculaValida = verificaMatricula(matricula);
+
+        if (nomeValido && matriculaValida) {
+            Funcionario funcionarioNaoEditado = this.funcionarioDAO.get(matriculaAntiga);
+            this.funcionarioDAO.remove(funcionarioNaoEditado);
+            Funcionario funcionarioEditado = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
+            funcionarioDAO.put(funcionarioEditado);
+            this.telaEditarFuncionario.exibeFuncionarioEditadoComSucesso();
+            this.telaFuncionario.updateData();
+
+        } else {
+            this.telaEditarFuncionario.exibeMatriculaJaExiste();
+        }
     }
 
     public boolean verificaMatricula(int matricula) {
@@ -117,6 +136,10 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
     public ArrayList getMatriculas() {
         return this.funcionarioDAO.getMatriculas();
+    }
+
+    public Collection<Funcionario> getListaFuncionarios() {
+        return this.funcionarioDAO.getList();
     }
 
     //
