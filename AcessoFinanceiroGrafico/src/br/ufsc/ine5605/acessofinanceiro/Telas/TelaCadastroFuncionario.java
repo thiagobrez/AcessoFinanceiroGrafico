@@ -9,29 +9,19 @@ import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
-import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -45,7 +35,6 @@ public class TelaCadastroFuncionario extends JFrame {
     private JComboBox comboCargos;
     private List<Cargo> cargos;
     private List<String> cargosNomes;
-    private JScrollPane spBaseTabela;
     private JLabel lbNome;
     private JTextField tfNome;
     private JLabel lbMatricula;
@@ -151,12 +140,12 @@ public class TelaCadastroFuncionario extends JFrame {
         this.cargos = ControladorPrincipal.getInstance().getListaCargos();
         comboCargos.removeAllItems();
         for (Cargo cargo : cargos) {
-            //this.cargosNomes.add(cargo.getNome());
-
             comboCargos.addItem(cargo);
 
-            System.out.println(cargo.getNome());
         }
+
+        //limpa os textsFields
+        limpaTextFields();
 
         this.repaint();
     }
@@ -164,12 +153,40 @@ public class TelaCadastroFuncionario extends JFrame {
     public void exibeMenuCadastroFuncionario() {
         updateData();
         setVisible(true);
+
+    }
+
+    public void exibeFuncionarioCadastradoComSucesso() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.GERENCIAR_FUNCIONARIO_TITULO_CADASTRADO_SUCESSO,
+                Constantes.GERENCIAR_FUNCIONARIO_TITULO,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
+    public void exibeMatriculaJaExiste() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE,
+                Constantes.GERENCIAR_FUNCIONARIO_TITULO,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
+    public void limpaTextFields() {
+        tfMatricula.setText("");
+        tfNome.setText("");
+        tfDataNascimento.setText("");
+        tfTelefone.setText("");
+        tfSalario.setText("");
     }
 
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             if (e.getSource().equals(btCadastrar)) {
                 controlador.cadastraFuncionario(Integer.parseInt(tfMatricula.getText()),
                         tfNome.getText(), tfDataNascimento.getText(), Integer.parseInt(tfTelefone.getText()),
