@@ -36,6 +36,8 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	private GridBagConstraints constraints;
 	private JScrollPane spBaseTabela;
 	private JTable tbItens;
+//	private DefaultTableModel model;
+//	private TableRowSorter<DefaultTableModel> sorter;
 	private JButton btVoltar;
 	private JComboBox comboFiltroMotivo;
 	private JComboBox comboFiltroMatricula;
