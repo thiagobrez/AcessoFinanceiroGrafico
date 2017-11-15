@@ -27,7 +27,9 @@ public class Constantes {
     public static final String COMUM_CODIGO = "Codigo";
     public static final String COMUM_OQUE_DESEJA_FAZER = "O que você deseja fazer?";
     public static final String COMUM_BOTAO_CANCELAR = "Cancelar";
+    public static final String COMUM_BOTAO_ALTERAR = "Alterar";
     public static final String COMUM_BOTAO_CADASTRAR = "Cadastrar";
+    public static final String COMUM_BOTAO_EDITAR = "Editar";
     public static final String COMUM_SIM = "Sim";
     public static final String COMUM_NAO = "Não";
 
@@ -79,7 +81,8 @@ public class Constantes {
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
     public static final String DATA_SISTEMA_ATUAL = "Data e Hora do sistema: ";
-    public static final String DATA_SISTEMA_BOTAO_ALTERAR = "Data e Hora do sistema: ";
+    public static final String DATA_SISTEMA_BOTAO_ALTERAR = "Alterar Data/Hora do Sistema";
+    public static final String DATA_SISTEMA_NOVO = "Nova data/hora do sistema: ";
 
     // ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
     // COMUM
