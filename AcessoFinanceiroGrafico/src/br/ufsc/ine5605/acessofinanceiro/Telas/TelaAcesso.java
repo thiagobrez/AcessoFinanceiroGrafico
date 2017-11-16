@@ -86,7 +86,7 @@ public class TelaAcesso extends JFrame {
     public void exibeAcessoNegadoMatriculaInexistente() {
 		JOptionPane.showMessageDialog(
 				null,
-				Constantes.ACESSO_NEGADO_MATRICULA_INEXISTENTE,
+				Constantes.MOTIVO_MATRICULA_INEXISTENTE,
 				Constantes.ACESSO_NEGADO_TITULO,
 				JOptionPane.PLAIN_MESSAGE
 		);
@@ -99,7 +99,7 @@ public class TelaAcesso extends JFrame {
     public void exibeAcessoNegadoCargoSemAcesso() {
 		JOptionPane.showMessageDialog(
 				null,
-				Constantes.ACESSO_NEGADO_CARGO_SEM_ACESSO,
+				Constantes.MOTIVO_CARGO_SEM_ACESSO,
 				Constantes.ACESSO_NEGADO_TITULO,
 				JOptionPane.PLAIN_MESSAGE
 		);
@@ -112,7 +112,7 @@ public class TelaAcesso extends JFrame {
     public void exibeAcessoNegadoHorarioNaoPermitido() {
 		JOptionPane.showMessageDialog(
 				null,
-				Constantes.ACESSO_NEGADO_HORARIO_NAO_PERMITIDO,
+				Constantes.MOTIVO_HORARIO_NAO_PERMITIDO,
 				Constantes.ACESSO_NEGADO_TITULO,
 				JOptionPane.PLAIN_MESSAGE
 		);
@@ -125,7 +125,7 @@ public class TelaAcesso extends JFrame {
     public void exibeAcessoNegadoAcessoBloqueado() {
 		JOptionPane.showMessageDialog(
 				null,
-				Constantes.ACESSO_NEGADO_ACESSO_BLOQUEADO,
+				Constantes.MOTIVO_ACESSO_BLOQUEADO,
 				Constantes.ACESSO_NEGADO_TITULO,
 				JOptionPane.PLAIN_MESSAGE
 		);

@@ -19,14 +19,22 @@ import java.util.Date;
  */
 public class ControladorRegistroAcessoNegado {
     
+	private static ControladorRegistroAcessoNegado controladorRegistroAcessoNegado;
+	
     private TelaRegistroAcessoNegado telaRegistroAcessoNegado;
 	private RegistroAcessoNegadoDAO registroDAO;
     
-    public ControladorRegistroAcessoNegado() {
+    private ControladorRegistroAcessoNegado() {
 		this.registroDAO = new RegistroAcessoNegadoDAO();
         this.telaRegistroAcessoNegado = new TelaRegistroAcessoNegado(this);
     }
     
+	public static ControladorRegistroAcessoNegado getInstance() {
+        if (controladorRegistroAcessoNegado == null)
+			controladorRegistroAcessoNegado = new ControladorRegistroAcessoNegado();
+        return controladorRegistroAcessoNegado;
+    }
+	
 	/**
 	 * Solicita a tela que exiba o menu para selecao de filtro para emissao do
 	 * relatorio e trata a opcao recebida.
@@ -35,6 +43,18 @@ public class ControladorRegistroAcessoNegado {
 		telaRegistroAcessoNegado.exibeMenuRelatorio();
     }
 
+	public ArrayList<RegistroAcessoNegado> filtraRegistros(String filtroMotivo, String filtroMatricula) {
+		ArrayList<RegistroAcessoNegado> registros = new ArrayList<>();
+		ArrayList<RegistroAcessoNegado> registrosMotivo = encontraRegistrosPorMotivo(filtroMotivo);
+		if(!filtroMatricula.equals(Constantes.REGISTRO_FILTRO_NENHUM)) {
+			for(RegistroAcessoNegado registro : registrosMotivo) {
+				if(registro.getMatricula() == Integer.parseInt(filtroMatricula)) registros.add(registro);
+			}
+			return registros;
+		}
+		return registrosMotivo;
+	}
+	
 	/**
 	 * Solicita a tela que exiba os motivos existentes que o usuario possa
 	 * escolher para filtrar a emissao do relatorio e trata a opcao recebida.
@@ -89,13 +109,13 @@ public class ControladorRegistroAcessoNegado {
 	 * mesmo motivo.
 	 */
 	public void exibeRelatorioPorMotivo(Motivo motivo) {
-		boolean encontrouRegistro = false;
-		
-		ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
-		registrosEncontrados = encontraRegistrosPorMotivo(motivo);
-		if(!registrosEncontrados.isEmpty()) encontrouRegistro = true;
-		telaRegistroAcessoNegado.exibeRelatorioPorMotivo(registrosEncontrados, encontrouRegistro, motivo);
-		exibeFiltroPorMotivo();
+//		boolean encontrouRegistro = false;
+//		
+//		ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
+//		registrosEncontrados = encontraRegistrosPorMotivo(motivo);
+//		if(!registrosEncontrados.isEmpty()) encontrouRegistro = true;
+//		telaRegistroAcessoNegado.exibeRelatorioPorMotivo(registrosEncontrados, encontrouRegistro, motivo);
+//		exibeFiltroPorMotivo();
 	}
 	
 	/**
@@ -119,10 +139,13 @@ public class ControladorRegistroAcessoNegado {
 	 * @param motivo desejado para encontrar os registros
 	 * @return ArrayList de registros encontrados
 	 */
-	public ArrayList<RegistroAcessoNegado> encontraRegistrosPorMotivo(Motivo motivo) {
+//	public ArrayList<RegistroAcessoNegado> encontraRegistrosPorMotivo(Motivo motivo) {
+	public ArrayList<RegistroAcessoNegado> encontraRegistrosPorMotivo(String motivo) {
+		if(motivo.equals(Constantes.REGISTRO_FILTRO_NENHUM)) return getListaRegistrosAcessosNegados();
 		ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
 		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
-			if(registro.getMotivo() == motivo) {
+//			if(registro.getMotivo() == motivo) {
+			if(registro.getMotivo().toString().equals(motivo)) {
 				registrosEncontrados.add(registro);
 			}
 		}
@@ -218,8 +241,14 @@ public class ControladorRegistroAcessoNegado {
 		}
 	}
 
-	public Collection<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
-		return this.registroDAO.getList();
+//	public Collection<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
+	public ArrayList<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
+		ArrayList<RegistroAcessoNegado> registros = new ArrayList<>();
+		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
+			registros.add(registro);
+		}
+		return registros;
+//		return this.registroDAO.getList();
 	}
 	
 }
