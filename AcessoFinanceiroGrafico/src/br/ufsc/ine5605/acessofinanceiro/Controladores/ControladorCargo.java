@@ -29,7 +29,11 @@ public class ControladorCargo implements IControladorCargo {
     public ControladorCargo() {
         this.telaCargo = new TelaCargo(this);
     }
-
+    
+    public void voltarMenuPrincipal() {
+        ControladorPrincipal.getInstance().exibeMenuPrincipal();
+    }
+    
     /**
      * Exibe o menu principal do CRUD do cargo.
      */
