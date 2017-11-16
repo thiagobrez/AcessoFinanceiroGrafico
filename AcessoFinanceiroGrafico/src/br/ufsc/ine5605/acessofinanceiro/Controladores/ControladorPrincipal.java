@@ -27,7 +27,7 @@ public class ControladorPrincipal {
     public ControladorDataSistema controladorData;
     public ControladorFuncionario controladorFuncionario;
     public ControladorAcesso controladorAcesso;
-    public ControladorRegistroAcessoNegado controladorRegistroAcessoNegado;
+//    public ControladorRegistroAcessoNegado controladorRegistroAcessoNegado;
 
     public ControladorPrincipal() {
         this.telaPrincipal = new TelaPrincipal(this);
@@ -35,7 +35,7 @@ public class ControladorPrincipal {
         this.controladorData = new ControladorDataSistema();
         this.controladorFuncionario = new ControladorFuncionario();
         this.controladorAcesso = new ControladorAcesso();
-        this.controladorRegistroAcessoNegado = new ControladorRegistroAcessoNegado();
+//        this.controladorRegistroAcessoNegado = new ControladorRegistroAcessoNegado();
     }
 
     public static ControladorPrincipal getInstance() {
@@ -119,7 +119,7 @@ public class ControladorPrincipal {
      * Chama classe que controla o registro de acesso negado
      */
     public void emitirRelatorio() {
-        controladorRegistroAcessoNegado.exibeRelatorio();
+		ControladorRegistroAcessoNegado.getInstance().exibeRelatorio();
     }
 
     public Date getDataSistema() {
@@ -146,7 +146,7 @@ public class ControladorPrincipal {
      * @return registro de acesso negado
      */
     public ArrayList<RegistroAcessoNegado> encontraRegistrosHorarioNaoPermitidoPelaMatricula(int matricula) {
-        return controladorRegistroAcessoNegado.encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
+		return ControladorRegistroAcessoNegado.getInstance().encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
     }
 
     /**
@@ -158,7 +158,7 @@ public class ControladorPrincipal {
      * @param motivo da negação de acesso
      */
     public void novoRegistroAcessoNegado(Date data, int matricula, Motivo motivo) {
-        controladorRegistroAcessoNegado.novoRegistroAcessoNegado(data, matricula, motivo);
+		ControladorRegistroAcessoNegado.getInstance().novoRegistroAcessoNegado(data, matricula, motivo);
     }
 
     /**
@@ -199,7 +199,7 @@ public class ControladorPrincipal {
     }
 
     public Collection<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
-        return controladorRegistroAcessoNegado.getListaRegistrosAcessosNegados();
+		return ControladorRegistroAcessoNegado.getInstance().getListaRegistrosAcessosNegados();
     }
 
     public Collection<Funcionario> getListaFuncionarios() {

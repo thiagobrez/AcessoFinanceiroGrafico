@@ -36,6 +36,8 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	private GridBagConstraints constraints;
 	private JScrollPane spBaseTabela;
 	private JTable tbItens;
+//	private DefaultTableModel model;
+//	private TableRowSorter<DefaultTableModel> sorter;
 	private JButton btVoltar;
 	private JComboBox comboFiltroMotivo;
 	private JComboBox comboFiltroMatricula;
@@ -80,7 +82,8 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		container.add(btVoltar);
 		
 		//Configuracao comboFiltroMotivo
-		Enum[] motivos = {
+		Object[] motivos = {
+			Constantes.REGISTRO_FILTRO_NENHUM,
 			Motivo.MATRICULA_INEXISTENTE,
 			Motivo.HORARIO_NAO_PERMITIDO,
 			Motivo.CARGO_SEM_ACESSO,
@@ -101,7 +104,7 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		
 	}
 	
-	public void updateData() {
+	public void updateData(String filtroMotivo, String filtroMatricula) {
 		
 		//Configuracao modelTbItens
 		DefaultTableModel modelTbItens = new DefaultTableModel() {
@@ -114,7 +117,26 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		modelTbItens.addColumn(Constantes.COMUM_MATRICULA);
 		modelTbItens.addColumn(Constantes.REGISTRO_MOTIVO);
 		
-		Collection<RegistroAcessoNegado> listaRegistros = ControladorPrincipal.getInstance().getListaRegistrosAcessosNegados();
+		Collection<RegistroAcessoNegado> listaRegistros = ControladorRegistroAcessoNegado
+				.getInstance()
+				.filtraRegistros(filtroMotivo, filtroMatricula);
+		
+//		Collection<RegistroAcessoNegado> listaRegistros = ControladorRegistroAcessoNegado.getInstance().getListaRegistrosAcessosNegados();
+		
+//		switch(filtro) {
+//			case Constantes.MOTIVO_MATRICULA_INEXISTENTE:
+//				listaRegistros = ControladorRegistroAcessoNegado.getInstance().encontraRegistrosPorMotivo(Motivo.MATRICULA_INEXISTENTE);
+//				break;
+//			case Constantes.MOTIVO_CARGO_SEM_ACESSO:
+//				listaRegistros = ControladorRegistroAcessoNegado.getInstance().encontraRegistrosPorMotivo(Motivo.CARGO_SEM_ACESSO);
+//				break;
+//			case Constantes.MOTIVO_HORARIO_NAO_PERMITIDO:
+//				listaRegistros = ControladorRegistroAcessoNegado.getInstance().encontraRegistrosPorMotivo(Motivo.HORARIO_NAO_PERMITIDO);
+//				break;
+//			case Constantes.MOTIVO_ACESSO_BLOQUEADO:
+//				listaRegistros = ControladorRegistroAcessoNegado.getInstance().encontraRegistrosPorMotivo(Motivo.ACESSO_BLOQUEADO);
+//				break;
+//		}
 		
 		for(RegistroAcessoNegado registro : listaRegistros) {
 			modelTbItens.addRow(new Object[]{
@@ -128,6 +150,7 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		//Configuracao comboFiltroMatricula
 		this.matriculas = ControladorPrincipal.getInstance().getMatriculas();
 		comboFiltroMatricula.removeAllItems();
+		comboFiltroMatricula.addItem(Constantes.REGISTRO_FILTRO_NENHUM);
 		for(int matricula : this.matriculas) {
 			comboFiltroMatricula.addItem(matricula);
 		}
@@ -142,7 +165,7 @@ public class TelaRegistroAcessoNegado extends JFrame {
      * @return int opcao escolhida pelo usuario
      */
     public void exibeMenuRelatorio() {
-		updateData();
+		updateData(Constantes.REGISTRO_FILTRO_NENHUM, Constantes.REGISTRO_FILTRO_NENHUM);
 		setVisible(true);
     }
 
@@ -375,11 +398,18 @@ public class TelaRegistroAcessoNegado extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource().equals(comboFiltroMotivo)) {
-				
-			} else if (e.getSource().equals(comboFiltroMatricula)) {
-				
-			}
+			
+			updateData(
+				comboFiltroMotivo.getSelectedItem().toString(),
+				(String) comboFiltroMatricula.getSelectedItem()
+			);
+			
+//			if(e.getSource().equals(comboFiltroMotivo)) {
+//				comboFiltroMatricula.setSelectedItem(0);
+//				updateData(comboFiltroMotivo.getSelectedItem().toString());
+//			} else if (e.getSource().equals(comboFiltroMatricula)) {
+//				
+//			}
 		}
 		
 	}

@@ -46,10 +46,6 @@ public class Constantes {
     public static final String ACESSO_INSIRA_MATRICULA = "Insira a matricula de acesso: ";
     public static final String ACESSO_BOTAO_ACESSAR = "Acessar";
     public static final String ACESSO_NEGADO_TITULO = "Acesso negado";
-    public static final String ACESSO_NEGADO_MATRICULA_INEXISTENTE = "Matrícula inexistente";
-    public static final String ACESSO_NEGADO_ACESSO_BLOQUEADO = "Acesso bloqueado";
-    public static final String ACESSO_NEGADO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
-    public static final String ACESSO_NEGADO_CARGO_SEM_ACESSO = "Cargo sem acesso";
     public static final String ACESSO_PERMITIDO = "Financeiro acessado com sucesso!";
     public static final String ACESSO_PERMITIDO_TITULO = "Acesso permitido";
 
@@ -57,6 +53,7 @@ public class Constantes {
     public static final String REGISTRO_TITULO = "Relatório de acessos negados";
     public static final String REGISTRO_NUMERO = "Número";
     public static final String REGISTRO_MOTIVO = "Motivo";
+    public static final String REGISTRO_FILTRO_NENHUM = "Nenhum";
 
     //FUNCIONARIO
     public static final String GERENCIAR_FUNCIONARIO_TITULO = "Gerenciar Funcionários";
@@ -78,11 +75,31 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "O funcionário não foi cadastrado. Matrícula ja existente.";
     public static final String GERENCIAR_FUNCIONARIO_CONFIRMACAO_DELETAR = "Você deseja mesmo excluir o funcionário?";
 
+    //CARGO
+    public static final String CARGO_TITULO = "Gerenciar Cargo";
+    public static final String CARGO_CADASTRAR = "Cadastrar Cargo";
+    public static final String CARGO_EDITAR = "Editar Cargo";
+    public static final String CARGO_DELETAR = "Deletar Cargo";
+    public static final String CARGO_EH_GERENCIAL = "É Gerencial";
+    public static final String CARGO_TEM_ACESSO = "Tem Acesso";
+    public static final String CARGO_INICIO_MANHA = "Hora Inicio Manhã";
+    public static final String CARGO_FIM_MANHA = "Hora Fim Manhã";
+    public static final String CARGO_INICIO_TARDE = "Hora Inicio Tarde";
+    public static final String CARGO_FIM_TARDE = "Hora Fim Tarde";
+    public static final String CARGO_DELETADO_SUCESSO = "O cargo foi deletado com sucesso!";
+    public static final String CARGO_NADA_SELECIONADO = "Selecione um cargo.";
+ 
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
     public static final String DATA_SISTEMA_ATUAL = "Data e Hora do sistema: ";
     public static final String DATA_SISTEMA_BOTAO_ALTERAR = "Alterar Data/Hora do Sistema";
     public static final String DATA_SISTEMA_NOVO = "Nova data/hora do sistema: ";
+	
+	//MOTIVO
+	public static final String MOTIVO_MATRICULA_INEXISTENTE = "Matrícula inexistente";
+	public static final String MOTIVO_CARGO_SEM_ACESSO = "Cargo sem acesso";
+	public static final String MOTIVO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
+	public static final String MOTIVO_ACESSO_BLOQUEADO = "Acesso bloqueado";
 
     // ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
     // COMUM
@@ -260,7 +277,7 @@ public class Constantes {
 
     //DELETAR CARGO
     public static final String TITULO_DELETAR_CARGO = "+-+-+-+-+-+-+-+ Deletar Cargo +-+-+-+-+-+-+-+";
-    public static final String CARGO_DELETADO_SUCESSO = "CARGO DELETADO COM SUCESSO!";
+//    public static final String CARGO_DELETADO_SUCESSO = "CARGO DELETADO COM SUCESSO!";
     public static final String CONFIRMACAO_EXCLUSAO_CARGO = " Tem certeza que deseja excluir o cargo? Caso selecione 'não' você voltará ao menu de cargos. ";
 
     //DATA DO SISTEMA
