@@ -78,6 +78,21 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "O funcionário não foi cadastrado. Matrícula ja existente.";
     public static final String GERENCIAR_FUNCIONARIO_CONFIRMACAO_DELETAR = "Você deseja mesmo excluir o funcionário?";
 
+    //CARGO
+    public static final String CARGO_TITULO = "Gerenciar Cargo";
+    public static final String CARGO_CADASTRAR = "Cadastrar Cargo";
+    public static final String CARGO_EDITAR = "Editar Cargo";
+    public static final String CARGO_DELETAR = "Deletar Cargo";
+    public static final String CARGO_EH_GERENCIAL = "É Gerencial";
+    public static final String CARGO_TEM_ACESSO = "Tem Acesso";
+    public static final String CARGO_INICIO_MANHA = "Hora Inicio Manhã";
+    public static final String CARGO_FIM_MANHA = "Hora Fim Manhã";
+    public static final String CARGO_INICIO_TARDE = "Hora Inicio Tarde";
+    public static final String CARGO_FIM_TARDE = "Hora Fim Tarde";
+    public static final String CARGO_DELETADO_SUCESSO = "O cargo foi deletado com sucesso!";
+    public static final String CARGO_NADA_SELECIONADO = "Selecione um cargo.";
+ 
+    
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
     public static final String DATA_SISTEMA_ATUAL = "Data e Hora do sistema: ";
@@ -260,7 +275,7 @@ public class Constantes {
 
     //DELETAR CARGO
     public static final String TITULO_DELETAR_CARGO = "+-+-+-+-+-+-+-+ Deletar Cargo +-+-+-+-+-+-+-+";
-    public static final String CARGO_DELETADO_SUCESSO = "CARGO DELETADO COM SUCESSO!";
+//    public static final String CARGO_DELETADO_SUCESSO = "CARGO DELETADO COM SUCESSO!";
     public static final String CONFIRMACAO_EXCLUSAO_CARGO = " Tem certeza que deseja excluir o cargo? Caso selecione 'não' você voltará ao menu de cargos. ";
 
     //DATA DO SISTEMA
