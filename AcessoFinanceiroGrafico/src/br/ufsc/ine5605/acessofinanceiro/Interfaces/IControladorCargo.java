@@ -26,5 +26,5 @@ public interface IControladorCargo {
      *
      * @return
      */
-    public void listaCargos();
+//    public void listaCargos();
 }
