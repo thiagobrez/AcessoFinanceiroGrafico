@@ -174,18 +174,18 @@ public class TelaFuncionario extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource().equals(btCadastraFuncionario)) {
-                controlador.exibeCadastraFuncionario();
+                ControladorFuncionario.getInstance().exibeCadastraFuncionario();
             }
             if (e.getSource().equals(btEditaFuncionario)) {
-                controlador.exibeEditarFuncionarioSelecionado(tbItens.getSelectedRow());
+                ControladorFuncionario.getInstance().exibeEditarFuncionarioSelecionado(tbItens.getSelectedRow());
             }
             if (e.getSource().equals(btDeletaFuncionario)) {
-                controlador.deletaFuncionarioSelecionado(tbItens.getSelectedRow());
+                ControladorFuncionario.getInstance().deletaFuncionarioSelecionado(tbItens.getSelectedRow());
                 updateData();
             }
             if (e.getSource().equals(btVoltarMenuPrincipal)) {
                 setVisible(false);
-                controlador.voltarMenuPrincipal();
+                ControladorFuncionario.getInstance().voltarMenuPrincipal();
             }
 
         }
@@ -202,14 +202,6 @@ public class TelaFuncionario extends JFrame {
     }
 
 // +-+-+-+-+-+-+-+-+-+- Antigo +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-//    private Scanner teclado;
-//    private ControladorFuncionario controlador;
-//
-//    public TelaFuncionario(ControladorFuncionario owner) {
-//        this.controlador = owner;
-//        //this.teclado = new Scanner(System.in);
-//    }
-//
 //
 // +-+-+-+-+-+-+-+-+-+- MENUS +-+-+-+-+-+-+-+-+-+-
 //

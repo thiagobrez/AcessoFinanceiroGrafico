@@ -29,11 +29,11 @@ public class ControladorCargo implements IControladorCargo {
     public ControladorCargo() {
         this.telaCargo = new TelaCargo(this);
     }
-    
+
     public void voltarMenuPrincipal() {
         ControladorPrincipal.getInstance().exibeMenuPrincipal();
     }
-    
+
     /**
      * Exibe o menu principal do CRUD do cargo.
      */
@@ -575,5 +575,3 @@ public class ControladorCargo implements IControladorCargo {
 //		Date horaInicioTarde = pedeHora(Constantes.DIGITE_HORA_INICIO_TARDE, formatador);
 //		Date horaFimTarde = pedeHora(Constantes.DIGITE_HORA_FIM_TARDE, formatador);
     }
-
-}

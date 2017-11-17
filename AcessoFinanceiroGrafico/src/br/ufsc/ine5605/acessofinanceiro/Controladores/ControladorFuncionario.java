@@ -25,6 +25,8 @@ import java.util.Collection;
  */
 public class ControladorFuncionario implements IControladorFuncionario {
 
+    private static ControladorFuncionario controladorFuncionario;
+
     private TelaFuncionario telaFuncionario;
     private TelaCadastroFuncionario telaCadastroFuncionario;
     private TelaEditarFuncionario telaEditarFuncionario;
@@ -35,6 +37,13 @@ public class ControladorFuncionario implements IControladorFuncionario {
         this.telaCadastroFuncionario = new TelaCadastroFuncionario(this);
         this.telaEditarFuncionario = new TelaEditarFuncionario(this);
         this.funcionarioDAO = new FuncionarioDAO();
+    }
+
+    public static ControladorFuncionario getInstance() {
+        if (controladorFuncionario == null) {
+            controladorFuncionario = new ControladorFuncionario();
+        }
+        return controladorFuncionario;
     }
 
     /**
@@ -85,6 +94,7 @@ public class ControladorFuncionario implements IControladorFuncionario {
             int matricula = matriculas.get(indexSelecionado);
             Funcionario funcionario = this.funcionarioDAO.get(matricula);
             this.funcionarioDAO.remove(funcionario);
+            funcionario = null;
             this.telaFuncionario.exibeFuncionarioDeletadoComSucesso();
         } else {
             this.telaFuncionario.exibeFuncionarioNaoSelecionado();

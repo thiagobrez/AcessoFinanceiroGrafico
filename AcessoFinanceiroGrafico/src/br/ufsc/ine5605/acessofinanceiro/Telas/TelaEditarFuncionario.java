@@ -186,7 +186,7 @@ public class TelaEditarFuncionario extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource().equals(btConfirmar)) {
-                controlador.editaFuncionario(matriculaAntiga, Integer.parseInt(tfMatricula.getText()),
+                ControladorFuncionario.getInstance().editaFuncionario(matriculaAntiga, Integer.parseInt(tfMatricula.getText()),
                         tfNome.getText(), tfDataNascimento.getText(), Integer.parseInt(tfTelefone.getText()),
                         Integer.parseInt(tfSalario.getText()), (Cargo) comboCargos.getSelectedItem());
                 setVisible(false);

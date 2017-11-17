@@ -98,7 +98,7 @@ public class ControladorPrincipal {
      * Chama classe que controla o gerenciamento de funcionarios
      */
     public void gerenciarFuncionarios() {
-        this.controladorFuncionario.exibeMenuFuncionario();
+        ControladorFuncionario.getInstance().exibeMenuFuncionario();
     }
 
     /**
@@ -119,7 +119,7 @@ public class ControladorPrincipal {
      * Chama classe que controla o registro de acesso negado
      */
     public void emitirRelatorio() {
-		ControladorRegistroAcessoNegado.getInstance().exibeRelatorio();
+        ControladorRegistroAcessoNegado.getInstance().exibeRelatorio();
     }
 
     public Date getDataSistema() {
@@ -134,7 +134,7 @@ public class ControladorPrincipal {
      * @return funcionario
      */
     public Funcionario encontraFuncionarioPelaMatricula(int matricula) {
-        return controladorFuncionario.encontraFuncionarioPelaMatricula(matricula);
+        return ControladorFuncionario.getInstance().encontraFuncionarioPelaMatricula(matricula);
     }
 
     /**
@@ -146,7 +146,7 @@ public class ControladorPrincipal {
      * @return registro de acesso negado
      */
     public ArrayList<RegistroAcessoNegado> encontraRegistrosHorarioNaoPermitidoPelaMatricula(int matricula) {
-		return ControladorRegistroAcessoNegado.getInstance().encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
+        return ControladorRegistroAcessoNegado.getInstance().encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
     }
 
     /**
@@ -158,7 +158,7 @@ public class ControladorPrincipal {
      * @param motivo da negação de acesso
      */
     public void novoRegistroAcessoNegado(Date data, int matricula, Motivo motivo) {
-		ControladorRegistroAcessoNegado.getInstance().novoRegistroAcessoNegado(data, matricula, motivo);
+        ControladorRegistroAcessoNegado.getInstance().novoRegistroAcessoNegado(data, matricula, motivo);
     }
 
     /**
@@ -170,7 +170,7 @@ public class ControladorPrincipal {
      * @return true ou false em relação da matricula já estar cadastrada
      */
     public boolean matriculaExiste(int matricula) {
-        return controladorFuncionario.matriculaExiste(matricula);
+        return ControladorFuncionario.getInstance().matriculaExiste(matricula);
     }
 
     /**
@@ -183,7 +183,7 @@ public class ControladorPrincipal {
     }
 
     public ArrayList getMatriculas() {
-        return this.controladorFuncionario.getMatriculas();
+        return ControladorFuncionario.getInstance().getMatriculas();
     }
 
     /**
@@ -195,15 +195,15 @@ public class ControladorPrincipal {
      * @param cargoIndefinido
      */
     public void deletaCargosFuncionarios(Cargo cargoDeletado, Cargo cargoIndefinido) {
-        controladorFuncionario.deixaFuncionariosSemCargo(cargoDeletado, cargoIndefinido);
+        ControladorFuncionario.getInstance().deixaFuncionariosSemCargo(cargoDeletado, cargoIndefinido);
     }
 
     public Collection<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
-		return ControladorRegistroAcessoNegado.getInstance().getListaRegistrosAcessosNegados();
+        return ControladorRegistroAcessoNegado.getInstance().getListaRegistrosAcessosNegados();
     }
 
     public Collection<Funcionario> getListaFuncionarios() {
-        return controladorFuncionario.getListaFuncionarios();
+        return ControladorFuncionario.getInstance().getListaFuncionarios();
     }
 
     public ArrayList<Cargo> getListaCargos() {
