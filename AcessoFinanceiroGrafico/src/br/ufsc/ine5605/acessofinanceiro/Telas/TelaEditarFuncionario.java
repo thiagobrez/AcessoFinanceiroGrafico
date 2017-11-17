@@ -18,11 +18,13 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -34,6 +36,7 @@ public class TelaEditarFuncionario extends JFrame {
     private GerenciadorBotoes btManager;
     private ControladorFuncionario controlador;
     private GridBagConstraints constraints;
+    private JPanel painelBotoes;
     private JComboBox comboCargos;
     private List<Cargo> cargos;
     private List<String> cargosNomes;
@@ -69,57 +72,77 @@ public class TelaEditarFuncionario extends JFrame {
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.CENTER;
-        constraints.gridwidth = 10;
-        constraints.gridheight = 8;
         constraints.gridx = 0;
-        constraints.gridy = 8;
+        constraints.gridy = 0;
+
+        //Configuracao lbNome
+        lbNome = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_NOME);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        container.add(lbNome, constraints);
+
+        //Configuracao tfNome
+        tfNome = new JTextField(20);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        container.add(tfNome, constraints);
+
+        //Configuracao lbMatricula
+        lbMatricula = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_MATRICULA);
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        container.add(lbMatricula);
+
+        //Configuracao tfMatricula
+        tfMatricula = new JTextField(10);
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        container.add(tfMatricula);
+
+        //Configuracao lbDataNascimento
+        lbDataNascimento = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_DATA_NASCIMENTO);
+        constraints.gridx = 0;
+        constraints.gridy = 6;
+        container.add(lbDataNascimento);
+
+        //Configuracao tfNascimento
+        tfDataNascimento = new JTextField(10);
+        constraints.gridx = 0;
+        constraints.gridy = 6;
+        container.add(tfDataNascimento);
+
+        //Configuracao lbTelefone
+        lbTelefone = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_TELEFONE);
+        constraints.gridx = 0;
+        constraints.gridy = 9;
+        container.add(lbTelefone);
+
+        //Configuracao tfTelefone
+        tfTelefone = new JTextField(10);
+        constraints.gridx = 0;
+        constraints.gridy = 9;
+        container.add(tfTelefone);
+
+        // Configuracao lbSalario
+        lbSalario = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_SALARIO);
+        constraints.gridx = 0;
+        constraints.gridy = 12;
+        container.add(lbSalario);
+
+        //Configuracao tfSalario
+        tfSalario = new JTextField(10);
+        constraints.gridx = 0;
+        constraints.gridy = 12;
+        container.add(tfSalario);
 
         //Configuracao comboCargos
         this.cargos = new ArrayList<>();
         this.cargosNomes = new ArrayList<>();
         comboCargos = new JComboBox(cargosNomes.toArray());
         comboCargos.addActionListener(comboManager);
+        constraints.gridx = 0;
+        constraints.gridy = 15;
         container.add(comboCargos, constraints);
-
-        //Configuracao lbNome
-        lbNome = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_NOME);
-        container.add(lbNome);
-
-        //Configuracao tfNome
-        tfNome = new JTextField(20);
-        container.add(tfNome);
-
-        //Configuracao lbMatricula
-        lbMatricula = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_MATRICULA);
-        container.add(lbMatricula);
-
-        //Configuracao tfMatricula
-        tfMatricula = new JTextField(10);
-        container.add(tfMatricula);
-
-        //Configuracao lbDataNascimento
-        lbDataNascimento = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_DATA_NASCIMENTO);
-        container.add(lbDataNascimento);
-
-        //Configuracao tfNascimento
-        tfDataNascimento = new JTextField(10);
-        container.add(tfDataNascimento);
-
-        //Configuracao lbTelefone
-        lbTelefone = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_TELEFONE);
-        container.add(lbTelefone);
-
-        //Configuracao tfTelefone
-        tfTelefone = new JTextField(10);
-        container.add(tfTelefone);
-
-        // Configuracao lbSalario
-        lbSalario = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_SALARIO);
-        container.add(lbSalario);
-
-        //Configuracao tfSalario
-        tfSalario = new JTextField(10);
-        container.add(tfSalario);
 
         //Configura btCancelar
         btCancelar = new JButton();
@@ -133,7 +156,12 @@ public class TelaEditarFuncionario extends JFrame {
         btConfirmar.addActionListener(btManager);
         container.add(btConfirmar);
 
-        setSize(1200, 500);
+        //Configuracao paibelBotoes
+        this.painelBotoes = new JPanel();
+        painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.LINE_AXIS));
+        this.painelBotoes.setVisible(false);
+
+        setSize(1000, 700);
         setLocationRelativeTo(null);
     }
 

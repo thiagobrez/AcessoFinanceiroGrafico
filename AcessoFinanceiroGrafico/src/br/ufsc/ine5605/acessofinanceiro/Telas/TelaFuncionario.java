@@ -26,10 +26,12 @@ import java.text.ParseException;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -45,6 +47,7 @@ public class TelaFuncionario extends JFrame {
     private GerenciadorBotoes btManager;
     private GerenciadorCombos comboManager;
     private GridBagConstraints constraints;
+    private JPanel painelBotoes;
     private JTable tbItens;
     private JScrollPane spBaseTabela;
     private JButton btCadastraFuncionario;
@@ -67,19 +70,20 @@ public class TelaFuncionario extends JFrame {
     private void configuraTela() throws ParseException {
 
         Container container = getContentPane();
+
         container.setLayout(new GridBagLayout());
 
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.PAGE_START;
-        constraints.gridwidth = 10;
-        constraints.gridheight = 10;
+        constraints.gridwidth = 15;
+        constraints.gridheight = 1;
         constraints.gridx = 0;
-        constraints.gridy = 6;
+        constraints.gridy = 1;
 
         //Configuracao tbItens
         this.tbItens = new JTable();
-        tbItens.setPreferredScrollableViewportSize(new Dimension(500, 300));
+        tbItens.setPreferredScrollableViewportSize(new Dimension(603, 300));
         tbItens.setFillsViewportHeight(true);
         spBaseTabela = new JScrollPane(tbItens);
         container.add(spBaseTabela, constraints);
@@ -88,29 +92,34 @@ public class TelaFuncionario extends JFrame {
         btCadastraFuncionario = new JButton();
         btCadastraFuncionario.setText(Constantes.GERENCIAR_FUNCIONARIO_CADASTRAR);
         btCadastraFuncionario.addActionListener(btManager);
-        container.add(btCadastraFuncionario);
 
         //Configura btEditaFuncionario
         btEditaFuncionario = new JButton();
         btEditaFuncionario.setText(Constantes.GERENCIAR_FUNCIONARIO_EDITAR);
         btEditaFuncionario.addActionListener(btManager);
-        container.add(btEditaFuncionario);
 
         //Configura btDeletaFuncionario
         btDeletaFuncionario = new JButton();
         btDeletaFuncionario.setText(Constantes.GERENCIAR_FUNCIONARIO_DELETAR);
         btDeletaFuncionario.addActionListener(btManager);
-        container.add(btDeletaFuncionario);
 
         //Configura btVoltarMenuPrincipal
         btVoltarMenuPrincipal = new JButton();
         btVoltarMenuPrincipal.setText(Constantes.COMUM_BOTAO_VOLTAR_MENU_PRINCIPAL);
         btVoltarMenuPrincipal.addActionListener(btManager);
-        constraints.gridx = 12;
-        constraints.gridy = 12;
-        container.add(btVoltarMenuPrincipal, constraints);
 
-        setSize(700, 500);
+        //Configuracao paibelBotoes
+        this.painelBotoes = new JPanel();
+        painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.LINE_AXIS));
+        this.painelBotoes.setVisible(true);
+        painelBotoes.add(btCadastraFuncionario);
+        painelBotoes.add(btEditaFuncionario);
+        painelBotoes.add(btDeletaFuncionario);
+        painelBotoes.add(btVoltarMenuPrincipal);
+        constraints.gridy = 11;
+        container.add(painelBotoes, constraints);
+
+        setSize(900, 500);
         setLocationRelativeTo(null);
 
     }
