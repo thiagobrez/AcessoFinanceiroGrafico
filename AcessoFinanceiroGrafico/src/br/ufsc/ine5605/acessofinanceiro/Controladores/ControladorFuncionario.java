@@ -263,11 +263,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
         Cargo cargo = null;
         switch (opcao) {
             case 1:
-                ControladorPrincipal.getInstance().controladorCargo.listaCargos();
+                ControladorCargo.getInstance().listaCargos();
                 cargo = comparaCodigoComCargo();
                 break;
             case 2:
-                cargo = ControladorPrincipal.getInstance().controladorCargo.incluiCargo();
+//                cargo = ControladorCargo.getInstance().incluiCargo();
                 break;
             default:
                 this.telaFuncionario.opcaoInexistente();
@@ -571,7 +571,7 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
         while (cargoNaoEncontrado) {
             int codigo = pedeCodigo();
-            cargo = ControladorPrincipal.getInstance().controladorCargo.encontraCargoPorCodigo(codigo);
+            cargo = ControladorCargo.getInstance().encontraCargoPorCodigo(codigo);
             if (cargo != null) {
                 cargoNaoEncontrado = false;
             } else {

@@ -5,17 +5,15 @@
  */
 package br.ufsc.ine5605.acessofinanceiro.Controladores;
 
-import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
-import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.CargoHorarioEspecial;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Interfaces.IControladorCargo;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCargo;
+import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarCargo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -23,13 +21,21 @@ import java.util.Date;
  */
 public class ControladorCargo implements IControladorCargo {
 
+	private static ControladorCargo controladorCargo;
+	
     private CargoDAO cargoDAO = new CargoDAO();
     private TelaCargo telaCargo;
+	private TelaEditarCargo telaEditarCargo;
 
-    public ControladorCargo() {
+    private ControladorCargo() {
         this.telaCargo = new TelaCargo(this);
     }
 
+	public static ControladorCargo getInstance() {
+        if (controladorCargo == null) controladorCargo = new ControladorCargo();
+        return controladorCargo;
+    }
+	
     public void voltarMenuPrincipal() {
         ControladorPrincipal.getInstance().exibeMenuPrincipal();
     }
@@ -39,43 +45,6 @@ public class ControladorCargo implements IControladorCargo {
      */
     public void exibeMenuCargo() {
         telaCargo.exibeMenuCargo();
-        controlaMenuCargo();
-    }
-
-    /**
-     * Controla o que o sistema faz com base na opcao que o usuario selecionar
-     * no menu principal do cargo. Caso aperte 1: cadastra um cargo. Caso aperte
-     * 2: edita um cargo. Caso aperte 3: lista todos os cargos. Caso aperte 4:
-     * deleta um cargo. Caso aperte 5: volta ao menu principal do sistema. Caso
-     * aperte outra tecla: apresenta uma mensagem de opcao inexistente e pede
-     * que o usuario digite outra vez a opcao que deseja selecionar.
-     */
-    public void controlaMenuCargo() {
-
-        int opcao = this.telaCargo.pedeOpcao();
-
-        switch (opcao) {
-            case 1:
-                incluiCargo();
-                exibeMenuCargo();
-                break;
-            case 2:
-                editaCargo();
-                break;
-            case 3:
-                pedeListaCargos();
-                break;
-            case 4:
-                menuDeletarCargo();
-                break;
-            case 5:
-                ControladorPrincipal.getInstance().exibeMenuPrincipal();
-                break;
-            default:
-                this.telaCargo.opcaoInexistente();
-                exibeMenuCargo();
-                break;
-        }
     }
 
     public ArrayList<Cargo> getListaCargos() {
@@ -93,91 +62,56 @@ public class ControladorCargo implements IControladorCargo {
      *
      * @return Cargo cadastrado
      */
-    public Cargo incluiCargo() {
-        this.telaCargo.mensagemNovoCargo();
-        String nome = pedeNome();
-        int codigo = verificaCodigoInserido();
-        int tipoCargo = this.telaCargo.pedeTipoCargo();
+    public Cargo incluiCargo(
+			int codigo, String nome, String tipoCargo, String inputHoraInicioManha,
+			String inputHoraFimManha, String inputHoraInicioTarde, String inputHoraFimTarde,
+			String inputHoraInicioEspecial, String inputHoraFimEspecial
+	) {
+		verificaNome(nome);
+		verificaCodigoInserido(codigo);
         SimpleDateFormat formatador = new SimpleDateFormat(Constantes.FORMATADOR_HORA);
-        try {
-            Date horaInicioManha = formatador.parse(Constantes.HORA_INICIO_MANHA_COMERCIAL);
-            Date horaFimManha = formatador.parse(Constantes.HORA_FIM_MANHA_COMERCIAL);
-            Date horaInicioTarde = formatador.parse(Constantes.HORA_INICIO_TARDE_COMERCIAL);
-            Date horaFimTarde = formatador.parse(Constantes.HORA_FIM_TARDE_COMERCIAL);
-            Cargo cargo = new Cargo(codigo, nome, false, true, horaInicioManha, horaFimManha, horaInicioTarde, horaFimTarde);
-            switch (tipoCargo) {
-                case 1:
-                    cargo.setEhGerencial(true);
-                    this.cargoDAO.put(cargo);
-                    this.telaCargo.mensagemCargoCadastrado();
-                    break;
-                case 2:
-                    this.cargoDAO.put(cargo);
-                    this.telaCargo.mensagemCargoCadastrado();
-                    break;
-                case 3:
-                    cargo = criaCargoEspecial(nome, codigo, formatador);
-                    this.telaCargo.mensagemCargoCadastrado();
-                    break;
-                case 4:
-                    cargo = criaCargoComum(nome, codigo, formatador);
-                    this.telaCargo.mensagemCargoCadastrado();
-                    break;
-                case 5:
-                    cargo.setTemAcessoAoFinanceiro(false);
-                    this.cargoDAO.put(cargo);
-                    this.telaCargo.mensagemCargoCadastrado();
-                    break;
-                default:
-                    this.telaCargo.exibeOpcaoInexistente();
-                    incluiCargo();
-                    break;
-            }
-            return cargo;
+		try {
+			Date horaInicioManha = formatador.parse(inputHoraInicioManha);
+			Date horaFimManha = formatador.parse(inputHoraFimManha);
+			Date horaInicioTarde = formatador.parse(inputHoraInicioTarde);
+			Date horaFimTarde = formatador.parse(inputHoraFimTarde);
+			Date horaInicioEspecial = formatador.parse(inputHoraInicioEspecial);
+			Date horaFimEspecial = formatador.parse(inputHoraFimEspecial);
+			Cargo cargo = new Cargo(codigo, nome, false, true, horaInicioManha, horaFimManha, horaInicioTarde, horaFimTarde);
+			switch (tipoCargo) {
+				case Constantes.CARGO_TIPO_GERENCIAL:
+					cargo.setEhGerencial(true);
+					this.cargoDAO.put(cargo);
+					this.telaCargo.mensagemCargoCadastrado();
+					break;
+				case Constantes.CARGO_TIPO_COMERCIAL:
+					this.cargoDAO.put(cargo);
+					this.telaCargo.mensagemCargoCadastrado();
+					break;
+				case Constantes.CARGO_TIPO_ESPECIAL:
+					cargo = criaCargoEspecial(
+							nome, codigo, horaInicioManha, horaFimManha,
+							horaInicioTarde, horaFimTarde, horaInicioEspecial,
+							horaFimEspecial
+							);
+					this.telaCargo.mensagemCargoCadastrado();
+					break;
+				case Constantes.CARGO_TIPO_COMUM:
+					cargo = criaCargoComum(nome, codigo, formatador);
+					this.telaCargo.mensagemCargoCadastrado();
+					break;
+				case Constantes.CARGO_TIPO_SEM_ACESSO:
+					cargo.setTemAcessoAoFinanceiro(false);
+					this.cargoDAO.put(cargo);
+					this.telaCargo.mensagemCargoCadastrado();
+					break;
+			}
+			return cargo;
         } catch (ParseException e) {
             telaCargo.exibeErroConstantesFormatador();
             ControladorPrincipal.getInstance().exibeMenuPrincipal();
         }
         return null;
-    }
-
-    /**
-     * Controla o que o sistema faz com base na opcao que o usuario selecionar
-     * no menu para deletar o cargo. Caso o usuario aperte 1: deleta o cargo.
-     * Caso o usuario aperte 2: volta para o menu principal do cargo. Caso o
-     * usuario aperte outra tecla qualquer: apresenta a mensagem de opcao
-     * inexistente e exibe o menu de deletar um cargo novamente
-     *
-     * @param cargo a ser deletado
-     */
-    public void controlaMenuDeletarCargo(Cargo cargo) {
-        int opcao = this.telaCargo.pedeOpcao();
-        switch (opcao) {
-            case 1:
-                deletaCargo(cargo);
-                exibeMenuCargo();
-                break;
-            case 2:
-                exibeMenuCargo();
-                break;
-            default:
-                this.telaCargo.opcaoInexistente();
-                controlaMenuDeletarCargo(cargo);
-                break;
-        }
-    }
-
-    /**
-     * Pede qual cargo o usuario deseja deletar. Exibe o menu de deletar cargo e
-     * chama quem controla o menu.
-     */
-    public void menuDeletarCargo() {
-        this.telaCargo.mensagemDeletaCargo();
-        Cargo cargo = pedeCargo();
-        this.telaCargo.exibeMensagemCargoSelecionado();
-        this.telaCargo.exibeCargo(cargo.getCodigo(), cargo.getNome(), cargo.ehGerencial(), cargo.temAcessoAoFinanceiro());
-        this.telaCargo.exibeMenuConfirmacaoDeletarCargo();
-        controlaMenuDeletarCargo(cargo);
     }
 
     /**
@@ -201,27 +135,13 @@ public class ControladorCargo implements IControladorCargo {
      * @return codigo caso não tenha sido cadastrado antes, caso contrario pede
      * para que o usuario insira um novo codigo
      */
-    public int verificaCodigoInserido() {
-        int codigo = this.telaCargo.pedeCodigo();
+    public int verificaCodigoInserido(int codigo) {
         for (Cargo cargoCadastrado : this.cargoDAO.getList()) {
             if (cargoCadastrado.getCodigo() == codigo) {
-                this.telaCargo.mensagemErroCodigoJaCadastrada();
-                verificaCodigoInserido();
+                this.telaCargo.mensagemErroCodigoJaCadastrado();
             }
         }
         return codigo;
-    }
-
-    /**
-     * Pede para o usuário inserir um nome para o cargo, chama o método para
-     * verificar se o nome é valido e, caso seja, retorna o nome.
-     *
-     * @return nome do cargo validado e inserido pelo usuário
-     */
-    public String pedeNome() {
-        String nome = this.telaCargo.pedeNome();
-        nome = verificaNome(nome);
-        return nome;
     }
 
     /**
@@ -231,24 +151,35 @@ public class ControladorCargo implements IControladorCargo {
      *
      * @param nome que o usuário inseriu por meio do teclado.
      */
-    public String verificaNome(String nome) {
+    public boolean verificaNome(String nome) {
         if (nome.length() > 2) {
             for (int i = 0; i < nome.length(); i++) {
                 char letraAnalisada = nome.charAt(i);
                 if (!Character.isLetter(letraAnalisada)) {
                     if (!Character.isSpace(letraAnalisada)) {
                         this.telaCargo.mensagemNomeInvalidoLetras();
-                        nome = pedeNome();
+						return false;
                     }
                 }
             }
         } else {
             this.telaCargo.mensagemNomeInvalidoTamanho();
-            nome = pedeNome();
+			return false;
         }
-        return nome;
+        return true;
     }
 
+	public void exibeEditarCargoSelecionado(int indexSelecionado) {
+        if (indexSelecionado != -1) {
+            ArrayList<Integer> codigos = this.cargoDAO.getCodigos();
+            int codigo = codigos.get(indexSelecionado);
+            Cargo cargo = this.cargoDAO.get(codigo);
+//            this.telaEditarCargo.exibeMenuEditaCargo(cargo);
+        } else {
+            this.telaCargo.exibeCargoNaoSelecionado();
+        }
+    }
+	
     /**
      * Pede qual cargo o usuario deseja editar. Exibe o menu de editar cargo e
      * chama quem controla o menu.
@@ -385,23 +316,18 @@ public class ControladorCargo implements IControladorCargo {
      * cargo especial e caso algum horario tenha sido inserido em formato errado
      * acusa erro e volta a pedir para inserir
      */
-    public CargoHorarioEspecial criaCargoEspecial(String nome, int codigo, SimpleDateFormat formatador) {
-        try {
-            Date horaInicioManha = formatador.parse(telaCargo.pedeHoraInicioManha());
-            Date horaFimManha = formatador.parse(telaCargo.pedeHoraFimManha());
-            Date horaInicioTarde = formatador.parse(telaCargo.pedeHoraInicioTarde());
-            Date horaFimTarde = formatador.parse(telaCargo.pedeHoraFimTarde());
-            Date horaInicioEspecial = formatador.parse(telaCargo.pedeHoraInicioEspecial());
-            Date horaFimEspecial = formatador.parse(telaCargo.pedeHoraFimEspecial());
-            CargoHorarioEspecial cargo = new CargoHorarioEspecial(codigo, nome, horaInicioManha, horaFimManha,
-                    horaInicioTarde, horaFimTarde, horaInicioEspecial, horaFimEspecial);
-            this.cargoDAO.put(cargo);
-            return cargo;
-        } catch (ParseException e) {
-            this.telaCargo.exibeHoraInseridaFormatoIncorreto();
-            criaCargoEspecial(nome, codigo, formatador);
-        }
-        return null;
+    public CargoHorarioEspecial criaCargoEspecial(
+			String nome, int codigo, Date horaInicioManha,
+			Date horaFimManha, Date horaInicioTarde, Date horaFimTarde,
+			Date horaInicioEspecial, Date horaFimEspecial
+	) {
+		CargoHorarioEspecial cargo = new CargoHorarioEspecial(
+				codigo, nome, horaInicioManha, horaFimManha,
+				horaInicioTarde, horaFimTarde, horaInicioEspecial,
+				horaFimEspecial
+		);
+		this.cargoDAO.put(cargo);
+		return cargo;
     }
 
     /**

@@ -23,19 +23,15 @@ public class ControladorPrincipal {
     private static ControladorPrincipal controladorPrincipal;
 
     public TelaPrincipal telaPrincipal;
-    public ControladorCargo controladorCargo;
     public ControladorDataSistema controladorData;
     public ControladorFuncionario controladorFuncionario;
     public ControladorAcesso controladorAcesso;
-//    public ControladorRegistroAcessoNegado controladorRegistroAcessoNegado;
 
-    public ControladorPrincipal() {
+    private ControladorPrincipal() {
         this.telaPrincipal = new TelaPrincipal(this);
-        this.controladorCargo = new ControladorCargo();
         this.controladorData = new ControladorDataSistema();
         this.controladorFuncionario = new ControladorFuncionario();
         this.controladorAcesso = new ControladorAcesso();
-//        this.controladorRegistroAcessoNegado = new ControladorRegistroAcessoNegado();
     }
 
     public static ControladorPrincipal getInstance() {
@@ -45,46 +41,20 @@ public class ControladorPrincipal {
         return controladorPrincipal;
     }
 
+	/**
+     * Instancia cargo indefinido (codigo = 0, sem função gerencial e sem acesso
+     * ao financeiro)
+     */
+    public void inicia() {
+        ControladorCargo.getInstance().criaCargoPadrao();
+        exibeMenuPrincipal();
+    }
+	
     /**
      * Exibe o menu principal do sistema.
      */
     public void exibeMenuPrincipal() {
         telaPrincipal.exibeMenuPrincipal();
-//        controlaMenuPrincipal();
-    }
-
-    /**
-     * Controla o que o sistema faz com base na opcao que o usuario selecionar
-     * no menu principal. Caso aperte 1: avança ao menu de acesso ao financeiro.
-     * Caso aperte 2: gerencia um funcionario. Caso aperte 3: gerencia um cargo.
-     * Caso aperte 4: gerencia a data do sistema. Caso aperte 5: emite relatorio
-     * de acessos. Caso aperte outra tecla: apresenta uma mensagem de opcao
-     * inexistente e pede que o usuario digite outra vez a opcao que deseja
-     * selecionar.
-     */
-    public void controlaMenuPrincipal() {
-        int opcao = 0;//telaPrincipal.pedeOpcao();
-
-        switch (opcao) {
-            case 1:
-                acessarFinanceiro();
-                break;
-            case 2:
-                gerenciarFuncionarios();
-                break;
-            case 3:
-                gerenciarCargos();
-                break;
-            case 4:
-                gerenciarData();
-                break;
-            case 5:
-                emitirRelatorio();
-                break;
-            default:
-                // this.telaPrincipal.exibeOpcaoInexistente();
-                exibeMenuPrincipal();
-        }
     }
 
     /**
@@ -105,7 +75,7 @@ public class ControladorPrincipal {
      * Chama classe que controla o gerenciamento de cargos
      */
     public void gerenciarCargos() {
-        this.controladorCargo.exibeMenuCargo();
+        ControladorCargo.getInstance().exibeMenuCargo();
     }
 
     /**
@@ -122,6 +92,8 @@ public class ControladorPrincipal {
         ControladorRegistroAcessoNegado.getInstance().exibeRelatorio();
     }
 
+	// ============= REDIRECIONAMENTOS ============= //
+	
     public Date getDataSistema() {
         return ControladorDataSistema.getInstance().getDataSistema();
     }
@@ -173,15 +145,6 @@ public class ControladorPrincipal {
         return ControladorFuncionario.getInstance().matriculaExiste(matricula);
     }
 
-    /**
-     * Instancia cargo indefinido (codigo = 0, sem função gerencial e sem acesso
-     * ao financeiro)
-     */
-    public void inicia() {
-        controladorCargo.criaCargoPadrao();
-        exibeMenuPrincipal();
-    }
-
     public ArrayList getMatriculas() {
         return ControladorFuncionario.getInstance().getMatriculas();
     }
@@ -207,6 +170,6 @@ public class ControladorPrincipal {
     }
 
     public ArrayList<Cargo> getListaCargos() {
-        return controladorCargo.getListaCargos();
+        return ControladorCargo.getInstance().getListaCargos();
     }
 }
