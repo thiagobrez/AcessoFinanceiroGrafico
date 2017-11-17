@@ -240,6 +240,15 @@ public class TelaCadastroFuncionario extends JFrame {
         );
     }
 
+    public void exibeErroNome() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.GERENCIAR_FUNCIONARIO_NADA_SELECIONADO,
+                Constantes.GERENCIAR_FUNCIONARIO_DELETAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
     public void limpaTextFields() {
         tfMatricula.setText("");
         tfNome.setText("");
