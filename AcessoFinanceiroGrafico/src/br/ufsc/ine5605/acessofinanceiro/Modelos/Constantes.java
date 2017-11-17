@@ -75,6 +75,7 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_EDITADO_SUCESSO = "O funcionário foi editado com sucesso!";
     public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "O funcionário não foi cadastrado. Matrícula ja existente.";
     public static final String GERENCIAR_FUNCIONARIO_CONFIRMACAO_DELETAR = "Você deseja mesmo excluir o funcionário?";
+    public static final String GERENCIAR_FUNCIONARIO_ERRO_NOME = "Erro: o nome deve possuir mais de 3 letras e não deve possuir números.";
 
     //CARGO
     public static final String CARGO_TITULO = "Gerenciar Cargo";
@@ -114,9 +115,9 @@ public class Constantes {
     public static final String MOTIVO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
     public static final String MOTIVO_ACESSO_BLOQUEADO = "Acesso bloqueado";
 
-	//FORMATADOR
-	public static final String FORMATADOR_ERRO_CONSTANTE = "Erro na constante do formatador";
-	
+    //FORMATADOR
+    public static final String FORMATADOR_ERRO_CONSTANTE = "Erro na constante do formatador";
+
     // ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
     // COMUM
     public static final String INSIRA_MATRICULA = "Digite a matrícula: ";

@@ -243,8 +243,8 @@ public class TelaCadastroFuncionario extends JFrame {
     public void exibeErroNome() {
         JOptionPane.showMessageDialog(
                 null,
-                Constantes.GERENCIAR_FUNCIONARIO_NADA_SELECIONADO,
-                Constantes.GERENCIAR_FUNCIONARIO_DELETAR,
+                Constantes.GERENCIAR_FUNCIONARIO_ERRO_NOME,
+                Constantes.GERENCIAR_FUNCIONARIO_TITULO,
                 JOptionPane.PLAIN_MESSAGE
         );
     }
