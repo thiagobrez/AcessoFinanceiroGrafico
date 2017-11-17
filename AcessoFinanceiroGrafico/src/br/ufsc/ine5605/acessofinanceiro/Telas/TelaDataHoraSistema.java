@@ -59,10 +59,10 @@ public class TelaDataHoraSistema extends JFrame {
         lbDataSistemaTitulo = new JLabel(Constantes.DATA_SISTEMA_ATUAL);
         container.add(lbDataSistemaTitulo);
 
-//        //Configuracao lbDataSistema
-//        lbDataSistema = new JLabel(pegaDataSistema());
-//        container.add(lbDataSistema);
-//
+        //Configuracao lbDataSistema
+        lbDataSistema = new JLabel("");
+        container.add(lbDataSistema);
+
         //Configura btVoltarMenuPrincipal
         btVoltarMenuPrincipal = new JButton();
         btVoltarMenuPrincipal.setText(Constantes.COMUM_BOTAO_VOLTAR_MENU_PRINCIPAL);
@@ -85,6 +85,12 @@ public class TelaDataHoraSistema extends JFrame {
 
     public void exibeMenuDataSistema() {
         setVisible(true);
+        exibeDataSistema();
+    }
+
+    public void exibeDataSistema() {
+        String dataSistema = pegaDataSistema();
+        lbDataSistema.setText(dataSistema);
     }
 
     public String pegaDataSistema() {
