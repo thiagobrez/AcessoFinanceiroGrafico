@@ -107,13 +107,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
         boolean matriculaValida = verificaMatricula(matricula);
 
         if (nomeValido && matriculaValida) {
-            Funcionario funcionario = this.funcionarioDAO.get(matriculaAntiga);
-            funcionario.setMatricula(matricula);
-            funcionario.setNome(nome);
-            funcionario.setDataNascimento(dataNascimento);
-            funcionario.setSalario(salario);
-            funcionario.setTelefone(telefone);
-            funcionario.setCargo(cargo);
+            Funcionario funcionarioNaoEditado = this.funcionarioDAO.get(matriculaAntiga);
+            this.funcionarioDAO.remove(funcionarioNaoEditado);
+            funcionarioNaoEditado = null;
+            Funcionario funcionarioEditado = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
+            funcionarioDAO.put(funcionarioEditado);
             this.telaEditarFuncionario.exibeFuncionarioEditadoComSucesso();
             this.telaFuncionario.updateData();
 
