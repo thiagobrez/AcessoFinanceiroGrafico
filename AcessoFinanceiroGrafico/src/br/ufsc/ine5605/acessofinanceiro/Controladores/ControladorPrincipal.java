@@ -112,7 +112,7 @@ public class ControladorPrincipal {
      * Chama classe que controla o gerenciamento da data do sistema
      */
     public void gerenciarData() {
-        this.controladorData.exibeMenuDataSistema();
+        ControladorDataSistema.getInstance().exibeMenuDataSistema();
     }
 
     /**
@@ -123,7 +123,7 @@ public class ControladorPrincipal {
     }
 
     public Date getDataSistema() {
-        return controladorData.getDataSistema();
+        return ControladorDataSistema.getInstance().getDataSistema();
     }
 
     /**

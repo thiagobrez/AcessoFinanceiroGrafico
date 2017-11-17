@@ -70,7 +70,6 @@ public class TelaFuncionario extends JFrame {
     private void configuraTela() throws ParseException {
 
         Container container = getContentPane();
-
         container.setLayout(new GridBagLayout());
 
         //Configuracao constraints
@@ -108,7 +107,7 @@ public class TelaFuncionario extends JFrame {
         btVoltarMenuPrincipal.setText(Constantes.COMUM_BOTAO_VOLTAR_MENU_PRINCIPAL);
         btVoltarMenuPrincipal.addActionListener(btManager);
 
-        //Configuracao paibelBotoes
+        //Configuracao painelBotoes
         this.painelBotoes = new JPanel();
         painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.LINE_AXIS));
         this.painelBotoes.setVisible(true);
