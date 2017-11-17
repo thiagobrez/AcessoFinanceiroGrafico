@@ -32,6 +32,7 @@ public class Constantes {
     public static final String COMUM_BOTAO_EDITAR = "Editar";
     public static final String COMUM_SIM = "Sim";
     public static final String COMUM_NAO = "Não";
+    public static final String COMUM_VAZIO = "";
 
     //MENU PRINCIPAL
     public static final String PRINCIPAL_TITULO = "Menu Principal";
@@ -88,18 +89,21 @@ public class Constantes {
     public static final String CARGO_FIM_TARDE = "Hora Fim Tarde";
     public static final String CARGO_DELETADO_SUCESSO = "O cargo foi deletado com sucesso!";
     public static final String CARGO_NADA_SELECIONADO = "Selecione um cargo.";
- 
+
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
     public static final String DATA_SISTEMA_ATUAL = "Data e Hora do sistema: ";
     public static final String DATA_SISTEMA_BOTAO_ALTERAR = "Alterar Data/Hora do Sistema";
     public static final String DATA_SISTEMA_NOVO = "Nova data/hora do sistema: ";
-	
-	//MOTIVO
-	public static final String MOTIVO_MATRICULA_INEXISTENTE = "Matrícula inexistente";
-	public static final String MOTIVO_CARGO_SEM_ACESSO = "Cargo sem acesso";
-	public static final String MOTIVO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
-	public static final String MOTIVO_ACESSO_BLOQUEADO = "Acesso bloqueado";
+    public static final String DATA_SISTEMA_SUCESSO = "Data e Hora do sistema atualizadas com sucesso!";
+    public static final String DATA_SISTEMA_FORMATO_INCORRETO = "Data e hora não atualizadas, formato incorreto.";
+    public static final String DATA_SISTEMA_FORMATO = "*Formato utilizado: dd-MM-yyyy HH:mm";
+
+    //MOTIVO
+    public static final String MOTIVO_MATRICULA_INEXISTENTE = "Matrícula inexistente";
+    public static final String MOTIVO_CARGO_SEM_ACESSO = "Cargo sem acesso";
+    public static final String MOTIVO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
+    public static final String MOTIVO_ACESSO_BLOQUEADO = "Acesso bloqueado";
 
     // ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
     // COMUM

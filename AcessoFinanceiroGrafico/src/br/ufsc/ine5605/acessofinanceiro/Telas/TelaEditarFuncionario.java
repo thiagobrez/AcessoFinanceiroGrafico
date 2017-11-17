@@ -13,6 +13,7 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -36,6 +37,13 @@ public class TelaEditarFuncionario extends JFrame {
     private GerenciadorBotoes btManager;
     private ControladorFuncionario controlador;
     private GridBagConstraints constraints;
+    private JPanel painelPrincipal;
+    private JPanel painelNome;
+    private JPanel painelMatricula;
+    private JPanel painelDataNascimento;
+    private JPanel painelSalario;
+    private JPanel painelTelefone;
+    private JPanel painelCargo;
     private JPanel painelBotoes;
     private JComboBox comboCargos;
     private List<Cargo> cargos;
@@ -72,96 +80,125 @@ public class TelaEditarFuncionario extends JFrame {
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(10, 0, 0, 0);
         constraints.gridx = 0;
-        constraints.gridy = 0;
+        constraints.gridy = 1;
 
         //Configuracao lbNome
         lbNome = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_NOME);
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        container.add(lbNome, constraints);
 
         //Configuracao tfNome
         tfNome = new JTextField(20);
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        container.add(tfNome, constraints);
+
+        //Configuracao painelNome
+        this.painelNome = new JPanel();
+        painelNome.setLayout(new BoxLayout(painelNome, BoxLayout.LINE_AXIS));
+        this.painelNome.setVisible(true);
+        painelNome.add(lbNome);
+        painelNome.add(tfNome);
 
         //Configuracao lbMatricula
         lbMatricula = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_MATRICULA);
-        constraints.gridx = 0;
-        constraints.gridy = 3;
-        container.add(lbMatricula);
 
         //Configuracao tfMatricula
-        tfMatricula = new JTextField(10);
-        constraints.gridx = 0;
-        constraints.gridy = 3;
-        container.add(tfMatricula);
+        tfMatricula = new JTextField(20);
+
+        //Configuracao painelMatricula
+        this.painelMatricula = new JPanel();
+        painelMatricula.setLayout(new BoxLayout(painelMatricula, BoxLayout.LINE_AXIS));
+        this.painelMatricula.setVisible(true);
+        painelMatricula.add(lbMatricula);
+        painelMatricula.add(tfMatricula);
 
         //Configuracao lbDataNascimento
         lbDataNascimento = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_DATA_NASCIMENTO);
-        constraints.gridx = 0;
-        constraints.gridy = 6;
-        container.add(lbDataNascimento);
 
-        //Configuracao tfNascimento
-        tfDataNascimento = new JTextField(10);
-        constraints.gridx = 0;
-        constraints.gridy = 6;
-        container.add(tfDataNascimento);
+        //Configuracao tfDataNascimento
+        tfDataNascimento = new JTextField(20);
+
+        //Configuracao painelDataNascimento
+        this.painelDataNascimento = new JPanel();
+        painelDataNascimento.setLayout(new BoxLayout(painelDataNascimento, BoxLayout.LINE_AXIS));
+        this.painelDataNascimento.setVisible(true);
+        painelDataNascimento.add(lbDataNascimento);
+        painelDataNascimento.add(tfDataNascimento);
 
         //Configuracao lbTelefone
         lbTelefone = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_TELEFONE);
-        constraints.gridx = 0;
-        constraints.gridy = 9;
-        container.add(lbTelefone);
 
         //Configuracao tfTelefone
-        tfTelefone = new JTextField(10);
-        constraints.gridx = 0;
-        constraints.gridy = 9;
-        container.add(tfTelefone);
+        tfTelefone = new JTextField(20);
+
+        //Configuracao painelTelefone
+        this.painelTelefone = new JPanel();
+        painelTelefone.setLayout(new BoxLayout(painelTelefone, BoxLayout.LINE_AXIS));
+        this.painelTelefone.setVisible(true);
+        painelTelefone.add(lbTelefone);
+        painelTelefone.add(tfTelefone);
 
         // Configuracao lbSalario
         lbSalario = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_SALARIO);
-        constraints.gridx = 0;
-        constraints.gridy = 12;
-        container.add(lbSalario);
 
         //Configuracao tfSalario
-        tfSalario = new JTextField(10);
-        constraints.gridx = 0;
-        constraints.gridy = 12;
-        container.add(tfSalario);
+        tfSalario = new JTextField(20);
+
+        //Configuracao painelSalario
+        this.painelSalario = new JPanel();
+        painelSalario.setLayout(new BoxLayout(painelSalario, BoxLayout.LINE_AXIS));
+        this.painelSalario.setVisible(true);
+        painelSalario.add(lbSalario);
+        painelSalario.add(tfSalario);
 
         //Configuracao comboCargos
         this.cargos = new ArrayList<>();
         this.cargosNomes = new ArrayList<>();
         comboCargos = new JComboBox(cargosNomes.toArray());
         comboCargos.addActionListener(comboManager);
-        constraints.gridx = 0;
-        constraints.gridy = 15;
-        container.add(comboCargos, constraints);
+
+        //Configuracao painelCargo
+        this.painelCargo = new JPanel();
+        painelCargo.setLayout(new BoxLayout(painelCargo, BoxLayout.LINE_AXIS));
+        this.painelCargo.setVisible(true);
+        painelCargo.add(comboCargos);
 
         //Configura btCancelar
         btCancelar = new JButton();
         btCancelar.setText(Constantes.COMUM_BOTAO_CANCELAR);
         btCancelar.addActionListener(btManager);
-        container.add(btCancelar);
 
         //Configura btConfirmar
         btConfirmar = new JButton();
         btConfirmar.setText(Constantes.COMUM_BOTAO_EDITAR);
         btConfirmar.addActionListener(btManager);
-        container.add(btConfirmar);
 
-        //Configuracao paibelBotoes
+        //Configuracao painelBotoes
         this.painelBotoes = new JPanel();
         painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.LINE_AXIS));
-        this.painelBotoes.setVisible(false);
+        this.painelBotoes.setVisible(true);
+        painelBotoes.add(btCancelar);
+        painelBotoes.add(btConfirmar);
 
-        setSize(1000, 700);
+        //Configuracao painelPrincipal
+        painelPrincipal = new JPanel();
+        painelPrincipal.setLayout(new GridBagLayout());
+        painelPrincipal.setVisible(true);
+        painelPrincipal.add(painelNome);
+        constraints.gridy = 2;
+        painelPrincipal.add(painelMatricula, constraints);
+        constraints.gridy = 3;
+        painelPrincipal.add(painelDataNascimento, constraints);
+        constraints.gridy = 4;
+        painelPrincipal.add(painelTelefone, constraints);
+        constraints.gridy = 5;
+        painelPrincipal.add(painelSalario, constraints);
+        constraints.gridy = 6;
+        painelPrincipal.add(painelCargo, constraints);
+        constraints.gridy = 7;
+        painelPrincipal.add(painelBotoes, constraints);
+        constraints.gridy = 8;
+        container.add(painelPrincipal, constraints);
+
+        setSize(500, 300);
         setLocationRelativeTo(null);
     }
 
