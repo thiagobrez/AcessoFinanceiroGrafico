@@ -53,7 +53,7 @@ public class TelaEditarCargo extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(btConfirmar)) {
-                ControladorFuncionario.getInstance().editaFuncionario(codigoAntiga, Integer.parseInt(tfCodigo.getText()),
+                ControladorFuncionario.getInstance().editaFuncionario(codigoAntigo, Integer.parseInt(tfCodigo.getText()),
                         tfNome.getText(), tfDataNascimento.getText(), Integer.parseInt(tfTelefone.getText()),
                         Integer.parseInt(tfSalario.getText()), (Cargo) comboCargos.getSelectedItem());
                 setVisible(false);
