@@ -9,8 +9,11 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.CargoHorarioEspecial;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Interfaces.IControladorCargo;
+import br.ufsc.ine5605.acessofinanceiro.Modelos.FuncionarioDAO;
+import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCadastroCargo;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCargo;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarCargo;
+import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarFuncionario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,21 +24,27 @@ import java.util.Date;
  */
 public class ControladorCargo implements IControladorCargo {
 
-	private static ControladorCargo controladorCargo;
-	
-    private CargoDAO cargoDAO = new CargoDAO();
+    private static ControladorCargo controladorCargo;
+    private CargoDAO cargoDAO;
     private TelaCargo telaCargo;
-	private TelaEditarCargo telaEditarCargo;
+    private TelaEditarCargo telaEditarCargo;
+    private TelaCadastroCargo telaCadastroCargo;
 
     private ControladorCargo() {
         this.telaCargo = new TelaCargo(this);
+        this.cargoDAO = new CargoDAO();
+        this.telaEditarCargo = new TelaEditarCargo(this);
+        this.telaCadastroCargo = new TelaCadastroCargo(this);
     }
 
-	public static ControladorCargo getInstance() {
+    public static ControladorCargo getInstance() {
         if (controladorCargo == null) controladorCargo = new ControladorCargo();
         return controladorCargo;
     }
-	
+    
+    /**
+     * Volta ao menu principal
+     */
     public void voltarMenuPrincipal() {
         ControladorPrincipal.getInstance().exibeMenuPrincipal();
     }
@@ -47,6 +56,10 @@ public class ControladorCargo implements IControladorCargo {
         telaCargo.exibeMenuCargo();
     }
 
+    public void exibeCadastraFuncionario() {
+        this.telaCadastroCargo.exibeMenuCadastroCargo();
+    }
+    
     public ArrayList<Cargo> getListaCargos() {
         return this.cargoDAO.getList();
     }
@@ -140,7 +153,7 @@ public class ControladorCargo implements IControladorCargo {
         for (Cargo cargoCadastrado : this.cargoDAO.getList()) {
             if (cargoCadastrado.getCodigo() == codigo) {
                 this.telaCargo.mensagemErroCodigoJaCadastrado();
-				return false;
+                return false;
             }
         }
         return true;
@@ -160,34 +173,38 @@ public class ControladorCargo implements IControladorCargo {
                 if (!Character.isLetter(letraAnalisada)) {
                     if (!Character.isSpace(letraAnalisada)) {
                         this.telaCargo.mensagemNomeInvalidoLetras();
-						return false;
+                        return false;
                     }
                 }
             }
         } else {
             this.telaCargo.mensagemNomeInvalidoTamanho();
-			return false;
+            return false;
         }
         return true;
     }
-
-	public void exibeEditarCargoSelecionado(int indexSelecionado) {
+    
+    public void exibeCadastraCargo() {
+        this.telaCadastroCargo.exibeMenuCadastroCargo();
+    }
+    
+    public void exibeEditarCargoSelecionado(int indexSelecionado) {
         if (indexSelecionado != -1) {
             ArrayList<Integer> codigos = this.cargoDAO.getCodigos();
             int codigo = codigos.get(indexSelecionado);
             Cargo cargo = this.cargoDAO.get(codigo);
-//            this.telaEditarCargo.exibeMenuEditaCargo(cargo);
+            this.telaEditarCargo.exibeMenuEditaCargo(cargo);
         } else {
             this.telaCargo.exibeCargoNaoSelecionado();
         }
     }
 	
-	public void editaCargo(int codigoAntigo, int codigo, String nome, String tipoCargo, String inputHoraInicioManha,
+    public void editaCargo(int codigoAntigo, int codigo, String nome, String tipoCargo, String inputHoraInicioManha,
 			String inputHoraFimManha, String inputHoraInicioTarde, String inputHoraFimTarde,
 			String inputHoraInicioEspecial, String inputHoraFimEspecial) {
         
-		boolean nomeValido = verificaNome(nome);
-        boolean codigoValido = verificaCodigoInserido(codigo);
+            boolean nomeValido = verificaNome(nome);
+            boolean codigoValido = verificaCodigoInserido(codigo);
 
         if (nomeValido && codigoValido) {
             Cargo cargoNaoEditado = this.cargoDAO.get(codigoAntigo);
@@ -202,6 +219,81 @@ public class ControladorCargo implements IControladorCargo {
 //            this.telaEditarFuncionario.exibeMatriculaJaExiste();
         }
     }
+        
+    @Override
+    public Cargo encontraCargoPorCodigo(int codigo) {
+        for (Cargo cargoLista : this.cargoDAO.getList()) {
+            if (cargoLista.getCodigo() == codigo) {
+                return cargoLista;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Pede ao usuario todos os horarios de inicio e fim para instanciar um novo
+     * cargo especial e caso algum horario tenha sido inserido em formato errado
+     * acusa erro e volta a pedir para inserir
+     */
+    public CargoHorarioEspecial criaCargoEspecial(
+			String nome, int codigo, Date horaInicioManha,
+			Date horaFimManha, Date horaInicioTarde, Date horaFimTarde,
+			Date horaInicioEspecial, Date horaFimEspecial
+	) {
+        CargoHorarioEspecial cargo = new CargoHorarioEspecial(
+                        codigo, nome, horaInicioManha, horaFimManha,
+                        horaInicioTarde, horaFimTarde, horaInicioEspecial,
+                        horaFimEspecial
+        );
+        this.cargoDAO.put(cargo);
+        return cargo;
+    }
+    
+    /**
+     * Instancia cargo indefinido que não tera função gerencial, nem acesso ao
+     * financeiro
+     */
+    public void criaCargoPadrao() {
+        Date dataIndefinida = new Date();
+        Cargo cargo = new Cargo(0, Constantes.CARGO_INDEFINIDO, false, false,
+                dataIndefinida, dataIndefinida, dataIndefinida, dataIndefinida);
+        this.cargoDAO.put(cargo);
+    }
+
+    /**
+     * Chama a função que encontra cargo no array de cargos, nessa caso
+     * especifico o cargo indefinido, e retorna esse cargo
+     *
+     * @return cargo
+     */
+    public Cargo encontraCargoIndefinido() {
+        return encontraCargoPorCodigo(0);
+    }
+
+    /**
+     * Pede ao usuario todos os horarios de inicio e fim para instanciar um novo
+     * cargo comum e caso algum horario tenha sido inserido em formato errado
+     * acusa erro e volta a pedir para inserir
+     */
+    public Cargo criaCargoComum(String nome, int codigo, Date horaInicioManha,
+			Date horaFimManha, Date horaInicioTarde, Date horaFimTarde) {
+//        try {
+            Cargo cargo = new Cargo(
+					codigo, nome, false, true, horaInicioManha, horaFimManha,
+                    horaInicioTarde, horaFimTarde
+			);
+            this.cargoDAO.put(cargo);
+            return cargo;
+//        } catch (ParseException e) {
+//            telaCargo.exibeHoraInseridaFormatoIncorreto();
+//            criaCargoComum(nome, codigo, formatador);
+//        }
+//        return null;
+    }
+    
+    
+    
+    
 	
 //    /**
 //     * Pede qual cargo o usuario deseja editar. Exibe o menu de editar cargo e
@@ -307,15 +399,7 @@ public class ControladorCargo implements IControladorCargo {
 //        }
 //    }
 
-    @Override
-    public Cargo encontraCargoPorCodigo(int codigo) {
-        for (Cargo cargoLista : this.cargoDAO.getList()) {
-            if (cargoLista.getCodigo() == codigo) {
-                return cargoLista;
-            }
-        }
-        return null;
-    }
+    
 
 //    /**
 //     * Pede inicialemente qual o codigo do cargo que o usuario esta se
@@ -334,24 +418,7 @@ public class ControladorCargo implements IControladorCargo {
 //        return cargo;
 //    }
 
-    /**
-     * Pede ao usuario todos os horarios de inicio e fim para instanciar um novo
-     * cargo especial e caso algum horario tenha sido inserido em formato errado
-     * acusa erro e volta a pedir para inserir
-     */
-    public CargoHorarioEspecial criaCargoEspecial(
-			String nome, int codigo, Date horaInicioManha,
-			Date horaFimManha, Date horaInicioTarde, Date horaFimTarde,
-			Date horaInicioEspecial, Date horaFimEspecial
-	) {
-		CargoHorarioEspecial cargo = new CargoHorarioEspecial(
-				codigo, nome, horaInicioManha, horaFimManha,
-				horaInicioTarde, horaFimTarde, horaInicioEspecial,
-				horaFimEspecial
-		);
-		this.cargoDAO.put(cargo);
-		return cargo;
-    }
+    
 
 //    /**
 //     * Atualiza a função gerencial do cargo com base na opcao que o usuario
@@ -403,48 +470,6 @@ public class ControladorCargo implements IControladorCargo {
 //                break;
 //        }
 //    }
-
-    /**
-     * Instancia cargo indefinido que não tera função gerencial, nem acesso ao
-     * financeiro
-     */
-    public void criaCargoPadrao() {
-        Date dataIndefinida = new Date();
-        Cargo cargo = new Cargo(0, Constantes.CARGO_INDEFINIDO, false, false,
-                dataIndefinida, dataIndefinida, dataIndefinida, dataIndefinida);
-        this.cargoDAO.put(cargo);
-    }
-
-    /**
-     * Chama a função que encontra cargo no array de cargos, nessa caso
-     * especifico o cargo indefinido, e retorna esse cargo
-     *
-     * @return cargo
-     */
-    public Cargo encontraCargoIndefinido() {
-        return encontraCargoPorCodigo(0);
-    }
-
-    /**
-     * Pede ao usuario todos os horarios de inicio e fim para instanciar um novo
-     * cargo comum e caso algum horario tenha sido inserido em formato errado
-     * acusa erro e volta a pedir para inserir
-     */
-    public Cargo criaCargoComum(String nome, int codigo, Date horaInicioManha,
-			Date horaFimManha, Date horaInicioTarde, Date horaFimTarde) {
-//        try {
-            Cargo cargo = new Cargo(
-					codigo, nome, false, true, horaInicioManha, horaFimManha,
-                    horaInicioTarde, horaFimTarde
-			);
-            this.cargoDAO.put(cargo);
-            return cargo;
-//        } catch (ParseException e) {
-//            telaCargo.exibeHoraInseridaFormatoIncorreto();
-//            criaCargoComum(nome, codigo, formatador);
-//        }
-//        return null;
-    }
 
 //    /**
 //     * Atualiza os horarios de acesso do cargo especial com base na opcao que o
