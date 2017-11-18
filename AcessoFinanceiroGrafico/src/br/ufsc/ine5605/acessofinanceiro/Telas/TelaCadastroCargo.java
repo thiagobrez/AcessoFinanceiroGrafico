@@ -5,14 +5,16 @@
  */
 package br.ufsc.ine5605.acessofinanceiro.Telas;
 
+import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorCargo;
+
 /**
  *
  * @author bruno.bertozzo
  */
 public class TelaCadastroCargo {
     
-    public TelaCadastroCargo () {
-        
+    public TelaCadastroCargo(ControladorCargo aThis) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void exibeMenuCadastroCargo() {
