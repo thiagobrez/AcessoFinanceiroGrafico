@@ -32,6 +32,7 @@ public class Constantes {
     public static final String COMUM_BOTAO_EDITAR = "Editar";
     public static final String COMUM_SIM = "Sim";
     public static final String COMUM_NAO = "Não";
+    public static final String COMUM_VAZIO = "";
 
     //MENU PRINCIPAL
     public static final String PRINCIPAL_TITULO = "Menu Principal";
@@ -74,10 +75,12 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_EDITADO_SUCESSO = "O funcionário foi editado com sucesso!";
     public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "O funcionário não foi cadastrado. Matrícula ja existente.";
     public static final String GERENCIAR_FUNCIONARIO_CONFIRMACAO_DELETAR = "Você deseja mesmo excluir o funcionário?";
+    public static final String GERENCIAR_FUNCIONARIO_ERRO_NOME = "Erro: o nome deve possuir mais de 3 letras e não deve possuir números.";
 
     //CARGO
     public static final String CARGO_TITULO = "Gerenciar Cargo";
     public static final String CARGO_CADASTRAR = "Cadastrar Cargo";
+    public static final String CARGO_CADASTRADO_SUCESSO = "Cargo cadastrado com sucesso!";
     public static final String CARGO_EDITAR = "Editar Cargo";
     public static final String CARGO_DELETAR = "Deletar Cargo";
     public static final String CARGO_EH_GERENCIAL = "É Gerencial";
@@ -86,20 +89,34 @@ public class Constantes {
     public static final String CARGO_FIM_MANHA = "Hora Fim Manhã";
     public static final String CARGO_INICIO_TARDE = "Hora Inicio Tarde";
     public static final String CARGO_FIM_TARDE = "Hora Fim Tarde";
-    public static final String CARGO_DELETADO_SUCESSO = "O cargo foi deletado com sucesso!";
+    public static final String CARGO_DELETADO_SUCESSO = "Cargo deletado com sucesso!";
     public static final String CARGO_NADA_SELECIONADO = "Selecione um cargo.";
- 
+    public static final String CARGO_TIPO_GERENCIAL = "Gerencial";
+    public static final String CARGO_TIPO_COMERCIAL = "Comercial";
+    public static final String CARGO_TIPO_ESPECIAL = "Especial";
+    public static final String CARGO_TIPO_COMUM = "Comum";
+    public static final String CARGO_TIPO_SEM_ACESSO = "Sem acesso";
+    public static final String CARGO_CODIGO_JA_CADASTRADO = "Código já cadastrado";
+    public static final String CARGO_NOME_INVALIDO_LETRAS = "O nome deve conter somente letras";
+    public static final String CARGO_NOME_INVALIDO_TAMANHO = "O nome deve conter mais de 3 caracteres";
+
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
     public static final String DATA_SISTEMA_ATUAL = "Data e Hora do sistema: ";
     public static final String DATA_SISTEMA_BOTAO_ALTERAR = "Alterar Data/Hora do Sistema";
     public static final String DATA_SISTEMA_NOVO = "Nova data/hora do sistema: ";
-	
-	//MOTIVO
-	public static final String MOTIVO_MATRICULA_INEXISTENTE = "Matrícula inexistente";
-	public static final String MOTIVO_CARGO_SEM_ACESSO = "Cargo sem acesso";
-	public static final String MOTIVO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
-	public static final String MOTIVO_ACESSO_BLOQUEADO = "Acesso bloqueado";
+    public static final String DATA_SISTEMA_SUCESSO = "Data e Hora do sistema atualizadas com sucesso!";
+    public static final String DATA_SISTEMA_FORMATO_INCORRETO = "Data e hora não atualizadas, formato incorreto.";
+    public static final String DATA_SISTEMA_FORMATO = "*Formato utilizado: dd-MM-yyyy HH:mm";
+
+    //MOTIVO
+    public static final String MOTIVO_MATRICULA_INEXISTENTE = "Matrícula inexistente";
+    public static final String MOTIVO_CARGO_SEM_ACESSO = "Cargo sem acesso";
+    public static final String MOTIVO_HORARIO_NAO_PERMITIDO = "Horário não permitido";
+    public static final String MOTIVO_ACESSO_BLOQUEADO = "Acesso bloqueado";
+
+    //FORMATADOR
+    public static final String FORMATADOR_ERRO_CONSTANTE = "Erro na constante do formatador";
 
     // ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
     // COMUM
@@ -251,7 +268,6 @@ public class Constantes {
     public static final String DIGITE_HORA_INICIO_ESPECIAL = " Digite a hora de início do turno especial no formato HH:mm : ";
     public static final String DIGITE_HORA_FIM_ESPECIAL = " Digite a hora de fim do turno especial no formato HH:mm : ";
     public static final String HORA_INSERIDA_FORMATO_INCORRETO = "------------ FORMATO INSERIDO INVÁLIDO, utilize o formato solicitado. ------------";
-    public static final String CARGO_CADASTRADO_SUCESSO = " CARGO CADASTRADO COM SUCESSO!";
 
     //EDITAR CARGO   @BRUNO
     public static final String TITULO_EDITAR_CARGO = "+-+-+-+-+-+-+-+ Editar Cargo +-+-+-+-+-+-+-+";

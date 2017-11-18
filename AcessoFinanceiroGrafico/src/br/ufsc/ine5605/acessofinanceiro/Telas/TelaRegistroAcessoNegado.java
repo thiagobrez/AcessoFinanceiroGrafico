@@ -398,11 +398,13 @@ public class TelaRegistroAcessoNegado extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			updateData(
-				comboFiltroMotivo.getSelectedItem().toString(),
-				(String) comboFiltroMatricula.getSelectedItem()
-			);
+			if(e.getSource().equals(comboFiltroMotivo)) {
+//				if(e.)
+				updateData(
+					comboFiltroMotivo.getSelectedItem().toString(),
+					String.valueOf(comboFiltroMatricula.getSelectedItem())
+				);
+			}
 			
 //			if(e.getSource().equals(comboFiltroMotivo)) {
 //				comboFiltroMatricula.setSelectedItem(0);

@@ -19,6 +19,8 @@ import java.util.Date;
  */
 public class ControladorDataSistema implements IControladorDataSistema {
 
+    private static ControladorDataSistema controladorDataSistema;
+
     private TelaDataHoraSistema telaDataHora;
     private TelaAlterarDataSistema telaAlterarDataSistema;
     private DataSistemaDAO dataSistema;
@@ -29,21 +31,50 @@ public class ControladorDataSistema implements IControladorDataSistema {
         this.dataSistema = new DataSistemaDAO();
     }
 
+    public static ControladorDataSistema getInstance() {
+
+        if (controladorDataSistema == null) {
+            controladorDataSistema = new ControladorDataSistema();
+
+        }
+        return controladorDataSistema;
+    }
+
     public void voltarMenuPrincipal() {
         ControladorPrincipal.getInstance().exibeMenuPrincipal();
     }
 
     @Override
     public Date getDataSistema() {
-        return new Date();
+        return this.dataSistema.get();
+    }
+
+    public String getDataSistemaString() {
+        Date data = getDataSistema();
+        return data.toString();
     }
 
     public void exibeMenuDataSistema() {
         this.telaDataHora.exibeMenuDataSistema();
     }
 
-    public void alterarDataSistema() {
+    public void exibeAlterarDataSistema() {
         this.telaAlterarDataSistema.exibeAlterarDataSistema();
+    }
+
+    public void alterarDataSistema(String dataEHoraInseridos) {
+        try {
+            Date data = new SimpleDateFormat("dd-MM-yyyy HH:mm")
+                    .parse(dataEHoraInseridos);
+            this.dataSistema.set(data);
+            System.out.println(this.dataSistema.get().toString());
+
+            this.telaAlterarDataSistema.exibeDataHoraAlteradoSucesso();
+            this.telaAlterarDataSistema.fechar();
+
+        } catch (ParseException ex) {
+            this.telaAlterarDataSistema.exibeErroFormatoAlteracaoDataHora();
+        }
     }
 
     //

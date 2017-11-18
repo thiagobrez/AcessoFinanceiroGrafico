@@ -12,7 +12,7 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
  * @author bruno
  */
 public interface IControladorCargo {
-    
+
     /**
      * Verifica se existe um cargo criado com o código passado como parametro,
      * caso exista retorna o cargo. Caso não exista retorna null.
@@ -20,13 +20,11 @@ public interface IControladorCargo {
      * @return cargo
      */
     public Cargo encontraCargoPorCodigo(int codigo);
-    
+
     /**
-     * Lista na tela todos os cargos cadastrados, com todos os seus
-     * atributos
-     * 
+     * Lista na tela todos os cargos cadastrados, com todos os seus atributos
+     *
      * @return
      */
-    public void listaCargos();
-
+//    public void listaCargos();
 }

@@ -136,7 +136,7 @@ public class TelaCargo extends JFrame {
         updateData();
         setVisible(true);
     }
-    
+	
     public void exibeCargoDeletadoComSucesso() {
         JOptionPane.showMessageDialog(
                 null,
@@ -153,12 +153,62 @@ public class TelaCargo extends JFrame {
                 Constantes.CARGO_DELETAR,
                 JOptionPane.PLAIN_MESSAGE
         );
-
     }
     
+    public void mensagemCargoCadastrado() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_CADASTRADO_SUCESSO,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
     
-    
-    
+	public void exibeErroConstantesFormatador() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.FORMATADOR_ERRO_CONSTANTE,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
+	public void mensagemCargoDeletadoSucesso() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_DELETADO_SUCESSO,
+                Constantes.CARGO_DELETAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
+	public void mensagemErroCodigoJaCadastrado() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_DELETADO_SUCESSO,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
+	public void mensagemNomeInvalidoLetras() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_NOME_INVALIDO_LETRAS,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
+	public void mensagemNomeInvalidoTamanho() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_NOME_INVALIDO_TAMANHO,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
