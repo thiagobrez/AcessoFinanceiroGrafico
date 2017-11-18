@@ -9,8 +9,11 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.CargoHorarioEspecial;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Interfaces.IControladorCargo;
+import br.ufsc.ine5605.acessofinanceiro.Modelos.FuncionarioDAO;
+import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCadastroCargo;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCargo;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarCargo;
+import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarFuncionario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,17 +24,20 @@ import java.util.Date;
  */
 public class ControladorCargo implements IControladorCargo {
 
-	private static ControladorCargo controladorCargo;
-	
-    private CargoDAO cargoDAO = new CargoDAO();
+    private static ControladorCargo controladorCargo;
+    private CargoDAO cargoDAO;
     private TelaCargo telaCargo;
-	private TelaEditarCargo telaEditarCargo;
+    private TelaEditarCargo telaEditarCargo;
+    private TelaCadastroCargo telaCadastroCargo;
 
     private ControladorCargo() {
         this.telaCargo = new TelaCargo(this);
+        this.cargoDAO = new CargoDAO();
+        this.telaEditarCargo = new TelaEditarCargo(this);
+        this.telaCadastroCargo = new TelaCadastroCargo(this);
     }
 
-	public static ControladorCargo getInstance() {
+    public static ControladorCargo getInstance() {
         if (controladorCargo == null) controladorCargo = new ControladorCargo();
         return controladorCargo;
     }
@@ -47,6 +53,10 @@ public class ControladorCargo implements IControladorCargo {
         telaCargo.exibeMenuCargo();
     }
 
+    public void exibeCadastraFuncionario() {
+        this.telaCadastroCargo.exibeMenuCadastroCargo();
+    }
+    
     public ArrayList<Cargo> getListaCargos() {
         return this.cargoDAO.getList();
     }
@@ -176,7 +186,7 @@ public class ControladorCargo implements IControladorCargo {
             ArrayList<Integer> codigos = this.cargoDAO.getCodigos();
             int codigo = codigos.get(indexSelecionado);
             Cargo cargo = this.cargoDAO.get(codigo);
-//            this.telaEditarCargo.exibeMenuEditaCargo(cargo);
+            this.telaEditarCargo.exibeMenuEditaCargo(cargo);
         } else {
             this.telaCargo.exibeCargoNaoSelecionado();
         }

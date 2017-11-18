@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/Projetos/Trabalho%202/AcessoFinanceiroGrafico/AcessoFinanceiroGrafico/src/br/ufsc/ine5605/acessofinanceiro/Telas/TelaEditarCargo.java</file>
+            <file>file:/C:/Projetos/Trabalho%202/AcessoFinanceiroGrafico/AcessoFinanceiroGrafico/src/br/ufsc/ine5605/acessofinanceiro/Telas/TelaFuncionario.java</file>
+            <file>file:/C:/Projetos/Trabalho%202/AcessoFinanceiroGrafico/AcessoFinanceiroGrafico/src/br/ufsc/ine5605/acessofinanceiro/Controladores/ControladorFuncionario.java</file>
+            <file>file:/C:/Projetos/Trabalho%202/AcessoFinanceiroGrafico/AcessoFinanceiroGrafico/src/br/ufsc/ine5605/acessofinanceiro/Telas/TelaCargo.java</file>
+            <file>file:/C:/Projetos/Trabalho%202/AcessoFinanceiroGrafico/AcessoFinanceiroGrafico/src/br/ufsc/ine5605/acessofinanceiro/Modelos/Constantes.java</file>
+            <file>file:/C:/Projetos/Trabalho%202/AcessoFinanceiroGrafico/AcessoFinanceiroGrafico/src/br/ufsc/ine5605/acessofinanceiro/Controladores/ControladorCargo.java</file>
+            <file>file:/C:/Projetos/Trabalho%202/AcessoFinanceiroGrafico/AcessoFinanceiroGrafico/src/br/ufsc/ine5605/acessofinanceiro/Telas/TelaCadastroCargo.java</file>
+        </group>
+>>>>>>> 98d6c763201c23e7ad975b21404ea7b1bb327ec2
     </open-files>
 </project-private>
