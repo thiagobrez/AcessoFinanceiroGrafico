@@ -46,7 +46,7 @@ public class ControladorRegistroAcessoNegado {
 	public ArrayList<RegistroAcessoNegado> filtraRegistros(String filtroMotivo, String filtroMatricula) {
 		ArrayList<RegistroAcessoNegado> registros = new ArrayList<>();
 		ArrayList<RegistroAcessoNegado> registrosMotivo = encontraRegistrosPorMotivo(filtroMotivo);
-		if(!filtroMatricula.equals(Constantes.REGISTRO_FILTRO_NENHUM)) {
+		if(!filtroMatricula.equals("")) {
 			for(RegistroAcessoNegado registro : registrosMotivo) {
 				if(registro.getMatricula() == Integer.parseInt(filtroMatricula)) registros.add(registro);
 			}
@@ -139,12 +139,10 @@ public class ControladorRegistroAcessoNegado {
 	 * @param motivo desejado para encontrar os registros
 	 * @return ArrayList de registros encontrados
 	 */
-//	public ArrayList<RegistroAcessoNegado> encontraRegistrosPorMotivo(Motivo motivo) {
 	public ArrayList<RegistroAcessoNegado> encontraRegistrosPorMotivo(String motivo) {
 		if(motivo.equals(Constantes.REGISTRO_FILTRO_NENHUM)) return getListaRegistrosAcessosNegados();
 		ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
 		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
-//			if(registro.getMotivo() == motivo) {
 			if(registro.getMotivo().toString().equals(motivo)) {
 				registrosEncontrados.add(registro);
 			}
