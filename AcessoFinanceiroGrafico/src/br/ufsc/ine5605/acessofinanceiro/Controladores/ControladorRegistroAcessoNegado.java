@@ -79,6 +79,15 @@ public class ControladorRegistroAcessoNegado {
 		return registrosEncontrados;
 	}
 	
+	public ArrayList<RegistroAcessoNegado> encontraRegistrosHorarioNaoPermitidoPelaMatricula(int matricula) {
+		ArrayList<RegistroAcessoNegado> registrosHorarioNaoPermitido = new ArrayList<>();
+		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
+			if(registro.getMatricula() == matricula && registro.getMotivo() == Motivo.HORARIO_NAO_PERMITIDO)
+				registrosHorarioNaoPermitido.add(registro);
+		}
+		return registrosHorarioNaoPermitido;
+	}
+	
 	/**
 	 * Instancia um novo RegistroAcessoNegado e inclui na colecao de registros.
 	 * 
