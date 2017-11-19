@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author vladimir
+ * @author João Grasel
  */
 public class TelaFuncionario extends JFrame {
 
@@ -69,7 +69,7 @@ public class TelaFuncionario extends JFrame {
 
         //Configuracao tbItens
         this.tbItens = new JTable();
-        tbItens.setPreferredScrollableViewportSize(new Dimension(603, 300));
+        tbItens.setPreferredScrollableViewportSize(new Dimension(603, 200));
         tbItens.setFillsViewportHeight(true);
         spBaseTabela = new JScrollPane(tbItens);
         container.add(spBaseTabela, constraints);
@@ -105,7 +105,7 @@ public class TelaFuncionario extends JFrame {
         constraints.gridy = 11;
         container.add(painelBotoes, constraints);
 
-        setSize(900, 500);
+        setSize(700, 320);
         setLocationRelativeTo(null);
 
     }

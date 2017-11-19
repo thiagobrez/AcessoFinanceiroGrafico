@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author vladimir
+ * @author João Grasel
  */
 public class TelaCadastroFuncionario extends JFrame {
 
@@ -67,6 +67,9 @@ public class TelaCadastroFuncionario extends JFrame {
         configuraTela();
     }
 
+    /**
+     * Monta todos os componentes da tela.
+     */
     private void configuraTela() {
 
         Container container = getContentPane();
@@ -200,6 +203,12 @@ public class TelaCadastroFuncionario extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    // ================== CONFIGURAÇÃO DE TELA ==================
+    /**
+     * Atualiza a tela de maneira que sempre seja possivel escolher todos os
+     * cargos cadastrados até o momento e os locais onde o usuario possa inserir
+     * o texto estejam sempre limpos.
+     */
     public void updateData() {
 
         //Configuracao comboCargos
@@ -216,12 +225,30 @@ public class TelaCadastroFuncionario extends JFrame {
         this.repaint();
     }
 
+    /**
+     * Atualiza a tela e faz com que seja exibida
+     */
     public void exibeMenuCadastroFuncionario() {
         updateData();
         setVisible(true);
 
     }
 
+    /**
+     * Limpa todos os textfields.
+     */
+    public void limpaTextFields() {
+        tfMatricula.setText("");
+        tfNome.setText("");
+        tfDataNascimento.setText("");
+        tfTelefone.setText("");
+        tfSalario.setText("");
+    }
+
+// ================== EXIBIÇÃO DE MENSAGENS ==================
+    /**
+     * Exibe a mensagem de funcionario cadastrado com sucesso.
+     */
     public void exibeFuncionarioCadastradoComSucesso() {
         JOptionPane.showMessageDialog(
                 null,
@@ -231,6 +258,10 @@ public class TelaCadastroFuncionario extends JFrame {
         );
     }
 
+    /**
+     * Exibe a mensagem de erro avisando que o funcionario nao foi cadastrado
+     * pois a matricula inserida ja esta sendo utilizada.
+     */
     public void exibeMatriculaJaExiste() {
         JOptionPane.showMessageDialog(
                 null,
@@ -240,6 +271,10 @@ public class TelaCadastroFuncionario extends JFrame {
         );
     }
 
+    /**
+     * Exibe a mensagem de erro com relação ao nome inserido não estar no
+     * formato desejado (somente letras e no minimo 3 caracteres).
+     */
     public void exibeErroNome() {
         JOptionPane.showMessageDialog(
                 null,
@@ -249,14 +284,7 @@ public class TelaCadastroFuncionario extends JFrame {
         );
     }
 
-    public void limpaTextFields() {
-        tfMatricula.setText("");
-        tfNome.setText("");
-        tfDataNascimento.setText("");
-        tfTelefone.setText("");
-        tfSalario.setText("");
-    }
-
+// ================== GERENCIADOR DE BOTÕES ==================
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
@@ -277,6 +305,7 @@ public class TelaCadastroFuncionario extends JFrame {
 
     }
 
+// ================== GERENCIADOR DA COMBOBOX ==================
     private class GerenciadorCombos implements ActionListener {
 
         @Override

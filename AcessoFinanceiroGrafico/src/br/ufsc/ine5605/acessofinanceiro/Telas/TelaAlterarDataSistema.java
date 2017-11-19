@@ -8,7 +8,6 @@ package br.ufsc.ine5605.acessofinanceiro.Telas;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorDataSistema;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -24,7 +23,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author vladimir
+ * @author João Grasel
  */
 public class TelaAlterarDataSistema extends JFrame {
 
@@ -46,6 +45,9 @@ public class TelaAlterarDataSistema extends JFrame {
         }
     }
 
+    /**
+     * Monta todos os componentes da tela.
+     */
     private void configuraTela() throws ParseException {
 
         Container container = getContentPane();
@@ -97,11 +99,36 @@ public class TelaAlterarDataSistema extends JFrame {
         setLocationRelativeTo(null);
     }
 
+// ================== CONFIGURAÇÃO DE TELA ==================
+    /**
+     * Atualiza a tela e faz com que seja exibida.
+     */
     public void exibeAlterarDataSistema() {
         updateData();
         setVisible(true);
     }
 
+    /**
+     * Fecha a tela.
+     */
+    public void fechar() {
+        setVisible(false);
+    }
+
+    /**
+     * Atualiza a tela de maneira que o campo para o usuário inserir a data e
+     * horario desejado esteja limpo.
+     */
+    public void updateData() {
+        tfPrincipal.setText("");
+        this.repaint();
+    }
+
+// ================== EXIBIÇÃO DE MENSAGENS ==================
+    /**
+     * Exibe a mensagem de que a data e a hora do sistema foram alteradas com
+     * sucesso.
+     */
     public void exibeDataHoraAlteradoSucesso() {
         JOptionPane.showMessageDialog(
                 null,
@@ -111,6 +138,11 @@ public class TelaAlterarDataSistema extends JFrame {
         );
     }
 
+    /**
+     * Exibe a mensagem de que a data e hora do sistema não foram atualizadas
+     * com sucesso, formato de texto inserido pelo usuário não confere com o
+     * desejado.
+     */
     public void exibeErroFormatoAlteracaoDataHora() {
         JOptionPane.showMessageDialog(
                 null,
@@ -120,15 +152,7 @@ public class TelaAlterarDataSistema extends JFrame {
         );
     }
 
-    public void fechar() {
-        setVisible(false);
-    }
-
-    public void updateData() {
-        tfPrincipal.setText("");
-        this.repaint();
-    }
-
+// ================== GERENCIADOR DE BOTÕES ==================
     private class GerenciadorBotoes implements ActionListener {
 
         @Override

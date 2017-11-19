@@ -16,7 +16,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -30,7 +29,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author vladimir
+ * @author João Grasel
  */
 public class TelaEditarFuncionario extends JFrame {
 
@@ -70,6 +69,9 @@ public class TelaEditarFuncionario extends JFrame {
         configuraTela();
     }
 
+    /**
+     * Monta todos os componentes da tela.
+     */
     private void configuraTela() {
 
         Container container = getContentPane();
@@ -202,6 +204,11 @@ public class TelaEditarFuncionario extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    // ================== CONFIGURAÇÃO DE TELA ==================
+    /**
+     * Atualiza a tela de maneira que os cargos disponiveis para seleção sempre
+     * sejam todos os cargos atuais do sistema.
+     */
     public void updateData() {
 
         //Configuracao comboCargos
@@ -215,6 +222,13 @@ public class TelaEditarFuncionario extends JFrame {
         this.repaint();
     }
 
+    /**
+     * Atualiza a tela e faz com que seja exibida, onde cada campo de informação
+     * do funcionario ja esteja preenchida com as informações do funcionario
+     * previamente selecionado pelo usuário.
+     *
+     * @param funcionario
+     */
     public void exibeMenuEditaFuncionario(Funcionario funcionario) {
         updateData();
         setVisible(true);
@@ -227,6 +241,10 @@ public class TelaEditarFuncionario extends JFrame {
 
     }
 
+    // ================== EXIBIÇÃO DE MENSAGENS ==================
+    /**
+     * Exibe a mensagem de que o funcionário foi editado com sucesso.
+     */
     public void exibeFuncionarioEditadoComSucesso() {
         JOptionPane.showMessageDialog(
                 null,
@@ -236,6 +254,10 @@ public class TelaEditarFuncionario extends JFrame {
         );
     }
 
+    /**
+     * Exibe a mensagem de que o funcionario não foi editado pois a matricula
+     * inserida ja esta sendo utilizada.
+     */
     public void exibeMatriculaJaExiste() {
         JOptionPane.showMessageDialog(
                 null,
@@ -245,6 +267,20 @@ public class TelaEditarFuncionario extends JFrame {
         );
     }
 
+    /**
+     * Exibe a mensagem de erro com relação ao nome inserido não estar no
+     * formato desejado (somente letras e no minimo 3 caracteres).
+     */
+    public void exibeErroNome() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.GERENCIAR_FUNCIONARIO_ERRO_NOME,
+                Constantes.GERENCIAR_FUNCIONARIO_TITULO,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
+    // ================== GERENCIADOR DE BOTÕES ==================
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
@@ -265,6 +301,7 @@ public class TelaEditarFuncionario extends JFrame {
 
     }
 
+    // ================== GERENCIADOR DA COMBOBOX ==================
     private class GerenciadorCombos implements ActionListener {
 
         @Override

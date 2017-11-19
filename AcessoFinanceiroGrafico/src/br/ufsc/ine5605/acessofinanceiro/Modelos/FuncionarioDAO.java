@@ -9,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +19,7 @@ import java.util.logging.Logger;
  */
 /**
  *
- * @author vladimir
+ * @author João Grasel
  */
 public class FuncionarioDAO {
 
@@ -32,23 +31,49 @@ public class FuncionarioDAO {
         load();
     }
 
+    /**
+     * Getter das matrículas salvas.
+     *
+     * @return ArrayList de matriculas (keys) salvas.
+     */
     public ArrayList<Integer> getMatriculas() {
-		return new ArrayList<>(this.cacheFuncionarios.keySet());	
+        return new ArrayList<>(this.cacheFuncionarios.keySet());
     }
 
+    /**
+     * Insere um funcionario no HashMap.
+     *
+     * @param funcionario
+     */
     public void put(Funcionario funcionario) {
         this.cacheFuncionarios.put(funcionario.getMatricula(), funcionario);
         persist();
     }
 
+    /**
+     * Encontra um funcionario a partir de uma matricula.
+     *
+     * @param matricula
+     * @return Funcionario com a matricula passada como parametro.
+     */
     public Funcionario get(Integer matricula) {
         return this.cacheFuncionarios.get(matricula);
     }
 
+    /**
+     * Getter de funcionarios.
+     *
+     * @return Collection de Funcionarios.
+     */
     public Collection<Funcionario> getList() {
         return this.cacheFuncionarios.values();
     }
 
+    /**
+     * Remove um funcionário do HashMap.
+     *
+     * @param funcionario
+     */
     public void remove(Funcionario funcionario) {
         this.cacheFuncionarios.remove(funcionario.getMatricula());
         persist();
