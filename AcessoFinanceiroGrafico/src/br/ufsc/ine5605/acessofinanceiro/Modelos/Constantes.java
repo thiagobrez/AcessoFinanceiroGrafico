@@ -99,6 +99,7 @@ public class Constantes {
     public static final String CARGO_TIPO_ESPECIAL = "Especial";
     public static final String CARGO_TIPO_COMUM = "Comum";
     public static final String CARGO_TIPO_SEM_ACESSO = "Sem acesso";
+    public static final String CARGO_TIPO = "Tipo do Cargo: ";
     public static final String CARGO_CODIGO_JA_CADASTRADO = "Código já cadastrado";
     public static final String CARGO_NOME_INVALIDO_LETRAS = "O nome deve conter somente letras";
     public static final String CARGO_NOME_INVALIDO_TAMANHO = "O nome deve conter mais de 3 caracteres";
