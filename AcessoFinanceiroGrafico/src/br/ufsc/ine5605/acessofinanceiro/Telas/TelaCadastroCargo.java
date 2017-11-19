@@ -37,6 +37,7 @@ public class TelaCadastroCargo extends JFrame {
     private GerenciadorBotoes btManager;
     private ControladorCargo controlador;
     private GridBagConstraints constraints;
+    private TelaCargo telaCargo;
     private JLabel lbNome;
     private JLabel lbCodigo;
     private JLabel lbTipoCargo;
@@ -116,16 +117,6 @@ public class TelaCadastroCargo extends JFrame {
         this.painelCodigo.setVisible(true);
         painelCodigo.add(lbCodigo);
         painelCodigo.add(tfCodigo);
-        
-      
-        //Configuracao painelTipo
-//        this.painelTipo = new JPanel();
-//        painelTipo.setLayout(new BoxLayout(painelTipo, BoxLayout.LINE_AXIS));
-//        painelTipo.add(comboTipos);
-//        this.painelTipo.setVisible(true);
-        
-        
-       // container.add(comboTipos);
         
        //Configuracao lbMatricula
         lbTipoCargo = new JLabel(Constantes.CARGO_TIPO);
@@ -276,18 +267,18 @@ public class TelaCadastroCargo extends JFrame {
     
     public void updateData() {
 
-        //Configuracao comboCargos
-//        this.cargos = ControladorPrincipal.getInstance().getListaCargos();
+//        //Configuracao comboCargos
 //        comboTipos.removeAllItems();
 //        for (Cargo cargo : cargos) {
-//            comboTipos.addItem(cargo);
+//            comboCargos.addItem(cargo);
 //
 //        }
+//
+//        //limpa os textsFields
+//        limpaTextFields();
+//
+//        this.repaint();
 
-        //limpa os textsFields
-        limpaTextFields();
-
-        this.repaint();
     }
     
     public void exibeMenuCadastroCargo() {
@@ -346,9 +337,14 @@ public class TelaCadastroCargo extends JFrame {
     public void limpaTextFields() {
         tfCodigo.setText("");
         tfNome.setText("");
-        //tfDataNascimento.setText("");
-        //tfTipo.setText("");
-        //tfSalario.setText("");
+        tfNome.setText("");
+        tfCodigo.setText("");
+        tfHoraInicioManha.setText("");
+        tfHoraFimManha.setText("");
+        tfHoraInicioTarde.setText("");
+        tfHoraFimTarde.setText("");
+        tfHoraInicioEspecial.setText("");
+        tfHoraFimEspecial.setText("");
     }
     
     private class GerenciadorBotoes implements ActionListener {
@@ -357,7 +353,11 @@ public class TelaCadastroCargo extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource().equals(btCadastrar)) {
-                
+                ControladorCargo.getInstance().incluiCargo(Integer.parseInt(tfCodigo.getText()),
+                        tfNome.getText(), comboTipos.getSelectedItem().toString(), tfHoraInicioManha.getText(), tfHoraFimManha.getText(),
+                        tfHoraInicioTarde.getText(), tfHoraFimTarde.getText(), tfHoraInicioEspecial.getText(),
+                        tfHoraInicioEspecial.getText());
+                setVisible(false);
             }
 
             if (e.getSource().equals(btCancelar)) {
@@ -372,7 +372,36 @@ public class TelaCadastroCargo extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-//            if (e.getSource().equals("Gerencial")) {
+//            switch(comboTipos.getSelectedIndex()) {
+//                case 0:
+//                    break;
+//                case 1: 
+//                    constraints.gridy = 4;
+//                    painelPrincipal.add(painelHoraInicioManha, constraints);
+//                    constraints.gridy = 5;
+//                    painelPrincipal.add(painelHoraFimManha, constraints);
+//                    constraints.gridy = 6;
+//                    painelPrincipal.add(painelHoraInicioTarde, constraints);
+//                    constraints.gridy = 7;
+//                    painelPrincipal.add(painelHoraFimTarde, constraints);
+//                    constraints.gridy = 8;
+//                    repaint();
+//                default:
+//                    break;
+                
+//                constraints.gridy = 4;
+//                painelPrincipal.add(painelHoraInicioManha, constraints);
+//                constraints.gridy = 5;
+//                painelPrincipal.add(painelHoraFimManha, constraints);
+//                constraints.gridy = 6;
+//                painelPrincipal.add(painelHoraInicioTarde, constraints);
+//                constraints.gridy = 7;
+//                painelPrincipal.add(painelHoraFimTarde, constraints);
+//                constraints.gridy = 8;
+//                painelPrincipal.add(painelHoraInicioEspecial, constraints);
+//                constraints.gridy = 9;
+//                painelPrincipal.add(painelHoraFimEspecial, constraints);
+            }
 //                
 //            } if(comboTipos.getSelectedItem().toString().equals("Comercial")) {
 ////                painelPrincipal.add(painelHoraInicioManha, constraints);
@@ -393,8 +422,8 @@ public class TelaCadastroCargo extends JFrame {
 //            } if (comboTipos.getSelectedItem().toString().equals("Comum")) {
 //                
 //            }
-        }
     }
+    
     
 
 }

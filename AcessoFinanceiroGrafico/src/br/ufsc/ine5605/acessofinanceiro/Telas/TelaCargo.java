@@ -108,6 +108,7 @@ public class TelaCargo extends JFrame {
         modelTbItens.addColumn(Constantes.COMUM_NOME);
         modelTbItens.addColumn(Constantes.COMUM_CODIGO);
         modelTbItens.addColumn(Constantes.CARGO_EH_GERENCIAL);
+        modelTbItens.addColumn(Constantes.CARGO_TEM_ACESSO);
         modelTbItens.addColumn(Constantes.CARGO_INICIO_MANHA);
         modelTbItens.addColumn(Constantes.CARGO_FIM_MANHA);
         modelTbItens.addColumn(Constantes.CARGO_INICIO_TARDE);
