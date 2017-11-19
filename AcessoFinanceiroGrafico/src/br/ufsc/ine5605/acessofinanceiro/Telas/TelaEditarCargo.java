@@ -20,7 +20,11 @@ import javax.swing.JFrame;
 public class TelaEditarCargo extends JFrame {
 	
     private ControladorCargo controlador;
+<<<<<<< HEAD
     //private GerenciadorBotoes btManager;
+=======
+    private GerenciadorBotoes btManager;
+>>>>>>> e339d8a91c813cbcdf72477c864e553605dc95b9
     
     public TelaEditarCargo(ControladorCargo owner) {
         super(Constantes.GERENCIAR_FUNCIONARIO_EDITAR);

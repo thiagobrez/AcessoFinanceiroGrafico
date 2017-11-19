@@ -55,6 +55,7 @@ public class Constantes {
     public static final String REGISTRO_NUMERO = "Número";
     public static final String REGISTRO_MOTIVO = "Motivo";
     public static final String REGISTRO_FILTRO_NENHUM = "Nenhum";
+    public static final String REGISTRO_BOTAO_FILTRAR = "Filtrar";
 
     //FUNCIONARIO
     public static final String GERENCIAR_FUNCIONARIO_TITULO = "Gerenciar Funcionários";
