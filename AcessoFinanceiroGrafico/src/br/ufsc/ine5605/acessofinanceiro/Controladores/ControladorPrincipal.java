@@ -23,15 +23,9 @@ public class ControladorPrincipal {
     private static ControladorPrincipal controladorPrincipal;
 
     public TelaPrincipal telaPrincipal;
-    public ControladorDataSistema controladorData;
-    public ControladorFuncionario controladorFuncionario;
-    public ControladorAcesso controladorAcesso;
 
     private ControladorPrincipal() {
         this.telaPrincipal = new TelaPrincipal(this);
-        this.controladorData = new ControladorDataSistema();
-        this.controladorFuncionario = new ControladorFuncionario();
-        this.controladorAcesso = new ControladorAcesso();
     }
 
     public static ControladorPrincipal getInstance() {
@@ -61,7 +55,7 @@ public class ControladorPrincipal {
      * Chama classe que controla o acesso ao financeiro
      */
     public void acessarFinanceiro() {
-        this.controladorAcesso.exibePainelAcesso();
+        ControladorAcesso.getInstance().exibePainelAcesso();
     }
 
     /**

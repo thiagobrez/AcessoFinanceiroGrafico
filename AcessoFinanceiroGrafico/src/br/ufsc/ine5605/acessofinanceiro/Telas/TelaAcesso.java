@@ -128,12 +128,25 @@ public class TelaAcesso extends JFrame {
 		);
     }
 
+	public void exibeMatriculaInvalida() {
+		JOptionPane.showMessageDialog(
+				null,
+				Constantes.ACESSO_MATRICULA_INVALIDA,
+				Constantes.ACESSO_NEGADO_TITULO,
+				JOptionPane.PLAIN_MESSAGE
+		);
+    }
+	
 	private class GerenciadorBotoes implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(btAcesso)) {
-				owner.acessaFinanceiro(Integer.parseInt(tfMatricula.getText()));
+				if(ControladorAcesso.getInstance().verificaMatricula(tfMatricula.getText())) {
+					owner.acessaFinanceiro(Integer.parseInt(tfMatricula.getText()));
+				} else {
+					exibeMatriculaInvalida();
+				}
 			} else if(e.getSource().equals(btVoltar)) {
 				setVisible(false);
 			}

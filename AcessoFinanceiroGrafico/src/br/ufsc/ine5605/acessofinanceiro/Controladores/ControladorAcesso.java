@@ -20,12 +20,19 @@ import java.util.Date;
  */
 public class ControladorAcesso {
 	
+	private static ControladorAcesso controladorAcesso;
+	
     private TelaAcesso telaAcesso;
     
-    public ControladorAcesso() {
+    private ControladorAcesso() {
         this.telaAcesso = new TelaAcesso(this);
     }
     
+	public static ControladorAcesso getInstance() {
+		if(controladorAcesso == null) controladorAcesso = new ControladorAcesso();
+		return controladorAcesso;
+	}
+	
 	/**
 	 * Exibe a tela para acesso do financeiro e trata o recebimento da matricula.
 	 */
@@ -71,6 +78,13 @@ public class ControladorAcesso {
         return false;
     }
 
+	public boolean verificaMatricula(String matricula) {
+		for (int i = 0; i < matricula.length(); i++) {
+			if(Character.isLetter(matricula.charAt(i))) return false;
+		}
+        return true;
+	}
+	
 	/**
 	 * Solicita a criacao de um novo registro de acesso negado.
 	 * 
