@@ -121,7 +121,13 @@ public class TelaFuncionario extends JFrame {
     public void updateData() {
 
         //Configuracao modelTbItens
-        DefaultTableModel modelTbItens = new DefaultTableModel();
+        DefaultTableModel modelTbItens = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
         modelTbItens.addColumn(Constantes.COMUM_NOME);
         modelTbItens.addColumn(Constantes.COMUM_MATRICULA);
         modelTbItens.addColumn(Constantes.COMUM_DATA_NASCIMENTO);
