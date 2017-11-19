@@ -7,19 +7,12 @@ package br.ufsc.ine5605.acessofinanceiro.Telas;
 
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
-import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,7 +23,6 @@ import javax.swing.JLabel;
  */
 public class TelaPrincipal extends JFrame {
 
-    private ControladorPrincipal owner;
     private JLabel lbPrincipal;
     private JButton btMenuAcesso;
     private JButton btMenuFuncionarios;
@@ -39,10 +31,9 @@ public class TelaPrincipal extends JFrame {
     private JButton btMenuRelatorio;
     private GridBagConstraints constraints;
 
-    public TelaPrincipal(ControladorPrincipal owner) {
+    public TelaPrincipal() {
         //refatorar depois essa constante
         super(Constantes.ACESSO_FINANCEIRO);
-        this.owner = owner;
         configuraTela();
     }
 
@@ -117,15 +108,15 @@ public class TelaPrincipal extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource().equals(btMenuAcesso)) {
-                owner.acessarFinanceiro();
+                ControladorPrincipal.getInstance().acessarFinanceiro();
             } else if (e.getSource().equals(btMenuFuncionarios)) {
-                owner.gerenciarFuncionarios();
+                ControladorPrincipal.getInstance().gerenciarFuncionarios();
             } else if (e.getSource().equals(btMenuCargos)) {
-                owner.gerenciarCargos();
+                ControladorPrincipal.getInstance().gerenciarCargos();
             } else if (e.getSource().equals(btMenuData)) {
-                owner.gerenciarData();
+                ControladorPrincipal.getInstance().gerenciarData();
             } else if (e.getSource().equals(btMenuRelatorio)) {
-                owner.emitirRelatorio();
+                ControladorPrincipal.getInstance().emitirRelatorio();
             }
         }
 

@@ -25,7 +25,7 @@ public class ControladorAcesso {
     private TelaAcesso telaAcesso;
     
     private ControladorAcesso() {
-        this.telaAcesso = new TelaAcesso(this);
+        this.telaAcesso = new TelaAcesso();
     }
     
 	public static ControladorAcesso getInstance() {

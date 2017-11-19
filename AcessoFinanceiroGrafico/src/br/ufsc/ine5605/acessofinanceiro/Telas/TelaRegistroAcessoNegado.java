@@ -36,7 +36,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaRegistroAcessoNegado extends JFrame {
 
-    private ControladorRegistroAcessoNegado owner;
 	private GridBagConstraints constraints;
 	private JScrollPane spBaseTabela;
 	private JTable tbItens;
@@ -52,9 +51,8 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	private JPanel painelBotoes;
 	
 
-    public TelaRegistroAcessoNegado(ControladorRegistroAcessoNegado owner) {
+    public TelaRegistroAcessoNegado() {
 		super(Constantes.REGISTRO_TITULO);
-        this.owner = owner;
 		configuraTela();
     }
 

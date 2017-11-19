@@ -23,15 +23,13 @@ import javax.swing.JTextField;
  */
 public class TelaAcesso extends JFrame {
 
-    private ControladorAcesso owner;
 	private JLabel lbPrincipal;
 	private JTextField tfMatricula;
 	private JButton btAcesso;
 	private JButton btVoltar;
 
-    public TelaAcesso(ControladorAcesso owner) {
+    public TelaAcesso() {
 		super(Constantes.ACESSO_FINANCEIRO);
-        this.owner = owner;
 		configuraTela();
     }
 
@@ -143,7 +141,7 @@ public class TelaAcesso extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(btAcesso)) {
 				if(ControladorAcesso.getInstance().verificaMatricula(tfMatricula.getText())) {
-					owner.acessaFinanceiro(Integer.parseInt(tfMatricula.getText()));
+					ControladorAcesso.getInstance().acessaFinanceiro(Integer.parseInt(tfMatricula.getText()));
 				} else {
 					exibeMatriculaInvalida();
 				}

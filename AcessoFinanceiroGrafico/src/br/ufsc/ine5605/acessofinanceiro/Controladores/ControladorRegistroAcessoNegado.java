@@ -25,7 +25,7 @@ public class ControladorRegistroAcessoNegado {
     
     private ControladorRegistroAcessoNegado() {
 		this.registroDAO = new RegistroAcessoNegadoDAO();
-        this.telaRegistroAcessoNegado = new TelaRegistroAcessoNegado(this);
+        this.telaRegistroAcessoNegado = new TelaRegistroAcessoNegado();
     }
     
 	public static ControladorRegistroAcessoNegado getInstance() {

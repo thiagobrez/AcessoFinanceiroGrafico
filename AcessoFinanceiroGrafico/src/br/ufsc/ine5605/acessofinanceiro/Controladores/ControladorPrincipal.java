@@ -25,7 +25,7 @@ public class ControladorPrincipal {
     public TelaPrincipal telaPrincipal;
 
     private ControladorPrincipal() {
-        this.telaPrincipal = new TelaPrincipal(this);
+        this.telaPrincipal = new TelaPrincipal();
     }
 
     public static ControladorPrincipal getInstance() {
