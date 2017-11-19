@@ -49,7 +49,7 @@ public class TelaPrincipal extends JFrame {
     private void configuraTela() {
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
-        
+
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.PAGE_START;
@@ -57,8 +57,8 @@ public class TelaPrincipal extends JFrame {
         constraints.gridheight = 1;
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.insets = new Insets(10,10,10,10);
-        
+        constraints.insets = new Insets(10, 10, 10, 10);
+
         //Configuracao lbPrincipal
         lbPrincipal = new JLabel(Constantes.PRINCIPAL_TITULO);
         container.add(lbPrincipal, constraints);
@@ -104,22 +104,21 @@ public class TelaPrincipal extends JFrame {
         setSize(720, 480);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
+
     }
 
-	public void exibeMenuPrincipal() {
-            setVisible(true);
-	}
-	
+    public void exibeMenuPrincipal() {
+        setVisible(true);
+    }
+
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+
             if (e.getSource().equals(btMenuAcesso)) {
                 owner.acessarFinanceiro();
             } else if (e.getSource().equals(btMenuFuncionarios)) {
-                setVisible(false);
                 owner.gerenciarFuncionarios();
             } else if (e.getSource().equals(btMenuCargos)) {
                 owner.gerenciarCargos();
