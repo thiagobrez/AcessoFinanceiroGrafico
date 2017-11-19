@@ -110,18 +110,6 @@ public class ControladorPrincipal {
     }
 
     /**
-     * Chama função no controlador registro de acesso negado que encontra
-     * resgistros de tentativas de acesso negadas, recebe como parametro uma
-     * matricula e retorna um registro
-     *
-     * @param matricula do funcionario
-     * @return registro de acesso negado
-     */
-    public ArrayList<RegistroAcessoNegado> encontraRegistrosHorarioNaoPermitidoPelaMatricula(int matricula) {
-        return ControladorRegistroAcessoNegado.getInstance().encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
-    }
-
-    /**
      * Chama função no controlador registro de acesso negado que registra nova
      * tentativa de acesso negada.
      *

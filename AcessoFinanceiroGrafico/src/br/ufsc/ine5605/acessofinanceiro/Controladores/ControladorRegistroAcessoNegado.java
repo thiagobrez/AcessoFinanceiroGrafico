@@ -10,7 +10,6 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Motivo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.RegistroAcessoNegado;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaRegistroAcessoNegado;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -46,7 +45,7 @@ public class ControladorRegistroAcessoNegado {
 	public ArrayList<RegistroAcessoNegado> filtraRegistros(String filtroMotivo, String filtroMatricula) {
 		ArrayList<RegistroAcessoNegado> registros = new ArrayList<>();
 		ArrayList<RegistroAcessoNegado> registrosMotivo = encontraRegistrosPorMotivo(filtroMotivo);
-		if(!filtroMatricula.equals("")) {
+		if(!filtroMatricula.equals(Constantes.REGISTRO_FILTRO_VAZIO)) {
 			for(RegistroAcessoNegado registro : registrosMotivo) {
 				if(registro.getMatricula() == Integer.parseInt(filtroMatricula)) registros.add(registro);
 			}
@@ -54,82 +53,12 @@ public class ControladorRegistroAcessoNegado {
 		}
 		return registrosMotivo;
 	}
-	
-	/**
-	 * Solicita a tela que exiba os motivos existentes que o usuario possa
-	 * escolher para filtrar a emissao do relatorio e trata a opcao recebida.
-	 */
-    public void exibeFiltroPorMotivo() {
-        int opcao = telaRegistroAcessoNegado.exibeFiltroPorMotivo();
-        switch(opcao) {
-            case 1:
-                exibeRelatorioPorMotivo(Motivo.MATRICULA_INEXISTENTE);
-                break;
-            case 2:
-                exibeRelatorioPorMotivo(Motivo.CARGO_SEM_ACESSO);
-                break;
-            case 3:
-                exibeRelatorioPorMotivo(Motivo.HORARIO_NAO_PERMITIDO);
-                break;
-            case 4:
-                exibeRelatorioPorMotivo(Motivo.ACESSO_BLOQUEADO);
-                break;
-			case 5:
-				exibeRelatorio();
-            default:
-				telaRegistroAcessoNegado.exibeOpcaoInexistente();
-                exibeFiltroPorMotivo();
-                break;
-        }
-    }
 
-	/**
-	 * Solicita a exibicao do input para a matricula e da existencia desta,
-	 * procura os registros de acesso negado com esta matricula e solicita a
-	 * exibicao do relatorio destes registros.
-	 */
-    public void exibeFiltroPorMatricula() {
-        int matricula = telaRegistroAcessoNegado.exibeFiltroPorMatricula();
-		boolean encontrouRegistro = false;
-		if(ControladorPrincipal.getInstance().matriculaExiste(matricula)) {
-			ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
-			registrosEncontrados = encontraRegistrosPorMatricula(matricula);
-			if(!registrosEncontrados.isEmpty()) encontrouRegistro = true;
-			exibeRelatorioPorMatricula(registrosEncontrados, matricula, encontrouRegistro);
-		} else {
-			exibeMatriculaInexistente();
+	public boolean verificaFiltroMatricula(String matricula) {
+		for (int i = 0; i < matricula.length(); i++) {
+			if(Character.isLetter(matricula.charAt(i))) return false;
 		}
-    }
-
-	/**
-	 * Encontra os registros de acesso negado com o motivo recebido e solicita
-	 * que a tela um relatorio destes.
-	 * 
-	 * @param motivo usado para encontrar todos os registros que tenham este
-	 * mesmo motivo.
-	 */
-	public void exibeRelatorioPorMotivo(Motivo motivo) {
-//		boolean encontrouRegistro = false;
-//		
-//		ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
-//		registrosEncontrados = encontraRegistrosPorMotivo(motivo);
-//		if(!registrosEncontrados.isEmpty()) encontrouRegistro = true;
-//		telaRegistroAcessoNegado.exibeRelatorioPorMotivo(registrosEncontrados, encontrouRegistro, motivo);
-//		exibeFiltroPorMotivo();
-	}
-	
-	/**
-	 * Solicita a exibicao da relatorio dos registros encontrados com a matricula
-	 * inserida e trata o retorno do usuario ao menu principal.
-	 * 
-	 * @param registrosEncontrados registros de acesso negado da matricula inserida
-	 * @param matricula matricula inserida para emissao do relatorio
-	 * @param encontrouRegistro recebe true se o array registrosEncontrados nao 
-	 * estiver vazio e false se estiver
-	 */
-	public void exibeRelatorioPorMatricula(ArrayList<RegistroAcessoNegado> registrosEncontrados, int matricula, boolean encontrouRegistro) {
-		telaRegistroAcessoNegado.exibeRelatorioPorMatricula(registrosEncontrados, matricula, encontrouRegistro);
-		exibeRelatorio();
+        return true;
 	}
 	
 	/**
@@ -140,7 +69,7 @@ public class ControladorRegistroAcessoNegado {
 	 * @return ArrayList de registros encontrados
 	 */
 	public ArrayList<RegistroAcessoNegado> encontraRegistrosPorMotivo(String motivo) {
-		if(motivo.equals(Constantes.REGISTRO_FILTRO_NENHUM)) return getListaRegistrosAcessosNegados();
+		if(motivo.equals(Constantes.REGISTRO_FILTRO_TODOS)) return getListaRegistrosAcessosNegados();
 		ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
 		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
 			if(registro.getMotivo().toString().equals(motivo)) {
@@ -148,42 +77,6 @@ public class ControladorRegistroAcessoNegado {
 			}
 		}
 		return registrosEncontrados;
-	}
-	
-	/**
-	 * Encontra na colecao de registros de acesso negado todos que possuirem
-	 * como matricula a recebida.
-	 * 
-	 * @param matricula desejada para encontrar os registros
-	 * @return ArrayList de registros encontrados
-	 */
-	public ArrayList<RegistroAcessoNegado> encontraRegistrosPorMatricula(int matricula) {
-		ArrayList<RegistroAcessoNegado> registrosEncontrados = new ArrayList<>();
-		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
-			if(registro.getMatricula() == matricula) {
-				registrosEncontrados.add(registro);
-			}
-		}
-		return registrosEncontrados;
-	}
-
-	/**
-	 * Encontra na colecao de registros de acesso negado todos que possuirem
-	 * como motivo horario nao permitido e como matricula a recebida.
-	 * 
-	 * @param matricula desejada para encontrar os registros
-	 * @return ArrayList de registros encontrados
-	 */
-	
-	//================================== ARRUMAR AQUI USANDO GET DO HASHMAP ===================================
-	
-	public ArrayList<RegistroAcessoNegado> encontraRegistrosHorarioNaoPermitidoPelaMatricula(int matricula) {
-		ArrayList<RegistroAcessoNegado> registrosHorarioNaoPermitido = new ArrayList<>();
-		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
-			if(registro.getMatricula() == matricula && registro.getMotivo() == Motivo.HORARIO_NAO_PERMITIDO)
-				registrosHorarioNaoPermitido.add(registro);
-		}
-		return registrosHorarioNaoPermitido;
 	}
 	
 	/**
@@ -197,56 +90,13 @@ public class ControladorRegistroAcessoNegado {
 		RegistroAcessoNegado registro = new RegistroAcessoNegado(data, matricula, motivo);
 		this.registroDAO.put(registro);
 	}
-	
-	/**
-	 * Solicita a tela a exibicao de que a matricula inserida nao existe e trata
-	 * a opcao recebida para tentar novamente ou voltar ao menu principal.
-	 */
-	public void exibeMatriculaInexistente() {
-		int opcao = 0;
-		opcao = telaRegistroAcessoNegado.exibeMatriculaInexistente();
-		switch(opcao) {
-			case 1:
-				exibeFiltroPorMatricula();
-				break;
-			case 2:
-				exibeRelatorio();
-				break;
-			default:
-				telaRegistroAcessoNegado.exibeOpcaoInexistente();
-				ControladorPrincipal.getInstance().exibeMenuPrincipal();
-				break;
-		}
-	}
 
-	/**
-	 * Gerencia a nova tentativa do usuário para tentar emitir um relatório por
-	 * matrícula ou motivo.
-	 * 
-	 * @param constante indica se a nova tentativa sera para matrícula ou motivo
-	 */
-	public void trataNovaTentativa(String constante) {
-		int opcao = 0;
-		opcao = telaRegistroAcessoNegado.exibeNovaTentativa();
-		if(opcao == 1) {
-			if(constante.equals(Constantes.NOVA_TENTATIVA_FILTRO_MATRICULA)) {
-				exibeFiltroPorMatricula();
-			} else if (constante.equals(Constantes.NOVA_TENTATIVA_FILTRO_MOTIVO)) {
-				exibeFiltroPorMotivo();
-			}
-		} else {
-			ControladorPrincipal.getInstance().exibeMenuPrincipal();
-		}
-	}
-
-//	public Collection<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
 	public ArrayList<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
 		ArrayList<RegistroAcessoNegado> registros = new ArrayList<>();
 		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
 			registros.add(registro);
 		}
 		return registros;
-//		return this.registroDAO.getList();
 	}
 	
 }
