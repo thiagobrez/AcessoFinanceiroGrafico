@@ -80,6 +80,8 @@ public class Constantes {
 
     //CARGO
     public static final String CARGO_TITULO = "Gerenciar Cargo";
+    public static final String CARGO_NOME = "Nome: ";
+    public static final String CARGO_CODIGO = "Codigo: ";
     public static final String CARGO_CADASTRAR = "Cadastrar Cargo";
     public static final String CARGO_CADASTRADO_SUCESSO = "Cargo cadastrado com sucesso!";
     public static final String CARGO_EDITAR = "Editar Cargo";

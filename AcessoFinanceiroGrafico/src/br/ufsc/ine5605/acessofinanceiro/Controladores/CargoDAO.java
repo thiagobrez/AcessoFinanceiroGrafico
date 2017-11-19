@@ -51,8 +51,8 @@ public class CargoDAO {
 		return new ArrayList<>(this.cacheCargos.keySet());
 	}
 	
-    public void remove(Integer codigo) {
-        cacheCargos.remove(codigo);
+    public void remove(Cargo cargo) {
+        cacheCargos.remove(cargo.getCodigo());
         persist();
     }
 
