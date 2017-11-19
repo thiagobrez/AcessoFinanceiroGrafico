@@ -15,7 +15,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -36,7 +35,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaRegistroAcessoNegado extends JFrame {
 
-    private ControladorRegistroAcessoNegado owner;
 	private GridBagConstraints constraints;
 	private JScrollPane spBaseTabela;
 	private JTable tbItens;
@@ -52,12 +50,14 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	private JPanel painelBotoes;
 	
 
-    public TelaRegistroAcessoNegado(ControladorRegistroAcessoNegado owner) {
+    public TelaRegistroAcessoNegado() {
 		super(Constantes.REGISTRO_TITULO);
-        this.owner = owner;
 		configuraTela();
     }
 
+	/**
+	 * Configura os elementos que aparecerao na interface grafica.
+	 */
 	private void configuraTela() {
 		
 		//Configuracao container
@@ -141,6 +141,12 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * Atualiza os dados da tabela de registros.
+	 * 
+	 * @param filtroMotivo motivo recebido para filtrar os itens mostrados
+	 * @param filtroMatricula matricula recebida para filtrar os itens mostrados
+	 */
 	public void updateData(String filtroMotivo, String filtroMatricula) {
 		
 		//Configuracao modelTbItens
@@ -171,16 +177,17 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	}
 	
     /**
-     * Exibe o menu de escolha do filtro para emissao do relatorio e trata se o
-     * input recebido eh realmente um inteiro.
-     *
-     * @return int opcao escolhida pelo usuario
-     */
+	 * Chama a funcao para atualizar os dados da tabela e exibe o relatorio.
+	 */
     public void exibeMenuRelatorio() {
 		updateData(Constantes.REGISTRO_FILTRO_TODOS, Constantes.REGISTRO_FILTRO_VAZIO);
 		setVisible(true);
     }
 
+	/**
+	 * Exibe modal indicando que a matricula inserida para filtro da tabela eh
+	 * invalida.
+	 */
 	public void exibeFiltroMatriculaInvalido() {
 		JOptionPane.showMessageDialog(
 			null,

@@ -45,6 +45,7 @@ public class Constantes {
     //ACESSO AO FINANCEIRO
     public static final String ACESSO_FINANCEIRO = "Acesso ao Financeiro";
     public static final String ACESSO_INSIRA_MATRICULA = "Insira a matrícula de acesso: ";
+    public static final String ACESSO_MATRICULA_INVALIDA = "Matrícula inválida";
     public static final String ACESSO_BOTAO_ACESSAR = "Acessar";
     public static final String ACESSO_NEGADO_TITULO = "Acesso Negado";
     public static final String ACESSO_PERMITIDO = "Financeiro acessado com sucesso!";
@@ -99,6 +100,8 @@ public class Constantes {
     public static final String CARGO_FIM_MANHA = "Hora Fim Manhã";
     public static final String CARGO_INICIO_TARDE = "Hora Inicio Tarde";
     public static final String CARGO_FIM_TARDE = "Hora Fim Tarde";
+    public static final String CARGO_FIM_ESPECIAL = "Hora Fim Especial";
+    public static final String CARGO_INICIO_ESPECIAL = "Hora Inicio Especial";
     public static final String CARGO_DELETADO_SUCESSO = "Cargo deletado com sucesso!";
     public static final String CARGO_NADA_SELECIONADO = "Selecione um cargo.";
     public static final String CARGO_TIPO_GERENCIAL = "Gerencial";

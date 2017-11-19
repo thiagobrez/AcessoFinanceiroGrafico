@@ -44,12 +44,16 @@ public class TelaCadastroCargo extends JFrame {
     private JLabel lbHoraFimManha;
     private JLabel lbHoraInicioTarde;
     private JLabel lbHoraFimTarde;
+    private JLabel lbHoraFimEspecial;
+    private JLabel lbHoraInicioEspecial;
     private JTextField tfNome;
     private JTextField tfCodigo;
     private JTextField tfHoraInicioManha;
     private JTextField tfHoraFimManha;
     private JTextField tfHoraInicioTarde;
     private JTextField tfHoraFimTarde;
+    private JTextField tfHoraInicioEspecial;
+    private JTextField tfHoraFimEspecial;
     private JPanel painelPrincipal;
     private JPanel painelNome;
     private JPanel painelCodigo;
@@ -59,6 +63,8 @@ public class TelaCadastroCargo extends JFrame {
     private JPanel painelHoraFimManha;
     private JPanel painelHoraInicioTarde;
     private JPanel painelHoraFimTarde;
+    private JPanel painelHoraFimEspecial;
+    private JPanel painelHoraInicioEspecial;
     private JComboBox comboTipos;
     private List<Cargo> cargos;
     private List<String> cargosTipos;
@@ -194,6 +200,32 @@ public class TelaCadastroCargo extends JFrame {
         painelHoraFimTarde.add(lbHoraFimTarde);
         painelHoraFimTarde.add(tfHoraFimTarde);
         
+        //Configuracao lbHoraInicioEspecial
+        lbHoraInicioEspecial = new JLabel(Constantes.CARGO_INICIO_ESPECIAL + ": ");
+
+        //Configuracao tfHoraInicioEspecial
+        tfHoraInicioEspecial = new JTextField(5);
+
+        //Configuracao painelHoraInicioEspecial
+        this.painelHoraInicioEspecial = new JPanel();
+        painelHoraInicioEspecial.setLayout(new BoxLayout(painelHoraInicioEspecial, BoxLayout.LINE_AXIS));
+        //this.painelHoraFimTarde.setVisible(true);
+        painelHoraInicioEspecial.add(lbHoraInicioEspecial);
+        painelHoraInicioEspecial.add(tfHoraInicioEspecial);
+        
+        //Configuracao lbHoraFimEspecial
+        lbHoraFimEspecial = new JLabel(Constantes.CARGO_FIM_ESPECIAL + ": ");
+
+        //Configuracao tfHoraFimEspecial
+        tfHoraFimEspecial = new JTextField(5);
+
+        //Configuracao painelHoraFimEspecial
+        this.painelHoraFimEspecial = new JPanel();
+        painelHoraFimEspecial.setLayout(new BoxLayout(painelHoraFimEspecial, BoxLayout.LINE_AXIS));
+        //this.painelHoraFimTarde.setVisible(true);
+        painelHoraFimEspecial.add(lbHoraFimEspecial);
+        painelHoraFimEspecial.add(tfHoraFimEspecial);
+        
         //Configura btCancelar
         btCancelar = new JButton();
         btCancelar.setText(Constantes.COMUM_BOTAO_CANCELAR);
@@ -230,8 +262,12 @@ public class TelaCadastroCargo extends JFrame {
         constraints.gridy = 7;
         painelPrincipal.add(painelHoraFimTarde, constraints);
         constraints.gridy = 8;
-        painelPrincipal.add(painelBotoes, constraints);
+        painelPrincipal.add(painelHoraInicioEspecial, constraints);
         constraints.gridy = 9;
+        painelPrincipal.add(painelHoraFimEspecial, constraints);
+        constraints.gridy = 10;
+        painelPrincipal.add(painelBotoes, constraints);
+        constraints.gridy = 11;
         container.add(painelPrincipal, constraints);
 
         setSize(720, 480);
@@ -336,20 +372,27 @@ public class TelaCadastroCargo extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (comboTipos.getSelectedItem().toString().equals("Gerencial")) {
-                
-            } if(comboTipos.getSelectedItem().toString().equals("Comercial")) {
-                
-            } if(comboTipos.getSelectedItem().toString().equals("Especial")) {
-                
-            } if(comboTipos.getSelectedItem().toString().equals("Comum")) {
-                painelHoraInicioManha.setVisible(true);
-                painelHoraFimManha.setVisible(true);
-                painelHoraInicioTarde.setVisible(true);
-                painelHoraFimTarde.setVisible(true);
-            } if (comboTipos.getSelectedItem().toString().equals("Comum")) {
-                
-            }
+//            if (e.getSource().equals("Gerencial")) {
+//                
+//            } if(comboTipos.getSelectedItem().toString().equals("Comercial")) {
+////                painelPrincipal.add(painelHoraInicioManha, constraints);
+////                constraints.gridy = 5;
+////                painelPrincipal.add(painelHoraFimManha, constraints);
+////                constraints.gridy = 6;
+////                painelPrincipal.add(painelHoraInicioTarde, constraints);
+////                constraints.gridy = 7;
+////                painelPrincipal.add(painelHoraFimTarde, constraints);
+////                painelHoraInicioManha.setVisible(true);
+////                painelHoraFimManha.setVisible(true);
+////                painelHoraInicioTarde.setVisible(true);
+////                painelHoraFimTarde.setVisible(true);
+//            } if(comboTipos.getSelectedItem().toString().equals("Especial")) {
+//                
+//            } if(comboTipos.getSelectedItem().toString().equals("Comum")) {
+//                
+//            } if (comboTipos.getSelectedItem().toString().equals("Comum")) {
+//                
+//            }
         }
     }
     
