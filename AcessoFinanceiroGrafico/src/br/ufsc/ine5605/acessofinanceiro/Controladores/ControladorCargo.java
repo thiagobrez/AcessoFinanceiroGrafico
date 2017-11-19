@@ -68,6 +68,10 @@ public class ControladorCargo implements IControladorCargo {
     public void voltaMenuPrincipal() {
         ControladorPrincipal.getInstance().exibeMenuPrincipal();
     }
+    
+    public void updateCargos() {
+        this.telaCargo.updateData();
+    }
 
     /**
      * Pede ao usuario todos os atributos para cadastrar um cargo e caso o cargo

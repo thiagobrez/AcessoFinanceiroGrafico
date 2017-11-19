@@ -102,9 +102,14 @@ public class TelaCargo extends JFrame {
     }
     
     public void updateData() {
-
+        DefaultTableModel modelTbItens = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+        };
+        
         //Configuracao modelTbItens
-        DefaultTableModel modelTbItens = new DefaultTableModel();
         modelTbItens.addColumn(Constantes.COMUM_NOME);
         modelTbItens.addColumn(Constantes.COMUM_CODIGO);
         modelTbItens.addColumn(Constantes.CARGO_EH_GERENCIAL);
