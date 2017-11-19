@@ -22,9 +22,9 @@ public class Constantes {
     public static final String COMUM_MATRICULA = "Matrícula";
     public static final String COMUM_DATA_NASCIMENTO = "Data de Nascimento";
     public static final String COMUM_TELEFONE = "Telefone";
-    public static final String COMUM_SALARIO = "Salario";
+    public static final String COMUM_SALARIO = "Salário";
     public static final String COMUM_CARGO = "Cargo";
-    public static final String COMUM_CODIGO = "Codigo";
+    public static final String COMUM_CODIGO = "Código";
     public static final String COMUM_OQUE_DESEJA_FAZER = "O que você deseja fazer?";
     public static final String COMUM_BOTAO_CANCELAR = "Cancelar";
     public static final String COMUM_BOTAO_ALTERAR = "Alterar";
@@ -37,21 +37,21 @@ public class Constantes {
     //MENU PRINCIPAL
     public static final String PRINCIPAL_TITULO = "Menu Principal";
     public static final String PRINCIPAL_MENU_ACESSO = "Acesso ao Financeiro";
-    public static final String PRINCIPAL_MENU_FUNCIONARIOS = "Gerenciar Funcionarios";
+    public static final String PRINCIPAL_MENU_FUNCIONARIOS = "Gerenciar Funcionários";
     public static final String PRINCIPAL_MENU_CARGOS = "Gerenciar Cargos";
     public static final String PRINCIPAL_MENU_DATA = "Gerenciar Data do Sistema";
-    public static final String PRINCIPAL_MENU_RELATORIO = "Emitir Relatorio";
+    public static final String PRINCIPAL_MENU_RELATORIO = "Emitir Relatório";
 
     //ACESSO AO FINANCEIRO
-    public static final String ACESSO_FINANCEIRO = "Acesso ao financeiro";
-    public static final String ACESSO_INSIRA_MATRICULA = "Insira a matricula de acesso: ";
+    public static final String ACESSO_FINANCEIRO = "Acesso ao Financeiro";
+    public static final String ACESSO_INSIRA_MATRICULA = "Insira a matrícula de acesso: ";
     public static final String ACESSO_BOTAO_ACESSAR = "Acessar";
-    public static final String ACESSO_NEGADO_TITULO = "Acesso negado";
+    public static final String ACESSO_NEGADO_TITULO = "Acesso Negado";
     public static final String ACESSO_PERMITIDO = "Financeiro acessado com sucesso!";
-    public static final String ACESSO_PERMITIDO_TITULO = "Acesso permitido";
+    public static final String ACESSO_PERMITIDO_TITULO = "Acesso Permitido";
 
     //REGISTRO
-    public static final String REGISTRO_TITULO = "Relatório de acessos negados";
+    public static final String REGISTRO_TITULO = "Relatório de Acessos Negados";
     public static final String REGISTRO_NUMERO = "Número";
     public static final String REGISTRO_MOTIVO = "Motivo";
     public static final String REGISTRO_FILTRO_NENHUM = "Nenhum";
@@ -69,12 +69,12 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_TELEFONE = "Telefone: ";
     public static final String GERENCIAR_FUNCIONARIO_SALARIO = "Salario: ";
     public static final String GERENCIAR_FUNCIONARIO_CARGO = "Cargo: ";
-    public static final String GERENCIAR_FUNCIONARIO_TITULO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
-    public static final String GERENCIAR_FUNCIONARIO_NADA_SELECIONADO = "Selecione um funcionário.";
-    public static final String GERENCIAR_FUNCIONARIO_TITULO_CADASTRADO_SUCESSO = "O funcionário foi cadastrado com sucesso!";
-    public static final String GERENCIAR_FUNCIONARIO_DELETADO_SUCESSO = "O funcionário foi deletado com sucesso!";
-    public static final String GERENCIAR_FUNCIONARIO_EDITADO_SUCESSO = "O funcionário foi editado com sucesso!";
-    public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "O funcionário não foi cadastrado. Matrícula ja existente.";
+    public static final String GERENCIAR_FUNCIONARIO_TITULO_DELETADO_SUCESSO = "Funcionário deletado com sucesso!";
+    public static final String GERENCIAR_FUNCIONARIO_NADA_SELECIONADO = "Nenhum funcionário selecionado.";
+    public static final String GERENCIAR_FUNCIONARIO_TITULO_CADASTRADO_SUCESSO = "Funcionário cadastrado com sucesso!";
+    public static final String GERENCIAR_FUNCIONARIO_DELETADO_SUCESSO = "Funcionário deletado com sucesso!";
+    public static final String GERENCIAR_FUNCIONARIO_EDITADO_SUCESSO = "Funcionário editado com sucesso!";
+    public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "O funcionário não cadastrado. Matrícula ja existente.";
     public static final String GERENCIAR_FUNCIONARIO_CONFIRMACAO_DELETAR = "Você deseja mesmo excluir o funcionário?";
     public static final String GERENCIAR_FUNCIONARIO_ERRO_NOME = "Erro: o nome deve possuir mais de 3 letras e não deve possuir números.";
 
@@ -100,14 +100,13 @@ public class Constantes {
     public static final String CARGO_TIPO_COMUM = "Comum";
     public static final String CARGO_TIPO_SEM_ACESSO = "Sem acesso";
     public static final String CARGO_TIPO = "Tipo do Cargo: ";
-    public static final String CARGO_CODIGO_JA_CADASTRADO = "Código já cadastrado";
-    public static final String CARGO_NOME_INVALIDO_LETRAS = "O nome deve conter somente letras";
-    public static final String CARGO_NOME_INVALIDO_TAMANHO = "O nome deve conter mais de 3 caracteres";
-    
+    public static final String CARGO_CODIGO_JA_CADASTRADO = "Código já cadastrado.";
+    public static final String CARGO_NOME_INVALIDO_LETRAS = "O nome deve conter somente letras.";
+    public static final String CARGO_NOME_INVALIDO_TAMANHO = "O nome deve conter mais de 3 caracteres.";
 
     //DATA SISTEMA
-    public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
-    public static final String DATA_SISTEMA_ATUAL = "Data e Hora do sistema: ";
+    public static final String DATA_SISTEMA_TITULO = "Data e Hora do Sistema";
+    public static final String DATA_SISTEMA_ATUAL = "Data e Hora do Sistema: ";
     public static final String DATA_SISTEMA_BOTAO_ALTERAR = "Alterar Data/Hora do Sistema";
     public static final String DATA_SISTEMA_NOVO = "Nova data/hora do sistema: ";
     public static final String DATA_SISTEMA_SUCESSO = "Data e Hora do sistema atualizadas com sucesso!";
