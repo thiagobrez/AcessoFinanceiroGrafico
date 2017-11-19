@@ -33,7 +33,6 @@ import javax.swing.JTextField;
 public class TelaCadastroFuncionario extends JFrame {
 
     private GerenciadorBotoes btManager;
-    private ControladorFuncionario controlador;
     private GridBagConstraints constraints;
     private JPanel painelPrincipal;
     private JPanel painelNome;
@@ -61,9 +60,8 @@ public class TelaCadastroFuncionario extends JFrame {
     private JButton btCancelar;
     private JButton btCadastrar;
 
-    public TelaCadastroFuncionario(ControladorFuncionario owner) {
+    public TelaCadastroFuncionario() {
         super(Constantes.GERENCIAR_FUNCIONARIO_CADASTRAR);
-        this.controlador = owner;
         this.btManager = new GerenciadorBotoes();
 
         configuraTela();

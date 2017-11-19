@@ -34,7 +34,6 @@ import javax.swing.JTextField;
 public class TelaEditarFuncionario extends JFrame {
 
     private GerenciadorBotoes btManager;
-    private ControladorFuncionario controlador;
     private GridBagConstraints constraints;
     private JPanel painelPrincipal;
     private JPanel painelNome;
@@ -63,9 +62,8 @@ public class TelaEditarFuncionario extends JFrame {
     private JButton btCancelar;
     private JButton btConfirmar;
 
-    public TelaEditarFuncionario(ControladorFuncionario owner) {
+    public TelaEditarFuncionario() {
         super(Constantes.GERENCIAR_FUNCIONARIO_EDITAR);
-        this.controlador = owner;
         this.btManager = new GerenciadorBotoes();
 
         configuraTela();

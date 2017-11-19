@@ -27,7 +27,6 @@ import javax.swing.JTextField;
  */
 public class TelaAlterarDataSistema extends JFrame {
 
-    private ControladorDataSistema controlador;
     private GridBagConstraints constraints;
     private JPanel painelBotoes;
     private JLabel lbPrincipal;
@@ -36,9 +35,8 @@ public class TelaAlterarDataSistema extends JFrame {
     private JButton btAlterar;
     private JLabel lbFormato;
 
-    public TelaAlterarDataSistema(ControladorDataSistema owner) {
+    public TelaAlterarDataSistema() {
         super(Constantes.DATA_SISTEMA_TITULO);
-        this.controlador = owner;
         try {
             configuraTela();
         } catch (ParseException e) {

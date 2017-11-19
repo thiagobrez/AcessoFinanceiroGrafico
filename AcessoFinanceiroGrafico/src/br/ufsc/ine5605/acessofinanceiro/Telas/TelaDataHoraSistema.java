@@ -23,7 +23,6 @@ import javax.swing.JLabel;
  */
 public class TelaDataHoraSistema extends JFrame {
 
-    private ControladorDataSistema controlador;
     private GridBagConstraints constraints;
     private GerenciadorBotoes btManager;
     private JLabel lbDataSistemaTitulo;
@@ -31,9 +30,8 @@ public class TelaDataHoraSistema extends JFrame {
     private JButton btVoltarMenuPrincipal;
     private JButton btAlterarDataSistema;
 
-    public TelaDataHoraSistema(ControladorDataSistema owner) {
+    public TelaDataHoraSistema() {
         super(Constantes.DATA_SISTEMA_TITULO);
-        this.controlador = owner;
         this.btManager = new GerenciadorBotoes();
         try {
             configuraTela();

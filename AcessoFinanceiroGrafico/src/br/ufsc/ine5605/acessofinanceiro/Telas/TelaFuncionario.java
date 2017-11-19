@@ -32,7 +32,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaFuncionario extends JFrame {
 
-    private ControladorFuncionario controlador;
     private GerenciadorBotoes btManager;
     private GridBagConstraints constraints;
     private JPanel painelBotoes;
@@ -43,9 +42,8 @@ public class TelaFuncionario extends JFrame {
     private JButton btDeletaFuncionario;
     private JButton btVoltarMenuPrincipal;
 
-    public TelaFuncionario(ControladorFuncionario owner) {
+    public TelaFuncionario() {
         super(Constantes.GERENCIAR_FUNCIONARIO_TITULO);
-        this.controlador = owner;
         this.btManager = new GerenciadorBotoes();
 
         try {

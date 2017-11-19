@@ -33,9 +33,9 @@ public class ControladorFuncionario implements IControladorFuncionario {
     private FuncionarioDAO funcionarioDAO;
 
     public ControladorFuncionario() {
-        this.telaFuncionario = new TelaFuncionario(this);
-        this.telaCadastroFuncionario = new TelaCadastroFuncionario(this);
-        this.telaEditarFuncionario = new TelaEditarFuncionario(this);
+        this.telaFuncionario = new TelaFuncionario();
+        this.telaCadastroFuncionario = new TelaCadastroFuncionario();
+        this.telaEditarFuncionario = new TelaEditarFuncionario();
         this.funcionarioDAO = new FuncionarioDAO();
     }
 
