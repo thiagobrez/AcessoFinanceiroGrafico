@@ -159,16 +159,26 @@ public class ControladorFuncionario implements IControladorFuncionario {
         boolean matriculaValida = verificaMatricula(matricula);
 
         if (nomeValido) {
-            if (matriculaValida) {
+            if (matriculaAntiga != matricula) {
+                if (matriculaValida) {
+                    Funcionario funcionarioNaoEditado = this.funcionarioDAO.get(matriculaAntiga);
+                    this.funcionarioDAO.remove(funcionarioNaoEditado);
+                    funcionarioNaoEditado = null;
+                    Funcionario funcionarioEditado = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
+                    funcionarioDAO.put(funcionarioEditado);
+                    this.telaEditarFuncionario.exibeFuncionarioEditadoComSucesso();
+                    this.telaFuncionario.updateData();
+                } else {
+                    this.telaEditarFuncionario.exibeMatriculaJaExiste();
+                }
+            } else {
                 Funcionario funcionarioNaoEditado = this.funcionarioDAO.get(matriculaAntiga);
                 this.funcionarioDAO.remove(funcionarioNaoEditado);
                 funcionarioNaoEditado = null;
-                Funcionario funcionarioEditado = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
+                Funcionario funcionarioEditado = new Funcionario(matriculaAntiga, nome, dataNascimento, telefone, salario, cargo);
                 funcionarioDAO.put(funcionarioEditado);
                 this.telaEditarFuncionario.exibeFuncionarioEditadoComSucesso();
                 this.telaFuncionario.updateData();
-            } else {
-                this.telaEditarFuncionario.exibeMatriculaJaExiste();
             }
         } else {
             this.telaEditarFuncionario.exibeErroNome();
