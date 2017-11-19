@@ -20,12 +20,12 @@ import javax.swing.JFrame;
 public class TelaEditarCargo extends JFrame {
 	
     private ControladorCargo controlador;
-    private GerenciadorBotoes brManager;
+    //private GerenciadorBotoes btManager;
     
     public TelaEditarCargo(ControladorCargo owner) {
         super(Constantes.GERENCIAR_FUNCIONARIO_EDITAR);
         this.controlador = owner;
-        this.btManager = new TelaEditarFuncionario.GerenciadorBotoes();
+        //this.btManager = new GerenciadorBotoes();
 
         configuraTela();
     }
@@ -45,26 +45,26 @@ public class TelaEditarCargo extends JFrame {
     }
 
     private void configuraTela() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
     
-    private class GerenciadorBotoes implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-                if (e.getSource().equals(btConfirmar)) {
-                ControladorFuncionario.getInstance().editaFuncionario(codigoAntigo, Integer.parseInt(tfCodigo.getText()),
-                        tfNome.getText(), tfDataNascimento.getText(), Integer.parseInt(tfTelefone.getText()),
-                        Integer.parseInt(tfSalario.getText()), (Cargo) comboCargos.getSelectedItem());
-                setVisible(false);
-            }
-
-            if (e.getSource().equals(btCancelar)) {
-                setVisible(false);
-            }
-        }
-
-    }
+//    private class GerenciadorBotoes implements ActionListener {
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//                if (e.getSource().equals(btConfirmar)) {
+//                ControladorFuncionario.getInstance().editaFuncionario(codigoAntigo, Integer.parseInt(tfCodigo.getText()),
+//                        tfNome.getText(), tfDataNascimento.getText(), Integer.parseInt(tfTelefone.getText()),
+//                        Integer.parseInt(tfSalario.getText()), (Cargo) comboCargos.getSelectedItem());
+//                setVisible(false);
+//            }
+//
+//            if (e.getSource().equals(btCancelar)) {
+//                setVisible(false);
+//            }
+//        }
+//
+//    }
     
     private class GerenciadorCombos implements ActionListener {
 

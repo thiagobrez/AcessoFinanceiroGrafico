@@ -7,6 +7,7 @@ package br.ufsc.ine5605.acessofinanceiro.Telas;
 
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorCargo;
+import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
@@ -96,7 +97,7 @@ public class TelaCargo extends JFrame {
         constraints.gridy = 12;
         container.add(btVoltarMenuPrincipal, constraints);
 
-        setSize(720, 480);
+        setSize(900, 500);
         setLocationRelativeTo(null);
     }
     
@@ -182,14 +183,14 @@ public class TelaCargo extends JFrame {
         );
     }
 	
-	public void mensagemErroCodigoJaCadastrado() {
+    public void mensagemErroCodigoJaCadastrado() {
         JOptionPane.showMessageDialog(
                 null,
                 Constantes.CARGO_DELETADO_SUCESSO,
                 Constantes.CARGO_CADASTRAR,
                 JOptionPane.PLAIN_MESSAGE
         );
-    }
+    }      
 	
 	public void mensagemNomeInvalidoLetras() {
         JOptionPane.showMessageDialog(
@@ -214,18 +215,18 @@ public class TelaCargo extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource().equals(btCadastraCargo)) {
-        //        owner.exibeCadastraCargo();
+                ControladorCargo.getInstance().exibeCadastraCargo();
             }
             if (e.getSource().equals(btEditaCargo)) {
-           //     owner.exibeEditarCargoSelecionado(tbItens.getSelectedRow());
+                ControladorCargo.getInstance().exibeEditarCargoSelecionado(tbItens.getSelectedRow());
             }
             if (e.getSource().equals(btDeletaCargo)) {
-        //        owner.deletaCargoSelecionado(tbItens.getSelectedRow());
+                ControladorCargo.getInstance().deletaCargoSelecionado(tbItens.getSelectedRow());
                 updateData();
             }
             if (e.getSource().equals(btVoltarMenuPrincipal)) {
                 setVisible(false);
-                owner.voltarMenuPrincipal();
+                ControladorCargo.getInstance().voltarMenuPrincipal();
             }
         }
     }

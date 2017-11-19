@@ -9,6 +9,7 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.CargoHorarioEspecial;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Interfaces.IControladorCargo;
+import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.FuncionarioDAO;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCadastroCargo;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCargo;
@@ -31,10 +32,10 @@ public class ControladorCargo implements IControladorCargo {
     private TelaCadastroCargo telaCadastroCargo;
 
     private ControladorCargo() {
-        this.telaCargo = new TelaCargo(this);
-        this.cargoDAO = new CargoDAO();
-        this.telaEditarCargo = new TelaEditarCargo(this);
-        this.telaCadastroCargo = new TelaCadastroCargo(this);
+//        this.telaCargo = new TelaCargo(this);
+//        this.cargoDAO = new CargoDAO();
+//        this.telaEditarCargo = new TelaEditarCargo(this);
+//        this.telaCadastroCargo = new TelaCadastroCargo(this);
     }
 
     public static ControladorCargo getInstance() {
@@ -131,15 +132,26 @@ public class ControladorCargo implements IControladorCargo {
     /**
      * Caso o cargo exista na lista de cargos ele é deletado da mesma
      *
-     * @param cargo que vai ser deletado
+     * @param indexSelecionado do cargo selecionado que vai ser deletado
      */
-    public void deletaCargo(Cargo cargo) {
-        Cargo cargoIndefinido = encontraCargoIndefinido();
-        if (cargo != null) {
-            ControladorPrincipal.getInstance().deletaCargosFuncionarios(cargo, cargoIndefinido);
-            cargoDAO.remove(cargo.getCodigo());
-            this.telaCargo.mensagemCargoDeletadoSucesso();
+    public void deletaCargoSelecionado(int indexSelecionado) {
+        if (indexSelecionado != -1) {
+            ArrayList<Integer> codigos = this.cargoDAO.getCodigos();
+            int codigo = codigos.get(indexSelecionado);
+            Cargo cargo = this.cargoDAO.get(codigo);
+            this.cargoDAO.remove(cargo);
+            cargo = null;
+            this.telaCargo.exibeCargoDeletadoComSucesso();
+        } else {
+            this.telaCargo.exibeCargoNaoSelecionado();
         }
+        
+//        Cargo cargoIndefinido = encontraCargoIndefinido();
+//        if (cargo != null) {
+//            ControladorPrincipal.getInstance().deletaCargosFuncionarios(cargo, cargoIndefinido);
+//            cargoDAO.remove(cargo.getCodigo());
+//            this.telaCargo.mensagemCargoDeletadoSucesso();
+//        }
     }
 
     /**
