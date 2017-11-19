@@ -26,8 +26,8 @@ public class ControladorDataSistema implements IControladorDataSistema {
     private DataSistemaDAO dataSistema;
 
     public ControladorDataSistema() {
-        this.telaDataHora = new TelaDataHoraSistema(this);
-        this.telaAlterarDataSistema = new TelaAlterarDataSistema(this);
+        this.telaDataHora = new TelaDataHoraSistema();
+        this.telaAlterarDataSistema = new TelaAlterarDataSistema();
         this.dataSistema = new DataSistemaDAO();
     }
 

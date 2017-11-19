@@ -45,6 +45,7 @@ public class Constantes {
     //ACESSO AO FINANCEIRO
     public static final String ACESSO_FINANCEIRO = "Acesso ao Financeiro";
     public static final String ACESSO_INSIRA_MATRICULA = "Insira a matrícula de acesso: ";
+    public static final String ACESSO_MATRICULA_INVALIDA = "Matrícula inválida";
     public static final String ACESSO_BOTAO_ACESSAR = "Acessar";
     public static final String ACESSO_NEGADO_TITULO = "Acesso Negado";
     public static final String ACESSO_PERMITIDO = "Financeiro acessado com sucesso!";

@@ -23,18 +23,19 @@ import javax.swing.JTextField;
  */
 public class TelaAcesso extends JFrame {
 
-    private ControladorAcesso owner;
 	private JLabel lbPrincipal;
 	private JTextField tfMatricula;
 	private JButton btAcesso;
 	private JButton btVoltar;
 
-    public TelaAcesso(ControladorAcesso owner) {
+    public TelaAcesso() {
 		super(Constantes.ACESSO_FINANCEIRO);
-        this.owner = owner;
 		configuraTela();
     }
 
+	/**
+	 * Configura os elementos que aparecerao na interface grafica
+	 */
 	private void configuraTela() {
 		Container container = getContentPane();
 		container.setLayout(new FlowLayout());
@@ -65,7 +66,7 @@ public class TelaAcesso extends JFrame {
 	}
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi permitido.
+     * Exibe modal indicando que o acesso ao financeiro foi permitido.
      */
     public void exibeAcessoPermitido() {
 		JOptionPane.showMessageDialog(
@@ -77,7 +78,7 @@ public class TelaAcesso extends JFrame {
     }
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi negado pois a matricula
+     * Exibe modal indicando que o acesso ao financeiro foi negado pois a matricula
      * nao existe.
      */
     public void exibeAcessoNegadoMatriculaInexistente() {
@@ -90,7 +91,7 @@ public class TelaAcesso extends JFrame {
     }
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi negado pois o cargo nao
+     * Exibe modal indicando que o acesso ao financeiro foi negado pois o cargo nao
      * tem acesso.
      */
     public void exibeAcessoNegadoCargoSemAcesso() {
@@ -103,7 +104,7 @@ public class TelaAcesso extends JFrame {
     }
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi negado pois o horario nao
+     * Exibe modal indicando que o acesso ao financeiro foi negado pois o horario nao
      * eh permitido para o cargo do funcionario tentando o acesso.
      */
     public void exibeAcessoNegadoHorarioNaoPermitido() {
@@ -116,8 +117,8 @@ public class TelaAcesso extends JFrame {
     }
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi negado pois o acesso do
-     * funcionario foi bloqueado.
+     * Exibe modal indicando que o acesso ao financeiro foi negado pois o acesso
+	 * do funcionario foi bloqueado.
      */
     public void exibeAcessoNegadoAcessoBloqueado() {
 		JOptionPane.showMessageDialog(
@@ -128,12 +129,28 @@ public class TelaAcesso extends JFrame {
 		);
     }
 
+	/**
+	 * Exibe modal indicando que a matricula inserida eh invalida.
+	 */
+	public void exibeMatriculaInvalida() {
+		JOptionPane.showMessageDialog(
+				null,
+				Constantes.ACESSO_MATRICULA_INVALIDA,
+				Constantes.ACESSO_NEGADO_TITULO,
+				JOptionPane.PLAIN_MESSAGE
+		);
+    }
+	
 	private class GerenciadorBotoes implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(btAcesso)) {
-				owner.acessaFinanceiro(Integer.parseInt(tfMatricula.getText()));
+				if(ControladorAcesso.getInstance().verificaMatricula(tfMatricula.getText())) {
+					ControladorAcesso.getInstance().acessaFinanceiro(Integer.parseInt(tfMatricula.getText()));
+				} else {
+					exibeMatriculaInvalida();
+				}
 			} else if(e.getSource().equals(btVoltar)) {
 				setVisible(false);
 			}
