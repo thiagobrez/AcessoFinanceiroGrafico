@@ -5,7 +5,6 @@
  */
 package br.ufsc.ine5605.acessofinanceiro.Telas;
 
-import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorRegistroAcessoNegado;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Motivo;
@@ -19,9 +18,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -41,7 +44,12 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	private JButton btFiltrar;
 	private JComboBox comboFiltroMotivo;
 	private JTextField tfFiltroMatricula;
+	private JLabel lbFiltroMotivo;
+	private JLabel lbFiltroMatricula;
 	private List<Integer> matriculas;
+	private JPanel painelFiltroMotivo;
+	private JPanel painelFiltroMatricula;
+	private JPanel painelBotoes;
 	
 
     public TelaRegistroAcessoNegado(ControladorRegistroAcessoNegado owner) {
@@ -59,10 +67,10 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		//Configuracao constraints
 		this.constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.CENTER;
-		constraints.gridwidth = 4;
-		constraints.gridheight = 4;
-//		constraints.gridx = 2;
-		constraints.gridy = 1;
+        constraints.gridwidth = 15;
+        constraints.gridheight = 15;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
 		
 		//Configuracao tbItens
 		this.tbItens = new JTable();
@@ -75,32 +83,61 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		//Configuracao btManager
 		GerenciadorBotoes btManager = new GerenciadorBotoes();
 		
+		//Configuracao lbFiltroMotivo
+		lbFiltroMotivo = new JLabel(Constantes.REGISTRO_LABEL_FILTRO_MOTIVO);
+		
 		//Configuracao comboFiltroMotivo
 		Object[] motivos = {
-			Constantes.REGISTRO_FILTRO_NENHUM,
+			Constantes.REGISTRO_FILTRO_TODOS,
 			Motivo.MATRICULA_INEXISTENTE,
 			Motivo.HORARIO_NAO_PERMITIDO,
 			Motivo.CARGO_SEM_ACESSO,
 			Motivo.ACESSO_BLOQUEADO
 		};
 		comboFiltroMotivo = new JComboBox(motivos);
-		container.add(comboFiltroMotivo);
+		
+		//Configuracao lbFiltroMatricula
+		lbFiltroMatricula = new JLabel(Constantes.REGISTRO_LABEL_FILTRO_MATRICULA);
 		
 		//Configuracao tfFiltroMatricula
 		tfFiltroMatricula = new JTextField(10);
-		container.add(tfFiltroMatricula);
 		
 		//Configuracao btFiltrar
 		btFiltrar = new JButton(Constantes.REGISTRO_BOTAO_FILTRAR);
 		btFiltrar.addActionListener(btManager);
-		container.add(btFiltrar);
 		
 		//Configuracao btVoltar
 		btVoltar = new JButton(Constantes.COMUM_BOTAO_VOLTAR);
 		btVoltar.addActionListener(btManager);
-		container.add(btVoltar);
 		
-		setSize(600, 400);
+		//Configuracao painelFiltroMotivo
+        this.painelFiltroMotivo = new JPanel();
+        painelFiltroMotivo.setLayout(new BoxLayout(painelFiltroMotivo, BoxLayout.LINE_AXIS));
+        this.painelFiltroMotivo.setVisible(true);
+		painelFiltroMotivo.add(lbFiltroMotivo);
+		painelFiltroMotivo.add(comboFiltroMotivo);
+		constraints.gridy = 20;
+        container.add(painelFiltroMotivo, constraints);
+
+		//Configuracao painelFiltroMatricula
+        this.painelFiltroMatricula = new JPanel();
+        painelFiltroMatricula.setLayout(new BoxLayout(painelFiltroMatricula, BoxLayout.LINE_AXIS));
+        this.painelFiltroMatricula.setVisible(true);
+		painelFiltroMatricula.add(lbFiltroMatricula);
+		painelFiltroMatricula.add(tfFiltroMatricula);
+		constraints.gridy = 40;
+        container.add(painelFiltroMatricula, constraints);
+		
+		//Configuracao painelBotoes
+		this.painelBotoes = new JPanel();
+		painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.LINE_AXIS));
+		this.painelBotoes.setVisible(true);
+		painelBotoes.add(btFiltrar);
+        painelBotoes.add(btVoltar);
+		constraints.gridy = 60;
+		container.add(painelBotoes, constraints);
+		
+		setSize(600, 500);
 		setLocationRelativeTo(null);
 	}
 	
@@ -140,223 +177,18 @@ public class TelaRegistroAcessoNegado extends JFrame {
      * @return int opcao escolhida pelo usuario
      */
     public void exibeMenuRelatorio() {
-		updateData(Constantes.REGISTRO_FILTRO_NENHUM, "");
+		updateData(Constantes.REGISTRO_FILTRO_TODOS, Constantes.REGISTRO_FILTRO_VAZIO);
 		setVisible(true);
     }
 
-    /**
-     * Exibe o menu com as opcoes de filtro da emissao do relatorio por motivos
-     * existentes e trata se o input recebido eh realmente um inteiro.
-     *
-     * @return int opcao escolhida pelo usuario
-     */
-    public int exibeFiltroPorMotivo() {
-		return 0;
-//        int opcao = 0;
-//        boolean opcaoInvalida = true;
-//        while (opcaoInvalida) {
-//            try {
-//                System.out.println();
-//                System.out.println(Constantes.RELATORIO_FILTRO_ESCOLHA_MOTIVO);
-//                System.out.println(Constantes.RELATORIO_FILTRO_MOTIVO_MATRICULA_INEXISTENTE);
-//                System.out.println(Constantes.RELATORIO_FILTRO_MOTIVO_CARGO_SEM_ACESSO);
-//                System.out.println(Constantes.RELATORIO_FILTRO_MOTIVO_HORARIO_NAO_PERMITIDO);
-//                System.out.println(Constantes.RELATORIO_FILTRO_MOTIVO_ACESSO_BLOQUEADO);
-//                System.out.println(Constantes.VOLTAR_5);
-//                System.out.println();
-//                System.out.println(Constantes.O_QUE_DESEJA_FAZER);
-//                opcao = teclado.nextInt();
-//                opcaoInvalida = false;
-//            } catch (InputMismatchException e) {
-//                teclado.next();
-//                System.out.println();
-//                System.out.println(Constantes.OPCAO_INVALIDA);
-//                System.out.println();
-//            }
-//        }
-//        return opcao;
-    }
-
-    /**
-     * Exibe o input para insercao da matricula a ser utilizada para filtrar a
-     * emissao do relatorio e trata se a matricula inserida eh realmente um
-     * inteiro.
-     *
-     * @return int matricula inserida pelo usuario.
-     */
-    public int exibeFiltroPorMatricula() {
-		return 0;
-//        int matricula = 0;
-//        boolean matriculaInvalida = true;
-//        while (matriculaInvalida) {
-//            try {
-//                System.out.println();
-//                System.out.println(Constantes.INSIRA_MATRICULA);
-//                System.out.println();
-//                matricula = teclado.nextInt();
-//                matriculaInvalida = false;
-//            } catch (InputMismatchException e) {
-//                teclado.next();
-//                System.out.println();
-//                System.out.println(Constantes.MATRICULA_INVALIDA);
-//                System.out.println();
-//            }
-//        }
-//        return matricula;
-    }
-
-    /**
-     * Exibe o relatorio de registros de acesso negado pelo motivo filtrado.
-     *
-     * @param registrosEncontrados colecao de registros encontrados pelo motivo
-     * @param encontrouRegistro recebe true se a colecao registrosEncontrados
-     * nao estiver vazia e false se estiver
-     * @param motivo motivo pelo qual o relatorio a ser exibido foi filtrado
-     * @return int opcao utilizada para voltar ao menu principal
-     */
-    public void exibeRelatorioPorMotivo(ArrayList<RegistroAcessoNegado> registrosEncontrados, boolean encontrouRegistro, Motivo motivo) {
-        if (!encontrouRegistro) {
-            System.out.println();
-            System.out.println(Constantes.RELATORIO_REGISTRO_NENHUM_ENCONTRADO);
-        } else {
-            int numeroRegistro = 0;
-            switch (motivo) {
-                case ACESSO_BLOQUEADO:
-                    System.out.println();
-                    System.out.println(Constantes.RELATORIO_ACESSO_MOTIVO_ACESSO_BLOQUEADO);
-                    System.out.println();
-                    break;
-                case MATRICULA_INEXISTENTE:
-                    System.out.println();
-                    System.out.println(Constantes.RELATORIO_ACESSO_MOTIVO_MATRICULA_INEXISTENTE);
-                    System.out.println();
-                    break;
-                case CARGO_SEM_ACESSO:
-                    System.out.println();
-                    System.out.println(Constantes.RELATORIO_ACESSO_MOTIVO_CARGO_SEM_ACESSO);
-                    System.out.println();
-                    break;
-                case HORARIO_NAO_PERMITIDO:
-                    System.out.println();
-                    System.out.println(Constantes.RELATORIO_ACESSO_MOTIVO_HORARIO_NAO_PERMITIDO);
-                    System.out.println();
-                    break;
-            }
-            for (RegistroAcessoNegado registro : registrosEncontrados) {
-                numeroRegistro++;
-                System.out.println();
-                System.out.println(Constantes.RELATORIO_REGISTRO_CABECALHO + numeroRegistro);
-                System.out.println(Constantes.RELATORIO_REGISTRO_DATA + registro.getData());
-                System.out.println(Constantes.RELATORIO_REGISTRO_MATRICULA + registro.getMatricula());
-                System.out.println();
-            }
-        }
-    }
-
-    /**
-     * Exibe o relatorio de registros de acesso negado pela matricula filtrada.
-     *
-     * @param registrosEncontrados colecao de registros encontrados com a
-     * matricula filtrada
-     * @param matricula matricula pela qual o relatorio a ser exibido foi
-     * filtrado
-     * @param encontrouRegistro recebe true se a colecao registrosEncontrados
-     * nao estiver vazia e false se estiver
-     * @return int opcao utilizada para voltar ao menu principal
-     */
-    public void exibeRelatorioPorMatricula(ArrayList<RegistroAcessoNegado> registrosEncontrados, int matricula, boolean encontrouRegistro) {
-        if (!encontrouRegistro) {
-            System.out.println();
-            System.out.println(Constantes.RELATORIO_REGISTRO_NENHUM_ENCONTRADO);
-            System.out.println();
-        } else {
-            int numeroRegistro = 0;
-            System.out.println();
-            System.out.println(Constantes.RELATORIO_ACESSO_MATRICULA + matricula);
-            for (RegistroAcessoNegado registro : registrosEncontrados) {
-                numeroRegistro++;
-                System.out.println();
-                System.out.println(Constantes.RELATORIO_REGISTRO_CABECALHO + numeroRegistro);
-                System.out.println(Constantes.RELATORIO_REGISTRO_DATA + registro.getData());
-                System.out.println(Constantes.RELATORIO_REGISTRO_MOTIVO + registro.getMotivo());
-                System.out.println();
-            }
-        }
-    }
-
-    /**
-     * Imprime que a opcao inserida pelo usuario nao existe.
-     */
-    public void exibeOpcaoInexistente() {
-        System.out.println();
-        System.out.println(Constantes.OPCAO_INEXISTENTE);
-        System.out.println();
-        System.out.println(Constantes.O_QUE_DESEJA_FAZER);
-        System.out.println();
-    }
-
-    /**
-     * Imprime que a matricula inserida pelo usuario nao existe, oferece um menu
-     * para ele tentar inserir novamente ou voltar ao menu principal e trata se
-     * a opcao inserida eh realmente um inteiro.
-     *
-     * @return int opcao inserida pelo usuario
-     */
-    public int exibeMatriculaInexistente() {
-		return 0;
-//        int opcao = 0;
-//        boolean opcaoInvalida = true;
-//        System.out.println();
-//        System.out.println(Constantes.MATRICULA_INEXISTENTE);
-//        System.out.println();
-//        while (opcaoInvalida) {
-//            try {
-//                System.out.println();
-//                System.out.println(Constantes.INSIRA_OPCAO);
-//                System.out.println();
-//                System.out.println(Constantes.TENTAR_NOVAMENTE);
-//                System.out.println(Constantes.VOLTAR_2);
-//                System.out.println();
-//                opcao = teclado.nextInt();
-//                opcaoInvalida = false;
-//            } catch (InputMismatchException e) {
-//                teclado.next();
-//                System.out.println();
-//                System.out.println(Constantes.OPCAO_INVALIDA);
-//                System.out.println();
-//            }
-//        }
-//        return opcao;
-    }
-
-    /**
-     * Exibe um menu para o usuario escolher a opcao desejada, para tentar
-     * inserir a matricula novamente ou voltar ao menu principal.
-     *
-     * @return int opcao escolhida pelo usuario
-     */
-    public int exibeNovaTentativa() {
-		return 0;
-//        int opcao = 0;
-//        boolean opcaoInvalida = true;
-//        while (opcaoInvalida) {
-//            try {
-//                System.out.println();
-//                System.out.println(Constantes.INSIRA_OPCAO);
-//                System.out.println();
-//                System.out.println(Constantes.TENTAR_NOVAMENTE);
-//                System.out.println(Constantes.VOLTAR_MENU_PRINCIPAL_2);
-//                System.out.println();
-//                opcao = teclado.nextInt();
-//                opcaoInvalida = false;
-//            } catch (InputMismatchException e) {
-//                System.out.println();
-//                System.out.println(Constantes.OPCAO_INVALIDA);
-//                System.out.println();
-//            }
-//        }
-//        return opcao;
-    }
+	public void exibeFiltroMatriculaInvalido() {
+		JOptionPane.showMessageDialog(
+			null,
+			Constantes.REGISTRO_FILTRO_MATRICULA_INVALIDA,
+			Constantes.REGISTRO_FILTRO_INVALIDO,
+			JOptionPane.PLAIN_MESSAGE
+		);
+	}
 
 	private class GerenciadorBotoes implements ActionListener {
 
@@ -365,10 +197,14 @@ public class TelaRegistroAcessoNegado extends JFrame {
 			if(e.getSource().equals(btVoltar)) {
 				setVisible(false);
 			} else if(e.getSource().equals(btFiltrar)) {
-				updateData(
-					comboFiltroMotivo.getSelectedItem().toString(),
-					tfFiltroMatricula.getText()
-				);
+				if(ControladorRegistroAcessoNegado.getInstance().verificaFiltroMatricula(tfFiltroMatricula.getText())) {
+					updateData(
+						comboFiltroMotivo.getSelectedItem().toString(),
+						tfFiltroMatricula.getText()
+					);
+				} else {
+					exibeFiltroMatriculaInvalido();
+				}
 			}
 		}
 		

@@ -11,7 +11,6 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,12 +32,10 @@ public class TelaAcesso extends JFrame {
     public TelaAcesso(ControladorAcesso owner) {
 		super(Constantes.ACESSO_FINANCEIRO);
         this.owner = owner;
-		try {
-			configuraTela();
-		} catch (ParseException e) {}
+		configuraTela();
     }
 
-	private void configuraTela() throws ParseException {
+	private void configuraTela() {
 		Container container = getContentPane();
 		container.setLayout(new FlowLayout());
 		
@@ -63,7 +60,7 @@ public class TelaAcesso extends JFrame {
 		btVoltar.addActionListener(btManager);
 		container.add(btVoltar);
 	
-		setSize(360, 150);
+		setSize(350, 100);
 		setLocationRelativeTo(null);
 	}
 
@@ -135,7 +132,6 @@ public class TelaAcesso extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// usar equals?
 			if(e.getSource().equals(btAcesso)) {
 				owner.acessaFinanceiro(Integer.parseInt(tfMatricula.getText()));
 			} else if(e.getSource().equals(btVoltar)) {

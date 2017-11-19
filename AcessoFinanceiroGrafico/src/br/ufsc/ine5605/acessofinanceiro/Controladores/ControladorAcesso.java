@@ -79,7 +79,7 @@ public class ControladorAcesso {
 	 * @param motivo motivo pelo qual o acesso foi negado
 	 */
 	public void novoRegistroAcessoNegado(Date data, int matricula, Motivo motivo) {
-		ControladorPrincipal.getInstance().novoRegistroAcessoNegado(data, matricula, motivo);
+		ControladorRegistroAcessoNegado.getInstance().novoRegistroAcessoNegado(data, matricula, motivo);
 	}
 
 	/**
