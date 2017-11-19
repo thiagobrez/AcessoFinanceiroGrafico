@@ -24,6 +24,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,11 +37,10 @@ public class TelaRegistroAcessoNegado extends JFrame {
 	private GridBagConstraints constraints;
 	private JScrollPane spBaseTabela;
 	private JTable tbItens;
-//	private DefaultTableModel model;
-//	private TableRowSorter<DefaultTableModel> sorter;
 	private JButton btVoltar;
+	private JButton btFiltrar;
 	private JComboBox comboFiltroMotivo;
-	private JComboBox comboFiltroMatricula;
+	private JTextField tfFiltroMatricula;
 	private List<Integer> matriculas;
 	
 
@@ -72,14 +72,8 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		spBaseTabela = new JScrollPane(tbItens);
 		container.add(spBaseTabela, constraints);
 		
-		//Configuracao btManager e comboManager
+		//Configuracao btManager
 		GerenciadorBotoes btManager = new GerenciadorBotoes();
-		GerenciadorCombos comboManager = new GerenciadorCombos();
-		
-		//Configuracao btVoltar
-		btVoltar = new JButton(Constantes.COMUM_BOTAO_VOLTAR);
-		btVoltar.addActionListener(btManager);
-		container.add(btVoltar);
 		
 		//Configuracao comboFiltroMotivo
 		Object[] motivos = {
@@ -90,18 +84,24 @@ public class TelaRegistroAcessoNegado extends JFrame {
 			Motivo.ACESSO_BLOQUEADO
 		};
 		comboFiltroMotivo = new JComboBox(motivos);
-		comboFiltroMotivo.addActionListener(comboManager);
 		container.add(comboFiltroMotivo);
 		
-		//Configuracao comboFiltroMatricula
-		this.matriculas = new ArrayList<>();
-		comboFiltroMatricula = new JComboBox(matriculas.toArray());
-		comboFiltroMatricula.addActionListener(comboManager);
-		container.add(comboFiltroMatricula);
+		//Configuracao tfFiltroMatricula
+		tfFiltroMatricula = new JTextField(10);
+		container.add(tfFiltroMatricula);
+		
+		//Configuracao btFiltrar
+		btFiltrar = new JButton(Constantes.REGISTRO_BOTAO_FILTRAR);
+		btFiltrar.addActionListener(btManager);
+		container.add(btFiltrar);
+		
+		//Configuracao btVoltar
+		btVoltar = new JButton(Constantes.COMUM_BOTAO_VOLTAR);
+		btVoltar.addActionListener(btManager);
+		container.add(btVoltar);
 		
 		setSize(600, 400);
 		setLocationRelativeTo(null);
-		
 	}
 	
 	public void updateData(String filtroMotivo, String filtroMatricula) {
@@ -121,23 +121,6 @@ public class TelaRegistroAcessoNegado extends JFrame {
 				.getInstance()
 				.filtraRegistros(filtroMotivo, filtroMatricula);
 		
-//		Collection<RegistroAcessoNegado> listaRegistros = ControladorRegistroAcessoNegado.getInstance().getListaRegistrosAcessosNegados();
-		
-//		switch(filtro) {
-//			case Constantes.MOTIVO_MATRICULA_INEXISTENTE:
-//				listaRegistros = ControladorRegistroAcessoNegado.getInstance().encontraRegistrosPorMotivo(Motivo.MATRICULA_INEXISTENTE);
-//				break;
-//			case Constantes.MOTIVO_CARGO_SEM_ACESSO:
-//				listaRegistros = ControladorRegistroAcessoNegado.getInstance().encontraRegistrosPorMotivo(Motivo.CARGO_SEM_ACESSO);
-//				break;
-//			case Constantes.MOTIVO_HORARIO_NAO_PERMITIDO:
-//				listaRegistros = ControladorRegistroAcessoNegado.getInstance().encontraRegistrosPorMotivo(Motivo.HORARIO_NAO_PERMITIDO);
-//				break;
-//			case Constantes.MOTIVO_ACESSO_BLOQUEADO:
-//				listaRegistros = ControladorRegistroAcessoNegado.getInstance().encontraRegistrosPorMotivo(Motivo.ACESSO_BLOQUEADO);
-//				break;
-//		}
-		
 		for(RegistroAcessoNegado registro : listaRegistros) {
 			modelTbItens.addRow(new Object[]{
 				registro.getData(),
@@ -146,14 +129,6 @@ public class TelaRegistroAcessoNegado extends JFrame {
 			});
 		}
 		tbItens.setModel(modelTbItens);
-		
-		//Configuracao comboFiltroMatricula
-		this.matriculas = ControladorPrincipal.getInstance().getMatriculas();
-		comboFiltroMatricula.removeAllItems();
-		comboFiltroMatricula.addItem(Constantes.REGISTRO_FILTRO_NENHUM);
-		for(int matricula : this.matriculas) {
-			comboFiltroMatricula.addItem(matricula);
-		}
 		
 		this.repaint();
 	}
@@ -165,7 +140,7 @@ public class TelaRegistroAcessoNegado extends JFrame {
      * @return int opcao escolhida pelo usuario
      */
     public void exibeMenuRelatorio() {
-		updateData(Constantes.REGISTRO_FILTRO_NENHUM, Constantes.REGISTRO_FILTRO_NENHUM);
+		updateData(Constantes.REGISTRO_FILTRO_NENHUM, "");
 		setVisible(true);
     }
 
@@ -389,29 +364,12 @@ public class TelaRegistroAcessoNegado extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(btVoltar)) {
 				setVisible(false);
-			}
-		}
-		
-	}
-
-	private class GerenciadorCombos implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if(e.getSource().equals(comboFiltroMotivo)) {
-//				if(e.)
+			} else if(e.getSource().equals(btFiltrar)) {
 				updateData(
 					comboFiltroMotivo.getSelectedItem().toString(),
-					String.valueOf(comboFiltroMatricula.getSelectedItem())
+					tfFiltroMatricula.getText()
 				);
 			}
-			
-//			if(e.getSource().equals(comboFiltroMotivo)) {
-//				comboFiltroMatricula.setSelectedItem(0);
-//				updateData(comboFiltroMotivo.getSelectedItem().toString());
-//			} else if (e.getSource().equals(comboFiltroMatricula)) {
-//				
-//			}
 		}
 		
 	}

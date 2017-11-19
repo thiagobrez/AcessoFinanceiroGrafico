@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 public class TelaEditarCargo extends JFrame {
 	
     private ControladorCargo controlador;
-    private GerenciadorBotoes brManager;
+    private GerenciadorBotoes btManager;
     
     public TelaEditarCargo(ControladorCargo owner) {
         super(Constantes.GERENCIAR_FUNCIONARIO_EDITAR);
@@ -53,7 +53,7 @@ public class TelaEditarCargo extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(btConfirmar)) {
-                ControladorFuncionario.getInstance().editaFuncionario(codigoAntiga, Integer.parseInt(tfCodigo.getText()),
+                ControladorFuncionario.getInstance().editaFuncionario(codigoAntigo, Integer.parseInt(tfCodigo.getText()),
                         tfNome.getText(), tfDataNascimento.getText(), Integer.parseInt(tfTelefone.getText()),
                         Integer.parseInt(tfSalario.getText()), (Cargo) comboCargos.getSelectedItem());
                 setVisible(false);

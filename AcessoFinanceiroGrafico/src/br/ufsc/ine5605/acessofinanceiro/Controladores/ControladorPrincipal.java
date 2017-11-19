@@ -46,7 +46,7 @@ public class ControladorPrincipal {
      * ao financeiro)
      */
     public void inicia() {
-        ControladorCargo.getInstance().criaCargoPadrao();
+//        ControladorCargo.getInstance().criaCargoPadrao();
         exibeMenuPrincipal();
     }
 	

@@ -55,6 +55,7 @@ public class Constantes {
     public static final String REGISTRO_NUMERO = "Número";
     public static final String REGISTRO_MOTIVO = "Motivo";
     public static final String REGISTRO_FILTRO_NENHUM = "Nenhum";
+    public static final String REGISTRO_BOTAO_FILTRAR = "Filtrar";
 
     //FUNCIONARIO
     public static final String GERENCIAR_FUNCIONARIO_TITULO = "Gerenciar Funcionários";
@@ -99,6 +100,7 @@ public class Constantes {
     public static final String CARGO_CODIGO_JA_CADASTRADO = "Código já cadastrado";
     public static final String CARGO_NOME_INVALIDO_LETRAS = "O nome deve conter somente letras";
     public static final String CARGO_NOME_INVALIDO_TAMANHO = "O nome deve conter mais de 3 caracteres";
+    
 
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do sistema";
