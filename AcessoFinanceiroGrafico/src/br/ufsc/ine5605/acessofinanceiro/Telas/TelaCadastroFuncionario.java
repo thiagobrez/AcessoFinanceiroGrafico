@@ -90,7 +90,7 @@ public class TelaCadastroFuncionario extends JFrame {
         lbNome = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_NOME);
 
         //Configuracao tfNome
-        tfNome = new JTextField(20);
+        tfNome = new JTextField(25);
 
         //Configuracao painelNome
         this.painelNome = new JPanel();
@@ -103,7 +103,7 @@ public class TelaCadastroFuncionario extends JFrame {
         lbMatricula = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_MATRICULA);
 
         //Configuracao tfMatricula
-        tfMatricula = new JTextField(20);
+        tfMatricula = new JTextField(23);
 
         //Configuracao painelMatricula
         this.painelMatricula = new JPanel();
@@ -116,7 +116,7 @@ public class TelaCadastroFuncionario extends JFrame {
         lbDataNascimento = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_DATA_NASCIMENTO);
 
         //Configuracao tfDataNascimento
-        tfDataNascimento = new JTextField(20);
+        tfDataNascimento = new JTextField(18);
 
         //Configuracao painelDataNascimento
         this.painelDataNascimento = new JPanel();
@@ -138,7 +138,7 @@ public class TelaCadastroFuncionario extends JFrame {
         lbTelefone = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_TELEFONE);
 
         //Configuracao tfTelefone
-        tfTelefone = new JTextField(20);
+        tfTelefone = new JTextField(24);
 
         //Configuracao painelTelefone
         this.painelTelefone = new JPanel();
@@ -151,7 +151,7 @@ public class TelaCadastroFuncionario extends JFrame {
         lbSalario = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_SALARIO);
 
         //Configuracao tfSalario
-        tfSalario = new JTextField(20);
+        tfSalario = new JTextField(25);
 
         //Configuracao painelSalario
         this.painelSalario = new JPanel();
