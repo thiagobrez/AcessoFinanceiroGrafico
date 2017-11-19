@@ -94,6 +94,8 @@ public class Constantes {
     public static final String CARGO_FIM_MANHA = "Hora Fim Manhã";
     public static final String CARGO_INICIO_TARDE = "Hora Inicio Tarde";
     public static final String CARGO_FIM_TARDE = "Hora Fim Tarde";
+    public static final String CARGO_FIM_ESPECIAL = "Hora Fim Especial";
+    public static final String CARGO_INICIO_ESPECIAL = "Hora Inicio Especial";
     public static final String CARGO_DELETADO_SUCESSO = "Cargo deletado com sucesso!";
     public static final String CARGO_NADA_SELECIONADO = "Selecione um cargo.";
     public static final String CARGO_TIPO_GERENCIAL = "Gerencial";
