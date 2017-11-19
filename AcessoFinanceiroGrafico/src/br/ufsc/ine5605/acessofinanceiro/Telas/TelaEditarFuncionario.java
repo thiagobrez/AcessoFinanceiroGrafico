@@ -40,6 +40,7 @@ public class TelaEditarFuncionario extends JFrame {
     private JPanel painelNome;
     private JPanel painelMatricula;
     private JPanel painelDataNascimento;
+    private JPanel painelFormatoDataNascimento;
     private JPanel painelSalario;
     private JPanel painelTelefone;
     private JPanel painelCargo;
@@ -54,6 +55,7 @@ public class TelaEditarFuncionario extends JFrame {
     private JTextField tfMatricula;
     private JLabel lbDataNascimento;
     private JTextField tfDataNascimento;
+    private JLabel lbFormatoDataNascimento;
     private JLabel lbSalario;
     private JTextField tfSalario;
     private JLabel lbTelefone;
@@ -125,6 +127,15 @@ public class TelaEditarFuncionario extends JFrame {
         painelDataNascimento.add(lbDataNascimento);
         painelDataNascimento.add(tfDataNascimento);
 
+        //Configuracao lbFormatoDataNascimento
+        lbFormatoDataNascimento = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_FORMATO_DATA_NASCIMENTO);
+
+        //Configuracao painelFormatoDataNascimento
+        this.painelFormatoDataNascimento = new JPanel();
+        painelFormatoDataNascimento.setLayout(new BoxLayout(painelFormatoDataNascimento, BoxLayout.LINE_AXIS));
+        this.painelFormatoDataNascimento.setVisible(true);
+        painelFormatoDataNascimento.add(lbFormatoDataNascimento);
+
         //Configuracao lbTelefone
         lbTelefone = new JLabel(Constantes.GERENCIAR_FUNCIONARIO_TELEFONE);
 
@@ -190,14 +201,16 @@ public class TelaEditarFuncionario extends JFrame {
         constraints.gridy = 3;
         painelPrincipal.add(painelDataNascimento, constraints);
         constraints.gridy = 4;
-        painelPrincipal.add(painelTelefone, constraints);
+        painelPrincipal.add(painelFormatoDataNascimento, constraints);
         constraints.gridy = 5;
-        painelPrincipal.add(painelSalario, constraints);
+        painelPrincipal.add(painelTelefone, constraints);
         constraints.gridy = 6;
-        painelPrincipal.add(painelCargo, constraints);
+        painelPrincipal.add(painelSalario, constraints);
         constraints.gridy = 7;
-        painelPrincipal.add(painelBotoes, constraints);
+        painelPrincipal.add(painelCargo, constraints);
         constraints.gridy = 8;
+        painelPrincipal.add(painelBotoes, constraints);
+        constraints.gridy = 9;
         container.add(painelPrincipal, constraints);
 
         setSize(500, 300);

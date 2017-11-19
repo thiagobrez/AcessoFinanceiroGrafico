@@ -79,8 +79,6 @@ public class ControladorDataSistema implements IControladorDataSistema {
             Date data = new SimpleDateFormat("dd-MM-yyyy HH:mm")
                     .parse(dataEHoraInseridos);
             this.dataSistema.set(data);
-            System.out.println(this.dataSistema.get().toString());
-
             this.telaAlterarDataSistema.exibeDataHoraAlteradoSucesso();
             this.telaDataHora.updateData();
             this.telaAlterarDataSistema.fechar();

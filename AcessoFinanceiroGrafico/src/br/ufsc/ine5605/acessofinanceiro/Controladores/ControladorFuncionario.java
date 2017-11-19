@@ -13,8 +13,11 @@ import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCadastroFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaFuncionario;
 import java.lang.Character;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  *
@@ -98,18 +101,23 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
         boolean nomeValido = verificaNomeInserido(nome);
         boolean matriculaValida = verificaMatricula(matricula);
+        boolean dataNascimentoValida = verificaDataNascimento(dataNascimento);
 
-        if (nomeValido) {
-            if (matriculaValida) {
-                Funcionario funcionario = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
-                funcionarioDAO.put(funcionario);
-                this.telaCadastroFuncionario.exibeFuncionarioCadastradoComSucesso();
-                this.telaFuncionario.updateData();
+        if (dataNascimentoValida) {
+            if (nomeValido) {
+                if (matriculaValida) {
+                    Funcionario funcionario = new Funcionario(matricula, nome, dataNascimento, telefone, salario, cargo);
+                    funcionarioDAO.put(funcionario);
+                    this.telaCadastroFuncionario.exibeFuncionarioCadastradoComSucesso();
+                    this.telaFuncionario.updateData();
+                } else {
+                    this.telaCadastroFuncionario.exibeMatriculaJaExiste();
+                }
             } else {
-                this.telaCadastroFuncionario.exibeMatriculaJaExiste();
+                this.telaCadastroFuncionario.exibeErroNome();
             }
         } else {
-            this.telaCadastroFuncionario.exibeErroNome();
+            this.telaCadastroFuncionario.exibeDataNascimentoInvalida();
         }
 
     }
@@ -223,6 +231,17 @@ public class ControladorFuncionario implements IControladorFuncionario {
             return false;
         }
         return true;
+    }
+
+    public boolean verificaDataNascimento(String dataNascimentoInserida) {
+        try {
+            Date data = new SimpleDateFormat("dd-MM-yyyy")
+                    .parse(dataNascimentoInserida);
+            return true;
+
+        } catch (ParseException ex) {
+            return false;
+        }
     }
 
     @Override

@@ -77,6 +77,8 @@ public class Constantes {
     public static final String GERENCIAR_FUNCIONARIO_MATRICULA_JA_EXISTENTE = "O funcionário não cadastrado. Matrícula ja existente.";
     public static final String GERENCIAR_FUNCIONARIO_CONFIRMACAO_DELETAR = "Você deseja mesmo excluir o funcionário?";
     public static final String GERENCIAR_FUNCIONARIO_ERRO_NOME = "Erro: o nome deve possuir mais de 3 letras e não deve possuir números.";
+    public static final String GERENCIAR_FUNCIONARIO_DATA_NASCIMENTO_INVALIDA = "Data de Nascimento inválida. Utilize o formato correto.";
+    public static final String GERENCIAR_FUNCIONARIO_FORMATO_DATA_NASCIMENTO = "*Insira uma data de nascimento no formato dd-MM-yyyy";
 
     //CARGO
     public static final String CARGO_TITULO = "Gerenciar Cargo";
