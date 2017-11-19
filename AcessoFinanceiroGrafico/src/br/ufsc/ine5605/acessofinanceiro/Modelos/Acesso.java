@@ -23,7 +23,6 @@ public class Acesso {
     public Acesso(Date data, int matricula) {
         this.data = data;
         this.matricula = matricula;
-//        this.controladorAcesso = new ControladorAcesso();
     }
 
     public Date getData() {

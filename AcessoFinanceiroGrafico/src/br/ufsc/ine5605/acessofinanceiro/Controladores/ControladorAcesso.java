@@ -34,12 +34,17 @@ public class ControladorAcesso {
 	}
 	
 	/**
-	 * Exibe a tela para acesso do financeiro e trata o recebimento da matricula.
+	 * Exibe a tela para acesso do financeiro.
 	 */
     public void exibePainelAcesso() {
 		this.telaAcesso.setVisible(true);
     }
     
+	/**
+	 * Se validado o acesso, mostra modal indicando acesso permitido.
+	 * 
+	 * @param matricula matricula inserida para o acesso
+	 */
 	public void acessaFinanceiro(int matricula) {
 		if(validaAcessoFinanceiro(matricula)) {
 			telaAcesso.exibeAcessoPermitido();
@@ -78,6 +83,12 @@ public class ControladorAcesso {
         return false;
     }
 
+	/**
+	 * Verifica se a matricula inserida contem somente numeros.
+	 * 
+	 * @param matricula matricula verificada
+	 * @return true se contiver somente numeros
+	 */
 	public boolean verificaMatricula(String matricula) {
 		for (int i = 0; i < matricula.length(); i++) {
 			if(Character.isLetter(matricula.charAt(i))) return false;

@@ -33,6 +33,9 @@ public class TelaAcesso extends JFrame {
 		configuraTela();
     }
 
+	/**
+	 * Configura os elementos que aparecerao na interface grafica
+	 */
 	private void configuraTela() {
 		Container container = getContentPane();
 		container.setLayout(new FlowLayout());
@@ -63,7 +66,7 @@ public class TelaAcesso extends JFrame {
 	}
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi permitido.
+     * Exibe modal indicando que o acesso ao financeiro foi permitido.
      */
     public void exibeAcessoPermitido() {
 		JOptionPane.showMessageDialog(
@@ -75,7 +78,7 @@ public class TelaAcesso extends JFrame {
     }
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi negado pois a matricula
+     * Exibe modal indicando que o acesso ao financeiro foi negado pois a matricula
      * nao existe.
      */
     public void exibeAcessoNegadoMatriculaInexistente() {
@@ -88,7 +91,7 @@ public class TelaAcesso extends JFrame {
     }
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi negado pois o cargo nao
+     * Exibe modal indicando que o acesso ao financeiro foi negado pois o cargo nao
      * tem acesso.
      */
     public void exibeAcessoNegadoCargoSemAcesso() {
@@ -101,7 +104,7 @@ public class TelaAcesso extends JFrame {
     }
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi negado pois o horario nao
+     * Exibe modal indicando que o acesso ao financeiro foi negado pois o horario nao
      * eh permitido para o cargo do funcionario tentando o acesso.
      */
     public void exibeAcessoNegadoHorarioNaoPermitido() {
@@ -114,8 +117,8 @@ public class TelaAcesso extends JFrame {
     }
 
     /**
-     * Imprime na tela que o acesso ao financeiro foi negado pois o acesso do
-     * funcionario foi bloqueado.
+     * Exibe modal indicando que o acesso ao financeiro foi negado pois o acesso
+	 * do funcionario foi bloqueado.
      */
     public void exibeAcessoNegadoAcessoBloqueado() {
 		JOptionPane.showMessageDialog(
@@ -126,6 +129,9 @@ public class TelaAcesso extends JFrame {
 		);
     }
 
+	/**
+	 * Exibe modal indicando que a matricula inserida eh invalida.
+	 */
 	public void exibeMatriculaInvalida() {
 		JOptionPane.showMessageDialog(
 				null,

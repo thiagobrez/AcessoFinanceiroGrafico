@@ -35,13 +35,20 @@ public class ControladorRegistroAcessoNegado {
     }
 	
 	/**
-	 * Solicita a tela que exiba o menu para selecao de filtro para emissao do
-	 * relatorio e trata a opcao recebida.
+	 * Solicita a tela que exiba o menu do relatorio.
 	 */
     public void exibeRelatorio() {
 		telaRegistroAcessoNegado.exibeMenuRelatorio();
     }
 
+	/**
+	 * Filtra os registros que serao mostrados para o usuario a partir do motivo
+	 * e matricula escolhidos.
+	 * 
+	 * @param filtroMotivo motivo escolhido pelo usuario
+	 * @param filtroMatricula matricula inserida pelo usuario
+	 * @return 
+	 */
 	public ArrayList<RegistroAcessoNegado> filtraRegistros(String filtroMotivo, String filtroMatricula) {
 		ArrayList<RegistroAcessoNegado> registros = new ArrayList<>();
 		ArrayList<RegistroAcessoNegado> registrosMotivo = encontraRegistrosPorMotivo(filtroMotivo);
@@ -54,6 +61,13 @@ public class ControladorRegistroAcessoNegado {
 		return registrosMotivo;
 	}
 
+	/**
+	 * Verifica se a matricula inserida para o filtro de registros eh valida, se
+	 * contem somente numeros.
+	 * 
+	 * @param matricula matricula inserida pelo usuario
+	 * @return true se a matricula contiver somente numeros
+	 */
 	public boolean verificaFiltroMatricula(String matricula) {
 		for (int i = 0; i < matricula.length(); i++) {
 			if(Character.isLetter(matricula.charAt(i))) return false;
@@ -63,7 +77,8 @@ public class ControladorRegistroAcessoNegado {
 	
 	/**
 	 * Encontra na colecao de registros de acesso negado todos que possuirem
-	 * como motivo o recebido.
+	 * como motivo o recebido. Se receber "Todos" retorna a lista completa de
+	 * registros.
 	 * 
 	 * @param motivo desejado para encontrar os registros
 	 * @return ArrayList de registros encontrados
@@ -79,6 +94,13 @@ public class ControladorRegistroAcessoNegado {
 		return registrosEncontrados;
 	}
 	
+	/**
+	 * Encontra e retorna os registros de horario nao permitido de propriedade
+	 * da matricula recebida.
+	 * 
+	 * @param matricula matricula utilizada para encontrar os registros
+	 * @return 
+	 */
 	public ArrayList<RegistroAcessoNegado> encontraRegistrosHorarioNaoPermitidoPelaMatricula(int matricula) {
 		ArrayList<RegistroAcessoNegado> registrosHorarioNaoPermitido = new ArrayList<>();
 		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {
@@ -100,6 +122,12 @@ public class ControladorRegistroAcessoNegado {
 		this.registroDAO.put(registro);
 	}
 
+	/**
+	 * Solicita ao registroDAO a lista de registros cadastrados e formata para
+	 * ArrayList.
+	 * 
+	 * @return ArrayList de registros cadastrados.
+	 */
 	public ArrayList<RegistroAcessoNegado> getListaRegistrosAcessosNegados() {
 		ArrayList<RegistroAcessoNegado> registros = new ArrayList<>();
 		for(RegistroAcessoNegado registro : this.registroDAO.getList()) {

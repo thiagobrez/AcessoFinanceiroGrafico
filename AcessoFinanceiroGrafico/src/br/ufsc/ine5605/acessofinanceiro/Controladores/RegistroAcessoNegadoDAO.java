@@ -43,6 +43,9 @@ public class RegistroAcessoNegadoDAO {
 		return cacheRegistros.values();
 	}
 	
+	/**
+	 * Realiza a persistencia dos registros de acesso negado.
+	 */
 	private void persist() {
 		try {
 			FileOutputStream fOS = new FileOutputStream(filename);
@@ -62,6 +65,9 @@ public class RegistroAcessoNegadoDAO {
 		}
 	}
 
+	/**
+	 * Le os registros de acesso negados persistidos.
+	 */
 	private void load() {
 		try {
 			FileInputStream fIS = new FileInputStream(filename);
