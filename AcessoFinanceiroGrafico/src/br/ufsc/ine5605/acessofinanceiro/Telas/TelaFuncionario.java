@@ -54,6 +54,9 @@ public class TelaFuncionario extends JFrame {
         }
     }
 
+    /**
+     * Monta todos os componentes da tela.
+     */
     private void configuraTela() throws ParseException {
 
         Container container = getContentPane();
@@ -110,6 +113,11 @@ public class TelaFuncionario extends JFrame {
 
     }
 
+    // ================== CONFIGURAÇÃO DE TELA ==================
+    /**
+     * Atualiza a tela de modo a mostrar todos os funcionarios cadastrados até
+     * então.
+     */
     public void updateData() {
 
         //Configuracao modelTbItens
@@ -138,11 +146,18 @@ public class TelaFuncionario extends JFrame {
         this.repaint();
     }
 
+    /**
+     * Exibe a tela.
+     */
     public void exibeMenuFuncionario() {
         updateData();
         setVisible(true);
     }
 
+    // ================== EXIBIÇÃO DE MENSAGENS ==================
+    /**
+     * Exibe a mensagem de que o funcionario foi deletado com sucesso.
+     */
     public void exibeFuncionarioDeletadoComSucesso() {
         JOptionPane.showMessageDialog(
                 null,
@@ -152,6 +167,9 @@ public class TelaFuncionario extends JFrame {
         );
     }
 
+    /**
+     * Exibe a mensagem de que nenhum funcionario foi selecionado.
+     */
     public void exibeFuncionarioNaoSelecionado() {
         JOptionPane.showMessageDialog(
                 null,
@@ -162,6 +180,7 @@ public class TelaFuncionario extends JFrame {
 
     }
 
+    // ================== GERENCIADOR DE BOTÕES ==================
     private class GerenciadorBotoes implements ActionListener {
 
         @Override

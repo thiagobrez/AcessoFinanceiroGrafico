@@ -12,16 +12,13 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.FuncionarioDAO;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCadastroFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaFuncionario;
-import java.util.Date;
 import java.lang.Character;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  *
- * @author vladimir
+ * @author João Grasel
  */
 public class ControladorFuncionario implements IControladorFuncionario {
 
@@ -46,17 +43,27 @@ public class ControladorFuncionario implements IControladorFuncionario {
         return controladorFuncionario;
     }
 
+    // ================== EXIBIÇÃO DE TELAS ==================
     /**
-     * Exibe o menu principal do CRUD do funcionário.
+     * Exibe a tela principal do CRUD do funcionário.
      */
     public void exibeMenuFuncionario() {
         this.telaFuncionario.exibeMenuFuncionario();
     }
 
+    /**
+     * Exibe a tela para cadastrar funcionario.
+     */
     public void exibeCadastraFuncionario() {
         this.telaCadastroFuncionario.exibeMenuCadastroFuncionario();
     }
 
+    /**
+     * Exibe a tela para editar o funcionario selecionado na tabela.
+     *
+     * @param indexSelecionado do funcionario selecionado na tabela da tela
+     * principal do crud do funcionario.
+     */
     public void exibeEditarFuncionarioSelecionado(int indexSelecionado) {
         if (indexSelecionado != -1) {
             ArrayList<Integer> matriculas = this.funcionarioDAO.getMatriculas();
@@ -68,10 +75,25 @@ public class ControladorFuncionario implements IControladorFuncionario {
         }
     }
 
+    /**
+     * Volta a tela principal do sistema
+     */
     public void voltarMenuPrincipal() {
         ControladorPrincipal.getInstance().exibeMenuPrincipal();
     }
 
+    // ================== CONTROLE DE FUNCIONÁRIOS ==================
+    /**
+     * Cadastra um funcionário. O nome de conter somente 3 letras e no minimo 3
+     * caracteres e a matricula não deve estar sendo utilizada.
+     *
+     * @param matricula
+     * @param nome
+     * @param dataNascimento
+     * @param telefone
+     * @param salario
+     * @param cargo
+     */
     public void cadastraFuncionario(int matricula, String nome, String dataNascimento, int telefone, int salario, Cargo cargo) {
 
         boolean nomeValido = verificaNomeInserido(nome);
@@ -92,6 +114,12 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
     }
 
+    /**
+     * Deleta o funcionario selecionado na tabela da tela na tela principal do
+     * crud do funcionario.
+     *
+     * @param indexSelecionado do funcionario selecionado
+     */
     public void deletaFuncionarioSelecionado(int indexSelecionado) {
         if (indexSelecionado != -1) {
             ArrayList<Integer> matriculas = this.funcionarioDAO.getMatriculas();
@@ -106,6 +134,18 @@ public class ControladorFuncionario implements IControladorFuncionario {
 
     }
 
+    /**
+     * Edita um funcionário. O nome de conter somente 3 letras e no minimo 3
+     * caracteres e a matricula não deve estar sendo utilizada.
+     *
+     * @param matriculaAntiga
+     * @param matricula
+     * @param nome
+     * @param dataNascimento
+     * @param telefone
+     * @param salario
+     * @param cargo
+     */
     public void editaFuncionario(int matriculaAntiga, int matricula, String nome, String dataNascimento, int telefone, int salario, Cargo cargo) {
         boolean nomeValido = verificaNomeInserido(nome);
         boolean matriculaValida = verificaMatricula(matricula);
@@ -127,6 +167,33 @@ public class ControladorFuncionario implements IControladorFuncionario {
         }
     }
 
+    @Override
+    public void deixaFuncionariosSemCargo(Cargo cargoDeletado, Cargo semCargo) {
+        if (cargoDeletado != null) {
+            for (Funcionario funcionarioCadastrado : this.funcionarioDAO.getList()) {
+                if (funcionarioCadastrado.getCargo().getCodigo() == cargoDeletado.getCodigo()) {
+                    funcionarioCadastrado.setCargo(semCargo);
+                }
+            }
+        }
+    }
+
+    @Override
+    public Funcionario encontraFuncionarioPelaMatricula(int matricula) {
+        Funcionario funcionario = funcionarioDAO.get(matricula);
+        if (funcionario != null) {
+            return funcionario;
+        }
+        return null;
+    }
+
+    // ================== VALIDAÇÕES ==================
+    /**
+     * Verifica se algum funcionario esta utilizando a matricula no momento.
+     *
+     * @param matricula
+     * @return true caso a matricula exista
+     */
     public boolean verificaMatricula(int matricula) {
         for (Funcionario funcionarioCadastrado : this.funcionarioDAO.getList()) {
             if (funcionarioCadastrado.getMatricula() == matricula) {
@@ -136,6 +203,12 @@ public class ControladorFuncionario implements IControladorFuncionario {
         return true;
     }
 
+    /**
+     * Verifica o nome inserido
+     *
+     * @param nome
+     * @return true caso o nome possua mais de 3 caracteres e somente letras.
+     */
     public boolean verificaNomeInserido(String nome) {
         if (nome.length() > 2) {
             for (int i = 0; i < nome.length(); i++) {
@@ -152,25 +225,6 @@ public class ControladorFuncionario implements IControladorFuncionario {
         return true;
     }
 
-    public ArrayList getMatriculas() {
-        return this.funcionarioDAO.getMatriculas();
-    }
-
-    public Collection<Funcionario> getListaFuncionarios() {
-        return this.funcionarioDAO.getList();
-    }
-
-    @Override
-    public void deixaFuncionariosSemCargo(Cargo cargoDeletado, Cargo semCargo) {
-        if (cargoDeletado != null) {
-            for (Funcionario funcionarioCadastrado : this.funcionarioDAO.getList()) {
-                if (funcionarioCadastrado.getCargo().getCodigo() == cargoDeletado.getCodigo()) {
-                    funcionarioCadastrado.setCargo(semCargo);
-                }
-            }
-        }
-    }
-
     @Override
     public boolean matriculaExiste(int matricula) {
         for (Funcionario funcionarioCadastrado : this.funcionarioDAO.getList()) {
@@ -181,13 +235,13 @@ public class ControladorFuncionario implements IControladorFuncionario {
         return false;
     }
 
-    @Override
-    public Funcionario encontraFuncionarioPelaMatricula(int matricula) {
-        Funcionario funcionario = funcionarioDAO.get(matricula);
-        if (funcionario != null) {
-            return funcionario;
-        }
-        return null;
+// ================== GETTERS ==================
+    public ArrayList getMatriculas() {
+        return this.funcionarioDAO.getMatriculas();
+    }
+
+    public Collection<Funcionario> getListaFuncionarios() {
+        return this.funcionarioDAO.getList();
     }
 
 }
