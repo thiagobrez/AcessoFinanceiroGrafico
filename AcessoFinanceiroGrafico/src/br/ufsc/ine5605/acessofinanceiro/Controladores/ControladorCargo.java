@@ -29,10 +29,10 @@ public class ControladorCargo implements IControladorCargo {
     private TelaCadastroCargo telaCadastroCargo;
 
     private ControladorCargo() {
-        this.telaCargo = new TelaCargo(this);
+        this.telaCargo = new TelaCargo();
         this.cargoDAO = new CargoDAO();
-        this.telaEditarCargo = new TelaEditarCargo(this);
-        this.telaCadastroCargo = new TelaCadastroCargo(this);
+        this.telaEditarCargo = new TelaEditarCargo();
+        this.telaCadastroCargo = new TelaCadastroCargo();
     }
 
     public static ControladorCargo getInstance() {

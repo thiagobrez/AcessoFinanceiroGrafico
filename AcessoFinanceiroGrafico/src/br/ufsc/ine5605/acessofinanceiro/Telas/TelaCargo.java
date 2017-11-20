@@ -35,7 +35,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaCargo extends JFrame {
 
-    private ControladorCargo owner;
     private GerenciadorBotoes btManager;
     private GerenciadorCombos cbManager;
     private GridBagConstraints constraints;
@@ -47,9 +46,8 @@ public class TelaCargo extends JFrame {
     private JButton btDeletaCargo;
     private JButton btVoltarMenuPrincipal;
 
-    public TelaCargo(ControladorCargo owner) {
+    public TelaCargo() {
         super(Constantes.CARGO_TITULO);
-        this.owner = owner;
         this.btManager = new GerenciadorBotoes();
         this.cbManager = new GerenciadorCombos();
         configuraTela();

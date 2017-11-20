@@ -73,11 +73,9 @@ public class TelaEditarCargo extends JFrame {
     private JButton btEditar;
     private int codigoAntigo;
 
-    public TelaEditarCargo(ControladorCargo owner) {
+    public TelaEditarCargo() {
         super(Constantes.GERENCIAR_FUNCIONARIO_EDITAR);
-        this.controlador = owner;
         this.btManager = new GerenciadorBotoes();
-
         configuraTela();
     }
 

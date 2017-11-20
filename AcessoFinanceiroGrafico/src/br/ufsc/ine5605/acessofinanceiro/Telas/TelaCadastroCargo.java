@@ -70,9 +70,8 @@ public class TelaCadastroCargo extends JFrame {
     private JButton btCancelar;
     private JButton btCadastrar;
 
-    public TelaCadastroCargo(ControladorCargo owner) {
+    public TelaCadastroCargo() {
         super(Constantes.CARGO_CADASTRAR);
-        this.controlador = owner;
         this.btManager = new TelaCadastroCargo.GerenciadorBotoes();
         configuraTela();
     }
