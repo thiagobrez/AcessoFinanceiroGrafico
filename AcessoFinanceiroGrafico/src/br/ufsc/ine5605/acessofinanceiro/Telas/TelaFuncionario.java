@@ -7,7 +7,6 @@ package br.ufsc.ine5605.acessofinanceiro.Telas;
 
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorFuncionario;
-import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -133,7 +132,7 @@ public class TelaFuncionario extends JFrame {
         modelTbItens.addColumn(Constantes.COMUM_SALARIO);
         modelTbItens.addColumn(Constantes.COMUM_CARGO);
 
-        Collection<Funcionario> listaFuncionarios = ControladorPrincipal.getInstance().getListaFuncionarios();
+        Collection<Funcionario> listaFuncionarios = ControladorFuncionario.getInstance().getListaFuncionarios();
         tbItens.removeAll();
         for (Funcionario funcionario : listaFuncionarios) {
             modelTbItens.addRow(new Object[]{

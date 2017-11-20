@@ -7,19 +7,14 @@ package br.ufsc.ine5605.acessofinanceiro.Telas;
 
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorCargo;
-
-import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
-
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -126,7 +121,7 @@ public class TelaCargo extends JFrame {
         modelTbItens.addColumn(Constantes.CARGO_INICIO_TARDE);
         modelTbItens.addColumn(Constantes.CARGO_FIM_TARDE);
 
-        Collection<Cargo> listaCargos = ControladorPrincipal.getInstance().getListaCargos();
+        Collection<Cargo> listaCargos = ControladorCargo.getInstance().getListaCargos();
         tbItens.removeAll();
         for (Cargo cargo : listaCargos) {
             modelTbItens.addRow(new Object[]{
