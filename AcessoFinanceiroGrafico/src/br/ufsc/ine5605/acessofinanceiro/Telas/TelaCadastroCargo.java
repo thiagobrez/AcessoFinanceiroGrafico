@@ -31,9 +31,7 @@ import javax.swing.JTextField;
 public class TelaCadastroCargo extends JFrame {
 
     private GerenciadorBotoes btManager;
-    private ControladorCargo controlador;
     private GridBagConstraints constraints;
-    private TelaCargo telaCargo;
     private JLabel lbNome;
     private JLabel lbCodigo;
     private JLabel lbTipoCargo;
