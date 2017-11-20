@@ -190,7 +190,7 @@ public class TelaCargo extends JFrame {
     public void mensagemErroCodigoJaCadastrado() {
         JOptionPane.showMessageDialog(
                 null,
-                Constantes.CARGO_DELETADO_SUCESSO,
+                Constantes.CARGO_CODIGO_JA_CADASTRADO,
                 Constantes.CARGO_CADASTRAR,
                 JOptionPane.PLAIN_MESSAGE
         );
@@ -214,6 +214,24 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	public void mensagemCodigoInvalidoLetras() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_CODIGO_INVALIDO_LETRAS,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
+	public void mensagemCodigoInvalidoTamanho() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_CODIGO_INVALIDO_TAMANHO,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
     private class GerenciadorBotoes implements ActionListener {
 
         @Override

@@ -6,11 +6,9 @@
 package br.ufsc.ine5605.acessofinanceiro.Telas;
 
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorCargo;
-import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorFuncionario;
-import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
+import br.ufsc.ine5605.acessofinanceiro.Modelos.CargoHorarioEspecial;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
-import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -41,6 +39,7 @@ public class TelaEditarCargo extends JFrame {
     private JLabel lbNome;
     private JLabel lbCodigo;
     private JLabel lbTipoCargo;
+    private JLabel lbFormatoHora;
     private JLabel lbHoraInicioManha;
     private JLabel lbHoraFimManha;
     private JLabel lbHoraInicioTarde;
@@ -60,6 +59,7 @@ public class TelaEditarCargo extends JFrame {
     private JPanel painelCodigo;
     private JPanel painelTipo;
     private JPanel painelBotoes;
+    private JPanel painelFormatoHora;
     private JPanel painelHoraInicioManha;
     private JPanel painelHoraFimManha;
     private JPanel painelHoraInicioTarde;
@@ -236,6 +236,13 @@ public class TelaEditarCargo extends JFrame {
         painelBotoes.add(btCancelar);
         painelBotoes.add(btEditar);
 
+		 //Configuracao formatoHora
+        lbFormatoHora = new JLabel(Constantes.CARGO_FORMATO_HORA);
+        this.painelFormatoHora = new JPanel();
+        painelFormatoHora.setLayout(new BoxLayout(painelFormatoHora, BoxLayout.LINE_AXIS));
+        this.painelFormatoHora.setVisible(true);
+        painelFormatoHora.add(lbFormatoHora);
+		
         //Configuracao painelPrincipal
         painelPrincipal = new JPanel();
         painelPrincipal.setLayout(new GridBagLayout());
@@ -246,30 +253,59 @@ public class TelaEditarCargo extends JFrame {
         constraints.gridy = 3;
         painelPrincipal.add(painelTipo, constraints);
         constraints.gridy = 4;
-        painelPrincipal.add(painelHoraInicioManha, constraints);
+        painelPrincipal.add(painelFormatoHora, constraints);
         constraints.gridy = 5;
-        painelPrincipal.add(painelHoraFimManha, constraints);
+        painelPrincipal.add(painelHoraInicioManha, constraints);
         constraints.gridy = 6;
-        painelPrincipal.add(painelHoraInicioTarde, constraints);
+        painelPrincipal.add(painelHoraFimManha, constraints);
         constraints.gridy = 7;
-        painelPrincipal.add(painelHoraFimTarde, constraints);
+        painelPrincipal.add(painelHoraInicioTarde, constraints);
         constraints.gridy = 8;
-        painelPrincipal.add(painelHoraInicioEspecial, constraints);
+        painelPrincipal.add(painelHoraFimTarde, constraints);
         constraints.gridy = 9;
-        painelPrincipal.add(painelHoraFimEspecial, constraints);
+        painelPrincipal.add(painelHoraInicioEspecial, constraints);
         constraints.gridy = 10;
-        painelPrincipal.add(painelBotoes, constraints);
+        painelPrincipal.add(painelHoraFimEspecial, constraints);
         constraints.gridy = 11;
+        painelPrincipal.add(painelBotoes, constraints);
+        constraints.gridy = 12;
         container.add(painelPrincipal, constraints);
 
-        setSize(550, 400);
+        setSize(500, 480);
         setLocationRelativeTo(null);
     }
 
-    public void updateData() {
-
-        this.repaint();
-    }
+	public void updateData(String tipoCargo) {
+		switch (tipoCargo) {
+			case Constantes.CARGO_TIPO_COMUM:
+				painelFormatoHora.setVisible(true);
+				painelHoraInicioManha.setVisible(true);
+				painelHoraFimManha.setVisible(true);
+				painelHoraInicioTarde.setVisible(true);
+				painelHoraFimTarde.setVisible(true);
+				painelHoraInicioEspecial.setVisible(false);
+				painelHoraFimEspecial.setVisible(false);
+				break;
+			case Constantes.CARGO_TIPO_ESPECIAL:
+				painelFormatoHora.setVisible(true);
+				painelHoraInicioManha.setVisible(true);
+				painelHoraFimManha.setVisible(true);
+				painelHoraInicioTarde.setVisible(true);
+				painelHoraFimTarde.setVisible(true);
+				painelHoraInicioEspecial.setVisible(true);
+				painelHoraFimEspecial.setVisible(true);
+				break;
+			default:
+				painelFormatoHora.setVisible(false);
+				painelHoraInicioManha.setVisible(false);
+				painelHoraFimManha.setVisible(false);
+				painelHoraInicioTarde.setVisible(false);
+				painelHoraFimTarde.setVisible(false);
+				painelHoraInicioEspecial.setVisible(false);
+				painelHoraFimEspecial.setVisible(false);
+				break;
+		}
+	}
 
     /**
      * Atualiza a tela e faz com que seja exibida, onde cada campo de informação
@@ -279,7 +315,7 @@ public class TelaEditarCargo extends JFrame {
      * @param cargo
      */
     public void exibeMenuEditaCargo(Cargo cargo) {
-        updateData();
+        updateData(Constantes.CARGO_TIPO_GERENCIAL);
         setVisible(true);
         codigoAntigo = cargo.getCodigo();
         tfCodigo.setText(Integer.toString(cargo.getCodigo()));
@@ -290,8 +326,10 @@ public class TelaEditarCargo extends JFrame {
         tfHoraFimManha.setText(df.format(cargo.getHoraFimManha()).toString());
         tfHoraInicioTarde.setText(df.format(cargo.getHoraInicioTarde()).toString());
         tfHoraFimTarde.setText(df.format(cargo.getHoraFimTarde()).toString());
-        tfHoraInicioEspecial.setText(df.format(cargo.getHoraInicioManha()).toString());
-        tfHoraFimEspecial.setText(df.format(cargo.getHoraInicioManha()).toString());
+		if(cargo instanceof CargoHorarioEspecial) {
+			tfHoraInicioEspecial.setText(df.format(((CargoHorarioEspecial) cargo).getHoraInicioEspecial()).toString());
+			tfHoraFimEspecial.setText(df.format(((CargoHorarioEspecial) cargo).getHoraFimEspecial()).toString());	
+		}
 
     }
 
@@ -304,24 +342,6 @@ public class TelaEditarCargo extends JFrame {
                 null,
                 Constantes.CARGO_EDITADO_SUCESSO,
                 Constantes.CARGO_EDITAR,
-                JOptionPane.PLAIN_MESSAGE
-        );
-    }
-
-    public void mensagemErroCodigoJaCadastrado() {
-        JOptionPane.showMessageDialog(
-                null,
-                Constantes.CARGO_DELETADO_SUCESSO,
-                Constantes.CARGO_CADASTRAR,
-                JOptionPane.PLAIN_MESSAGE
-        );
-    }
-
-    public void mensagemNomeInvalidoLetras() {
-        JOptionPane.showMessageDialog(
-                null,
-                Constantes.CARGO_NOME_INVALIDO_LETRAS,
-                Constantes.CARGO_CADASTRAR,
                 JOptionPane.PLAIN_MESSAGE
         );
     }
@@ -359,7 +379,9 @@ public class TelaEditarCargo extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            if (e.getSource().equals(comboTipos)) {
+                updateData(comboTipos.getSelectedItem().toString());
+            }
         }
 
     }

@@ -285,24 +285,6 @@ public class TelaCadastroCargo extends JFrame {
         );
     }
 
-    public void mensagemErroCodigoJaCadastrado() {
-        JOptionPane.showMessageDialog(
-                null,
-                Constantes.CARGO_DELETADO_SUCESSO,
-                Constantes.CARGO_CADASTRAR,
-                JOptionPane.PLAIN_MESSAGE
-        );
-    }
-
-    public void mensagemNomeInvalidoLetras() {
-        JOptionPane.showMessageDialog(
-                null,
-                Constantes.CARGO_NOME_INVALIDO_LETRAS,
-                Constantes.CARGO_CADASTRAR,
-                JOptionPane.PLAIN_MESSAGE
-        );
-    }
-
     public void mensagemNomeInvalidoTamanho() {
         JOptionPane.showMessageDialog(
                 null,
@@ -311,7 +293,7 @@ public class TelaCadastroCargo extends JFrame {
                 JOptionPane.PLAIN_MESSAGE
         );
     }
-
+	
     public void limpaTextFields() {
         tfCodigo.setText("");
         tfNome.setText("");
@@ -331,12 +313,15 @@ public class TelaCadastroCargo extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource().equals(btCadastrar)) {
-                ControladorCargo.getInstance().incluiCargo(Integer.parseInt(tfCodigo.getText()),
-                        tfNome.getText(), comboTipos.getSelectedItem().toString(), tfHoraInicioManha.getText(), tfHoraFimManha.getText(),
-                        tfHoraInicioTarde.getText(), tfHoraFimTarde.getText(), tfHoraInicioEspecial.getText(),
-                        tfHoraFimEspecial.getText());
-                ControladorCargo.getInstance().updateCargos();
-                setVisible(false);
+				if(ControladorCargo.getInstance().verificaCodigo(tfCodigo.getText()) &&
+						ControladorCargo.getInstance().verificaNome(tfNome.getText())) {
+					ControladorCargo.getInstance().incluiCargo(Integer.parseInt(tfCodigo.getText()),
+							tfNome.getText(), comboTipos.getSelectedItem().toString(), tfHoraInicioManha.getText(),
+							tfHoraFimManha.getText(), tfHoraInicioTarde.getText(), tfHoraFimTarde.getText(),
+							tfHoraInicioEspecial.getText(), tfHoraFimEspecial.getText(), false);
+					ControladorCargo.getInstance().updateCargos();
+					setVisible(false);
+				}
             }
 
             if (e.getSource().equals(btCancelar)) {

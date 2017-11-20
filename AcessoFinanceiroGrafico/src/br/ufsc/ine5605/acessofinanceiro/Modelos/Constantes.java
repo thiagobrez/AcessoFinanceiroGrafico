@@ -96,6 +96,7 @@ public class Constantes {
     public static final String CARGO_CADASTRAR = "Cadastrar Cargo";
     public static final String CARGO_CADASTRADO_SUCESSO = "Cargo cadastrado com sucesso!";
     public static final String CARGO_EDITAR = "Editar Cargo";
+    public static final String CARGO_EDITADO_SUCESSO = "Cargo editado com sucesso!";
     public static final String CARGO_DELETAR = "Deletar Cargo";
     public static final String CARGO_EH_GERENCIAL = "É Gerencial";
     public static final String CARGO_TEM_ACESSO = "Tem Acesso";
@@ -115,8 +116,14 @@ public class Constantes {
     public static final String CARGO_TIPO = "Tipo do Cargo: ";
     public static final String CARGO_CODIGO_JA_CADASTRADO = "Código já cadastrado.";
     public static final String CARGO_NOME_INVALIDO_LETRAS = "O nome deve conter somente letras.";
+    public static final String CARGO_CODIGO_INVALIDO_LETRAS = "O código deve conter somente números.";
+    public static final String CARGO_CODIGO_INVALIDO_TAMANHO = "O código deve conter no máximo 9 caracteres.";
     public static final String CARGO_NOME_INVALIDO_TAMANHO = "O nome deve conter mais de 3 caracteres.";
     public static final String CARGO_FORMATO_HORA = "*Formato utilizado: HH:mm";
+	public static final String CARGO_HORA_INICIO_MANHA_COMERCIAL = "08:00";
+    public static final String CARGO_HORA_FIM_MANHA_COMERCIAL = "12:00";
+    public static final String CARGO_HORA_INICIO_TARDE_COMERCIAL = "14:00";
+    public static final String CARGO_HORA_FIM_TARDE_COMERCIAL = "18:00";
 
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do Sistema";
@@ -229,7 +236,6 @@ public class Constantes {
     public static final String ALTERAR_SALARIO = " 5. Alterar o salário ";
     public static final String ALTERAR_CARGO = " 6. Alterar o cargo ";
     public static final String OPCAO_VOLTAR = " 7. Voltar ";
-    public static final String CARGO_EDITADO_SUCESSO = " CARGO EDITADO COM SUCESSO!";
     public static final String SALARIO_EDITADO_SUCESSO = " SALÁRIO EDITADO COM SUCESSO!";
     public static final String TELEFONE_EDITADO_SUCESSO = " TELEFONE EDITADO COM SUCESSO!";
     public static final String DATA_NASCIMENTO_EDITADA_SUCESSO = " DATA DE NASCIMENTO EDITADA COM SUCESSO!";
@@ -239,10 +245,6 @@ public class Constantes {
     public static final String EDITA_HORARIOS_CARGO_SEM_ACESSO = "------------ Não é possível editar os horários de acesso: o cargo não possui acesso. ------------";
 
     // CARGO
-    public static final String HORA_INICIO_MANHA_COMERCIAL = " 08:00";
-    public static final String HORA_FIM_MANHA_COMERCIAL = " 12:00";
-    public static final String HORA_INICIO_TARDE_COMERCIAL = " 14:00";
-    public static final String HORA_FIM_TARDE_COMERCIAL = " 18:00";
     public static final String ERRO_INTERNO_CONSTANTES_FORMATADOR = "------------ ERRO INTERNO: as constantes usadas para formatação dos horários de acesso dos cargos estão inválidas. ------------";
 
 //SELECIONAR OU CRIAR CARGO NO CADASTRO

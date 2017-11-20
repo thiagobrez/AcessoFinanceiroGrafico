@@ -38,7 +38,7 @@ public class CargoDAO {
         cacheCargos.put(cargo.getCodigo(), cargo);
         persist();
     }
-
+	
     public Cargo get(Integer codigo) {
         return cacheCargos.get(codigo);
     }

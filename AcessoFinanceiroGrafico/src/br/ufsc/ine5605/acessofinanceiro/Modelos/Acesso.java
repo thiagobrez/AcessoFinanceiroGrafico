@@ -89,7 +89,7 @@ public class Acesso {
 				if(
 				   ((!horaAtual.before(((CargoHorarioEspecial) cargo).getHoraInicioTarde())) && (!horaAtual.after(meiaNoite))) ||
 				   ((!horaAtual.before(meiaNoite)) && (!horaAtual.after(((CargoHorarioEspecial) cargo).getHoraFimTarde()))) ||
-				   ((!(horaAtual.before(((CargoHorarioEspecial) cargo).getHoraInicioEspecial()))) && (!(horaAtual.after(meiaNoite)))) ||
+				   ((!horaAtual.before(((CargoHorarioEspecial) cargo).getHoraInicioEspecial())) && (!horaAtual.after(meiaNoite))) ||
 				   ((!horaAtual.before(meiaNoite)) && (!horaAtual.after(((CargoHorarioEspecial) cargo).getHoraFimEspecial())))
 				  ) {
 					return true;
