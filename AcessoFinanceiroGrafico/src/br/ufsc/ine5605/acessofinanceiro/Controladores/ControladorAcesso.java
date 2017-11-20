@@ -80,6 +80,7 @@ public class ControladorAcesso {
 			ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.MATRICULA_INEXISTENTE);
 			telaAcesso.exibeAcessoNegadoMatriculaInexistente();
         } catch (NullPointerException e) {
+			System.out.println(e.getMessage());
 			if(funcionario == null) {
 //				ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.MATRICULA_INEXISTENTE);
 //				telaAcesso.exibeAcessoNegadoMatriculaInexistente();

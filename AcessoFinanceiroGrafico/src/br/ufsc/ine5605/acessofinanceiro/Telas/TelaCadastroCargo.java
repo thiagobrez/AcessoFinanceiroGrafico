@@ -334,7 +334,7 @@ public class TelaCadastroCargo extends JFrame {
                 ControladorCargo.getInstance().incluiCargo(Integer.parseInt(tfCodigo.getText()),
                         tfNome.getText(), comboTipos.getSelectedItem().toString(), tfHoraInicioManha.getText(), tfHoraFimManha.getText(),
                         tfHoraInicioTarde.getText(), tfHoraFimTarde.getText(), tfHoraInicioEspecial.getText(),
-                        tfHoraInicioEspecial.getText());
+                        tfHoraFimEspecial.getText());
                 ControladorCargo.getInstance().updateCargos();
                 setVisible(false);
             }

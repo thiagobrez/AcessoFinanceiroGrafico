@@ -76,12 +76,22 @@ public class Acesso {
 		Date horaAtual = formatador.parse(formatador.format(acesso.getData()));
 		Date meiaNoite = formatador.parse(Constantes.FORMATADOR_MEIA_NOITE);
 		if(cargo instanceof CargoHorarioEspecial) {
+			
+			System.out.println(((CargoHorarioEspecial) cargo).getHoraInicioEspecial());
+			System.out.println(((CargoHorarioEspecial) cargo).getHoraFimEspecial());
+			System.out.println("=============================");
+			System.out.println(horaAtual);
+			System.out.println(meiaNoite);
+			System.out.println("");
+			
 			if(((CargoHorarioEspecial) cargo).getHoraInicioTarde().after(((CargoHorarioEspecial) cargo).getHoraFimTarde()) ||
 			   ((CargoHorarioEspecial) cargo).getHoraInicioEspecial().after(((CargoHorarioEspecial) cargo).getHoraFimEspecial())) {
-				if(((!horaAtual.before(((CargoHorarioEspecial) cargo).getHoraInicioTarde())) && (!horaAtual.after(meiaNoite))) ||
+				if(
+				   ((!horaAtual.before(((CargoHorarioEspecial) cargo).getHoraInicioTarde())) && (!horaAtual.after(meiaNoite))) ||
 				   ((!horaAtual.before(meiaNoite)) && (!horaAtual.after(((CargoHorarioEspecial) cargo).getHoraFimTarde()))) ||
-				   ((!horaAtual.before(((CargoHorarioEspecial) cargo).getHoraInicioEspecial())) && (!horaAtual.after(meiaNoite))) ||
-				   ((!horaAtual.before(meiaNoite)) && (!horaAtual.after(((CargoHorarioEspecial) cargo).getHoraFimEspecial())))) {
+				   ((!(horaAtual.before(((CargoHorarioEspecial) cargo).getHoraInicioEspecial()))) && (!(horaAtual.after(meiaNoite)))) ||
+				   ((!horaAtual.before(meiaNoite)) && (!horaAtual.after(((CargoHorarioEspecial) cargo).getHoraFimEspecial())))
+				  ) {
 					return true;
 				}
 			} else {
