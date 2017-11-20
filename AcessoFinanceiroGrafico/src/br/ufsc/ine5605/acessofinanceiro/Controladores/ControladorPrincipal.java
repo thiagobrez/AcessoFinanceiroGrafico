@@ -93,17 +93,6 @@ public class ControladorPrincipal {
     }
 
     /**
-     * Chama função no controlador funcionario que encontra funcionario, recebe
-     * como parametro uma matricula e retorna um funcionario
-     *
-     * @param matricula do funcionario
-     * @return funcionario
-     */
-    public Funcionario encontraFuncionarioPelaMatricula(int matricula) {
-        return ControladorFuncionario.getInstance().encontraFuncionarioPelaMatricula(matricula);
-    }
-
-    /**
      * Chama função no controlador registro de acesso negado que encontra
      * resgistros de tentativas de acesso negadas, recebe como parametro uma
      * matricula e retorna um registro

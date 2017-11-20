@@ -12,7 +12,7 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.FuncionarioDAO;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCadastroFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarFuncionario;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaFuncionario;
-import java.lang.Character;
+import excecoes.MatriculaInexistenteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -197,12 +197,11 @@ public class ControladorFuncionario implements IControladorFuncionario {
     }
 
     @Override
-    public Funcionario encontraFuncionarioPelaMatricula(int matricula) {
+    public Funcionario encontraFuncionarioPelaMatricula(int matricula) throws MatriculaInexistenteException {
         Funcionario funcionario = funcionarioDAO.get(matricula);
-        if (funcionario != null) {
-            return funcionario;
-        }
-        return null;
+        if (funcionario == null) throw new MatriculaInexistenteException();
+		return funcionario;
+        
     }
 
     // ================== VALIDAÇÕES ==================
