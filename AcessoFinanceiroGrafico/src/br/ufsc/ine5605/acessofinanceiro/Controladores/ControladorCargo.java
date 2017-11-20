@@ -219,21 +219,39 @@ public class ControladorCargo implements IControladorCargo {
 			String inputHoraFimManha, String inputHoraInicioTarde, String inputHoraFimTarde,
 			String inputHoraInicioEspecial, String inputHoraFimEspecial) {
         
-            boolean nomeValido = verificaNome(nome);
-            boolean codigoValido = verificaCodigoInserido(codigo);
+        boolean nomeValido = verificaNome(nome);
+        boolean codigoValido = verificaCodigoInserido(codigo);
 
-        if (nomeValido && codigoValido) {
-            Cargo cargoNaoEditado = this.cargoDAO.get(codigoAntigo);
-//            this.cargoDAO.remove(cargoNaoEditado);
-//            cargoNaoEditado = null;
-//			Cargo cargoEditado = new Cargo(matricula, nome, dataNascimento, telefone, salario, cargo);
-//            funcionarioDAO.put(funcionarioEditado);
-//            this.telaEditarFuncionario.exibeFuncionarioEditadoComSucesso();
-//            this.telaFuncionario.updateData();
-
+        if (nomeValido) {
+            if (codigoAntigo != codigo) {
+                if (codigoValido) {
+                    Cargo cargoNaoEditado = this.cargoDAO.get(codigoAntigo);
+                    this.cargoDAO.remove(cargoNaoEditado);
+                    cargoNaoEditado = null;
+                    Cargo cargoEditado = incluiCargo(codigo, nome, tipoCargo, 
+                                inputHoraInicioManha, inputHoraFimManha, inputHoraInicioTarde, 
+                                inputHoraFimTarde, inputHoraInicioEspecial, inputHoraFimEspecial);
+                    cargoDAO.put(cargoEditado);
+                    this.telaEditarCargo.exibeCargoEditadoComSucesso();
+                    this.telaCargo.updateData();
+                } else {
+                    this.telaEditarCargo.mensagemErroCodigoJaCadastrado();
+                }
+            } else {
+                Cargo cargoNaoEditado = this.cargoDAO.get(codigoAntigo);
+                this.cargoDAO.remove(cargoNaoEditado);
+                cargoNaoEditado = null;
+                Cargo cargoEditado = incluiCargo(codigo, nome, tipoCargo, 
+                                inputHoraInicioManha, inputHoraFimManha, inputHoraInicioTarde, 
+                                inputHoraFimTarde, inputHoraInicioEspecial, inputHoraFimEspecial);
+                cargoDAO.put(cargoEditado);
+                this.telaEditarCargo.exibeCargoEditadoComSucesso();
+                this.telaCargo.updateData();
+            }
         } else {
-//            this.telaEditarFuncionario.exibeMatriculaJaExiste();
+            this.telaEditarCargo.mensagemNomeInvalidoLetras();
         }
+        
     }
         
     @Override

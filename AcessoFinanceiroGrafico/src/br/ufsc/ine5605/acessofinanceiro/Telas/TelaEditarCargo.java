@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -78,28 +79,7 @@ public class TelaEditarCargo extends JFrame {
 
         configuraTela();
     }
-	
-//	public void exibeMenuEditaCargo(Cargo cargo) {
-//        updateData();
-//        setVisible(true);
-//        codigoAntigo = cargo.getCodigo();
-//        tfCodigo.setText(Integer.toString(cargo.getCodigo()));
-//        tfNome.setText(cargo.getNome());
-//        tfHoraInicioManha.setText(cargo.getDataNascimento());
-//        tfHoraFimManha.setText(funcionario.getDataNascimento());
-//        tfHoraInicioTarde.setText(funcionario.getDataNascimento());
-//        tfHoraFimTarde.setText(funcionario.getDataNascimento());
-//        tfHoraInicioEspecial.setText(funcionario.getDataNascimento());
-//        tfHoraFimEspecial.setText(funcionario.getDataNascimento());
-		
-		// Setar textFields para ja virem com os dados do cargo
-//        tfMatricula.setText(Integer.toString(funcionario.getMatricula()));
-//        tfNome.setText(funcionario.getNome());
-//        tfDataNascimento.setText(funcionario.getDataNascimento());
-//        tfTelefone.setText(Integer.toString(funcionario.getTelefone()));
-//        tfSalario.setText(Integer.toString(funcionario.getSalario()));
 
-    //}
 
     private void configuraTela() {
         Container container = getContentPane();
@@ -248,12 +228,11 @@ public class TelaEditarCargo extends JFrame {
         btEditar = new JButton();
         btEditar.setText(Constantes.COMUM_BOTAO_EDITAR);
         btEditar.addActionListener(btManager);
-        container.add(btEditar);
 
         //Configuracao painelBotoes
         painelBotoes = new JPanel();
         painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.LINE_AXIS));
-        //this.painelBotoes.setVisible(true);
+        this.painelBotoes.setVisible(true);
         painelBotoes.add(btCancelar);
         painelBotoes.add(btEditar);
         
@@ -289,7 +268,7 @@ public class TelaEditarCargo extends JFrame {
     
     public void updateData() {
 
-        //this.repaint();
+        this.repaint();
     }
     /**
      * Atualiza a tela e faz com que seja exibida, onde cada campo de informação
@@ -315,13 +294,53 @@ public class TelaEditarCargo extends JFrame {
 
     }
     
+    // ================== EXIBIÇÃO DE MENSAGENS ==================
+    /**
+     * Exibe a mensagem de que o cargo foi editado com sucesso.
+     */
+    public void exibeCargoEditadoComSucesso() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_EDITADO_SUCESSO,
+                Constantes.CARGO_EDITAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+
+    public void mensagemErroCodigoJaCadastrado() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_DELETADO_SUCESSO,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }      
+	
+    public void mensagemNomeInvalidoLetras() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_NOME_INVALIDO_LETRAS,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
+    public void mensagemNomeInvalidoTamanho() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_NOME_INVALIDO_TAMANHO,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+    
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             
             if (e.getSource().equals(btEditar)) {
-                ControladorCargo.getInstance().incluiCargo(Integer.parseInt(tfCodigo.getText()),
+                ControladorCargo.getInstance().editaCargo(codigoAntigo, Integer.parseInt(tfCodigo.getText()),
                         tfNome.getText(), comboTipos.getSelectedItem().toString(), tfHoraInicioManha.getText(), tfHoraFimManha.getText(),
                         tfHoraInicioTarde.getText(), tfHoraFimTarde.getText(), tfHoraInicioEspecial.getText(),
                         tfHoraInicioEspecial.getText());
