@@ -10,6 +10,7 @@ import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Motivo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.RegistroAcessoNegado;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaAcesso;
+import excecoes.MatriculaInexistenteException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,8 +66,9 @@ public class ControladorAcesso {
 		Funcionario funcionario = null;
 		ArrayList<RegistroAcessoNegado> registrosHorarioNaoPermitido = new ArrayList<>();
         try {
-            funcionario = ControladorPrincipal.getInstance().encontraFuncionarioPelaMatricula(matricula);
-			registrosHorarioNaoPermitido = ControladorPrincipal.getInstance().encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
+            funcionario = ControladorFuncionario.getInstance().encontraFuncionarioPelaMatricula(matricula);
+			registrosHorarioNaoPermitido = ControladorRegistroAcessoNegado.getInstance()
+					.encontraRegistrosHorarioNaoPermitidoPelaMatricula(matricula);
 			if(registrosHorarioNaoPermitido.size() >= 3) {
 				ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.ACESSO_BLOQUEADO);
 				telaAcesso.exibeAcessoNegadoAcessoBloqueado();
@@ -74,10 +76,13 @@ public class ControladorAcesso {
 			}
 			Acesso acesso = new Acesso(dataAtual, matricula);
 			return acesso.validaAcesso(acesso, funcionario, dataAtual);
+		} catch (MatriculaInexistenteException e) {
+			ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.MATRICULA_INEXISTENTE);
+			telaAcesso.exibeAcessoNegadoMatriculaInexistente();
         } catch (NullPointerException e) {
 			if(funcionario == null) {
-				ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.MATRICULA_INEXISTENTE);
-				telaAcesso.exibeAcessoNegadoMatriculaInexistente();
+//				ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.MATRICULA_INEXISTENTE);
+//				telaAcesso.exibeAcessoNegadoMatriculaInexistente();
 			}
         } catch (ParseException e) {}
         return false;

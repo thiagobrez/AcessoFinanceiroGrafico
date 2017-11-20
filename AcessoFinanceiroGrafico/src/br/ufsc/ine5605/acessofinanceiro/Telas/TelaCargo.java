@@ -102,12 +102,18 @@ public class TelaCargo extends JFrame {
     }
     
     public void updateData() {
-
+        DefaultTableModel modelTbItens = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+        };
+        
         //Configuracao modelTbItens
-        DefaultTableModel modelTbItens = new DefaultTableModel();
         modelTbItens.addColumn(Constantes.COMUM_NOME);
         modelTbItens.addColumn(Constantes.COMUM_CODIGO);
         modelTbItens.addColumn(Constantes.CARGO_EH_GERENCIAL);
+        modelTbItens.addColumn(Constantes.CARGO_TEM_ACESSO);
         modelTbItens.addColumn(Constantes.CARGO_INICIO_MANHA);
         modelTbItens.addColumn(Constantes.CARGO_FIM_MANHA);
         modelTbItens.addColumn(Constantes.CARGO_INICIO_TARDE);
@@ -165,20 +171,11 @@ public class TelaCargo extends JFrame {
         );
     }
     
-	public void exibeErroConstantesFormatador() {
+    public void exibeErroConstantesFormatador() {
         JOptionPane.showMessageDialog(
                 null,
                 Constantes.FORMATADOR_ERRO_CONSTANTE,
                 Constantes.CARGO_CADASTRAR,
-                JOptionPane.PLAIN_MESSAGE
-        );
-    }
-	
-	public void mensagemCargoDeletadoSucesso() {
-        JOptionPane.showMessageDialog(
-                null,
-                Constantes.CARGO_DELETADO_SUCESSO,
-                Constantes.CARGO_DELETAR,
                 JOptionPane.PLAIN_MESSAGE
         );
     }
@@ -192,7 +189,7 @@ public class TelaCargo extends JFrame {
         );
     }      
 	
-	public void mensagemNomeInvalidoLetras() {
+    public void mensagemNomeInvalidoLetras() {
         JOptionPane.showMessageDialog(
                 null,
                 Constantes.CARGO_NOME_INVALIDO_LETRAS,
@@ -201,7 +198,7 @@ public class TelaCargo extends JFrame {
         );
     }
 	
-	public void mensagemNomeInvalidoTamanho() {
+    public void mensagemNomeInvalidoTamanho() {
         JOptionPane.showMessageDialog(
                 null,
                 Constantes.CARGO_NOME_INVALIDO_TAMANHO,
@@ -219,6 +216,7 @@ public class TelaCargo extends JFrame {
             }
             if (e.getSource().equals(btEditaCargo)) {
                 ControladorCargo.getInstance().exibeEditarCargoSelecionado(tbItens.getSelectedRow());
+                updateData();
             }
             if (e.getSource().equals(btDeletaCargo)) {
                 ControladorCargo.getInstance().deletaCargoSelecionado(tbItens.getSelectedRow());

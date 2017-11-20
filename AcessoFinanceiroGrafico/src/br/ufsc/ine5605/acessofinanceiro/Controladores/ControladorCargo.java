@@ -68,6 +68,10 @@ public class ControladorCargo implements IControladorCargo {
     public void voltaMenuPrincipal() {
         ControladorPrincipal.getInstance().exibeMenuPrincipal();
     }
+    
+    public void updateCargos() {
+        this.telaCargo.updateData();
+    }
 
     /**
      * Pede ao usuario todos os atributos para cadastrar um cargo e caso o cargo
@@ -81,47 +85,47 @@ public class ControladorCargo implements IControladorCargo {
 			String inputHoraFimManha, String inputHoraInicioTarde, String inputHoraFimTarde,
 			String inputHoraInicioEspecial, String inputHoraFimEspecial
 	) {
-		verificaNome(nome);
-		verificaCodigoInserido(codigo);
+        verificaNome(nome);
+        verificaCodigoInserido(codigo);
         SimpleDateFormat formatador = new SimpleDateFormat(Constantes.FORMATADOR_HORA);
-		try {
-			Date horaInicioManha = formatador.parse(inputHoraInicioManha);
-			Date horaFimManha = formatador.parse(inputHoraFimManha);
-			Date horaInicioTarde = formatador.parse(inputHoraInicioTarde);
-			Date horaFimTarde = formatador.parse(inputHoraFimTarde);
-			Date horaInicioEspecial = formatador.parse(inputHoraInicioEspecial);
-			Date horaFimEspecial = formatador.parse(inputHoraFimEspecial);
-			Cargo cargo = new Cargo(codigo, nome, false, true, horaInicioManha, horaFimManha, horaInicioTarde, horaFimTarde);
-			switch (tipoCargo) {
-				case Constantes.CARGO_TIPO_GERENCIAL:
-					cargo.setEhGerencial(true);
-					this.cargoDAO.put(cargo);
-					this.telaCargo.mensagemCargoCadastrado();
-					break;
-				case Constantes.CARGO_TIPO_COMERCIAL:
-					this.cargoDAO.put(cargo);
-					this.telaCargo.mensagemCargoCadastrado();
-					break;
-				case Constantes.CARGO_TIPO_ESPECIAL:
-					cargo = criaCargoEspecial(
-							nome, codigo, horaInicioManha, horaFimManha,
-							horaInicioTarde, horaFimTarde, horaInicioEspecial,
-							horaFimEspecial
-							);
-					this.telaCargo.mensagemCargoCadastrado();
-					break;
-				case Constantes.CARGO_TIPO_COMUM:
-					cargo = criaCargoComum(nome, codigo, horaInicioManha, horaFimManha,
-							horaInicioTarde, horaFimTarde);
-					this.telaCargo.mensagemCargoCadastrado();
-					break;
-				case Constantes.CARGO_TIPO_SEM_ACESSO:
-					cargo.setTemAcessoAoFinanceiro(false);
-					this.cargoDAO.put(cargo);
-					this.telaCargo.mensagemCargoCadastrado();
-					break;
-			}
-			return cargo;
+        try {
+            Date horaInicioManha = formatador.parse(inputHoraInicioManha);
+            Date horaFimManha = formatador.parse(inputHoraFimManha);
+            Date horaInicioTarde = formatador.parse(inputHoraInicioTarde);
+            Date horaFimTarde = formatador.parse(inputHoraFimTarde);
+            Date horaInicioEspecial = formatador.parse(inputHoraInicioEspecial);
+            Date horaFimEspecial = formatador.parse(inputHoraFimEspecial);
+            Cargo cargo = new Cargo(codigo, nome, false, true, horaInicioManha, horaFimManha, horaInicioTarde, horaFimTarde);
+            switch (tipoCargo) {
+                case Constantes.CARGO_TIPO_GERENCIAL:
+                    cargo.setEhGerencial(true);
+                    this.cargoDAO.put(cargo);
+                    this.telaCargo.mensagemCargoCadastrado();
+                    break;
+                case Constantes.CARGO_TIPO_COMERCIAL:
+                    this.cargoDAO.put(cargo);
+                    this.telaCargo.mensagemCargoCadastrado();
+                    break;
+                case Constantes.CARGO_TIPO_ESPECIAL:
+                    cargo = criaCargoEspecial(
+                                    nome, codigo, horaInicioManha, horaFimManha,
+                                    horaInicioTarde, horaFimTarde, horaInicioEspecial,
+                                    horaFimEspecial
+                                    );
+                    this.telaCargo.mensagemCargoCadastrado();
+                    break;
+                case Constantes.CARGO_TIPO_COMUM:
+                    cargo = criaCargoComum(nome, codigo, horaInicioManha, horaFimManha,
+                                    horaInicioTarde, horaFimTarde);
+                    this.telaCargo.mensagemCargoCadastrado();
+                    break;
+                case Constantes.CARGO_TIPO_SEM_ACESSO:
+                    cargo.setTemAcessoAoFinanceiro(false);
+                    this.cargoDAO.put(cargo);
+                    this.telaCargo.mensagemCargoCadastrado();
+                    break;
+            }
+            return cargo;
         } catch (ParseException e) {
             telaCargo.exibeErroConstantesFormatador();
             ControladorPrincipal.getInstance().exibeMenuPrincipal();
@@ -215,21 +219,39 @@ public class ControladorCargo implements IControladorCargo {
 			String inputHoraFimManha, String inputHoraInicioTarde, String inputHoraFimTarde,
 			String inputHoraInicioEspecial, String inputHoraFimEspecial) {
         
-            boolean nomeValido = verificaNome(nome);
-            boolean codigoValido = verificaCodigoInserido(codigo);
+        boolean nomeValido = verificaNome(nome);
+        boolean codigoValido = verificaCodigoInserido(codigo);
 
-        if (nomeValido && codigoValido) {
-            Cargo cargoNaoEditado = this.cargoDAO.get(codigoAntigo);
-//            this.cargoDAO.remove(cargoNaoEditado);
-//            cargoNaoEditado = null;
-//			Cargo cargoEditado = new Cargo(matricula, nome, dataNascimento, telefone, salario, cargo);
-//            funcionarioDAO.put(funcionarioEditado);
-//            this.telaEditarFuncionario.exibeFuncionarioEditadoComSucesso();
-//            this.telaFuncionario.updateData();
-
+        if (nomeValido) {
+            if (codigoAntigo != codigo) {
+                if (codigoValido) {
+                    Cargo cargoNaoEditado = this.cargoDAO.get(codigoAntigo);
+                    this.cargoDAO.remove(cargoNaoEditado);
+                    cargoNaoEditado = null;
+                    Cargo cargoEditado = incluiCargo(codigo, nome, tipoCargo, 
+                                inputHoraInicioManha, inputHoraFimManha, inputHoraInicioTarde, 
+                                inputHoraFimTarde, inputHoraInicioEspecial, inputHoraFimEspecial);
+                    cargoDAO.put(cargoEditado);
+                    this.telaEditarCargo.exibeCargoEditadoComSucesso();
+                    this.telaCargo.updateData();
+                } else {
+                    this.telaEditarCargo.mensagemErroCodigoJaCadastrado();
+                }
+            } else {
+                Cargo cargoNaoEditado = this.cargoDAO.get(codigoAntigo);
+                this.cargoDAO.remove(cargoNaoEditado);
+                cargoNaoEditado = null;
+                Cargo cargoEditado = incluiCargo(codigo, nome, tipoCargo, 
+                                inputHoraInicioManha, inputHoraFimManha, inputHoraInicioTarde, 
+                                inputHoraFimTarde, inputHoraInicioEspecial, inputHoraFimEspecial);
+                cargoDAO.put(cargoEditado);
+                this.telaEditarCargo.exibeCargoEditadoComSucesso();
+                this.telaCargo.updateData();
+            }
         } else {
-//            this.telaEditarFuncionario.exibeMatriculaJaExiste();
+            this.telaEditarCargo.mensagemNomeInvalidoLetras();
         }
+        
     }
         
     @Override
