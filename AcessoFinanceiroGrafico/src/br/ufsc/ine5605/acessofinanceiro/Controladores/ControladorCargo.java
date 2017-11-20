@@ -12,10 +12,13 @@ import br.ufsc.ine5605.acessofinanceiro.Interfaces.IControladorCargo;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCadastroCargo;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaCargo;
 import br.ufsc.ine5605.acessofinanceiro.Telas.TelaEditarCargo;
+import excecoes.CodigoInexistenteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author bruno e thiago
@@ -300,13 +303,13 @@ public class ControladorCargo implements IControladorCargo {
     }
         
     @Override
-    public Cargo encontraCargoPorCodigo(int codigo) {
+    public Cargo encontraCargoPorCodigo(int codigo) throws CodigoInexistenteException {
         for (Cargo cargoLista : this.cargoDAO.getList()) {
             if (cargoLista.getCodigo() == codigo) {
                 return cargoLista;
             }
         }
-        return null;
+        throw new CodigoInexistenteException();
     }
     
     /**
@@ -346,7 +349,13 @@ public class ControladorCargo implements IControladorCargo {
      * @return cargo
      */
     public Cargo encontraCargoIndefinido() {
-        return encontraCargoPorCodigo(0);
+		Cargo cargo = null;
+		try {
+			cargo = encontraCargoPorCodigo(0);
+		} catch (CodigoInexistenteException e) {
+			System.out.println(e.getMessage());
+		}
+		return cargo;
     }
 
     /**

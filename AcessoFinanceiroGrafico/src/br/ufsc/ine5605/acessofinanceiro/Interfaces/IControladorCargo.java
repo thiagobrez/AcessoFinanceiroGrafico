@@ -6,6 +6,7 @@
 package br.ufsc.ine5605.acessofinanceiro.Interfaces;
 
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
+import excecoes.CodigoInexistenteException;
 
 /**
  *
@@ -19,7 +20,7 @@ public interface IControladorCargo {
      *
      * @return cargo
      */
-    public Cargo encontraCargoPorCodigo(int codigo);
+    public Cargo encontraCargoPorCodigo(int codigo) throws CodigoInexistenteException;
 
     /**
      * Lista na tela todos os cargos cadastrados, com todos os seus atributos

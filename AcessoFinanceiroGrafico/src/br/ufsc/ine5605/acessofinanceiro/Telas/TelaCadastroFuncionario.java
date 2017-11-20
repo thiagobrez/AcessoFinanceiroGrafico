@@ -211,7 +211,7 @@ public class TelaCadastroFuncionario extends JFrame {
 
         container.add(painelPrincipal, constraints);
 
-        setSize(500, 300);
+        setSize(550, 350);
         setLocationRelativeTo(null);
     }
 

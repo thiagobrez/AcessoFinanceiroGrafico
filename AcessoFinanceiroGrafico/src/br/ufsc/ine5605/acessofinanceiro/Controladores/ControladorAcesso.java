@@ -79,13 +79,9 @@ public class ControladorAcesso {
 		} catch (MatriculaInexistenteException e) {
 			ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.MATRICULA_INEXISTENTE);
 			telaAcesso.exibeAcessoNegadoMatriculaInexistente();
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | ParseException e) {
 			System.out.println(e.getMessage());
-			if(funcionario == null) {
-//				ControladorPrincipal.getInstance().novoRegistroAcessoNegado(dataAtual, matricula, Motivo.MATRICULA_INEXISTENTE);
-//				telaAcesso.exibeAcessoNegadoMatriculaInexistente();
-			}
-        } catch (ParseException e) {}
+        }
         return false;
     }
 

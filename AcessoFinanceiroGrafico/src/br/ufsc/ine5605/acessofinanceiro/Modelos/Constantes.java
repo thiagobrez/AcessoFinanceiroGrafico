@@ -147,5 +147,6 @@ public class Constantes {
 
     //EXCEPTION
     public static final String EXCEPTION_MATRICULA_INEXISTENTE = "Matricula inexistente";
+    public static final String EXCEPTION_CODIGO_INEXISTENTE = "Codigo inexistente";
 
 }
