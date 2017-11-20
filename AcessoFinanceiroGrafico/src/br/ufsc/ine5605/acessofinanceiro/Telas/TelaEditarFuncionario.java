@@ -208,7 +208,7 @@ public class TelaEditarFuncionario extends JFrame {
         constraints.gridy = 9;
         container.add(painelPrincipal, constraints);
 
-        setSize(500, 300);
+        setSize(550, 350);
         setLocationRelativeTo(null);
     }
 

@@ -74,6 +74,9 @@ public class TelaCadastroCargo extends JFrame {
         configuraTela();
     }
 
+	/**
+	 * Configura elementos que aparecerao na interface grafica.
+	 */
     private void configuraTela() {
         //Configuracao container
         Container container = getContentPane();
@@ -226,6 +229,10 @@ public class TelaCadastroCargo extends JFrame {
         setLocationRelativeTo(null);
     }
 
+	/**
+	 * Atualiza inputs da tabela de cadastro.
+	 * @param tipoCargo tipo do cargo utilizado para filtrar os inputs
+	 */
     public void updateData(String tipoCargo) {
         switch (tipoCargo) {
             case Constantes.CARGO_TIPO_COMUM:
@@ -258,12 +265,19 @@ public class TelaCadastroCargo extends JFrame {
         }
     }
 
-    public void exibeMenuCadastroCargo() {
+    // ############################### Mensagens ###############################
+	
+	/**
+	 * Exibe menu de cadastro do cargo.
+	 */
+	public void exibeMenuCadastroCargo() {
         updateData(Constantes.CARGO_TIPO_GERENCIAL);
         setVisible(true);
     }
-
-    // ############################### Mensagens ###############################
+	
+	/**
+	 * Exibe mensagem indicando que o cargo foi cadastrado com sucesso.
+	 */
     public void mensagemCargoCadastrado() {
         JOptionPane.showMessageDialog(
                 null,
@@ -273,6 +287,9 @@ public class TelaCadastroCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que houve erro interno nas constantes do formatador.
+	 */
     public void exibeErroConstantesFormatador() {
         JOptionPane.showMessageDialog(
                 null,
@@ -282,6 +299,10 @@ public class TelaCadastroCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicandoque o nome eh invalido pois nao atende ao tamanho
+	 * minimo de 3 caracteres.
+	 */
     public void mensagemNomeInvalidoTamanho() {
         JOptionPane.showMessageDialog(
                 null,
@@ -291,6 +312,9 @@ public class TelaCadastroCargo extends JFrame {
         );
     }
 	
+	/**
+	 * Limpa os textFields.
+	 */
     public void limpaTextFields() {
         tfCodigo.setText("");
         tfNome.setText("");
@@ -304,6 +328,9 @@ public class TelaCadastroCargo extends JFrame {
         tfHoraFimEspecial.setText("");
     }
 
+	/**
+	 * Gerencia as acoes nos botoes.
+	 */
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
@@ -329,6 +356,9 @@ public class TelaCadastroCargo extends JFrame {
 
     }
 
+	/**
+	 * Gerencia as acoes nos comboBox.
+	 */
     private class GerenciadorCombos implements ActionListener {
 
         @Override

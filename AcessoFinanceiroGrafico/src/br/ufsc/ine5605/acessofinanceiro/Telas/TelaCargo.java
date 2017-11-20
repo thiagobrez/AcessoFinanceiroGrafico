@@ -31,7 +31,6 @@ import javax.swing.table.DefaultTableModel;
 public class TelaCargo extends JFrame {
 
     private GerenciadorBotoes btManager;
-    private GerenciadorCombos cbManager;
     private GridBagConstraints constraints;
     private JPanel painelBotoes;
     private JTable tbItens;
@@ -44,10 +43,12 @@ public class TelaCargo extends JFrame {
     public TelaCargo() {
         super(Constantes.CARGO_TITULO);
         this.btManager = new GerenciadorBotoes();
-        this.cbManager = new GerenciadorCombos();
         configuraTela();
     }
 
+	/**
+	 * Configura elementos que aparecerao na interface grafica.
+	 */
     public void configuraTela() {
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
@@ -103,6 +104,9 @@ public class TelaCargo extends JFrame {
         setLocationRelativeTo(null);
     }
 
+	/**
+	 * Atualiza dados da tabela de cargos.
+	 */
     public void updateData() {
         DefaultTableModel modelTbItens = new DefaultTableModel() {
             @Override
@@ -139,11 +143,17 @@ public class TelaCargo extends JFrame {
         this.repaint();
     }
 
+	/**
+	 * Exibe menu de cargos.
+	 */
     public void exibeMenuCargo() {
         updateData();
         setVisible(true);
     }
 
+	/**
+	 * Exibe mensagem indicando que o cargo foi deletado com sucesso.
+	 */
     public void exibeCargoDeletadoComSucesso() {
         JOptionPane.showMessageDialog(
                 null,
@@ -153,6 +163,9 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que nenhum cargo foi selecionado.
+	 */
     public void exibeCargoNaoSelecionado() {
         JOptionPane.showMessageDialog(
                 null,
@@ -162,6 +175,9 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o cargo foi cadastrado com sucesso.
+	 */
     public void mensagemCargoCadastrado() {
         JOptionPane.showMessageDialog(
                 null,
@@ -171,6 +187,10 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que houve um erro interno nas constantes do
+	 * formatador.
+	 */
     public void exibeErroConstantesFormatador() {
         JOptionPane.showMessageDialog(
                 null,
@@ -180,6 +200,9 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o codigo ja foi cadastrado.
+	 */
     public void mensagemErroCodigoJaCadastrado() {
         JOptionPane.showMessageDialog(
                 null,
@@ -189,6 +212,10 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o nome eh invalido pois nao contem somente
+	 * letras.
+	 */
     public void mensagemNomeInvalidoLetras() {
         JOptionPane.showMessageDialog(
                 null,
@@ -198,6 +225,10 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o nome eh invalido pois nao contem o tamanho
+	 * minimo de 3 caracteres.
+	 */
     public void mensagemNomeInvalidoTamanho() {
         JOptionPane.showMessageDialog(
                 null,
@@ -207,6 +238,10 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o codigo eh invalido pois nao contem somente
+	 * numeros.
+	 */
 	public void mensagemCodigoInvalidoLetras() {
         JOptionPane.showMessageDialog(
                 null,
@@ -216,6 +251,10 @@ public class TelaCargo extends JFrame {
         );
     }
 	
+	/**
+	 * Exibe mensagem indicando que o codigo eh invalido pois excedeu o tamanho
+	 * maximo de 9 caracteres.
+	 */
 	public void mensagemCodigoInvalidoTamanho() {
         JOptionPane.showMessageDialog(
                 null,
@@ -225,6 +264,9 @@ public class TelaCargo extends JFrame {
         );
     }
 	
+	/**
+	 * Gerencia as acoes nos botoes.
+	 */
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
@@ -245,15 +287,6 @@ public class TelaCargo extends JFrame {
                 ControladorCargo.getInstance().voltarMenuPrincipal();
             }
         }
-    }
-
-    private class GerenciadorCombos implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-
     }
 
 }

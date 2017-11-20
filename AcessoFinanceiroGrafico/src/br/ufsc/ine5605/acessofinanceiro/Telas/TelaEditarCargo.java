@@ -77,6 +77,9 @@ public class TelaEditarCargo extends JFrame {
         configuraTela();
     }
 
+	/**
+	 * Configura elementos que aparecerao na interface grafica.
+	 */
     private void configuraTela() {
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
@@ -271,6 +274,10 @@ public class TelaEditarCargo extends JFrame {
         setLocationRelativeTo(null);
     }
 
+	/**
+	 * Atualiza inputs da tabela de cargos.
+	 * @param tipoCargo tipo do cargo para filtrar os inputs
+	 */
 	public void updateData(String tipoCargo) {
 		switch (tipoCargo) {
 			case Constantes.CARGO_TIPO_COMUM:
@@ -330,6 +337,7 @@ public class TelaEditarCargo extends JFrame {
     }
 
     // ================== EXIBIÇÃO DE MENSAGENS ==================
+	
     /**
      * Exibe a mensagem de que o cargo foi editado com sucesso.
      */
@@ -342,6 +350,10 @@ public class TelaEditarCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o nome eh invalido pois nao atende ao tamanho
+	 * minimo de 3 caracteres.
+	 */
     public void mensagemNomeInvalidoTamanho() {
         JOptionPane.showMessageDialog(
                 null,
@@ -351,6 +363,9 @@ public class TelaEditarCargo extends JFrame {
         );
     }
 
+	/**
+	 * Gerencia as acoes nos botoes.
+	 */
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
@@ -371,6 +386,9 @@ public class TelaEditarCargo extends JFrame {
 
     }
 
+	/**
+	 * Gerencia as acoes nos comboBox.
+	 */
     private class GerenciadorCombos implements ActionListener {
 
         @Override
