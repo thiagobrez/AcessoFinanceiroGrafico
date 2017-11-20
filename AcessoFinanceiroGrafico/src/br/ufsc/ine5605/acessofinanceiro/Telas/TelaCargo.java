@@ -225,6 +225,7 @@ public class TelaCargo extends JFrame {
             }
             if (e.getSource().equals(btEditaCargo)) {
                 ControladorCargo.getInstance().exibeEditarCargoSelecionado(tbItens.getSelectedRow());
+                updateData();
             }
             if (e.getSource().equals(btDeletaCargo)) {
                 ControladorCargo.getInstance().deletaCargoSelecionado(tbItens.getSelectedRow());

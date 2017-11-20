@@ -17,6 +17,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -67,7 +68,7 @@ public class TelaEditarCargo extends JFrame {
     private List<Cargo> cargos;
     private List<String> cargosTipos;
     private JButton btCancelar;
-    private JButton btCadastrar;
+    private JButton btEditar;
     private int codigoAntigo;
     
     public TelaEditarCargo(ControladorCargo owner) {
@@ -78,10 +79,18 @@ public class TelaEditarCargo extends JFrame {
         configuraTela();
     }
 	
-	public void exibeMenuEditaCargo(Cargo cargo) {
+//	public void exibeMenuEditaCargo(Cargo cargo) {
 //        updateData();
 //        setVisible(true);
-//        codigoAntigo = cargo.getMatricula();
+//        codigoAntigo = cargo.getCodigo();
+//        tfCodigo.setText(Integer.toString(cargo.getCodigo()));
+//        tfNome.setText(cargo.getNome());
+//        tfHoraInicioManha.setText(cargo.getDataNascimento());
+//        tfHoraFimManha.setText(funcionario.getDataNascimento());
+//        tfHoraInicioTarde.setText(funcionario.getDataNascimento());
+//        tfHoraFimTarde.setText(funcionario.getDataNascimento());
+//        tfHoraInicioEspecial.setText(funcionario.getDataNascimento());
+//        tfHoraFimEspecial.setText(funcionario.getDataNascimento());
 		
 		// Setar textFields para ja virem com os dados do cargo
 //        tfMatricula.setText(Integer.toString(funcionario.getMatricula()));
@@ -90,7 +99,7 @@ public class TelaEditarCargo extends JFrame {
 //        tfTelefone.setText(Integer.toString(funcionario.getTelefone()));
 //        tfSalario.setText(Integer.toString(funcionario.getSalario()));
 
-    }
+    //}
 
     private void configuraTela() {
         Container container = getContentPane();
@@ -235,18 +244,18 @@ public class TelaEditarCargo extends JFrame {
         btCancelar.setText(Constantes.COMUM_BOTAO_CANCELAR);
         btCancelar.addActionListener(btManager);
 
-        //Configura btCadastrar
-        btCadastrar = new JButton();
-        btCadastrar.setText(Constantes.COMUM_BOTAO_CADASTRAR);
-        btCadastrar.addActionListener(btManager);
-        container.add(btCadastrar);
+        //Configura btEditar
+        btEditar = new JButton();
+        btEditar.setText(Constantes.COMUM_BOTAO_EDITAR);
+        btEditar.addActionListener(btManager);
+        container.add(btEditar);
 
         //Configuracao painelBotoes
         painelBotoes = new JPanel();
         painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.LINE_AXIS));
-        this.painelBotoes.setVisible(true);
+        //this.painelBotoes.setVisible(true);
         painelBotoes.add(btCancelar);
-        painelBotoes.add(btCadastrar);
+        painelBotoes.add(btEditar);
         
         //Configuracao painelPrincipal
         painelPrincipal = new JPanel();
@@ -280,28 +289,29 @@ public class TelaEditarCargo extends JFrame {
     
     public void updateData() {
 
-        this.repaint();
+        //this.repaint();
     }
     /**
      * Atualiza a tela e faz com que seja exibida, onde cada campo de informação
-     * do funcionario ja esteja preenchida com as informações do funcionario
+     * do cargo ja esteja preenchida com as informações do cargo
      * previamente selecionado pelo usuário.
      *
      * @param cargo
      */
-    public void exibeMenuEditaFuncionario(Cargo cargo) {
+    public void exibeMenuEditaCargo(Cargo cargo) {
         updateData();
         setVisible(true);
         codigoAntigo = cargo.getCodigo();
         tfCodigo.setText(Integer.toString(cargo.getCodigo()));
         tfNome.setText(cargo.getNome());
         
-        tfHoraInicioManha.setText(cargo.getHoraInicioManha().toString());
-        tfHoraFimManha.setText(cargo.getHoraFimManha().toString());
-        tfHoraInicioTarde.setText(cargo.getHoraInicioTarde().toString());
-        tfHoraFimTarde.setText(cargo.getHoraFimTarde().toString());
-        tfHoraInicioEspecial.setText(cargo.getHoraInicioManha().toString());
-        tfHoraFimEspecial.setText(cargo.getHoraInicioManha().toString());
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        tfHoraInicioManha.setText(df.format(cargo.getHoraInicioManha()).toString());
+        tfHoraFimManha.setText(df.format(cargo.getHoraFimManha()).toString());
+        tfHoraInicioTarde.setText(df.format(cargo.getHoraInicioTarde()).toString());
+        tfHoraFimTarde.setText(df.format(cargo.getHoraFimTarde()).toString());
+        tfHoraInicioEspecial.setText(df.format(cargo.getHoraInicioManha()).toString());
+        tfHoraFimEspecial.setText(df.format(cargo.getHoraInicioManha()).toString());
 
     }
     
@@ -310,7 +320,7 @@ public class TelaEditarCargo extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             
-            if (e.getSource().equals(btCadastrar)) {
+            if (e.getSource().equals(btEditar)) {
                 ControladorCargo.getInstance().incluiCargo(Integer.parseInt(tfCodigo.getText()),
                         tfNome.getText(), comboTipos.getSelectedItem().toString(), tfHoraInicioManha.getText(), tfHoraFimManha.getText(),
                         tfHoraInicioTarde.getText(), tfHoraFimTarde.getText(), tfHoraInicioEspecial.getText(),
