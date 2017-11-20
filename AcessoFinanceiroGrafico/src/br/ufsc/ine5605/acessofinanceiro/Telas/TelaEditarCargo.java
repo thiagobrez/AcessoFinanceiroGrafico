@@ -33,6 +33,7 @@ import javax.swing.JTextField;
  * @author bruno.bertozzo
  */
 public class TelaEditarCargo extends JFrame {
+
     private GerenciadorBotoes btManager;
     private ControladorCargo controlador;
     private GridBagConstraints constraints;
@@ -71,22 +72,21 @@ public class TelaEditarCargo extends JFrame {
     private JButton btCancelar;
     private JButton btEditar;
     private int codigoAntigo;
-    
+
     public TelaEditarCargo(ControladorCargo owner) {
         super(Constantes.GERENCIAR_FUNCIONARIO_EDITAR);
         this.controlador = owner;
-        //this.btManager = new GerenciadorBotoes();
+        this.btManager = new GerenciadorBotoes();
 
         configuraTela();
     }
-
 
     private void configuraTela() {
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
 
         GerenciadorCombos comboManager = new GerenciadorCombos();
-        
+
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.CENTER;
@@ -106,7 +106,7 @@ public class TelaEditarCargo extends JFrame {
         this.painelNome.setVisible(true);
         painelNome.add(lbNome);
         painelNome.add(tfNome);
-        
+
         //Configuracao lbCodigo
         lbCodigo = new JLabel(Constantes.CARGO_CODIGO);
 
@@ -119,21 +119,21 @@ public class TelaEditarCargo extends JFrame {
         this.painelCodigo.setVisible(true);
         painelCodigo.add(lbCodigo);
         painelCodigo.add(tfCodigo);
-        
-       //Configuracao lbMatricula
+
+        //Configuracao lbMatricula
         lbTipoCargo = new JLabel(Constantes.CARGO_TIPO);
-       
+
         //Configuracao comboTipos
         Object[] tipos = {
-			Constantes.CARGO_TIPO_GERENCIAL,
-			Constantes.CARGO_TIPO_COMERCIAL,
-			Constantes.CARGO_TIPO_ESPECIAL,
-			Constantes.CARGO_TIPO_COMUM,
-                        Constantes.CARGO_TIPO_SEM_ACESSO
-		};
+            Constantes.CARGO_TIPO_GERENCIAL,
+            Constantes.CARGO_TIPO_COMERCIAL,
+            Constantes.CARGO_TIPO_ESPECIAL,
+            Constantes.CARGO_TIPO_COMUM,
+            Constantes.CARGO_TIPO_SEM_ACESSO
+        };
         comboTipos = new JComboBox(tipos);
         comboTipos.addActionListener(comboManager);
-        
+
         //Configuracao painelTipo
         this.painelTipo = new JPanel();
         painelTipo.setLayout(new BoxLayout(painelTipo, BoxLayout.LINE_AXIS));
@@ -153,7 +153,7 @@ public class TelaEditarCargo extends JFrame {
         //this.painelHoraInicioManha.setVisible(true);
         painelHoraInicioManha.add(lbHoraInicioManha);
         painelHoraInicioManha.add(tfHoraInicioManha);
-        
+
         //Configuracao lbHoraFimManha
         lbHoraFimManha = new JLabel(Constantes.CARGO_FIM_MANHA + ": ");
 
@@ -166,7 +166,7 @@ public class TelaEditarCargo extends JFrame {
         //this.painelHoraFimManha.setVisible(true);
         painelHoraFimManha.add(lbHoraFimManha);
         painelHoraFimManha.add(tfHoraFimManha);
-        
+
         //Configuracao lbHoraInicioTarde
         lbHoraInicioTarde = new JLabel(Constantes.CARGO_INICIO_TARDE + ": ");
 
@@ -179,7 +179,7 @@ public class TelaEditarCargo extends JFrame {
         //this.painelHoraInicioTarde.setVisible(true);
         painelHoraInicioTarde.add(lbHoraInicioTarde);
         painelHoraInicioTarde.add(tfHoraInicioTarde);
-        
+
         //Configuracao lbHoraFimTarde
         lbHoraFimTarde = new JLabel(Constantes.CARGO_FIM_TARDE + ": ");
 
@@ -192,7 +192,7 @@ public class TelaEditarCargo extends JFrame {
         //this.painelHoraFimTarde.setVisible(true);
         painelHoraFimTarde.add(lbHoraFimTarde);
         painelHoraFimTarde.add(tfHoraFimTarde);
-        
+
         //Configuracao lbHoraInicioEspecial
         lbHoraInicioEspecial = new JLabel(Constantes.CARGO_INICIO_ESPECIAL + ": ");
 
@@ -205,7 +205,7 @@ public class TelaEditarCargo extends JFrame {
         //this.painelHoraFimTarde.setVisible(true);
         painelHoraInicioEspecial.add(lbHoraInicioEspecial);
         painelHoraInicioEspecial.add(tfHoraInicioEspecial);
-        
+
         //Configuracao lbHoraFimEspecial
         lbHoraFimEspecial = new JLabel(Constantes.CARGO_FIM_ESPECIAL + ": ");
 
@@ -218,7 +218,7 @@ public class TelaEditarCargo extends JFrame {
         //this.painelHoraFimTarde.setVisible(true);
         painelHoraFimEspecial.add(lbHoraFimEspecial);
         painelHoraFimEspecial.add(tfHoraFimEspecial);
-        
+
         //Configura btCancelar
         btCancelar = new JButton();
         btCancelar.setText(Constantes.COMUM_BOTAO_CANCELAR);
@@ -235,7 +235,7 @@ public class TelaEditarCargo extends JFrame {
         this.painelBotoes.setVisible(true);
         painelBotoes.add(btCancelar);
         painelBotoes.add(btEditar);
-        
+
         //Configuracao painelPrincipal
         painelPrincipal = new JPanel();
         painelPrincipal.setLayout(new GridBagLayout());
@@ -265,15 +265,16 @@ public class TelaEditarCargo extends JFrame {
         setSize(720, 480);
         setLocationRelativeTo(null);
     }
-    
+
     public void updateData() {
 
         this.repaint();
     }
+
     /**
      * Atualiza a tela e faz com que seja exibida, onde cada campo de informação
-     * do cargo ja esteja preenchida com as informações do cargo
-     * previamente selecionado pelo usuário.
+     * do cargo ja esteja preenchida com as informações do cargo previamente
+     * selecionado pelo usuário.
      *
      * @param cargo
      */
@@ -283,7 +284,7 @@ public class TelaEditarCargo extends JFrame {
         codigoAntigo = cargo.getCodigo();
         tfCodigo.setText(Integer.toString(cargo.getCodigo()));
         tfNome.setText(cargo.getNome());
-        
+
         SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         tfHoraInicioManha.setText(df.format(cargo.getHoraInicioManha()).toString());
         tfHoraFimManha.setText(df.format(cargo.getHoraFimManha()).toString());
@@ -293,7 +294,7 @@ public class TelaEditarCargo extends JFrame {
         tfHoraFimEspecial.setText(df.format(cargo.getHoraInicioManha()).toString());
 
     }
-    
+
     // ================== EXIBIÇÃO DE MENSAGENS ==================
     /**
      * Exibe a mensagem de que o cargo foi editado com sucesso.
@@ -314,8 +315,8 @@ public class TelaEditarCargo extends JFrame {
                 Constantes.CARGO_CADASTRAR,
                 JOptionPane.PLAIN_MESSAGE
         );
-    }      
-	
+    }
+
     public void mensagemNomeInvalidoLetras() {
         JOptionPane.showMessageDialog(
                 null,
@@ -324,7 +325,7 @@ public class TelaEditarCargo extends JFrame {
                 JOptionPane.PLAIN_MESSAGE
         );
     }
-	
+
     public void mensagemNomeInvalidoTamanho() {
         JOptionPane.showMessageDialog(
                 null,
@@ -333,12 +334,12 @@ public class TelaEditarCargo extends JFrame {
                 JOptionPane.PLAIN_MESSAGE
         );
     }
-    
+
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+
             if (e.getSource().equals(btEditar)) {
                 ControladorCargo.getInstance().editaCargo(codigoAntigo, Integer.parseInt(tfCodigo.getText()),
                         tfNome.getText(), comboTipos.getSelectedItem().toString(), tfHoraInicioManha.getText(), tfHoraFimManha.getText(),
@@ -353,7 +354,7 @@ public class TelaEditarCargo extends JFrame {
         }
 
     }
-    
+
     private class GerenciadorCombos implements ActionListener {
 
         @Override
@@ -362,5 +363,5 @@ public class TelaEditarCargo extends JFrame {
         }
 
     }
-	
+
 }
