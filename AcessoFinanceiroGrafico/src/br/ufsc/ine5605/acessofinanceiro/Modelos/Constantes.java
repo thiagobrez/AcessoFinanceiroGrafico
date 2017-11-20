@@ -133,6 +133,9 @@ public class Constantes {
     //FORMATADOR
     public static final String FORMATADOR_ERRO_CONSTANTE = "Erro na constante do formatador";
 
+	//EXCEPTION
+	public static final String EXCEPTION_MATRICULA_INEXISTENTE = "Matricula inexistente";
+	
     // ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
     // COMUM
     public static final String INSIRA_MATRICULA = "Digite a matrícula: ";

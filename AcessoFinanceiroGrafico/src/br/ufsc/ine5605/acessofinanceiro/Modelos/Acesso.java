@@ -18,7 +18,6 @@ public class Acesso {
 	
     private Date data;
     private int matricula;
-	private ControladorAcesso controladorAcesso;
     
     public Acesso(Date data, int matricula) {
         this.data = data;
@@ -50,13 +49,14 @@ public class Acesso {
 	 * @param funcionario Funcionario que tentou o acesso
 	 * @param data Data da tentativa de acesso
 	 * @return True se o acesso for validado
+	 * @throws java.text.ParseException
 	 */
 	public boolean validaAcesso(Acesso acesso, Funcionario funcionario, Date data) throws ParseException {
 		if(funcionario.getCargo().ehGerencial()) return true;
 		if(funcionario.getCargo().temAcessoAoFinanceiro())
 			return validaHorarioAcesso(acesso, funcionario.getCargo(), data);
-		controladorAcesso.novoRegistroAcessoNegado(data, acesso.getMatricula(), Motivo.CARGO_SEM_ACESSO);
-		controladorAcesso.exibeAcessoNegadoCargoSemAcesso();
+		ControladorAcesso.getInstance().novoRegistroAcessoNegado(data, acesso.getMatricula(), Motivo.CARGO_SEM_ACESSO);
+		ControladorAcesso.getInstance().exibeAcessoNegadoCargoSemAcesso();
 		return false;
 	}
 
@@ -69,6 +69,7 @@ public class Acesso {
 	 * @param data Data da tentativa de acesso
 	 * @return True se o horario da tentativa de acesso estiver dentro do
 	 * permitido pelo cargo
+	 * @throws java.text.ParseException
 	 */
 	public boolean validaHorarioAcesso(Acesso acesso, Cargo cargo, Date data) throws ParseException {
 		SimpleDateFormat formatador = new SimpleDateFormat(Constantes.FORMATADOR_HORA);
@@ -108,8 +109,8 @@ public class Acesso {
 				}
 			}
 		}
-		controladorAcesso.novoRegistroAcessoNegado(data, acesso.getMatricula(), Motivo.HORARIO_NAO_PERMITIDO);
-		controladorAcesso.exibeAcessoNegadoHorarioNaoPermitido();
+		ControladorAcesso.getInstance().novoRegistroAcessoNegado(data, acesso.getMatricula(), Motivo.HORARIO_NAO_PERMITIDO);
+		ControladorAcesso.getInstance().exibeAcessoNegadoHorarioNaoPermitido();
 		return false;
 	}
     

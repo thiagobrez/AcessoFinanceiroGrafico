@@ -7,6 +7,7 @@ package br.ufsc.ine5605.acessofinanceiro.Interfaces;
 
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Funcionario;
+import excecoes.MatriculaInexistenteException;
 
 /**
  *
@@ -19,8 +20,9 @@ public interface IControladorFuncionario {
      *
      * @param matricula matricula para encontrar o funcionario
      * @return funcionario
+	 * @throws excecoes.MatriculaInexistenteException
      */
-    public Funcionario encontraFuncionarioPelaMatricula(int matricula);
+    public Funcionario encontraFuncionarioPelaMatricula(int matricula) throws MatriculaInexistenteException;
 
     /**
      * verifica se um funcionario ja possui a matricula passada como parametro
