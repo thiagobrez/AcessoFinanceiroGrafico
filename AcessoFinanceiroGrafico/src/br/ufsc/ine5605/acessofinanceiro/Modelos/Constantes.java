@@ -59,8 +59,8 @@ public class Constantes {
     public static final String REGISTRO_NUMERO = "Número";
     public static final String REGISTRO_MOTIVO = "Motivo";
     public static final String REGISTRO_BOTAO_FILTRAR = "Filtrar";
-    public static final String REGISTRO_LABEL_FILTRO_MOTIVO = "Filtrar por motivo:";
-    public static final String REGISTRO_LABEL_FILTRO_MATRICULA = "Filtrar por matrícula:";
+    public static final String REGISTRO_LABEL_FILTRO_MOTIVO = "Filtrar por motivo: ";
+    public static final String REGISTRO_LABEL_FILTRO_MATRICULA = "Filtrar por matrícula: ";
     public static final String REGISTRO_FILTRO_TODOS = "Todos";
     public static final String REGISTRO_FILTRO_VAZIO = "";
     public static final String REGISTRO_FILTRO_MATRICULA_INVALIDA = "A matrícula deve conter somente números";
