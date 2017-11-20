@@ -35,12 +35,15 @@ public class Constantes {
     public static final String COMUM_VAZIO = "";
 
     //MENU PRINCIPAL
-    public static final String PRINCIPAL_TITULO = "Menu Principal";
-    public static final String PRINCIPAL_MENU_ACESSO = "Acesso ao Financeiro";
+    public static final String PRINCIPAL_TITULO = "AcessFIN - Controle como nenhum outro!";
+    public static final String PRINCIPAL_SUBTITULO = "Versão 12.0.1.3";
+    public static final String PRINCIPAL_MENU_ACESSO = "Acessar o Financeiro";
     public static final String PRINCIPAL_MENU_FUNCIONARIOS = "Gerenciar Funcionários";
     public static final String PRINCIPAL_MENU_CARGOS = "Gerenciar Cargos";
     public static final String PRINCIPAL_MENU_DATA = "Gerenciar Data do Sistema";
-    public static final String PRINCIPAL_MENU_RELATORIO = "Emitir Relatório";
+    public static final String PRINCIPAL_MENU_RELATORIO = "Emitir Relatórios";
+    public static final String PRINCIPAL_MENU_SAIR = "Sair";
+    public static final String PRINCIPAL_MENU_BEM_VINDO = "Bem vindo ao melhor controle de acessos da galáxia!";
 
     //ACESSO AO FINANCEIRO
     public static final String ACESSO_FINANCEIRO = "Acesso ao Financeiro";
@@ -58,8 +61,8 @@ public class Constantes {
     public static final String REGISTRO_BOTAO_FILTRAR = "Filtrar";
     public static final String REGISTRO_LABEL_FILTRO_MOTIVO = "Filtrar por motivo:";
     public static final String REGISTRO_LABEL_FILTRO_MATRICULA = "Filtrar por matrícula:";
-	public static final String REGISTRO_FILTRO_TODOS = "Todos";
-	public static final String REGISTRO_FILTRO_VAZIO = "";
+    public static final String REGISTRO_FILTRO_TODOS = "Todos";
+    public static final String REGISTRO_FILTRO_VAZIO = "";
     public static final String REGISTRO_FILTRO_MATRICULA_INVALIDA = "A matrícula deve conter somente números";
     public static final String REGISTRO_FILTRO_INVALIDO = "Filtro inválido";
 
@@ -133,9 +136,9 @@ public class Constantes {
     //FORMATADOR
     public static final String FORMATADOR_ERRO_CONSTANTE = "Erro na constante do formatador";
 
-	//EXCEPTION
-	public static final String EXCEPTION_MATRICULA_INEXISTENTE = "Matricula inexistente";
-	
+    //EXCEPTION
+    public static final String EXCEPTION_MATRICULA_INEXISTENTE = "Matricula inexistente";
+
     // ========== NAO USAR DAQUI PRA BAIXO, ESTOU MANTENDO ESSE CODIGO SOMENTE PARA RODAR SEM ERROS ========== //
     // COMUM
     public static final String INSIRA_MATRICULA = "Digite a matrícula: ";

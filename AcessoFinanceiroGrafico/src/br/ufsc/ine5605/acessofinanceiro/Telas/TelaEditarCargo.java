@@ -262,7 +262,7 @@ public class TelaEditarCargo extends JFrame {
         constraints.gridy = 11;
         container.add(painelPrincipal, constraints);
 
-        setSize(720, 480);
+        setSize(550, 400);
         setLocationRelativeTo(null);
     }
 

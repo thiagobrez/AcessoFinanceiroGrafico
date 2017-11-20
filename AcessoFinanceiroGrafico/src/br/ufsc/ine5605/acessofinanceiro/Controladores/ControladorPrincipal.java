@@ -21,11 +21,13 @@ import java.util.Date;
 public class ControladorPrincipal {
 
     private static ControladorPrincipal controladorPrincipal;
+    public boolean primeiraVez;
 
     public TelaPrincipal telaPrincipal;
 
     private ControladorPrincipal() {
         this.telaPrincipal = new TelaPrincipal();
+        this.primeiraVez = false;
     }
 
     public static ControladorPrincipal getInstance() {
@@ -35,7 +37,7 @@ public class ControladorPrincipal {
         return controladorPrincipal;
     }
 
-	/**
+    /**
      * Instancia cargo indefinido (codigo = 0, sem função gerencial e sem acesso
      * ao financeiro)
      */
@@ -43,12 +45,16 @@ public class ControladorPrincipal {
         ControladorCargo.getInstance().criaCargoPadrao();
         exibeMenuPrincipal();
     }
-	
+
     /**
      * Exibe o menu principal do sistema.
      */
     public void exibeMenuPrincipal() {
         telaPrincipal.exibeMenuPrincipal();
+        if (!primeiraVez) {
+            telaPrincipal.exibeBemVindo();
+            primeiraVez = true;
+        }
     }
 
     /**
@@ -86,8 +92,7 @@ public class ControladorPrincipal {
         ControladorRegistroAcessoNegado.getInstance().exibeRelatorio();
     }
 
-	// ============= REDIRECIONAMENTOS ============= //
-	
+    // ============= REDIRECIONAMENTOS ============= //
     public Date getDataSistema() {
         return ControladorDataSistema.getInstance().getDataSistema();
     }
