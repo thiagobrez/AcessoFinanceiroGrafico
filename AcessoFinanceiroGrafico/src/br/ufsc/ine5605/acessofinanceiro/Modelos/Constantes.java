@@ -113,6 +113,7 @@ public class Constantes {
     public static final String CARGO_CODIGO_JA_CADASTRADO = "Código já cadastrado.";
     public static final String CARGO_NOME_INVALIDO_LETRAS = "O nome deve conter somente letras.";
     public static final String CARGO_NOME_INVALIDO_TAMANHO = "O nome deve conter mais de 3 caracteres.";
+    public static final String CARGO_FORMATO_HORA = "*Formato utilizado: HH:mm";
 
     //DATA SISTEMA
     public static final String DATA_SISTEMA_TITULO = "Data e Hora do Sistema";
