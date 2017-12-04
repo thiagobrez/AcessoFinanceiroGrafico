@@ -7,19 +7,14 @@ package br.ufsc.ine5605.acessofinanceiro.Telas;
 
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorCargo;
-
-import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
-
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,9 +30,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaCargo extends JFrame {
 
-    private ControladorCargo owner;
     private GerenciadorBotoes btManager;
-    private GerenciadorCombos cbManager;
     private GridBagConstraints constraints;
     private JPanel painelBotoes;
     private JTable tbItens;
@@ -47,14 +40,15 @@ public class TelaCargo extends JFrame {
     private JButton btDeletaCargo;
     private JButton btVoltarMenuPrincipal;
 
-    public TelaCargo(ControladorCargo owner) {
+    public TelaCargo() {
         super(Constantes.CARGO_TITULO);
-        this.owner = owner;
         this.btManager = new GerenciadorBotoes();
-        this.cbManager = new GerenciadorCombos();
         configuraTela();
     }
 
+	/**
+	 * Configura elementos que aparecerao na interface grafica.
+	 */
     public void configuraTela() {
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
@@ -110,6 +104,9 @@ public class TelaCargo extends JFrame {
         setLocationRelativeTo(null);
     }
 
+	/**
+	 * Atualiza dados da tabela de cargos.
+	 */
     public void updateData() {
         DefaultTableModel modelTbItens = new DefaultTableModel() {
             @Override
@@ -128,7 +125,7 @@ public class TelaCargo extends JFrame {
         modelTbItens.addColumn(Constantes.CARGO_INICIO_TARDE);
         modelTbItens.addColumn(Constantes.CARGO_FIM_TARDE);
 
-        Collection<Cargo> listaCargos = ControladorPrincipal.getInstance().getListaCargos();
+        Collection<Cargo> listaCargos = ControladorCargo.getInstance().getListaCargos();
         tbItens.removeAll();
         for (Cargo cargo : listaCargos) {
             modelTbItens.addRow(new Object[]{
@@ -146,11 +143,17 @@ public class TelaCargo extends JFrame {
         this.repaint();
     }
 
+	/**
+	 * Exibe menu de cargos.
+	 */
     public void exibeMenuCargo() {
         updateData();
         setVisible(true);
     }
 
+	/**
+	 * Exibe mensagem indicando que o cargo foi deletado com sucesso.
+	 */
     public void exibeCargoDeletadoComSucesso() {
         JOptionPane.showMessageDialog(
                 null,
@@ -160,6 +163,9 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que nenhum cargo foi selecionado.
+	 */
     public void exibeCargoNaoSelecionado() {
         JOptionPane.showMessageDialog(
                 null,
@@ -169,6 +175,9 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o cargo foi cadastrado com sucesso.
+	 */
     public void mensagemCargoCadastrado() {
         JOptionPane.showMessageDialog(
                 null,
@@ -178,6 +187,10 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que houve um erro interno nas constantes do
+	 * formatador.
+	 */
     public void exibeErroConstantesFormatador() {
         JOptionPane.showMessageDialog(
                 null,
@@ -187,15 +200,22 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o codigo ja foi cadastrado.
+	 */
     public void mensagemErroCodigoJaCadastrado() {
         JOptionPane.showMessageDialog(
                 null,
-                Constantes.CARGO_DELETADO_SUCESSO,
+                Constantes.CARGO_CODIGO_JA_CADASTRADO,
                 Constantes.CARGO_CADASTRAR,
                 JOptionPane.PLAIN_MESSAGE
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o nome eh invalido pois nao contem somente
+	 * letras.
+	 */
     public void mensagemNomeInvalidoLetras() {
         JOptionPane.showMessageDialog(
                 null,
@@ -205,6 +225,10 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o nome eh invalido pois nao contem o tamanho
+	 * minimo de 3 caracteres.
+	 */
     public void mensagemNomeInvalidoTamanho() {
         JOptionPane.showMessageDialog(
                 null,
@@ -214,6 +238,35 @@ public class TelaCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que o codigo eh invalido pois nao contem somente
+	 * numeros.
+	 */
+	public void mensagemCodigoInvalidoLetras() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_CODIGO_INVALIDO_LETRAS,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
+	/**
+	 * Exibe mensagem indicando que o codigo eh invalido pois excedeu o tamanho
+	 * maximo de 9 caracteres.
+	 */
+	public void mensagemCodigoInvalidoTamanho() {
+        JOptionPane.showMessageDialog(
+                null,
+                Constantes.CARGO_CODIGO_INVALIDO_TAMANHO,
+                Constantes.CARGO_CADASTRAR,
+                JOptionPane.PLAIN_MESSAGE
+        );
+    }
+	
+	/**
+	 * Gerencia as acoes nos botoes.
+	 */
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
@@ -234,15 +287,6 @@ public class TelaCargo extends JFrame {
                 ControladorCargo.getInstance().voltarMenuPrincipal();
             }
         }
-    }
-
-    private class GerenciadorCombos implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-
     }
 
 }

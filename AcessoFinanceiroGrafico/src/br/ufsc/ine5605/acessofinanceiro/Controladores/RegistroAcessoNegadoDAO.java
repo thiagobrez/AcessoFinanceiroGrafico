@@ -25,18 +25,20 @@ public class RegistroAcessoNegadoDAO {
 	
 	private HashMap<Integer, RegistroAcessoNegado> cacheRegistros = new HashMap<>();
 	private final String filename = "registros.batman";
+	private int id = 0;
 	
 	public RegistroAcessoNegadoDAO() {
 		load();
 	}
 	
 	public void put(RegistroAcessoNegado registro) {
-		cacheRegistros.put(registro.getMatricula(), registro);
+		id++;
+		cacheRegistros.put(id, registro);
 		persist();
 	}
 	
-	public RegistroAcessoNegado get(Integer matricula) {
-		return cacheRegistros.get(matricula);
+	public RegistroAcessoNegado get(int id) {
+		return cacheRegistros.get(id);
 	}
 	
 	public Collection<RegistroAcessoNegado> getList() {
@@ -52,6 +54,7 @@ public class RegistroAcessoNegadoDAO {
 			ObjectOutputStream oOS = new ObjectOutputStream(fOS);
 			
 			oOS.writeObject(cacheRegistros);
+			oOS.writeObject(id);
 			
 			oOS.flush();
 			fOS.flush();
@@ -74,6 +77,7 @@ public class RegistroAcessoNegadoDAO {
 			ObjectInputStream oIS = new ObjectInputStream(fIS);
 			
 			cacheRegistros = (HashMap<Integer, RegistroAcessoNegado>) oIS.readObject();
+			id = (Integer) oIS.readObject();
 			
 			oIS.close();
 			fIS.close();

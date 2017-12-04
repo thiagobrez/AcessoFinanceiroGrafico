@@ -5,8 +5,8 @@
  */
 package br.ufsc.ine5605.acessofinanceiro.Telas;
 
+import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorCargo;
 import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorFuncionario;
-import br.ufsc.ine5605.acessofinanceiro.Controladores.ControladorPrincipal;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Cargo;
 import br.ufsc.ine5605.acessofinanceiro.Modelos.Constantes;
 import java.awt.Container;
@@ -74,8 +74,6 @@ public class TelaCadastroFuncionario extends JFrame {
 
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
-
-        GerenciadorCombos comboManager = new GerenciadorCombos();
 
         //Configuracao constraints
         this.constraints = new GridBagConstraints();
@@ -162,7 +160,6 @@ public class TelaCadastroFuncionario extends JFrame {
         this.cargos = new ArrayList<>();
         this.cargosNomes = new ArrayList<>();
         comboCargos = new JComboBox(cargosNomes.toArray());
-        comboCargos.addActionListener(comboManager);
 
         //Configuracao painelCargo
         this.painelCargo = new JPanel();
@@ -211,7 +208,7 @@ public class TelaCadastroFuncionario extends JFrame {
 
         container.add(painelPrincipal, constraints);
 
-        setSize(500, 300);
+        setSize(550, 350);
         setLocationRelativeTo(null);
     }
 
@@ -224,7 +221,7 @@ public class TelaCadastroFuncionario extends JFrame {
     public void updateData() {
 
         //Configuracao comboCargos
-        this.cargos = ControladorPrincipal.getInstance().getListaCargos();
+        this.cargos = ControladorCargo.getInstance().getListaCargos();
         comboCargos.removeAllItems();
         for (Cargo cargo : cargos) {
             comboCargos.addItem(cargo);
@@ -324,16 +321,6 @@ public class TelaCadastroFuncionario extends JFrame {
             if (e.getSource().equals(btCancelar)) {
                 setVisible(false);
             }
-
-        }
-
-    }
-
-// ================== GERENCIADOR DA COMBOBOX ==================
-    private class GerenciadorCombos implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
 
         }
 

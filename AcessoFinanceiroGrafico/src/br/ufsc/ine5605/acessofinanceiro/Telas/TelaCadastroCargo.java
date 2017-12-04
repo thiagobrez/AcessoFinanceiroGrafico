@@ -31,9 +31,7 @@ import javax.swing.JTextField;
 public class TelaCadastroCargo extends JFrame {
 
     private GerenciadorBotoes btManager;
-    private ControladorCargo controlador;
     private GridBagConstraints constraints;
-    private TelaCargo telaCargo;
     private JLabel lbNome;
     private JLabel lbCodigo;
     private JLabel lbTipoCargo;
@@ -70,13 +68,15 @@ public class TelaCadastroCargo extends JFrame {
     private JButton btCancelar;
     private JButton btCadastrar;
 
-    public TelaCadastroCargo(ControladorCargo owner) {
+    public TelaCadastroCargo() {
         super(Constantes.CARGO_CADASTRAR);
-        this.controlador = owner;
         this.btManager = new TelaCadastroCargo.GerenciadorBotoes();
         configuraTela();
     }
 
+	/**
+	 * Configura elementos que aparecerao na interface grafica.
+	 */
     private void configuraTela() {
         //Configuracao container
         Container container = getContentPane();
@@ -229,6 +229,10 @@ public class TelaCadastroCargo extends JFrame {
         setLocationRelativeTo(null);
     }
 
+	/**
+	 * Atualiza inputs da tabela de cadastro.
+	 * @param tipoCargo tipo do cargo utilizado para filtrar os inputs
+	 */
     public void updateData(String tipoCargo) {
         switch (tipoCargo) {
             case Constantes.CARGO_TIPO_COMUM:
@@ -261,12 +265,19 @@ public class TelaCadastroCargo extends JFrame {
         }
     }
 
-    public void exibeMenuCadastroCargo() {
+    // ############################### Mensagens ###############################
+	
+	/**
+	 * Exibe menu de cadastro do cargo.
+	 */
+	public void exibeMenuCadastroCargo() {
         updateData(Constantes.CARGO_TIPO_GERENCIAL);
         setVisible(true);
     }
-
-    // ############################### Mensagens ###############################
+	
+	/**
+	 * Exibe mensagem indicando que o cargo foi cadastrado com sucesso.
+	 */
     public void mensagemCargoCadastrado() {
         JOptionPane.showMessageDialog(
                 null,
@@ -276,6 +287,9 @@ public class TelaCadastroCargo extends JFrame {
         );
     }
 
+	/**
+	 * Exibe mensagem indicando que houve erro interno nas constantes do formatador.
+	 */
     public void exibeErroConstantesFormatador() {
         JOptionPane.showMessageDialog(
                 null,
@@ -285,24 +299,10 @@ public class TelaCadastroCargo extends JFrame {
         );
     }
 
-    public void mensagemErroCodigoJaCadastrado() {
-        JOptionPane.showMessageDialog(
-                null,
-                Constantes.CARGO_DELETADO_SUCESSO,
-                Constantes.CARGO_CADASTRAR,
-                JOptionPane.PLAIN_MESSAGE
-        );
-    }
-
-    public void mensagemNomeInvalidoLetras() {
-        JOptionPane.showMessageDialog(
-                null,
-                Constantes.CARGO_NOME_INVALIDO_LETRAS,
-                Constantes.CARGO_CADASTRAR,
-                JOptionPane.PLAIN_MESSAGE
-        );
-    }
-
+	/**
+	 * Exibe mensagem indicandoque o nome eh invalido pois nao atende ao tamanho
+	 * minimo de 3 caracteres.
+	 */
     public void mensagemNomeInvalidoTamanho() {
         JOptionPane.showMessageDialog(
                 null,
@@ -311,7 +311,10 @@ public class TelaCadastroCargo extends JFrame {
                 JOptionPane.PLAIN_MESSAGE
         );
     }
-
+	
+	/**
+	 * Limpa os textFields.
+	 */
     public void limpaTextFields() {
         tfCodigo.setText("");
         tfNome.setText("");
@@ -325,18 +328,24 @@ public class TelaCadastroCargo extends JFrame {
         tfHoraFimEspecial.setText("");
     }
 
+	/**
+	 * Gerencia as acoes nos botoes.
+	 */
     private class GerenciadorBotoes implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource().equals(btCadastrar)) {
-                ControladorCargo.getInstance().incluiCargo(Integer.parseInt(tfCodigo.getText()),
-                        tfNome.getText(), comboTipos.getSelectedItem().toString(), tfHoraInicioManha.getText(), tfHoraFimManha.getText(),
-                        tfHoraInicioTarde.getText(), tfHoraFimTarde.getText(), tfHoraInicioEspecial.getText(),
-                        tfHoraInicioEspecial.getText());
-                ControladorCargo.getInstance().updateCargos();
-                setVisible(false);
+				if(ControladorCargo.getInstance().verificaCodigo(tfCodigo.getText()) &&
+						ControladorCargo.getInstance().verificaNome(tfNome.getText())) {
+					ControladorCargo.getInstance().incluiCargo(Integer.parseInt(tfCodigo.getText()),
+							tfNome.getText(), comboTipos.getSelectedItem().toString(), tfHoraInicioManha.getText(),
+							tfHoraFimManha.getText(), tfHoraInicioTarde.getText(), tfHoraFimTarde.getText(),
+							tfHoraInicioEspecial.getText(), tfHoraFimEspecial.getText(), false);
+					ControladorCargo.getInstance().updateCargos();
+					setVisible(false);
+				}
             }
 
             if (e.getSource().equals(btCancelar)) {
@@ -347,6 +356,9 @@ public class TelaCadastroCargo extends JFrame {
 
     }
 
+	/**
+	 * Gerencia as acoes nos comboBox.
+	 */
     private class GerenciadorCombos implements ActionListener {
 
         @Override
